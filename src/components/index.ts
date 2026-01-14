@@ -37,3 +37,9 @@ export {
   ComparisonMatrix,
   FAQ,
 } from './pricing'
+
+// About page components
+export {
+  Founder,
+  OpenSource,
+} from './about'
