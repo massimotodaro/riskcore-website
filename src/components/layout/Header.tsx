@@ -100,6 +100,8 @@ export default function Header() {
             className="md:hidden p-2 text-text-muted hover:text-text-primary transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             {isMobileMenuOpen ? (
               <X className="w-6 h-6" />
@@ -112,6 +114,8 @@ export default function Header() {
 
       {/* Mobile Menu */}
       <div
+        id="mobile-menu"
+        aria-hidden={!isMobileMenuOpen}
         className={`md:hidden fixed inset-0 top-16 bg-bg-primary/95 backdrop-blur-xl transition-all duration-300 ${
           isMobileMenuOpen
             ? 'opacity-100 pointer-events-auto'

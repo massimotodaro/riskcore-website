@@ -1,0 +1,8 @@
+# Robots.txt for RISKCORE
+# https://riskcore.io
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://riskcore.io/sitemap.xml

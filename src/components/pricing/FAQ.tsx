@@ -31,34 +31,47 @@ const faqs = [
   },
 ]
 
-function FAQItem({ question, answer, isOpen, onClick }: {
+function FAQItem({ question, answer, isOpen, onClick, index }: {
   question: string
   answer: string
   isOpen: boolean
   onClick: () => void
+  index: number
 }) {
+  const questionId = `faq-question-${index}`
+  const answerId = `faq-answer-${index}`
+
   return (
     <div className="border-b border-white/10 last:border-b-0">
-      <button
-        onClick={onClick}
-        className="w-full py-5 flex items-center justify-between text-left group"
-      >
-        <span className="font-heading font-semibold text-text-primary group-hover:text-brand-blue transition-colors pr-4">
-          {question}
-        </span>
-        <motion.span
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.2 }}
-          className="flex-shrink-0 text-text-muted"
+      <h3>
+        <button
+          id={questionId}
+          onClick={onClick}
+          aria-expanded={isOpen}
+          aria-controls={answerId}
+          className="w-full py-5 flex items-center justify-between text-left group"
         >
-          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
-        </motion.span>
-      </button>
+          <span className="font-heading font-semibold text-text-primary group-hover:text-brand-blue transition-colors pr-4">
+            {question}
+          </span>
+          <motion.span
+            animate={{ rotate: isOpen ? 180 : 0 }}
+            transition={{ duration: 0.2 }}
+            className="flex-shrink-0 text-text-muted"
+            aria-hidden="true"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </motion.span>
+        </button>
+      </h3>
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            id={answerId}
+            role="region"
+            aria-labelledby={questionId}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -98,6 +111,7 @@ export default function FAQ() {
         {faqs.map((faq, index) => (
           <FAQItem
             key={index}
+            index={index}
             question={faq.question}
             answer={faq.answer}
             isOpen={openIndex === index}
