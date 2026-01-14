@@ -29,3 +29,11 @@ export {
   Solution,
   HowItWorks,
 } from './why-riskcore'
+
+// Pricing page components
+export {
+  Features as PricingFeatures,
+  PricingCards,
+  ComparisonMatrix,
+  FAQ,
+} from './pricing'
