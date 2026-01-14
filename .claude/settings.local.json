@@ -18,7 +18,9 @@
       "Bash(robocopy:*)",
       "Bash(cmd.exe /c \"robocopy C:\\\\Users\\\\massi\\\\Desktop\\\\riskcore-website-new C:\\\\Users\\\\massi\\\\Desktop\\\\RISKCORE_WEBSITE /E /XD .claude\")",
       "Bash(powershell -Command:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "mcp__supabase__apply_migration",
+      "Bash(npm install:*)"
     ]
   }
 }
