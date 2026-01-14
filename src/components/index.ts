@@ -43,3 +43,9 @@ export {
   Founder,
   OpenSource,
 } from './about'
+
+// Integration components
+export {
+  CrispChat,
+  Analytics,
+} from './integrations'

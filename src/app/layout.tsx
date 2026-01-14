@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { Header, Footer } from '@/components/layout'
+import { CrispChat, Analytics } from '@/components'
 
 export const metadata: Metadata = {
   title: 'RISKCORE | Firm-Wide Risk Visibility for Multi-Manager Funds',
@@ -29,11 +30,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className="min-h-screen bg-bg-primary text-text-secondary antialiased flex flex-col">
+        <Analytics />
         <Header />
         <main className="flex-1">
           {children}
         </main>
         <Footer />
+        <CrispChat />
       </body>
     </html>
   )

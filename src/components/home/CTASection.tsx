@@ -8,17 +8,35 @@ export default function CTASection() {
   const [email, setEmail] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [error, setError] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!email) return
 
     setIsSubmitting(true)
-    // Simulate API call - will be replaced with MailerLite integration
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    setIsSubmitting(false)
-    setIsSubmitted(true)
-    setEmail('')
+    setError('')
+
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Something went wrong')
+      }
+
+      setIsSubmitted(true)
+      setEmail('')
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to subscribe')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -102,6 +120,9 @@ export default function CTASection() {
                   )}
                 </button>
               </div>
+              {error && (
+                <p className="text-red-400 text-sm mt-3">{error}</p>
+              )}
               <p className="text-text-dim text-xs mt-4">
                 We respect your inbox. No spam, just updates on our launch.
               </p>
