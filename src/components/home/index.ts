@@ -1,0 +1,5 @@
+export { default as Hero } from './Hero'
+export { default as TrustBadges } from './TrustBadges'
+export { default as Features } from './Features'
+export { default as DashboardPreview } from './DashboardPreview'
+export { default as CTASection } from './CTASection'

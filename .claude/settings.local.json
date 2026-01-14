@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git clone:*)",
+      "Bash(copy \"C:\\\\Users\\\\massi\\\\Desktop\\\\RISKCORE_WEBSITE\\\\designs\\\\Riskboard.html\" \"C:\\\\Users\\\\massi\\\\Desktop\\\\riskcore-website-new\\\\designs\")",
+      "Bash(xcopy:*)",
+      "Bash(npx create-next-app:*)",
+      "Bash(npx create-next-app@latest:*)",
+      "Bash(git init:*)",
+      "Bash(git remote add:*)",
+      "Bash(git branch:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git config:*)",
+      "Bash(git push:*)",
+      "Bash(timeout 15 npm run dev)",
+      "mcp__github__list_commits",
+      "Bash(robocopy:*)",
+      "Bash(cmd.exe /c \"robocopy C:\\\\Users\\\\massi\\\\Desktop\\\\riskcore-website-new C:\\\\Users\\\\massi\\\\Desktop\\\\RISKCORE_WEBSITE /E /XD .claude\")",
+      "Bash(powershell -Command:*)",
+      "Bash(npm run build:*)"
+    ]
+  }
+}
