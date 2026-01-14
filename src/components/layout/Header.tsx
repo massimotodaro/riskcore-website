@@ -1,0 +1,159 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { Menu, X, Github, ChevronRight } from 'lucide-react'
+
+const navigation = [
+  { name: 'Why RISKCORE', href: '/why-riskcore' },
+  { name: 'Pricing', href: '/pricing' },
+  { name: 'About', href: '/about' },
+  { name: 'Docs', href: 'https://github.com/massimotodaro/riskcore#readme', external: true },
+]
+
+export default function Header() {
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isMobileMenuOpen])
+
+  return (
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? 'bg-bg-primary/80 backdrop-blur-xl border-b border-white/10 shadow-lg'
+          : 'bg-transparent'
+      }`}
+    >
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 md:h-20">
+          {/* Logo */}
+          <Link
+            href="/"
+            className="flex items-center gap-2 group"
+          >
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-blue to-brand-cyan flex items-center justify-center">
+              <span className="text-white font-bold text-sm">R</span>
+            </div>
+            <span className="font-heading font-bold text-xl text-text-primary group-hover:text-brand-blue transition-colors">
+              RISKCORE
+            </span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                target={item.external ? '_blank' : undefined}
+                rel={item.external ? 'noopener noreferrer' : undefined}
+                className="text-text-muted hover:text-text-primary transition-colors text-sm font-medium"
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+
+          {/* Desktop CTAs */}
+          <div className="hidden md:flex items-center gap-4">
+            <Link
+              href="https://github.com/massimotodaro/riskcore"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 text-text-muted hover:text-text-primary transition-colors text-sm font-medium"
+            >
+              <Github className="w-5 h-5" />
+              <span>GitHub</span>
+            </Link>
+            <Link
+              href="#early-access"
+              className="btn-primary text-sm"
+            >
+              Get Early Access
+              <ChevronRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            type="button"
+            className="md:hidden p-2 text-text-muted hover:text-text-primary transition-colors"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+          >
+            {isMobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Menu */}
+      <div
+        className={`md:hidden fixed inset-0 top-16 bg-bg-primary/95 backdrop-blur-xl transition-all duration-300 ${
+          isMobileMenuOpen
+            ? 'opacity-100 pointer-events-auto'
+            : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        <div className="flex flex-col p-6 space-y-4">
+          {navigation.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              target={item.external ? '_blank' : undefined}
+              rel={item.external ? 'noopener noreferrer' : undefined}
+              className="text-text-secondary hover:text-text-primary transition-colors text-lg font-medium py-2 border-b border-white/10"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              {item.name}
+            </Link>
+          ))}
+
+          <div className="pt-4 space-y-4">
+            <Link
+              href="https://github.com/massimotodaro/riskcore"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 px-4 py-3 border border-white/20 rounded-lg text-text-secondary hover:text-text-primary hover:border-white/40 transition-all text-base font-medium"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <Github className="w-5 h-5" />
+              <span>Star on GitHub</span>
+            </Link>
+            <Link
+              href="#early-access"
+              className="btn-primary w-full justify-center text-base"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Get Early Access
+              <ChevronRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </header>
+  )
+}

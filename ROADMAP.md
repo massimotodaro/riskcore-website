@@ -17,8 +17,8 @@ Build a professional, conversion-focused marketing website that:
 
 | Phase | Description | Duration | Status |
 |-------|-------------|----------|--------|
-| Phase 1 | Project Setup | Day 1 | In Progress |
-| Phase 2 | Layout Components | Day 1-2 | Not Started |
+| Phase 1 | Project Setup | Day 1 | Complete |
+| Phase 2 | Layout Components | Day 1-2 | In Progress |
 | Phase 3 | Home Page | Day 2-3 | Not Started |
 | Phase 4 | Why RISKCORE Page | Day 3-4 | Not Started |
 | Phase 5 | Pricing Page | Day 4-5 | Not Started |
@@ -232,8 +232,8 @@ Status: NOT STARTED
 | Resource | URL |
 |----------|-----|
 | GitHub Repo | https://github.com/massimotodaro/riskcore-website |
-| Vercel Project | [To be added] |
-| Live Site | [To be added] |
+| Vercel Project | Connected |
+| Live Site | https://riskcore.io |
 | Design Reference | `designs/Riskboard.html` |
 | MailerLite | [To be added] |
 

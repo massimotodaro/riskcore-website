@@ -1,8 +1,8 @@
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      {/* Hero Section - Placeholder */}
-      <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <>
+      {/* Hero Section */}
+      <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
         {/* Background Effects */}
         <div className="absolute inset-0 hero-pattern" />
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-blue/20 rounded-full blur-3xl" />
@@ -47,6 +47,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </main>
+    </>
   )
 }
