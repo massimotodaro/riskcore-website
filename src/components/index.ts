@@ -47,5 +47,6 @@ export {
 // Integration components
 export {
   CrispChat,
+  TawkTo,
   Analytics,
 } from './integrations'

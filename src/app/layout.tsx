@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { Header, Footer } from '@/components/layout'
-import { CrispChat, Analytics } from '@/components'
+import { TawkTo, Analytics } from '@/components'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://riskcore.io'),
@@ -58,7 +58,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
-        <CrispChat />
+        <TawkTo />
       </body>
     </html>
   )
