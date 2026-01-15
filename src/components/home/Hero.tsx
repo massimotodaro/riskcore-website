@@ -114,8 +114,8 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg md:text-xl text-text-muted mb-8"
           >
-            Keep your trading systems. Keep your PMs&apos; workflows. RISKCORE sits on top
-            and gives you the <span className="text-text-primary font-medium">firm-wide view you&apos;ve never had</span>.
+            Keep your trading systems. Keep your PMs&apos; workflows. RISKCORE sits on top and gives you the<br />
+            <span className="text-text-primary font-medium">firm-wide view you&apos;ve never had</span>.
           </motion.p>
 
           {/* Email CTA */}
