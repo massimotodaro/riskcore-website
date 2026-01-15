@@ -38,7 +38,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative min-h-screen flex items-start overflow-hidden pb-10">
+    <section className="relative min-h-[90vh] flex items-start overflow-hidden pb-10">
       {/* Background Effects */}
       <div className="absolute inset-0">
         {/* Grid pattern */}
