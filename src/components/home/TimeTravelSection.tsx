@@ -327,7 +327,7 @@ export default function TimeTravelSection() {
               </p>
 
               <p className="text-lg text-slate-400 leading-relaxed">
-                Now can finally answer the question that&apos;s been haunting you:{' '}
+                Now you can finally answer the question that&apos;s been haunting you:{' '}
                 <motion.span
                   className="text-emerald-400 font-semibold italic"
                   initial={{ opacity: 0 }}
