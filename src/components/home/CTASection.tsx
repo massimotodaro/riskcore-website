@@ -6,6 +6,7 @@ import { useState } from 'react'
 
 export default function CTASection() {
   const [email, setEmail] = useState('')
+  const [website, setWebsite] = useState('') // Honeypot field
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [error, setError] = useState('')
@@ -21,7 +22,7 @@ export default function CTASection() {
       const response = await fetch('/api/newsletter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, website }), // Include honeypot
       })
 
       const data = await response.json()
@@ -74,6 +75,17 @@ export default function CTASection() {
           {/* Form */}
           {!isSubmitted ? (
             <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+              {/* Honeypot field - hidden from real users, bots will fill it */}
+              <input
+                type="text"
+                name="website"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+                className="absolute -left-[9999px] opacity-0 pointer-events-none"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+              />
               <div className="flex flex-col sm:flex-row gap-3">
                 <div className="relative flex-1">
                   <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-dim" />

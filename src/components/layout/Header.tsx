@@ -62,21 +62,31 @@ export default function Header() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                target={item.external ? '_blank' : undefined}
-                rel={item.external ? 'noopener noreferrer' : undefined}
-                className="text-text-muted hover:text-text-primary transition-colors text-sm font-medium"
-              >
-                {item.name}
-              </Link>
+              item.external ? (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-text-muted hover:text-text-primary transition-colors text-sm font-medium"
+                >
+                  {item.name}
+                </a>
+              ) : (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="text-text-muted hover:text-text-primary transition-colors text-sm font-medium"
+                >
+                  {item.name}
+                </Link>
+              )
             ))}
           </div>
 
           {/* Desktop CTAs */}
           <div className="hidden md:flex items-center gap-4">
-            <Link
+            <a
               href="https://github.com/massimotodaro/riskcore"
               target="_blank"
               rel="noopener noreferrer"
@@ -84,7 +94,7 @@ export default function Header() {
             >
               <Github className="w-5 h-5" />
               <span>GitHub</span>
-            </Link>
+            </a>
             <Link
               href="#early-access"
               className="btn-primary text-sm"
@@ -124,20 +134,31 @@ export default function Header() {
       >
         <div className="flex flex-col p-6 space-y-4">
           {navigation.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              target={item.external ? '_blank' : undefined}
-              rel={item.external ? 'noopener noreferrer' : undefined}
-              className="text-text-secondary hover:text-text-primary transition-colors text-lg font-medium py-2 border-b border-white/10"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {item.name}
-            </Link>
+            item.external ? (
+              <a
+                key={item.name}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-text-secondary hover:text-text-primary transition-colors text-lg font-medium py-2 border-b border-white/10"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {item.name}
+              </a>
+            ) : (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="text-text-secondary hover:text-text-primary transition-colors text-lg font-medium py-2 border-b border-white/10"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
+            )
           ))}
 
           <div className="pt-4 space-y-4">
-            <Link
+            <a
               href="https://github.com/massimotodaro/riskcore"
               target="_blank"
               rel="noopener noreferrer"
@@ -146,7 +167,7 @@ export default function Header() {
             >
               <Github className="w-5 h-5" />
               <span>Star on GitHub</span>
-            </Link>
+            </a>
             <Link
               href="#early-access"
               className="btn-primary w-full justify-center text-base"

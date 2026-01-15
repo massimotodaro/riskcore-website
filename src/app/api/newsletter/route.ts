@@ -1,22 +1,34 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import { Resend } from 'resend'
 
 const MAILERLITE_API_KEY = process.env.MAILERLITE_API_KEY
 const MAILERLITE_GROUP_ID = process.env.MAILERLITE_GROUP_ID
 const SUPABASE_URL = process.env.SUPABASE_URL
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY
+const RESEND_API_KEY = process.env.RESEND_API_KEY
+const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL || 'hello@riskcore.io'
 
-// Initialize Supabase client
+// Initialize clients
 const supabase = SUPABASE_URL && SUPABASE_SERVICE_KEY
   ? createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY)
   : null
 
+const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null
+
 export async function POST(request: Request) {
   try {
-    const { email } = await request.json()
+    const { email, website } = await request.json() // website is honeypot field
     const headers = request.headers
     const ip = headers.get('x-forwarded-for') || headers.get('x-real-ip') || 'unknown'
     const userAgent = headers.get('user-agent') || 'unknown'
+
+    // Bot detection: honeypot field should be empty
+    if (website) {
+      console.log('Bot detected (honeypot filled):', { email, ip })
+      // Return success to fool the bot, but don't process
+      return NextResponse.json({ success: true, message: 'Subscribed successfully!' })
+    }
 
     if (!email) {
       return NextResponse.json(
@@ -36,6 +48,7 @@ export async function POST(request: Request) {
 
     // Save to Supabase (our source of truth)
     if (supabase) {
+      // Save to website_subscribers (legacy)
       const { error: dbError } = await supabase
         .from('website_subscribers')
         .upsert({
@@ -48,9 +61,24 @@ export async function POST(request: Request) {
         })
 
       if (dbError) {
-        console.error('Supabase error:', dbError)
+        console.error('Supabase subscribers error:', dbError)
+      }
+
+      // Also save to leads table (CRM)
+      const { error: leadsError } = await supabase
+        .from('leads')
+        .insert({
+          email,
+          source: 'website_newsletter',
+          status: 'new',
+          ip_address: ip,
+          user_agent: userAgent
+        })
+
+      if (leadsError && !leadsError.message?.includes('duplicate')) {
+        console.error('Supabase leads error:', leadsError)
       } else {
-        console.log('Saved to Supabase:', email)
+        console.log('Saved to Supabase leads:', email)
       }
     }
 
@@ -72,6 +100,29 @@ export async function POST(request: Request) {
       if (!response.ok && response.status !== 409) {
         const error = await response.json()
         console.error('MailerLite error:', error)
+      }
+    }
+
+    // Send notification email via Resend
+    if (resend) {
+      try {
+        await resend.emails.send({
+          from: 'RISKCORE <notifications@riskcore.io>',
+          to: NOTIFICATION_EMAIL,
+          subject: '🎉 New RISKCORE Signup!',
+          html: `
+            <h2>New Beta Signup</h2>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Time:</strong> ${new Date().toISOString()}</p>
+            <p><strong>IP:</strong> ${ip}</p>
+            <p><strong>Source:</strong> Website form</p>
+            <hr>
+            <p><a href="https://supabase.com/dashboard">View in Supabase</a></p>
+          `
+        })
+        console.log('Notification email sent for:', email)
+      } catch (emailError) {
+        console.error('Resend error:', emailError)
       }
     }
 

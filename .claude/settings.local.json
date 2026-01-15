@@ -20,7 +20,11 @@
       "Bash(powershell -Command:*)",
       "Bash(npm run build:*)",
       "mcp__supabase__apply_migration",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(timeout /t 60 /nobreak)",
+      "Bash(curl:*)",
+      "mcp__supabase__execute_sql",
+      "mcp__supabase__list_tables"
     ]
   }
 }

@@ -109,7 +109,7 @@ export default function Hero() {
             Get Early Access
             <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
           </Link>
-          <Link
+          <a
             href="https://github.com/massimotodaro/riskcore"
             target="_blank"
             rel="noopener noreferrer"
@@ -117,7 +117,7 @@ export default function Hero() {
           >
             <Github className="w-5 h-5" />
             Star on GitHub
-          </Link>
+          </a>
         </motion.div>
 
         {/* Video/Demo CTA */}
