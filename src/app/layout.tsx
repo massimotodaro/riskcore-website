@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { Header, Footer } from '@/components/layout'
-import { TawkTo, Analytics } from '@/components'
+import { TawkTo, Analytics, ThemeProvider } from '@/components'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://riskcore.io'),
@@ -50,15 +50,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className="min-h-screen bg-bg-primary text-text-secondary antialiased flex flex-col">
-        <Analytics />
-        <Header />
-        <main className="flex-1">
-          {children}
-        </main>
-        <Footer />
-        <TawkTo />
+        <ThemeProvider>
+          <Analytics />
+          <Header />
+          <main className="flex-1">
+            {children}
+          </main>
+          <Footer />
+          <TawkTo />
+        </ThemeProvider>
       </body>
     </html>
   )

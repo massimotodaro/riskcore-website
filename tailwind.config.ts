@@ -6,27 +6,26 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        // Background colors
-        'bg-primary': '#0f172a',
-        'bg-secondary': '#1e293b',
-        'bg-tertiary': '#334155',
+        // Theme-aware colors using CSS variables
+        'bg-primary': 'var(--bg-primary)',
+        'bg-secondary': 'var(--bg-secondary)',
+        'bg-tertiary': 'var(--bg-tertiary)',
+        'text-primary': 'var(--text-primary)',
+        'text-secondary': 'var(--text-secondary)',
+        'text-muted': 'var(--text-muted)',
+        'text-dim': 'var(--text-dim)',
 
-        // Brand colors
+        // Brand colors (consistent across themes)
         'brand-blue': '#3b82f6',
         'brand-green': '#22c55e',
         'brand-purple': '#a855f7',
         'brand-cyan': '#06b6d4',
         'brand-yellow': '#eab308',
         'brand-orange': '#f97316',
-
-        // Text colors
-        'text-primary': '#f1f5f9',
-        'text-secondary': '#e2e8f0',
-        'text-muted': '#94a3b8',
-        'text-dim': '#64748b',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
@@ -35,13 +34,13 @@ const config: Config = {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'hero-gradient': 'linear-gradient(180deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)',
+        'hero-gradient': 'var(--hero-gradient)',
       },
       boxShadow: {
         'glow-blue': '0 0 40px rgba(59, 130, 246, 0.3)',
         'glow-green': '0 0 40px rgba(34, 197, 94, 0.3)',
-        'card': '0 8px 32px rgba(0, 0, 0, 0.3)',
-        'card-hover': '0 20px 40px rgba(0, 0, 0, 0.4)',
+        'card': 'var(--card-shadow)',
+        'card-hover': 'var(--card-shadow-hover)',
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',

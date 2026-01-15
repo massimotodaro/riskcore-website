@@ -50,3 +50,9 @@ export {
   TawkTo,
   Analytics,
 } from './integrations'
+
+// Provider components
+export {
+  ThemeProvider,
+  ThemeToggle,
+} from './providers'
