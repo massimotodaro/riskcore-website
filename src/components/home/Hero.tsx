@@ -38,7 +38,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20 pb-10">
+    <section className="relative min-h-screen flex items-center overflow-hidden pt-20 pb-10">
       {/* Background Effects */}
       <div className="absolute inset-0">
         {/* Grid pattern */}
@@ -89,139 +89,113 @@ export default function Hero() {
         />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-green/10 border border-brand-green/20 mb-8"
-        >
-          <span className="w-2 h-2 rounded-full bg-brand-green animate-pulse" />
-          <span className="text-brand-green text-sm font-medium">Open Source Risk Aggregation</span>
-        </motion.div>
-
-        {/* Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-text-primary leading-tight mb-6"
-        >
-          Firm-Wide Risk Visibility
-          <br />
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-blue via-brand-cyan to-brand-green">
-            for Multi-Manager Funds
-          </span>
-        </motion.h1>
-
-        {/* Subheadline */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-lg md:text-xl text-text-muted max-w-3xl mx-auto mb-10"
-        >
-          Keep your trading systems. Keep your PMs&apos; workflows. RISKCORE sits on top
-          and gives you the <span className="text-text-primary font-medium">firm-wide view you&apos;ve never had</span>.
-        </motion.p>
-
-        {/* Email CTA - Vanta Style */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="max-w-lg mx-auto mb-16"
-        >
-          {status === 'success' ? (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="flex items-center justify-center gap-2 py-4 px-6 bg-brand-green/10 border border-brand-green/20 rounded-xl"
+      {/* Main Content - Two Column Layout */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          {/* Left Column - Text Content */}
+          <div className="text-left">
+            {/* Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold text-text-primary leading-tight mb-6"
             >
-              <span className="w-2 h-2 rounded-full bg-brand-green" />
-              <span className="text-brand-green font-medium">{message}</span>
-            </motion.div>
-          ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
-              <div className="flex-1 relative">
-                <input
-                  type="email"
-                  placeholder="Enter your work email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl text-text-primary placeholder:text-text-dim focus:outline-none focus:border-brand-blue/50 focus:ring-2 focus:ring-brand-blue/20 transition-all text-lg"
-                  required
-                  disabled={status === 'loading'}
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={status === 'loading'}
-                className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-blue text-white font-semibold rounded-xl transition-all duration-200 hover:bg-brand-blue/90 shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40 text-lg disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
-              >
-                {status === 'loading' ? (
-                  <>
-                    <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                    </svg>
-                    <span>Joining...</span>
-                  </>
-                ) : (
-                  <>
-                    Get Early Access
-                    <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                  </>
-                )}
-              </button>
-            </form>
-          )}
-          {status === 'error' && (
+              Firm-Wide Risk Visibility
+              <br />
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-blue via-brand-cyan to-brand-green">
+                for Multi-Manager Funds
+              </span>
+            </motion.h1>
+
+            {/* Subheadline */}
             <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="mt-3 text-red-400 text-sm"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-lg md:text-xl text-text-muted max-w-xl mb-8"
             >
-              {message}
+              Keep your trading systems. Keep your PMs&apos; workflows. RISKCORE sits on top
+              and gives you the <span className="text-text-primary font-medium">firm-wide view you&apos;ve never had</span>.
             </motion.p>
-          )}
-          <p className="mt-4 text-sm text-text-dim">
-            Join 250+ risk professionals. No spam, unsubscribe anytime.
-          </p>
-        </motion.div>
-      </div>
 
-      {/* Animated Riskboard Dashboard */}
-      <motion.div
-        initial={{ opacity: 0, y: 60 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-      >
-        <AnimatedRiskboard />
-      </motion.div>
+            {/* Email CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="max-w-md"
+            >
+              {status === 'success' ? (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="flex items-center gap-2 py-4 px-6 bg-brand-green/10 border border-brand-green/20 rounded-xl"
+                >
+                  <span className="w-2 h-2 rounded-full bg-brand-green" />
+                  <span className="text-brand-green font-medium">{message}</span>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+                  <div className="flex-1 relative">
+                    <input
+                      type="email"
+                      placeholder="Work email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl text-text-primary placeholder:text-text-dim focus:outline-none focus:border-brand-blue/50 focus:ring-2 focus:ring-brand-blue/20 transition-all text-lg"
+                      required
+                      disabled={status === 'loading'}
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={status === 'loading'}
+                    className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-blue text-white font-semibold rounded-xl transition-all duration-200 hover:bg-brand-blue/90 shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40 text-lg disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+                  >
+                    {status === 'loading' ? (
+                      <>
+                        <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                        </svg>
+                        <span>Joining...</span>
+                      </>
+                    ) : (
+                      <>
+                        Subscribe
+                        <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                      </>
+                    )}
+                  </button>
+                </form>
+              )}
+              {status === 'error' && (
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="mt-3 text-red-400 text-sm"
+                >
+                  {message}
+                </motion.p>
+              )}
+              <p className="mt-4 text-sm text-text-dim">
+                Join 250+ risk professionals. No spam, unsubscribe anytime.
+              </p>
+            </motion.div>
+          </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 rounded-full border-2 border-text-dim flex items-start justify-center p-2"
-        >
+          {/* Right Column - Dashboard */}
           <motion.div
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-1 h-2 rounded-full bg-text-dim"
-          />
-        </motion.div>
-      </motion.div>
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="relative lg:pl-4"
+          >
+            <AnimatedRiskboard />
+          </motion.div>
+        </div>
+      </div>
     </section>
   )
 }
