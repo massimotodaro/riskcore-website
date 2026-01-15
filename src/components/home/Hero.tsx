@@ -99,11 +99,11 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold text-text-primary leading-tight mb-6"
+              className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary leading-tight mb-6"
             >
-              Firm-Wide Risk Visibility
+              <span className="whitespace-nowrap">Firm-Wide Risk Visibility</span>
               <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-blue via-brand-cyan to-brand-green">
+              <span className="whitespace-nowrap bg-clip-text text-transparent bg-gradient-to-r from-brand-blue via-brand-cyan to-brand-green">
                 for Multi-Manager Funds
               </span>
             </motion.h1>
