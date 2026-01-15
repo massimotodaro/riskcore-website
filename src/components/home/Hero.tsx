@@ -1,16 +1,42 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Link from 'next/link'
-import { ChevronRight, Github, Play } from 'lucide-react'
-
-// Import all dashboard variations - swap the import to try different versions
-// import { AnimatedDashboardV1 as AnimatedDashboard } from '../hero'
-// import { AnimatedDashboardV2 as AnimatedDashboard } from '../hero'
-import { AnimatedDashboardV3 as AnimatedDashboard } from '../hero'
-// import { AnimatedDashboardV4 as AnimatedDashboard } from '../hero'
+import { ChevronRight } from 'lucide-react'
+import { useState } from 'react'
+import { AnimatedRiskboard } from '../hero'
 
 export default function Hero() {
+  const [email, setEmail] = useState('')
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [message, setMessage] = useState('')
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email) return
+
+    setStatus('loading')
+    try {
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
+      const data = await res.json()
+
+      if (res.ok) {
+        setStatus('success')
+        setMessage('Welcome aboard! Check your inbox.')
+        setEmail('')
+      } else {
+        setStatus('error')
+        setMessage(data.error || 'Something went wrong')
+      }
+    } catch {
+      setStatus('error')
+      setMessage('Failed to connect. Please try again.')
+    }
+  }
+
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20 pb-10">
       {/* Background Effects */}
@@ -101,53 +127,80 @@ export default function Hero() {
           and gives you the <span className="text-text-primary font-medium">firm-wide view you&apos;ve never had</span>.
         </motion.p>
 
-        {/* CTAs */}
+        {/* Email CTA - Vanta Style */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
+          className="max-w-lg mx-auto mb-16"
         >
-          <Link
-            href="#early-access"
-            className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-blue text-white font-semibold rounded-lg transition-all duration-200 hover:bg-brand-blue/90 shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40 text-lg"
-          >
-            Get Early Access
-            <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-          </Link>
-          <a
-            href="https://github.com/massimotodaro/riskcore"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent border border-white/20 dark:border-white/20 text-text-primary font-semibold rounded-lg transition-all duration-200 hover:border-white/40 hover:bg-white/5 text-lg"
-          >
-            <Github className="w-5 h-5" />
-            Star on GitHub
-          </a>
-        </motion.div>
-
-        {/* Video/Demo CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="flex items-center justify-center gap-3 text-text-muted mb-16"
-        >
-          <button className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 transition-all">
-            <Play className="w-5 h-5 text-text-primary ml-0.5" />
-          </button>
-          <span className="text-sm">Watch 2-min demo</span>
+          {status === 'success' ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="flex items-center justify-center gap-2 py-4 px-6 bg-brand-green/10 border border-brand-green/20 rounded-xl"
+            >
+              <span className="w-2 h-2 rounded-full bg-brand-green" />
+              <span className="text-brand-green font-medium">{message}</span>
+            </motion.div>
+          ) : (
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+              <div className="flex-1 relative">
+                <input
+                  type="email"
+                  placeholder="Enter your work email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl text-text-primary placeholder:text-text-dim focus:outline-none focus:border-brand-blue/50 focus:ring-2 focus:ring-brand-blue/20 transition-all text-lg"
+                  required
+                  disabled={status === 'loading'}
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={status === 'loading'}
+                className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-blue text-white font-semibold rounded-xl transition-all duration-200 hover:bg-brand-blue/90 shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40 text-lg disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+              >
+                {status === 'loading' ? (
+                  <>
+                    <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                    <span>Joining...</span>
+                  </>
+                ) : (
+                  <>
+                    Get Early Access
+                    <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                  </>
+                )}
+              </button>
+            </form>
+          )}
+          {status === 'error' && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="mt-3 text-red-400 text-sm"
+            >
+              {message}
+            </motion.p>
+          )}
+          <p className="mt-4 text-sm text-text-dim">
+            Join 250+ risk professionals. No spam, unsubscribe anytime.
+          </p>
         </motion.div>
       </div>
 
-      {/* Animated Dashboard */}
+      {/* Animated Riskboard Dashboard */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
         className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       >
-        <AnimatedDashboard />
+        <AnimatedRiskboard />
       </motion.div>
 
       {/* Scroll indicator */}
