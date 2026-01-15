@@ -29,6 +29,12 @@ interface MarketData {
   isUp: boolean
 }
 
+interface DataRow {
+  label: string
+  pct: string
+  value: string
+}
+
 // ==============================================
 // ANIMATED NUMBER COMPONENT
 // ==============================================
@@ -335,7 +341,7 @@ function SummaryStrip() {
       className="flex items-center gap-8 px-4 py-3 border-b border-white/5"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ delay: 0.8 }}
+      transition={{ delay: 1.2 }}
     >
       <div className="flex items-center gap-2">
         <span className="text-sm text-slate-400">Firm Gross:</span>
@@ -343,9 +349,9 @@ function SummaryStrip() {
           className="text-lg font-bold font-mono text-slate-100"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
+          transition={{ delay: 1.8 }}
         >
-          $<AnimatedNumber value={2090} suffix="M" />
+          $<AnimatedNumber value={2090} suffix="M" duration={2.5} />
         </motion.span>
       </div>
       <div className="flex items-center gap-2">
@@ -354,9 +360,9 @@ function SummaryStrip() {
           className="text-lg font-bold font-mono text-emerald-400"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.4 }}
+          transition={{ delay: 2.2 }}
         >
-          $<AnimatedNumber value={641} suffix="M" />
+          $<AnimatedNumber value={641} suffix="M" duration={2.5} />
         </motion.span>
       </div>
       <div className="flex items-center gap-2">
@@ -365,9 +371,9 @@ function SummaryStrip() {
           className="text-lg font-bold font-mono text-slate-100"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.6 }}
+          transition={{ delay: 2.6 }}
         >
-          <AnimatedNumber value={4081} />
+          <AnimatedNumber value={4081} duration={2.5} />
         </motion.span>
       </div>
     </motion.div>
@@ -385,6 +391,7 @@ interface MiniRiskCardProps {
   change: string
   isUp: boolean
   metrics: { label: string; value: string }[]
+  rows: DataRow[]
   barPercentage: number
   delay: number
 }
@@ -396,6 +403,7 @@ function MiniRiskCard({
   change,
   isUp,
   metrics,
+  rows,
   barPercentage,
   delay
 }: MiniRiskCardProps) {
@@ -408,7 +416,7 @@ function MiniRiskCard({
 
   return (
     <motion.div
-      className="bg-slate-800/60 backdrop-blur-sm border border-white/10 rounded-xl p-4 min-w-[200px] flex-shrink-0"
+      className="bg-slate-800/60 backdrop-blur-sm border border-white/10 rounded-xl p-4 min-w-[240px] flex-shrink-0 flex flex-col"
       initial={{ opacity: 0, y: 30, scale: 0.9 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ delay, duration: 0.5, type: 'spring' }}
@@ -453,8 +461,35 @@ function MiniRiskCard({
         </div>
       </div>
 
+      {/* Data Rows Table */}
+      <div className="flex-1 mb-3">
+        <div
+          className="grid grid-cols-3 gap-1 px-2 py-1 text-[9px] font-semibold uppercase tracking-wider rounded-t"
+          style={{ backgroundColor: `${color}15`, color: color }}
+        >
+          <span></span>
+          <span className="text-center">%</span>
+          <span className="text-center">Delta</span>
+        </div>
+        <div className="bg-slate-900/40 rounded-b divide-y divide-white/5">
+          {rows.map((row, i) => (
+            <motion.div
+              key={row.label}
+              className="grid grid-cols-3 gap-1 px-2 py-1.5 text-[10px] hover:bg-white/5 transition-colors"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: delay + 0.6 + i * 0.08 }}
+            >
+              <span className="text-slate-400 font-medium">{row.label}</span>
+              <span className="text-center font-mono text-slate-300">{row.pct}</span>
+              <span className="text-center font-mono text-slate-300">{row.value}</span>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
       {/* Mini Metrics */}
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-3 gap-2 pt-2 border-t border-white/5">
         {metrics.map((metric, i) => (
           <motion.div
             key={metric.label}
@@ -489,6 +524,13 @@ export default function AnimatedRiskboard() {
         { label: 'Vega', value: '$280K' },
         { label: 'Gamma', value: '$42K' },
       ],
+      rows: [
+        { label: 'N. America', pct: '48%', value: '$20.4M' },
+        { label: 'Europe', pct: '22%', value: '$9.4M' },
+        { label: 'Japan', pct: '15%', value: '$6.4M' },
+        { label: 'SE Asia', pct: '10%', value: '$4.3M' },
+        { label: 'RoW', pct: '5%', value: '$2.0M' },
+      ],
       barPercentage: 65,
     },
     {
@@ -501,6 +543,12 @@ export default function AnimatedRiskboard() {
         { label: 'DV01', value: '$85K' },
         { label: 'Duration', value: '4.2Y' },
         { label: 'Convex', value: '0.45' },
+      ],
+      rows: [
+        { label: '2Y', pct: '21%', value: '$18K' },
+        { label: '5Y', pct: '38%', value: '$32K' },
+        { label: '10Y', pct: '33%', value: '$28K' },
+        { label: '30Y', pct: '8%', value: '$7K' },
       ],
       barPercentage: 55,
     },
@@ -515,6 +563,13 @@ export default function AnimatedRiskboard() {
         { label: 'Cr.Dur', value: '3.8Y' },
         { label: 'Avg PD', value: '2.4%' },
       ],
+      rows: [
+        { label: 'AAA-AA', pct: '18%', value: '$7.5K' },
+        { label: 'A', pct: '32%', value: '$13.4K' },
+        { label: 'BBB', pct: '28%', value: '$11.8K' },
+        { label: 'HY', pct: '16%', value: '$6.7K' },
+        { label: 'Distress', pct: '6%', value: '$2.6K' },
+      ],
       barPercentage: 45,
     },
     {
@@ -527,6 +582,13 @@ export default function AnimatedRiskboard() {
         { label: 'Delta', value: '$18.2M' },
         { label: 'Vega', value: '$320K' },
         { label: 'Pairs', value: '12' },
+      ],
+      rows: [
+        { label: 'EUR', pct: '38%', value: '$6.9M' },
+        { label: 'JPY', pct: '25%', value: '$4.5M' },
+        { label: 'GBP', pct: '18%', value: '$3.3M' },
+        { label: 'CHF', pct: '12%', value: '$2.2M' },
+        { label: 'Other', pct: '7%', value: '$1.3M' },
       ],
       barPercentage: 35,
     },
@@ -541,6 +603,13 @@ export default function AnimatedRiskboard() {
         { label: 'Basis', value: '$45K' },
         { label: 'Roll', value: '-0.8%' },
       ],
+      rows: [
+        { label: 'Crude', pct: '42%', value: '$12M' },
+        { label: 'Gold', pct: '28%', value: '$8M' },
+        { label: 'NatGas', pct: '15%', value: '$4.3M' },
+        { label: 'Copper', pct: '10%', value: '$2.8M' },
+        { label: 'Other', pct: '5%', value: '$1.4M' },
+      ],
       barPercentage: 40,
     },
     {
@@ -553,6 +622,11 @@ export default function AnimatedRiskboard() {
         { label: 'VaR', value: '$340K' },
         { label: 'CVaR', value: '$520K' },
         { label: 'Pos', value: '45' },
+      ],
+      rows: [
+        { label: 'Struct', pct: '55%', value: '$4.5M' },
+        { label: 'Vol', pct: '30%', value: '$2.5M' },
+        { label: 'Other', pct: '15%', value: '$1.2M' },
       ],
       barPercentage: 25,
     },
@@ -605,17 +679,37 @@ export default function AnimatedRiskboard() {
 
             {/* Risk Cards Row */}
             <motion.div
-              className="flex-1 p-4 overflow-x-auto"
+              className="flex-1 p-4 overflow-x-auto riskboard-scrollbar"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1 }}
+              style={{
+                scrollbarWidth: 'thin',
+                scrollbarColor: '#334155 #0f172a',
+              }}
             >
+              <style>{`
+                .riskboard-scrollbar::-webkit-scrollbar {
+                  height: 6px;
+                }
+                .riskboard-scrollbar::-webkit-scrollbar-track {
+                  background: #0f172a;
+                  border-radius: 3px;
+                }
+                .riskboard-scrollbar::-webkit-scrollbar-thumb {
+                  background: linear-gradient(90deg, #334155, #475569);
+                  border-radius: 3px;
+                }
+                .riskboard-scrollbar::-webkit-scrollbar-thumb:hover {
+                  background: linear-gradient(90deg, #475569, #64748b);
+                }
+              `}</style>
               <div className="flex gap-4 h-full">
                 {riskCards.map((card, index) => (
                   <MiniRiskCard
                     key={card.title}
                     {...card}
-                    delay={1.2 + index * 0.15}
+                    delay={2.8 + index * 0.15}
                   />
                 ))}
               </div>

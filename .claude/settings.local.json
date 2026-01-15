@@ -25,7 +25,8 @@
       "Bash(curl:*)",
       "mcp__supabase__execute_sql",
       "mcp__supabase__list_tables",
-      "Bash(timeout 10 npm run dev)"
+      "Bash(timeout 10 npm run dev)",
+      "WebFetch(domain:www.vanta.com)"
     ]
   }
 }
