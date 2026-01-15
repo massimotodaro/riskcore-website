@@ -90,8 +90,8 @@ export default function Hero() {
       </div>
 
       {/* Main Content - Two Column Layout */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:pr-0">
+        <div className="grid lg:grid-cols-[1fr_1.4fr] gap-8 lg:gap-6 items-center">
           {/* Left Column - Text Content */}
           <div className="text-left">
             {/* Headline */}
@@ -190,9 +190,11 @@ export default function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="relative lg:pl-4"
+            className="relative"
           >
-            <AnimatedRiskboard />
+            <div className="lg:scale-100 origin-left">
+              <AnimatedRiskboard />
+            </div>
           </motion.div>
         </div>
       </div>
