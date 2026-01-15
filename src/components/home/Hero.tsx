@@ -217,9 +217,6 @@ export default function Hero() {
           <CTAButtons />
         </motion.div>
 
-        {/* Stats */}
-        <StatsRow />
-
         {/* AnimatedRiskboard */}
         <motion.div
           className="mt-12 hidden lg:block"
@@ -229,6 +226,9 @@ export default function Hero() {
         >
           <AnimatedRiskboard />
         </motion.div>
+
+        {/* Stats */}
+        <StatsRow />
 
         {/* Trust Badges */}
         <TrustBadges />
