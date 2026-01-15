@@ -3,7 +3,7 @@
 /**
  * AnimatedRiskboard.tsx
  *
- * "You're now officially Marty McFly of Risk Management!"
+ * "You're now officially the Marty McFly of Risk Management!"
  *
  * A dynamic, attention-grabbing animated Riskboard for the hero section.
  * Designed to make boring risk managers with pinky rings spill their espresso.
@@ -31,8 +31,25 @@ interface MarketData {
 
 interface DataRow {
   label: string
-  pct: string
-  value: string
+  values: string[]
+}
+
+interface RiskCardData {
+  title: string
+  color: string
+  primaryLabel: string
+  primaryValue: string
+  primaryNumber: number
+  change: string
+  isUp: boolean
+  secondaryMetrics: { label: string; value: string }[]
+  tableHeaders: string[]
+  tableRows: DataRow[]
+  positions: number
+  var95: string
+  cvar95: string
+  grossExposure: string
+  netExposure: string
 }
 
 // ==============================================
@@ -43,12 +60,14 @@ function AnimatedNumber({
   value,
   prefix = '',
   suffix = '',
-  duration = 2
+  duration = 2,
+  decimals = 0
 }: {
   value: number
   prefix?: string
   suffix?: string
   duration?: number
+  decimals?: number
 }) {
   const [displayValue, setDisplayValue] = useState(0)
 
@@ -57,11 +76,8 @@ function AnimatedNumber({
     const animate = (currentTime: number) => {
       if (!startTime) startTime = currentTime
       const progress = Math.min((currentTime - startTime) / (duration * 1000), 1)
-
-      // Easing function for smooth deceleration
       const easeOut = 1 - Math.pow(1 - progress, 3)
-      setDisplayValue(Math.floor(easeOut * value))
-
+      setDisplayValue(easeOut * value)
       if (progress < 1) {
         requestAnimationFrame(animate)
       }
@@ -69,11 +85,11 @@ function AnimatedNumber({
     requestAnimationFrame(animate)
   }, [value, duration])
 
-  return (
-    <span>
-      {prefix}{displayValue.toLocaleString()}{suffix}
-    </span>
-  )
+  const formatted = decimals > 0
+    ? displayValue.toFixed(decimals)
+    : Math.floor(displayValue).toLocaleString()
+
+  return <span>{prefix}{formatted}{suffix}</span>
 }
 
 // ==============================================
@@ -96,23 +112,91 @@ function PulsingDot({ color = '#22c55e' }: { color?: string }) {
 }
 
 // ==============================================
+// MODERN SVG ICONS
+// ==============================================
+
+const Icons = {
+  riskboard: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+      <rect x="3" y="3" width="7" height="9" rx="1" />
+      <rect x="14" y="3" width="7" height="5" rx="1" />
+      <rect x="14" y="12" width="7" height="9" rx="1" />
+      <rect x="3" y="16" width="7" height="5" rx="1" />
+    </svg>
+  ),
+  positions: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+      <path d="M3 9h18" />
+      <path d="M3 15h18" />
+      <path d="M9 9v6" />
+      <path d="M15 9v6" />
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+    </svg>
+  ),
+  trades: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+      <path d="M3 17l6-6 4 4 8-8" />
+      <path d="M17 7h4v4" />
+    </svg>
+  ),
+  overlaps: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+      <circle cx="9" cy="12" r="6" />
+      <circle cx="15" cy="12" r="6" />
+    </svg>
+  ),
+  correlation: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+      <path d="M3 3v18h18" />
+      <circle cx="9" cy="15" r="2" />
+      <circle cx="13" cy="10" r="2" />
+      <circle cx="17" cy="7" r="2" />
+      <path d="M9 15l4-5" />
+      <path d="M13 10l4-3" />
+    </svg>
+  ),
+  upload: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+      <path d="M12 15V3" />
+      <path d="M8 7l4-4 4 4" />
+      <path d="M20 21H4" />
+      <path d="M20 17v4" />
+      <path d="M4 17v4" />
+    </svg>
+  ),
+  settings: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+      <circle cx="12" cy="12" r="3" />
+      <path d="M12 1v4" />
+      <path d="M12 19v4" />
+      <path d="M4.22 4.22l2.83 2.83" />
+      <path d="M16.95 16.95l2.83 2.83" />
+      <path d="M1 12h4" />
+      <path d="M19 12h4" />
+      <path d="M4.22 19.78l2.83-2.83" />
+      <path d="M16.95 7.05l2.83-2.83" />
+    </svg>
+  ),
+}
+
+// ==============================================
 // SIDEBAR COMPONENT
 // ==============================================
 
 function AnimatedSidebar() {
   const menuItems = [
-    { icon: '📊', label: 'Riskboard', active: true },
-    { icon: '📋', label: 'Positions', active: false },
-    { icon: '💹', label: 'Trades', active: false },
-    { icon: '🔄', label: 'Overlaps', active: false },
-    { icon: '📈', label: 'Correlation', active: false },
-    { icon: '📤', label: 'Upload', active: false },
-    { icon: '⚙️', label: 'Settings', active: false },
+    { icon: Icons.riskboard, label: 'Riskboard', active: true },
+    { icon: Icons.positions, label: 'Positions', active: false },
+    { icon: Icons.trades, label: 'Trades', active: false },
+    { icon: Icons.overlaps, label: 'Overlaps', active: false },
+    { icon: Icons.correlation, label: 'Correlation', active: false },
+    { icon: Icons.upload, label: 'Upload', active: false },
+    { icon: Icons.settings, label: 'Settings', active: false },
   ]
 
   return (
     <motion.div
-      className="w-48 bg-slate-950/90 border-r border-white/10 flex flex-col h-full"
+      className="w-44 bg-slate-950/90 border-r border-white/10 flex flex-col h-full flex-shrink-0"
       initial={{ x: -100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -124,22 +208,22 @@ function AnimatedSidebar() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
-        <h1 className="text-xl font-bold bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent tracking-wider">
+        <h1 className="text-lg font-bold bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent tracking-wider">
           RISKCORE
         </h1>
       </motion.div>
 
       {/* Menu Items */}
-      <div className="flex-1 py-4 px-2 space-y-1">
+      <div className="flex-1 py-3 px-2 space-y-0.5">
         {menuItems.map((item, index) => (
           <motion.div
             key={item.label}
             className={`
-              flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium cursor-pointer
+              flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs font-medium cursor-pointer
               transition-all duration-300
               ${item.active
                 ? 'bg-emerald-500/20 text-emerald-400'
-                : 'text-slate-500 blur-[1px] hover:blur-0 hover:text-slate-400'
+                : 'text-slate-500 blur-[0.5px] hover:blur-0 hover:text-slate-400'
               }
             `}
             initial={{ x: -50, opacity: 0 }}
@@ -147,7 +231,7 @@ function AnimatedSidebar() {
             transition={{ delay: 0.4 + index * 0.08, duration: 0.4 }}
             whileHover={!item.active ? { x: 5, filter: 'blur(0px)' } : {}}
           >
-            <span className="text-base">{item.icon}</span>
+            <span className="flex-shrink-0 opacity-80">{item.icon}</span>
             <span>{item.label}</span>
             {item.active && (
               <motion.div
@@ -165,7 +249,7 @@ function AnimatedSidebar() {
 
       {/* Footer */}
       <motion.div
-        className="p-3 border-t border-white/10 text-xs text-slate-600"
+        className="p-2.5 border-t border-white/10 text-[10px] text-slate-600"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
@@ -181,7 +265,7 @@ function AnimatedSidebar() {
 // ==============================================
 
 function AnimatedHeader() {
-  const [currentTime, setCurrentTime] = useState('14:32:15')
+  const [currentTime, setCurrentTime] = useState('16:14:49')
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -193,35 +277,33 @@ function AnimatedHeader() {
 
   return (
     <motion.header
-      className="h-14 bg-slate-950/80 border-b border-white/10 flex items-center justify-between px-4"
+      className="h-11 bg-slate-950/80 border-b border-white/10 flex items-center justify-between px-4 flex-shrink-0"
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.2 }}
     >
-      <div className="flex items-center gap-4">
-        <span className="text-lg font-semibold text-slate-100">Riskboard</span>
+      <div className="flex items-center gap-3">
+        <span className="text-sm font-semibold text-slate-100">Riskboard</span>
 
         {/* Time Travel Selector */}
         <motion.div
-          className="flex items-center gap-2 px-3 py-1.5 bg-slate-800/80 rounded-lg border border-white/10"
+          className="flex items-center gap-1.5 px-2.5 py-1 bg-slate-800/80 rounded-md border border-white/10 text-xs"
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.8, type: 'spring' }}
-          whileHover={{ scale: 1.02, borderColor: 'rgba(255,255,255,0.2)' }}
         >
           <PulsingDot />
-          <span className="text-sm text-slate-300">Latest (Now)</span>
-          <span className="text-slate-500 text-xs">▼</span>
+          <span className="text-slate-300">Latest (Now)</span>
+          <span className="text-slate-500 text-[10px]">▼</span>
         </motion.div>
 
         {/* Calculate Button */}
         <motion.button
-          className="flex items-center gap-2 px-4 py-1.5 bg-emerald-500/20 border border-emerald-500/40 rounded-lg text-emerald-400 text-sm font-medium"
+          className="flex items-center gap-1.5 px-3 py-1 bg-emerald-500/20 border border-emerald-500/40 rounded-md text-emerald-400 text-xs font-medium"
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.9, type: 'spring' }}
           whileHover={{ scale: 1.05, backgroundColor: 'rgba(34, 197, 94, 0.3)' }}
-          whileTap={{ scale: 0.95 }}
         >
           <motion.span
             animate={{ rotate: 360 }}
@@ -232,21 +314,14 @@ function AnimatedHeader() {
           Calculate
         </motion.button>
 
-        <motion.span
-          className="text-xs text-slate-500 font-mono"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.1 }}
-        >
-          Last: {currentTime}
-        </motion.span>
+        <span className="text-[10px] text-slate-500 font-mono">Last: {currentTime}</span>
       </div>
 
-      <div className="flex items-center gap-3">
-        <span className="text-xs text-slate-500">Color Mode</span>
-        <div className="w-12 h-6 bg-slate-700 rounded-full relative">
+      <div className="flex items-center gap-2">
+        <span className="text-[10px] text-slate-500">Color Mode</span>
+        <div className="w-10 h-5 bg-slate-700 rounded-full relative">
           <motion.div
-            className="absolute w-5 h-5 rounded-full top-0.5 left-0.5"
+            className="absolute w-4 h-4 rounded-full top-0.5 left-0.5"
             style={{
               background: 'conic-gradient(#ef4444, #eab308, #22c55e, #06b6d4, #3b82f6, #a855f7, #ef4444)'
             }}
@@ -264,69 +339,40 @@ function AnimatedHeader() {
 // ==============================================
 
 function MarketAnchorsStrip() {
-  const [marketData, setMarketData] = useState<MarketData[]>([
-    { ticker: 'SPY', price: '584.20', change: '+0.8%', isUp: true },
-    { ticker: 'QQQ', price: '498.50', change: '+1.2%', isUp: true },
-    { ticker: 'TLT', price: '92.45', change: '-0.4%', isUp: false },
-    { ticker: 'CDX.IG', price: '52.8', change: '+1.2bp', isUp: false },
-    { ticker: 'EUR/USD', price: '1.0842', change: '-0.2%', isUp: false },
-    { ticker: 'GLD', price: '192.80', change: '+0.6%', isUp: true },
-    { ticker: 'VIX', price: '14.20', change: '-3.2%', isUp: true },
+  const [marketData] = useState<MarketData[]>([
+    { ticker: 'SPY', price: '584.24', change: '+0.8%', isUp: true },
+    { ticker: 'QQQ', price: '498.41', change: '+1.2%', isUp: true },
+    { ticker: 'TLT', price: '92.56', change: '-0.4%', isUp: false },
+    { ticker: 'CDX.IG', price: '52.80', change: '+1.2bp', isUp: false },
+    { ticker: 'EUR/USD', price: '1.2820', change: '-0.2%', isUp: false },
+    { ticker: 'GLD', price: '192.62', change: '+0.6%', isUp: true },
+    { ticker: 'VIX', price: '14.21', change: '-3.2%', isUp: true },
   ])
-
-  // Simulate live price updates
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setMarketData(prev => prev.map(item => {
-        const change = (Math.random() - 0.5) * 0.1
-        const currentPrice = parseFloat(item.price.replace(',', ''))
-        const newPrice = currentPrice + change
-        return {
-          ...item,
-          price: item.ticker === 'GLD' ? newPrice.toFixed(2) :
-                 item.ticker === 'EUR/USD' ? newPrice.toFixed(4) :
-                 newPrice.toFixed(2),
-        }
-      }))
-    }, 3000)
-    return () => clearInterval(interval)
-  }, [])
 
   return (
     <motion.div
-      className="bg-slate-900/60 border-b border-white/5 px-4 py-2 overflow-hidden"
+      className="bg-slate-900/60 border-b border-white/5 px-4 py-1.5 flex-shrink-0"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.6 }}
     >
-      <motion.div
-        className="flex gap-6"
-        animate={{ x: [0, -50, 0] }}
-        transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-      >
-        {[...marketData, ...marketData].map((item, index) => (
+      <div className="flex gap-5">
+        {marketData.map((item, index) => (
           <motion.div
-            key={`${item.ticker}-${index}`}
-            className="flex items-center gap-2 text-xs whitespace-nowrap"
+            key={item.ticker}
+            className="flex items-center gap-1.5 text-[10px] whitespace-nowrap"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 + (index % marketData.length) * 0.05 }}
+            transition={{ delay: 0.7 + index * 0.05 }}
           >
             <span className="text-slate-400 font-semibold">{item.ticker}</span>
-            <motion.span
-              className="text-slate-200 font-mono"
-              key={item.price}
-              initial={{ opacity: 0.5 }}
-              animate={{ opacity: 1 }}
-            >
-              {item.price}
-            </motion.span>
+            <span className="text-slate-200 font-mono">{item.price}</span>
             <span className={item.isUp ? 'text-emerald-400' : 'text-rose-400'}>
               {item.change}
             </span>
           </motion.div>
         ))}
-      </motion.div>
+      </div>
     </motion.div>
   )
 }
@@ -338,15 +384,15 @@ function MarketAnchorsStrip() {
 function SummaryStrip() {
   return (
     <motion.div
-      className="flex items-center gap-8 px-4 py-3 border-b border-white/5"
+      className="flex items-center gap-6 px-4 py-2 border-b border-white/5 flex-shrink-0"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 1.2 }}
     >
-      <div className="flex items-center gap-2">
-        <span className="text-sm text-slate-400">Firm Gross:</span>
+      <div className="flex items-center gap-1.5">
+        <span className="text-xs text-slate-400">Firm Gross:</span>
         <motion.span
-          className="text-lg font-bold font-mono text-slate-100"
+          className="text-sm font-bold font-mono text-slate-100"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.8 }}
@@ -354,10 +400,10 @@ function SummaryStrip() {
           $<AnimatedNumber value={2090} suffix="M" duration={2.5} />
         </motion.span>
       </div>
-      <div className="flex items-center gap-2">
-        <span className="text-sm text-slate-400">Firm Net:</span>
+      <div className="flex items-center gap-1.5">
+        <span className="text-xs text-slate-400">Firm Net:</span>
         <motion.span
-          className="text-lg font-bold font-mono text-emerald-400"
+          className="text-sm font-bold font-mono text-emerald-400"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2.2 }}
@@ -365,10 +411,10 @@ function SummaryStrip() {
           $<AnimatedNumber value={641} suffix="M" duration={2.5} />
         </motion.span>
       </div>
-      <div className="flex items-center gap-2">
-        <span className="text-sm text-slate-400">Positions:</span>
+      <div className="flex items-center gap-1.5">
+        <span className="text-xs text-slate-400">Positions:</span>
         <motion.span
-          className="text-lg font-bold font-mono text-slate-100"
+          className="text-sm font-bold font-mono text-slate-100"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2.6 }}
@@ -381,81 +427,59 @@ function SummaryStrip() {
 }
 
 // ==============================================
-// MINI RISK CARD (for the animated hero)
+// RISK CARD COMPONENT (Full Detail)
 // ==============================================
 
-interface MiniRiskCardProps {
-  title: string
-  color: string
-  netNumber: number
-  change: string
-  isUp: boolean
-  metrics: { label: string; value: string }[]
-  rows: DataRow[]
-  riskParam: string
-  barPercentage: number
-  delay: number
-}
-
-function MiniRiskCard({
-  title,
-  color,
-  netNumber,
-  change,
-  isUp,
-  metrics,
-  rows,
-  riskParam,
-  barPercentage,
-  delay
-}: MiniRiskCardProps) {
+function RiskCard({ data, delay }: { data: RiskCardData; delay: number }) {
   const [barWidth, setBarWidth] = useState(0)
 
   useEffect(() => {
-    const timer = setTimeout(() => setBarWidth(barPercentage), delay * 1000 + 500)
+    const timer = setTimeout(() => setBarWidth(65), delay * 1000 + 500)
     return () => clearTimeout(timer)
-  }, [barPercentage, delay])
+  }, [delay])
 
   return (
     <motion.div
-      className="bg-slate-800/60 backdrop-blur-sm border border-white/10 rounded-lg p-2 flex flex-col h-full"
-      initial={{ opacity: 0, y: 20, scale: 0.95 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ delay, duration: 0.4, type: 'spring' }}
-      whileHover={{
-        scale: 1.02,
-        boxShadow: `0 0 20px ${color}20`,
-        borderColor: `${color}40`
-      }}
+      className="bg-slate-800/50 border border-white/10 rounded-lg overflow-hidden flex flex-col"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay, duration: 0.5 }}
+      whileHover={{ borderColor: `${data.color}40` }}
     >
-      {/* Header */}
-      <div className="flex items-center justify-between mb-1">
-        <span className="text-xs font-bold tracking-wide" style={{ color }}>{title}</span>
-        <span className={`text-[9px] font-medium ${isUp ? 'text-emerald-400' : 'text-rose-400'}`}>
-          {isUp ? '▲' : '▼'} {change}
-        </span>
+      {/* Card Header */}
+      <div className="flex items-center justify-between px-3 py-2 border-b border-white/5">
+        <span className="text-sm font-bold" style={{ color: data.color }}>{data.title}</span>
+        <div className="flex items-center gap-2">
+          <span className={`text-[10px] font-medium ${data.isUp ? 'text-emerald-400' : 'text-rose-400'}`}>
+            {data.isUp ? '▲' : '▼'} {data.change}
+          </span>
+          <span className="text-slate-600 text-[10px]">::</span>
+          <motion.button
+            className="px-2 py-0.5 text-[10px] font-medium border border-white/20 rounded text-slate-300 hover:bg-white/10"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Trades
+          </motion.button>
+        </div>
       </div>
 
       {/* Primary Metric */}
-      <div className="mb-1">
-        <div className="text-[9px] text-slate-500">Net Exposure</div>
+      <div className="px-3 py-2">
+        <div className="text-[10px] text-slate-500 uppercase tracking-wide">{data.primaryLabel}</div>
         <motion.div
-          className="text-base font-bold font-mono text-slate-100"
+          className="text-2xl font-bold font-mono text-slate-100"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: delay + 0.3 }}
         >
-          $<AnimatedNumber value={netNumber} suffix="M" duration={1.5} />
+          {data.primaryValue}
         </motion.div>
-
-        {/* Animated Bar */}
-        <div className="h-0.5 bg-slate-700 rounded-full mt-0.5 overflow-hidden">
+        {/* Progress Bar */}
+        <div className="h-1 bg-slate-700/50 rounded-full mt-1.5 overflow-hidden">
           <motion.div
             className="h-full rounded-full"
-            style={{
-              background: `linear-gradient(90deg, ${color}, ${color}aa)`,
-              width: `${barWidth}%`
-            }}
+            style={{ background: `linear-gradient(90deg, ${data.color}, ${data.color}88)` }}
             initial={{ width: 0 }}
             animate={{ width: `${barWidth}%` }}
             transition={{ delay: delay + 0.5, duration: 1, ease: 'easeOut' }}
@@ -463,183 +487,284 @@ function MiniRiskCard({
         </div>
       </div>
 
-      {/* Data Rows Table */}
-      <div className="flex-1 min-h-0">
+      {/* Secondary Metrics Row */}
+      <div className="grid grid-cols-3 gap-1 px-3 pb-2">
+        {data.secondaryMetrics.map((metric, i) => (
+          <motion.div
+            key={metric.label}
+            className="bg-slate-900/50 rounded px-2 py-1.5 text-center"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: delay + 0.4 + i * 0.1 }}
+          >
+            <div className="text-[8px] text-slate-500 uppercase">{metric.label}</div>
+            <div className="text-[11px] font-mono font-semibold text-slate-200">{metric.value}</div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Data Table */}
+      <div className="px-3 flex-1">
+        {/* Table Header */}
         <div
-          className="grid grid-cols-3 gap-0.5 px-1 py-0.5 text-[7px] font-semibold uppercase tracking-wider rounded-t"
-          style={{ backgroundColor: `${color}15`, color: color }}
+          className="grid gap-0.5 px-1.5 py-1 text-[8px] font-semibold uppercase tracking-wide rounded-t"
+          style={{
+            gridTemplateColumns: `50px repeat(${data.tableHeaders.length - 1}, 1fr)`,
+            backgroundColor: `${data.color}15`,
+            color: data.color
+          }}
         >
-          <span></span>
-          <span className="text-center">%</span>
-          <span className="text-center">{riskParam}</span>
+          {data.tableHeaders.map((header, i) => (
+            <span key={i} className={i > 0 ? 'text-center' : ''}>{header}</span>
+          ))}
         </div>
-        <div className="bg-slate-900/40 rounded-b">
-          {rows.slice(0, 3).map((row, i) => (
+        {/* Table Rows */}
+        <div className="bg-slate-900/30 rounded-b">
+          {data.tableRows.map((row, rowIndex) => (
             <motion.div
               key={row.label}
-              className="grid grid-cols-3 gap-0.5 px-1 py-px text-[8px] hover:bg-white/5 transition-colors border-b border-white/5 last:border-0"
+              className="grid gap-0.5 px-1.5 py-0.5 text-[9px] border-b border-white/5 last:border-0 hover:bg-white/5"
+              style={{ gridTemplateColumns: `50px repeat(${data.tableHeaders.length - 1}, 1fr)` }}
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: delay + 0.6 + i * 0.06 }}
+              transition={{ delay: delay + 0.6 + rowIndex * 0.05 }}
             >
-              <span className="text-slate-400 font-medium truncate">{row.label}</span>
-              <span className="text-center font-mono text-slate-300">{row.pct}</span>
-              <span className="text-center font-mono text-slate-300">{row.value}</span>
+              <span className="font-medium" style={{ color: data.color }}>{row.label}</span>
+              {row.values.map((val, i) => (
+                <span key={i} className="text-center font-mono text-slate-300">{val}</span>
+              ))}
             </motion.div>
           ))}
         </div>
       </div>
 
-      {/* Mini Metrics - Fixed at bottom */}
-      <div className="grid grid-cols-3 gap-0.5 pt-1 mt-1 border-t border-white/5">
-        {metrics.map((metric, i) => (
-          <motion.div
-            key={metric.label}
-            className="text-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: delay + 0.4 + i * 0.1 }}
-          >
-            <div className="text-[7px] text-slate-500 uppercase leading-tight">{metric.label}</div>
-            <div className="text-[9px] font-mono text-slate-300 leading-tight">{metric.value}</div>
-          </motion.div>
-        ))}
+      {/* Bottom Stats */}
+      <div className="grid grid-cols-3 gap-1 px-3 py-2 mt-auto">
+        <motion.div
+          className="text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: delay + 0.9 }}
+        >
+          <div className="text-[8px] text-slate-500 uppercase">Positions</div>
+          <div className="text-[10px] font-mono text-slate-200">{data.positions}</div>
+        </motion.div>
+        <motion.div
+          className="text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: delay + 1 }}
+        >
+          <div className="text-[8px] text-slate-500 uppercase">VaR (95%)</div>
+          <div className="text-[10px] font-mono text-rose-400">{data.var95}</div>
+        </motion.div>
+        <motion.div
+          className="text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: delay + 1.1 }}
+        >
+          <div className="text-[8px] text-slate-500 uppercase">CVaR (95%)</div>
+          <div className="text-[10px] font-mono text-rose-400">{data.cvar95}</div>
+        </motion.div>
+      </div>
+
+      {/* Footer */}
+      <div className="grid grid-cols-2 gap-1 px-3 pb-2">
+        <motion.div
+          className="bg-slate-900/40 rounded px-2 py-1.5 text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: delay + 1.2 }}
+        >
+          <div className="text-[8px] text-slate-500 uppercase">Gross Exposure</div>
+          <div className="text-[11px] font-mono font-semibold text-slate-200">{data.grossExposure}</div>
+        </motion.div>
+        <motion.div
+          className="bg-slate-900/40 rounded px-2 py-1.5 text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: delay + 1.3 }}
+        >
+          <div className="text-[8px] text-slate-500 uppercase">Net Exposure</div>
+          <div className="text-[11px] font-mono font-semibold text-slate-200">{data.netExposure}</div>
+        </motion.div>
       </div>
     </motion.div>
   )
 }
 
 // ==============================================
+// CARD DATA
+// ==============================================
+
+const riskCardsData: RiskCardData[] = [
+  {
+    title: 'EQUITY',
+    color: '#3b82f6',
+    primaryLabel: 'NET DELTA',
+    primaryValue: '$42.5M',
+    primaryNumber: 42.5,
+    change: '+1.2%',
+    isUp: true,
+    secondaryMetrics: [
+      { label: 'Beta', value: '1.15' },
+      { label: 'Vega', value: '$280K' },
+      { label: 'Gamma', value: '$42K' },
+    ],
+    tableHeaders: ['', '%', 'DELTA', 'BETA', 'VEGA', 'CORR.', '0HEDGE'],
+    tableRows: [
+      { label: 'US+CAN', values: ['48%', '$20.4M', '1.08', '$134K', '0.96', '-$19.6M'] },
+      { label: 'Europe', values: ['22%', '$9.4M', '0.95', '$62K', '0.88', '-$8.3M'] },
+      { label: 'Japan', values: ['15%', '$6.4M', '0.82', '$42K', '0.85', '-$5.4M'] },
+      { label: 'SE Asia', values: ['10%', '$4.3M', '1.15', '$28K', '0.78', '-$3.4M'] },
+      { label: 'RoW', values: ['5%', '$2.0M', '0.92', '$14K', '0.72', '-$1.4M'] },
+    ],
+    positions: 342,
+    var95: '$2.1M',
+    cvar95: '$3.4M',
+    grossExposure: '$320M',
+    netExposure: '$42.5M',
+  },
+  {
+    title: 'RATES',
+    color: '#22c55e',
+    primaryLabel: 'DV01',
+    primaryValue: '$85,000',
+    primaryNumber: 85000,
+    change: '-0.8%',
+    isUp: false,
+    secondaryMetrics: [
+      { label: 'Duration', value: '4.2 yrs' },
+      { label: 'Convexity', value: '0.45' },
+      { label: 'Yield', value: '5.25%' },
+    ],
+    tableHeaders: ['', '%', 'DV01', 'DUR', 'CONV', 'CORR.', '0HEDGE'],
+    tableRows: [
+      { label: '2Y', values: ['21%', '$18K', '1.9', '0.08', '0.92', '-$16.5K'] },
+      { label: '5Y', values: ['38%', '$32K', '4.6', '0.25', '0.89', '-$28.5K'] },
+      { label: '10Y', values: ['33%', '$28K', '8.2', '0.72', '0.85', '-$23.8K'] },
+      { label: '30Y', values: ['8%', '$7K', '18.5', '3.80', '0.78', '-$5.5K'] },
+    ],
+    positions: 156,
+    var95: '$1.8M',
+    cvar95: '$2.9M',
+    grossExposure: '$180M',
+    netExposure: '$120M',
+  },
+  {
+    title: 'CREDIT',
+    color: '#a855f7',
+    primaryLabel: 'CS01',
+    primaryValue: '$42,000',
+    primaryNumber: 42000,
+    change: '-1.2%',
+    isUp: false,
+    secondaryMetrics: [
+      { label: 'CR. DUR', value: '3.8 yrs' },
+      { label: 'AVG PD', value: '2.4%' },
+      { label: 'AVG LGD', value: '40%' },
+    ],
+    tableHeaders: ['', '%', 'CS01', 'PD', 'LGD', 'CORR.', '0HEDGE'],
+    tableRows: [
+      { label: 'AAA-AA', values: ['18%', '$7.5K', '0.1%', '25%', '0.85', '-$6.4K'] },
+      { label: 'A', values: ['32%', '$13.4K', '0.5%', '35%', '0.88', '-$11.8K'] },
+      { label: 'BBB', values: ['28%', '$11.8K', '1.8%', '40%', '0.82', '-$9.7K'] },
+      { label: 'HY', values: ['16%', '$6.7K', '4.2%', '55%', '0.74', '-$5.0K'] },
+      { label: 'Distress', values: ['6%', '$2.6K', '18.5%', '65%', '0.42', 'N/A'] },
+    ],
+    positions: 89,
+    var95: '$890K',
+    cvar95: '$1.4M',
+    grossExposure: '$95M',
+    netExposure: '$72M',
+  },
+  {
+    title: 'FX',
+    color: '#06b6d4',
+    primaryLabel: 'FX DELTA',
+    primaryValue: '$18.2M',
+    primaryNumber: 18.2,
+    change: '+0.4%',
+    isUp: true,
+    secondaryMetrics: [
+      { label: 'FX Vega', value: '$320K' },
+      { label: 'Basis', value: '42 bps' },
+      { label: 'Pairs', value: '12' },
+    ],
+    tableHeaders: ['', '%', 'DELTA', 'VEGA', 'BASIS', 'CORR.', '0HEDGE'],
+    tableRows: [
+      { label: 'EUR', values: ['38%', '$6.9M', '$122K', '15bp', '0.94', '-$6.5M'] },
+      { label: 'JPY', values: ['25%', '$4.5M', '$80K', '12bp', '0.91', '-$4.1M'] },
+      { label: 'GBP', values: ['18%', '$3.3M', '$58K', '8bp', '0.89', '-$2.9M'] },
+      { label: 'Crypto', values: ['12%', '$2.2M', '$45K', '5bp', '0.72', '-$1.6M'] },
+      { label: 'Other', values: ['7%', '$1.3M', '$15K', '2bp', '0.65', '-$0.8M'] },
+    ],
+    positions: 45,
+    var95: '$540K',
+    cvar95: '$850K',
+    grossExposure: '$65M',
+    netExposure: '$18.2M',
+  },
+  {
+    title: 'COMMODITIES',
+    color: '#eab308',
+    primaryLabel: 'NET EXPOSURE',
+    primaryValue: '$28.5M',
+    primaryNumber: 28.5,
+    change: '+1.5%',
+    isUp: true,
+    secondaryMetrics: [
+      { label: 'P. Sens', value: '$285K' },
+      { label: 'Basis', value: '$45K' },
+      { label: 'Roll', value: '-0.8%' },
+    ],
+    tableHeaders: ['', '%', 'EXP', 'P.SENS', 'BASIS', 'CORR.', '0HEDGE'],
+    tableRows: [
+      { label: 'Crude', values: ['42%', '$12M', '$120K', '$18K', '0.92', '-$11M'] },
+      { label: 'Gold', values: ['28%', '$8M', '$80K', '$8K', '0.88', '-$7M'] },
+      { label: 'NatGas', values: ['15%', '$4.3M', '$43K', '$12K', '0.75', '-$3.2M'] },
+      { label: 'Copper', values: ['10%', '$2.8M', '$28K', '$5K', '0.82', '-$2.3M'] },
+      { label: 'Other', values: ['5%', '$1.4M', '$14K', '$2K', '0.65', '-$0.9M'] },
+    ],
+    positions: 67,
+    var95: '$1.2M',
+    cvar95: '$1.9M',
+    grossExposure: '$45M',
+    netExposure: '$28.5M',
+  },
+  {
+    title: 'OTHER',
+    color: '#94a3b8',
+    primaryLabel: 'NET EXPOSURE',
+    primaryValue: '$5.8M',
+    primaryNumber: 5.8,
+    change: '-0.0%',
+    isUp: false,
+    secondaryMetrics: [
+      { label: 'P. Sens', value: '$58K' },
+      { label: 'Vol Sens', value: '$125K' },
+      { label: 'Complx', value: 'Medium' },
+    ],
+    tableHeaders: ['', '%', 'EXP', 'P.SENS', 'V.SENS', 'CORR.', '0HEDGE'],
+    tableRows: [
+      { label: 'Volatility', values: ['55%', '$3.2M', '$32K', '$95K', '0.78', '-$2.5M'] },
+      { label: 'Struct.', values: ['35%', '$2.0M', '$20K', '$25K', '0.65', '-$1.3M'] },
+      { label: 'Unclass.', values: ['10%', '$0.6M', '$6K', '$5K', 'N/A', 'N/A'] },
+    ],
+    positions: 23,
+    var95: '$280K',
+    cvar95: '$450K',
+    grossExposure: '$12M',
+    netExposure: '$5.8M',
+  },
+]
+
+// ==============================================
 // MAIN ANIMATED RISKBOARD COMPONENT
 // ==============================================
 
 export default function AnimatedRiskboard() {
-  const riskCards = [
-    {
-      title: 'EQUITY',
-      color: '#3b82f6',
-      netNumber: 42.5,
-      change: '+1.2%',
-      isUp: true,
-      riskParam: 'Delta',
-      metrics: [
-        { label: 'Beta', value: '1.15' },
-        { label: 'Vega', value: '$280K' },
-        { label: 'Gamma', value: '$42K' },
-      ],
-      rows: [
-        { label: 'N. America', pct: '48%', value: '$20.4M' },
-        { label: 'Europe', pct: '22%', value: '$9.4M' },
-        { label: 'Japan', pct: '15%', value: '$6.4M' },
-        { label: 'SE Asia', pct: '10%', value: '$4.3M' },
-        { label: 'RoW', pct: '5%', value: '$2.0M' },
-      ],
-      barPercentage: 65,
-    },
-    {
-      title: 'RATES',
-      color: '#22c55e',
-      netNumber: 120,
-      change: '-0.8%',
-      isUp: false,
-      riskParam: 'DV01',
-      metrics: [
-        { label: 'DV01', value: '$85K' },
-        { label: 'Duration', value: '4.2Y' },
-        { label: 'Convex', value: '0.45' },
-      ],
-      rows: [
-        { label: '2Y', pct: '21%', value: '$18K' },
-        { label: '5Y', pct: '38%', value: '$32K' },
-        { label: '10Y', pct: '33%', value: '$28K' },
-        { label: '30Y', pct: '8%', value: '$7K' },
-      ],
-      barPercentage: 55,
-    },
-    {
-      title: 'CREDIT',
-      color: '#a855f7',
-      netNumber: 72,
-      change: '-1.2%',
-      isUp: false,
-      riskParam: 'CS01',
-      metrics: [
-        { label: 'CS01', value: '$42K' },
-        { label: 'Cr.Dur', value: '3.8Y' },
-        { label: 'Avg PD', value: '2.4%' },
-      ],
-      rows: [
-        { label: 'AAA-AA', pct: '18%', value: '$7.5K' },
-        { label: 'A', pct: '32%', value: '$13.4K' },
-        { label: 'BBB', pct: '28%', value: '$11.8K' },
-        { label: 'HY', pct: '16%', value: '$6.7K' },
-        { label: 'Distress', pct: '6%', value: '$2.6K' },
-      ],
-      barPercentage: 45,
-    },
-    {
-      title: 'FX',
-      color: '#06b6d4',
-      netNumber: 18.2,
-      change: '+0.4%',
-      isUp: true,
-      riskParam: 'Delta',
-      metrics: [
-        { label: 'Delta', value: '$18.2M' },
-        { label: 'Vega', value: '$320K' },
-        { label: 'Pairs', value: '12' },
-      ],
-      rows: [
-        { label: 'EUR', pct: '38%', value: '$6.9M' },
-        { label: 'JPY', pct: '25%', value: '$4.5M' },
-        { label: 'GBP', pct: '18%', value: '$3.3M' },
-        { label: 'CHF', pct: '12%', value: '$2.2M' },
-        { label: 'Other', pct: '7%', value: '$1.3M' },
-      ],
-      barPercentage: 35,
-    },
-    {
-      title: 'CMDTY',
-      color: '#eab308',
-      netNumber: 28.5,
-      change: '+1.5%',
-      isUp: true,
-      riskParam: 'Exp',
-      metrics: [
-        { label: 'P.Sens', value: '$285K' },
-        { label: 'Basis', value: '$45K' },
-        { label: 'Roll', value: '-0.8%' },
-      ],
-      rows: [
-        { label: 'Crude', pct: '42%', value: '$12M' },
-        { label: 'Gold', pct: '28%', value: '$8M' },
-        { label: 'NatGas', pct: '15%', value: '$4.3M' },
-        { label: 'Copper', pct: '10%', value: '$2.8M' },
-        { label: 'Other', pct: '5%', value: '$1.4M' },
-      ],
-      barPercentage: 40,
-    },
-    {
-      title: 'OTHER',
-      color: '#94a3b8',
-      netNumber: 8.2,
-      change: '-0.2%',
-      isUp: false,
-      riskParam: 'Value',
-      metrics: [
-        { label: 'VaR', value: '$340K' },
-        { label: 'CVaR', value: '$520K' },
-        { label: 'Pos', value: '45' },
-      ],
-      rows: [
-        { label: 'Struct', pct: '55%', value: '$4.5M' },
-        { label: 'Vol', pct: '30%', value: '$2.5M' },
-        { label: 'Other', pct: '15%', value: '$1.2M' },
-      ],
-      barPercentage: 25,
-    },
-  ]
-
   return (
     <div className="relative w-full max-w-6xl mx-auto">
       {/* Glow Effect Behind */}
@@ -654,7 +779,7 @@ export default function AnimatedRiskboard() {
         <div className="absolute bottom-1/4 right-1/4 w-[250px] h-[250px] bg-purple-500/10 rounded-full blur-[80px]" />
       </motion.div>
 
-      {/* Main Container with 3D Perspective - 3:2 Aspect Ratio */}
+      {/* Main Container - 3:2 Aspect Ratio */}
       <motion.div
         className="rounded-2xl overflow-hidden border border-white/10 bg-slate-900/80 backdrop-blur-xl shadow-2xl"
         initial={{ opacity: 0, rotateX: 10, rotateY: -5, scale: 0.9 }}
@@ -665,18 +790,14 @@ export default function AnimatedRiskboard() {
           perspective: '1000px',
           aspectRatio: '3 / 2',
         }}
-        whileHover={{
-          rotateX: 2,
-          rotateY: 2,
-          transition: { duration: 0.3 }
-        }}
+        whileHover={{ rotateX: 1, rotateY: 1, transition: { duration: 0.3 } }}
       >
         <div className="flex h-full">
           {/* Sidebar */}
           <AnimatedSidebar />
 
           {/* Main Content */}
-          <div className="flex-1 flex flex-col overflow-hidden">
+          <div className="flex-1 flex flex-col min-w-0 h-full">
             {/* Header */}
             <AnimatedHeader />
 
@@ -686,46 +807,45 @@ export default function AnimatedRiskboard() {
             {/* Summary Strip */}
             <SummaryStrip />
 
-            {/* Risk Cards Grid - 2 rows of 3 */}
+            {/* Risk Cards Grid - Scrollable */}
             <motion.div
-              className="flex-1 p-4 overflow-hidden"
+              className="flex-1 p-3 overflow-y-auto overflow-x-hidden min-h-0 riskboard-scrollbar"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1 }}
+              style={{
+                scrollbarWidth: 'thin',
+                scrollbarColor: '#334155 #0f172a',
+              }}
             >
-              <div className="grid grid-cols-3 grid-rows-2 gap-3 h-full">
-                {riskCards.map((card, index) => (
-                  <MiniRiskCard
+              <style>{`
+                .riskboard-scrollbar::-webkit-scrollbar {
+                  width: 6px;
+                }
+                .riskboard-scrollbar::-webkit-scrollbar-track {
+                  background: #0f172a;
+                  border-radius: 3px;
+                }
+                .riskboard-scrollbar::-webkit-scrollbar-thumb {
+                  background: linear-gradient(180deg, #334155, #475569);
+                  border-radius: 3px;
+                }
+                .riskboard-scrollbar::-webkit-scrollbar-thumb:hover {
+                  background: linear-gradient(180deg, #475569, #64748b);
+                }
+              `}</style>
+              <div className="grid grid-cols-3 gap-3">
+                {riskCardsData.map((card, index) => (
+                  <RiskCard
                     key={card.title}
-                    {...card}
-                    delay={2.8 + index * 0.12}
+                    data={card}
+                    delay={2.8 + index * 0.15}
                   />
                 ))}
               </div>
             </motion.div>
           </div>
         </div>
-      </motion.div>
-
-      {/* Floating Cursor Animation (optional - shows interactivity) */}
-      <motion.div
-        className="absolute w-4 h-4 pointer-events-none z-50"
-        initial={{ x: 100, y: 200, opacity: 0 }}
-        animate={{
-          x: [100, 300, 450, 600, 400, 200, 100],
-          y: [200, 150, 250, 180, 300, 250, 200],
-          opacity: [0, 1, 1, 1, 1, 1, 0]
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          repeatDelay: 3,
-          ease: 'easeInOut'
-        }}
-      >
-        <svg viewBox="0 0 24 24" fill="white" className="drop-shadow-lg">
-          <path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87c.48 0 .72-.58.38-.92L6.35 2.85a.5.5 0 0 0-.85.36Z"/>
-        </svg>
       </motion.div>
     </div>
   )
