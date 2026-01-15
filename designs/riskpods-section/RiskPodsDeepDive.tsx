@@ -1,11 +1,21 @@
 'use client'
 
 /**
- * DashboardPreview.tsx (RiskPodsDeepDive variant)
+ * RiskPodsDeepDive.tsx
+ *
+ * RiskPods Section Variant 1: "The Deep Dive"
  *
  * Educational approach with explanatory callouts.
  * Shows 3 featured RiskPods with detailed explanations
  * of what each metric means and why it matters.
+ *
+ * Target: CIOs, CROs who want to understand the depth
+ *
+ * Usage:
+ *   <RiskPodsDeepDive />
+ *
+ * Dependencies:
+ *   npm install framer-motion
  */
 
 import { useEffect, useState, useRef } from 'react'
@@ -332,7 +342,7 @@ const creditData: RiskCardData = {
 // MAIN COMPONENT
 // ==============================================
 
-export default function DashboardPreview() {
+export default function RiskPodsDeepDive() {
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 })
 
@@ -357,7 +367,7 @@ export default function DashboardPreview() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 px-4 sm:px-6 overflow-hidden"
+      className="relative py-24 px-6 overflow-hidden"
       style={{ background: 'linear-gradient(to bottom, #151E31, #10182B)' }}
     >
       {/* Background Glow */}
@@ -382,7 +392,7 @@ export default function DashboardPreview() {
           </motion.div>
 
           <motion.h2
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-100 mb-4"
+            className="text-4xl md:text-5xl font-bold text-slate-100 mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.3 }}
@@ -394,7 +404,7 @@ export default function DashboardPreview() {
           </motion.h2>
 
           <motion.p
-            className="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto"
+            className="text-xl text-slate-400 max-w-3xl mx-auto"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.4 }}
@@ -447,14 +457,13 @@ export default function DashboardPreview() {
           <p className="text-slate-500 text-sm mb-4">
             Plus FX, Commodities, and Other — all in one unified view
           </p>
-          <motion.a
-            href="#early-access"
-            className="inline-block px-4 py-2 bg-brand-blue text-white font-semibold text-sm rounded-[3px] transition-all duration-200 hover:bg-brand-blue/90 shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40"
+          <motion.button
+            className="px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-bold text-lg rounded-xl transition-colors"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            Book a Demo
-          </motion.a>
+            See All RiskPods
+          </motion.button>
         </motion.div>
       </div>
     </section>
