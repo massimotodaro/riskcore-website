@@ -52,10 +52,16 @@ export default function Header() {
             href="/"
             className="flex items-center gap-2 group"
           >
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-blue to-brand-cyan flex items-center justify-center">
-              <span className="text-white font-bold text-sm">R</span>
+            <div
+              className="w-8 h-8 rounded-lg flex items-center justify-center"
+              style={{ background: 'linear-gradient(to right, #34d399, #22c55e)' }}
+            >
+              <span className="text-white font-bold text-base">R</span>
             </div>
-            <span className="font-heading font-bold text-xl text-text-primary group-hover:text-brand-blue transition-colors">
+            <span
+              className="font-heading font-bold text-xl bg-clip-text text-transparent transition-opacity group-hover:opacity-80"
+              style={{ backgroundImage: 'linear-gradient(to right, #34d399, #22c55e)' }}
+            >
               RISKCORE
             </span>
           </Link>
