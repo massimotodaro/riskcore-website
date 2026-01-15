@@ -3,8 +3,6 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Menu, X, Github, ChevronRight } from 'lucide-react'
-import { ThemeToggle } from '@/components/providers'
-import { useTheme } from 'next-themes'
 
 const navigation = [
   { name: 'Why RISKCORE', href: '/why-riskcore' },
@@ -16,12 +14,6 @@ const navigation = [
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [mounted, setMounted] = useState(false)
-  const { resolvedTheme } = useTheme()
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,10 +24,7 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Logo gradient: dark blue in light mode, green in dark mode
-  const logoGradient = mounted && resolvedTheme === 'light'
-    ? 'linear-gradient(to right, #18243C, #162031)'
-    : 'linear-gradient(to right, #34d399, #22c55e)'
+  const logoGradient = 'linear-gradient(to right, #34d399, #22c55e)'
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -114,7 +103,6 @@ export default function Header() {
               <Github className="w-5 h-5" />
               <span>GitHub</span>
             </a>
-            <ThemeToggle />
             <Link
               href="#early-access"
               className="btn-primary text-sm"
@@ -124,9 +112,8 @@ export default function Header() {
             </Link>
           </div>
 
-          {/* Mobile: Theme Toggle and Menu Button */}
+          {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-2">
-            <ThemeToggle />
             <button
               type="button"
               className="p-2 text-text-muted hover:text-text-primary transition-colors"
