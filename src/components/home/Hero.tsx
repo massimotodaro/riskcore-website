@@ -90,19 +90,19 @@ export default function Hero() {
       </div>
 
       {/* Main Container - 30% margins left and right */}
-      <div className="relative z-10 w-full mx-[5%] lg:mx-[15%] pt-[20vh] flex flex-col lg:flex-row gap-8">
+      <div className="relative z-10 w-full px-4 sm:px-6 lg:mx-[15%] lg:px-0 pt-[12vh] lg:pt-[20vh] flex flex-col lg:flex-row gap-8">
         {/* First Container - Text Content */}
-        <div className="flex-1 flex flex-col pt-[8vh]">
+        <div className="flex-1 flex flex-col pt-0 lg:pt-[8vh]">
           {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold text-text-primary leading-tight mb-6"
+            className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-text-primary leading-tight mb-6"
           >
-            <span className="whitespace-nowrap">Firm-Wide Risk Visibility</span>
+            <span className="lg:whitespace-nowrap">Firm-Wide Risk Visibility</span>
             <br />
-            <span className="whitespace-nowrap bg-clip-text text-transparent bg-gradient-to-r from-brand-blue via-brand-cyan to-brand-green">
+            <span className="lg:whitespace-nowrap bg-clip-text text-transparent bg-gradient-to-r from-brand-blue via-brand-cyan to-brand-green">
               for Multi-Manager Funds
             </span>
           </motion.h1>
@@ -189,7 +189,7 @@ export default function Hero() {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="flex-1 flex flex-col"
+          className="flex-1 hidden lg:flex flex-col"
         >
           <div className="transform scale-125 origin-top-left">
             <AnimatedRiskboard />
