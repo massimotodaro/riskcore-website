@@ -38,7 +38,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative min-h-screen flex items-start overflow-hidden pt-[30vh] pb-10">
+    <section className="relative min-h-screen flex items-start overflow-hidden pb-10">
       {/* Background Effects */}
       <div className="absolute inset-0">
         {/* Grid pattern */}
@@ -93,7 +93,7 @@ export default function Hero() {
       <div className="relative z-10 w-full">
         <div className="grid lg:grid-cols-2 items-start">
           {/* Left Column - Text Content */}
-          <div className="text-left pl-[8%] lg:pl-[30%] pr-[8%] lg:pr-[5%]">
+          <div className="text-left pl-[8%] lg:pl-[30%] pr-[8%] lg:pr-[5%] pt-[30vh]">
             {/* Headline */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -137,13 +137,13 @@ export default function Hero() {
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
-                  <div className="flex-1 relative">
+                  <div className="flex-[2] relative">
                     <input
                       type="email"
                       placeholder="Work email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl text-text-primary placeholder:text-text-dim focus:outline-none focus:border-brand-blue/50 focus:ring-2 focus:ring-brand-blue/20 transition-all text-lg"
+                      className="w-full px-5 py-3 bg-white/5 border border-white/10 rounded-xl text-text-primary placeholder:text-text-dim focus:outline-none focus:border-brand-blue/50 focus:ring-2 focus:ring-brand-blue/20 transition-all text-base"
                       required
                       disabled={status === 'loading'}
                     />
@@ -151,7 +151,7 @@ export default function Hero() {
                   <button
                     type="submit"
                     disabled={status === 'loading'}
-                    className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-blue text-white font-semibold rounded-xl transition-all duration-200 hover:bg-brand-blue/90 shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40 text-lg disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+                    className="group inline-flex items-center justify-center gap-2 px-6 py-3 bg-brand-blue text-white font-semibold rounded-xl transition-all duration-200 hover:bg-brand-blue/90 shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40 text-base disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
                   >
                     {status === 'loading' ? (
                       <>
@@ -190,7 +190,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="relative pl-[5%] pr-[8%] lg:pr-[20%]"
+            className="relative pl-[5%] pr-[8%] lg:pr-[20%] pt-[10vh]"
           >
             <div className="transform scale-125 origin-top-left">
               <AnimatedRiskboard />
