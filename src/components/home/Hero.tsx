@@ -339,7 +339,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            You Shouldn't Need
+            You Shouldn&apos;t Need
             <br />
             <span className="text-rose-400 line-through opacity-60">Three Spreadsheets</span>
             <br />
@@ -355,7 +355,7 @@ export default function Hero() {
             transition={{ delay: 0.6 }}
           >
             RISKCORE gives single and multi-manager funds the firm-wide risk visibility
-            they've been building spreadsheets to fake.
+            they&apos;ve been building spreadsheets to fake.
           </motion.p>
         </motion.div>
 
