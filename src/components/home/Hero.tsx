@@ -90,16 +90,16 @@ export default function Hero() {
       </div>
 
       {/* Main Content - Two Column Layout */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:pr-0">
-        <div className="grid lg:grid-cols-[1fr_1.4fr] gap-8 lg:gap-6 items-center">
+      <div className="relative z-10 w-full">
+        <div className="grid lg:grid-cols-2 items-center">
           {/* Left Column - Text Content */}
-          <div className="text-left">
+          <div className="text-left pl-[8%] lg:pl-[30%] pr-[8%] lg:pr-[5%]">
             {/* Headline */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary leading-tight mb-6"
+              className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold text-text-primary leading-tight mb-6"
             >
               <span className="whitespace-nowrap">Firm-Wide Risk Visibility</span>
               <br />
@@ -190,11 +190,9 @@ export default function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="relative"
+            className="relative pl-[5%] pr-[8%] lg:pr-[20%]"
           >
-            <div className="lg:scale-100 origin-left">
-              <AnimatedRiskboard />
-            </div>
+            <AnimatedRiskboard />
           </motion.div>
         </div>
       </div>
