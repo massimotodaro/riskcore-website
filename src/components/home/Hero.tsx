@@ -38,7 +38,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-20 pb-10">
+    <section className="relative min-h-screen flex items-start overflow-hidden pt-[30vh] pb-10">
       {/* Background Effects */}
       <div className="absolute inset-0">
         {/* Grid pattern */}
@@ -91,7 +91,7 @@ export default function Hero() {
 
       {/* Main Content - Two Column Layout */}
       <div className="relative z-10 w-full">
-        <div className="grid lg:grid-cols-2 items-center">
+        <div className="grid lg:grid-cols-2 items-start">
           {/* Left Column - Text Content */}
           <div className="text-left pl-[8%] lg:pl-[30%] pr-[8%] lg:pr-[5%]">
             {/* Headline */}
@@ -99,7 +99,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold text-text-primary leading-tight mb-6"
+              className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold text-text-primary leading-tight mb-6"
             >
               <span className="whitespace-nowrap">Firm-Wide Risk Visibility</span>
               <br />
@@ -192,7 +192,9 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className="relative pl-[5%] pr-[8%] lg:pr-[20%]"
           >
-            <AnimatedRiskboard />
+            <div className="transform scale-125 origin-top-left">
+              <AnimatedRiskboard />
+            </div>
           </motion.div>
         </div>
       </div>
