@@ -598,7 +598,7 @@ export default function TimeTravelSection() {
 
               <p className="text-lg text-slate-400 leading-relaxed mb-6">
                 Instead of a DeLorean doing 88 mph, you&apos;ve got a dropdown doing{' '}
-                <span className="text-slate-200 font-mono">T-minus whatever-you-want</span>.
+                <span className="text-slate-200">T-minus whatever-you-want</span>.
               </p>
 
               <p className="text-lg text-slate-400 leading-relaxed">
