@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ChevronRight, Mail } from 'lucide-react'
+import { Mail } from 'lucide-react'
 import { useState } from 'react'
 
 export default function CTASection() {
@@ -101,7 +101,7 @@ export default function CTASection() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-brand-blue text-white font-semibold rounded-lg transition-all duration-200 hover:bg-brand-blue/90 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-brand-blue/25"
+                  className="inline-flex items-center justify-center px-4 py-2 bg-brand-blue text-white font-semibold rounded-[3px] transition-all duration-200 hover:bg-brand-blue/90 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40 text-sm"
                 >
                   {isSubmitting ? (
                     <svg
@@ -125,10 +125,7 @@ export default function CTASection() {
                       />
                     </svg>
                   ) : (
-                    <>
-                      Book a Demo
-                      <ChevronRight className="w-5 h-5" />
-                    </>
+                    'Book a Demo'
                   )}
                 </button>
               </div>
