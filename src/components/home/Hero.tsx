@@ -93,7 +93,7 @@ export default function Hero() {
       <div className="relative z-10 w-full">
         <div className="grid lg:grid-cols-2 items-start">
           {/* Left Column - Text Content */}
-          <div className="text-left pl-[8%] lg:pl-[30%] pr-[8%] lg:pr-[5%] pt-[30vh]">
+          <div className="text-left ml-[30%] pt-[30vh]">
             {/* Headline */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -190,7 +190,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="relative pr-[20%] pt-[20vh] flex justify-end"
+            className="relative mr-[20%] pt-[20vh] flex justify-end"
           >
             <div className="transform scale-125 origin-top-left">
               <AnimatedRiskboard />
