@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Menu, X, Github, ChevronRight } from 'lucide-react'
 import { ThemeToggle } from '@/components/providers'
+import { useTheme } from 'next-themes'
 
 const navigation = [
   { name: 'Why RISKCORE', href: '/why-riskcore' },
@@ -15,6 +16,12 @@ const navigation = [
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+  const { resolvedTheme } = useTheme()
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +31,11 @@ export default function Header() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Logo gradient: dark blue in light mode, green in dark mode
+  const logoGradient = mounted && resolvedTheme === 'light'
+    ? 'linear-gradient(to right, #18243C, #162031)'
+    : 'linear-gradient(to right, #34d399, #22c55e)'
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -54,13 +66,13 @@ export default function Header() {
           >
             <div
               className="w-8 h-8 rounded-lg flex items-center justify-center"
-              style={{ background: 'linear-gradient(to right, #34d399, #22c55e)' }}
+              style={{ background: logoGradient }}
             >
               <span className="text-white font-bold text-base">R</span>
             </div>
             <span
               className="font-heading font-bold text-xl bg-clip-text text-transparent transition-opacity group-hover:opacity-80"
-              style={{ backgroundImage: 'linear-gradient(to right, #34d399, #22c55e)' }}
+              style={{ backgroundImage: logoGradient }}
             >
               RISKCORE
             </span>
