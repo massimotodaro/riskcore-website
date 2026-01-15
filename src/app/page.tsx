@@ -1,5 +1,6 @@
 import {
   Hero,
+  TimeTravelSection,
   TrustBadges,
   Features,
   DashboardPreview,
@@ -10,6 +11,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <TimeTravelSection />
       <TrustBadges />
       <DashboardPreview />
       <Features />
