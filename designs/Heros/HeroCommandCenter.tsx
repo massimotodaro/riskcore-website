@@ -1,5 +1,3 @@
-'use client'
-
 /**
  * HeroCommandCenter.tsx
  *
@@ -8,6 +6,12 @@
  * Bold, powerful, stats-driven. Features the animated Riskboard
  * as the visual centerpiece. For CIOs and CROs who want to feel
  * like they're walking into mission control.
+ *
+ * Usage:
+ *   <HeroCommandCenter />
+ *
+ * Dependencies:
+ *   npm install framer-motion
  */
 
 import { useEffect, useState } from 'react'
@@ -235,24 +239,20 @@ function CTAButtons() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.6 }}
     >
-      <motion.a
-        href="#early-access"
-        className="px-4 py-2 bg-brand-blue text-white font-semibold text-sm rounded-[3px] transition-all duration-200 hover:bg-brand-blue/90 shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40"
+      <motion.button
+        className="px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-bold text-lg rounded-xl transition-colors shadow-lg shadow-emerald-500/25"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        Book a Demo
-      </motion.a>
-      <motion.a
-        href="https://github.com/massimotodaro/riskcore"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-100 font-semibold text-sm rounded-[3px] border border-white/10 transition-colors"
+        Request Live Demo
+      </motion.button>
+      <motion.button
+        className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-slate-100 font-semibold text-lg rounded-xl border border-white/10 transition-colors"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
         View on GitHub
-      </motion.a>
+      </motion.button>
     </motion.div>
   )
 }
@@ -261,10 +261,10 @@ function CTAButtons() {
 // MAIN HERO COMPONENT
 // ==============================================
 
-export default function Hero() {
+export default function HeroCommandCenter() {
   return (
     <section
-      className="relative min-h-[90vh] overflow-hidden"
+      className="relative min-h-screen overflow-hidden"
       style={{ background: 'linear-gradient(to bottom, #0a0f1a, #151E31, #10182B)' }}
     >
       {/* Background Grid */}
