@@ -612,7 +612,7 @@ const riskCardsData: RiskCardData[] = [
     cvar95: '$3.4M',
     grossExposure: '$320M',
     netExposure: '$42.5M',
-    description: 'Aggregate equity exposure across all portfolios, broken down by region. Delta measures directional market exposure, while Beta shows sensitivity to benchmark moves. The CORR. column shows how each regional bucket correlates to your chosen Risk Benchmark (default: S&P 500), helping you understand which exposures move together during market stress. The 0HEDGE column calculates the exact notional required to neutralize each position\'s delta — updated in real-time so you always know the cost of going flat.',
+    description: 'Aggregate equity exposure across all portfolios and see key risk parameters. Have the historical correlation to the Risk Benchmark and the required notional to neutralize each position\'s delta — updated in real-time.',
   },
   {
     title: 'RATES',
@@ -638,7 +638,7 @@ const riskCardsData: RiskCardData[] = [
     cvar95: '$2.9M',
     grossExposure: '$180M',
     netExposure: '$120M',
-    description: 'Interest rate sensitivity across all fixed income positions. DV01 shows your P&L impact per basis point move, while the tenor breakdown reveals your curve positioning from 2Y to 30Y. The CORR. column measures how each tenor bucket correlates to your Risk Benchmark (default: 10Y Treasury), so you can see which parts of the curve drive your overall rates risk. The 0HEDGE column shows the exact DV01 offset needed to flatten each tenor — whether through futures, swaps, or Treasury hedges.',
+    description: 'Aggregate interest rate sensitivity across all fixed income positions. See correlation to your Risk Benchmark and the exact DV01 offset needed to flatten each tenor — updated in real-time.',
   },
   {
     title: 'CREDIT',
@@ -665,7 +665,7 @@ const riskCardsData: RiskCardData[] = [
     cvar95: '$1.4M',
     grossExposure: '$95M',
     netExposure: '$72M',
-    description: 'Credit spread sensitivity aggregated by rating bucket from AAA to Distressed. CS01 measures your P&L per basis point of spread widening, while PD (Probability of Default) and LGD (Loss Given Default) give you a forward-looking view of credit risk. The CORR. column shows how each rating bucket correlates to your Risk Benchmark (default: CDX IG Index), revealing which credit exposures cluster together in risk-off events. The 0HEDGE column calculates the CDS notional or index hedge required to neutralize spread risk in each bucket.',
+    description: 'Aggregate credit spread sensitivity by rating bucket. See correlation to your Risk Benchmark and the CDS notional required to neutralize spread risk — updated in real-time.',
   },
   {
     title: 'FX',
@@ -692,7 +692,7 @@ const riskCardsData: RiskCardData[] = [
     cvar95: '$850K',
     grossExposure: '$65M',
     netExposure: '$18.2M',
-    description: 'Currency exposure across all positions — not just explicit FX trades, but the embedded FX risk in your international equities, bonds, and derivatives. Vega captures your FX option exposure, while Basis shows the cross-currency funding spread. The CORR. column measures how each currency pair correlates to your Risk Benchmark (default: DXY Dollar Index), helping you understand if you\'re implicitly long or short the dollar across your book. The 0HEDGE column shows the forward or spot FX trade needed to neutralize each currency exposure.',
+    description: 'Aggregate currency exposure across all positions — including embedded FX risk in equities and bonds. See correlation to your Risk Benchmark and the FX trade needed to neutralize each exposure — updated in real-time.',
   },
   {
     title: 'COMMODITIES',
@@ -719,7 +719,7 @@ const riskCardsData: RiskCardData[] = [
     cvar95: '$1.9M',
     grossExposure: '$45M',
     netExposure: '$28.5M',
-    description: 'Commodity exposure aggregated across futures, ETFs, commodity-linked equities, and structured products. Price Sensitivity shows your P&L per 1% move in spot prices, while Basis tracks the futures-spot spread and Roll shows your carry cost from contango or backwardation. The CORR. column measures how each commodity correlates to your Risk Benchmark (default: Bloomberg Commodity Index), revealing your true inflation beta. The 0HEDGE column calculates the futures position needed to neutralize each commodity exposure — essential for managing roll costs.',
+    description: 'Aggregate commodity exposure across futures, ETFs, and commodity-linked equities. See correlation to your Risk Benchmark and the futures position needed to neutralize each exposure — updated in real-time.',
   },
   {
     title: 'OTHER',
@@ -744,7 +744,7 @@ const riskCardsData: RiskCardData[] = [
     cvar95: '$450K',
     grossExposure: '$12M',
     netExposure: '$5.8M',
-    description: 'Everything that doesn\'t fit neatly elsewhere: volatility products, variance swaps, structured notes, and exotic derivatives. Each position is decomposed into its underlying risk factors so you understand what\'s actually inside. The CORR. column shows how each sub-category correlates to your Risk Benchmark (default: VIX for volatility products), surfacing hidden tail risk that traditional reports miss. The 0HEDGE column provides the delta-equivalent hedge where possible — note that some illiquid or bespoke structures show N/A when no liquid hedge exists.',
+    description: 'Aggregate volatility products, structured notes, and exotic derivatives. See correlation to your Risk Benchmark and the delta-equivalent hedge where available — updated in real-time.',
   },
 ]
 
