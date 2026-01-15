@@ -135,7 +135,7 @@ export default function Hero() {
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
-                <div className="flex-1 relative">
+                <div className="flex-[3] relative">
                   <input
                     type="email"
                     placeholder="Work email"
@@ -149,7 +149,7 @@ export default function Hero() {
                 <button
                   type="submit"
                   disabled={status === 'loading'}
-                  className="group inline-flex items-center justify-center gap-2 px-6 py-3 bg-brand-blue text-white font-semibold rounded-[3px] transition-all duration-200 hover:bg-brand-blue/90 shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40 text-base disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+                  className="flex-1 group inline-flex items-center justify-center gap-2 px-6 py-3 bg-brand-blue text-white font-semibold rounded-[3px] transition-all duration-200 hover:bg-brand-blue/90 shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40 text-base disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
                 >
                   {status === 'loading' ? (
                     <>
