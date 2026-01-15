@@ -638,7 +638,7 @@ const riskCardsData: RiskCardData[] = [
     cvar95: '$2.9M',
     grossExposure: '$180M',
     netExposure: '$120M',
-    description: 'Aggregate interest rate sensitivity across all fixed income positions. See correlation to your Risk Benchmark and the exact DV01 offset needed to flatten each tenor — updated in real-time.',
+    description: 'Aggregate interest rate sensitivity across all fixed income positions. See correlation to your Risk Benchmark and the exact DV01 offset needed to flatten each tenor.',
   },
   {
     title: 'CREDIT',
@@ -665,7 +665,7 @@ const riskCardsData: RiskCardData[] = [
     cvar95: '$1.4M',
     grossExposure: '$95M',
     netExposure: '$72M',
-    description: 'Aggregate credit spread sensitivity by rating bucket. See correlation to your Risk Benchmark and the CDS notional required to neutralize spread risk — updated in real-time.',
+    description: 'Aggregate credit spread sensitivity by rating bucket. See correlation to your Risk Benchmark and the CDS notional required to neutralize spread risk.',
   },
   {
     title: 'FX',
@@ -692,7 +692,7 @@ const riskCardsData: RiskCardData[] = [
     cvar95: '$850K',
     grossExposure: '$65M',
     netExposure: '$18.2M',
-    description: 'Aggregate currency exposure across all positions — including embedded FX risk in equities and bonds. See correlation to your Risk Benchmark and the FX trade needed to neutralize each exposure — updated in real-time.',
+    description: 'Aggregate currency exposure across all positions — including embedded FX risk in equities and bonds. See correlation to your Risk Benchmark and the FX trade needed to neutralize each exposure.',
   },
   {
     title: 'COMMODITIES',
@@ -719,7 +719,7 @@ const riskCardsData: RiskCardData[] = [
     cvar95: '$1.9M',
     grossExposure: '$45M',
     netExposure: '$28.5M',
-    description: 'Aggregate commodity exposure across futures, ETFs, and commodity-linked equities. See correlation to your Risk Benchmark and the futures position needed to neutralize each exposure — updated in real-time.',
+    description: 'Aggregate commodity exposure across futures, ETFs, and commodity-linked equities. See correlation to your Risk Benchmark and the futures position needed to neutralize each exposure.',
   },
   {
     title: 'OTHER',
@@ -744,7 +744,7 @@ const riskCardsData: RiskCardData[] = [
     cvar95: '$450K',
     grossExposure: '$12M',
     netExposure: '$5.8M',
-    description: 'Aggregate volatility products, structured notes, and exotic derivatives. See correlation to your Risk Benchmark and the delta-equivalent hedge where available — updated in real-time.',
+    description: 'Aggregate volatility products, structured notes, and exotic derivatives. See correlation to your Risk Benchmark and the delta-equivalent hedge where available.',
   },
 ]
 
