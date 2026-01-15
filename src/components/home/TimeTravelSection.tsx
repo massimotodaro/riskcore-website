@@ -129,7 +129,7 @@ function SpeedLines() {
             duration: 1.5,
             delay: i * 0.15,
             repeat: Infinity,
-            repeatDelay: 2,
+            repeatDelay: 8,
             ease: 'easeOut',
           }}
         />
@@ -139,11 +139,51 @@ function SpeedLines() {
 }
 
 // ==============================================
+// MODERN SVG ICONS FOR FEATURE CARDS
+// ==============================================
+
+const FeatureIcons = {
+  clock: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8">
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 6v6l4 2" />
+      <path d="M16 3l2 2" />
+      <path d="M8 3l-2 2" />
+    </svg>
+  ),
+  snapshot: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8">
+      <rect x="3" y="3" width="18" height="18" rx="2" />
+      <circle cx="12" cy="12" r="3" />
+      <path d="M3 9h2" />
+      <path d="M19 9h2" />
+    </svg>
+  ),
+  greeks: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8">
+      <path d="M3 3v18h18" />
+      <path d="M7 16l4-6 4 4 5-8" />
+      <circle cx="7" cy="16" r="1.5" fill="currentColor" />
+      <circle cx="11" cy="10" r="1.5" fill="currentColor" />
+      <circle cx="15" cy="14" r="1.5" fill="currentColor" />
+      <circle cx="20" cy="6" r="1.5" fill="currentColor" />
+    </svg>
+  ),
+  audit: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+      <path d="M14 2v6h6" />
+      <path d="M9 15l2 2 4-4" />
+    </svg>
+  ),
+}
+
+// ==============================================
 // FEATURE CARDS
 // ==============================================
 
 interface FeatureCardProps {
-  icon: string
+  icon: React.ReactNode
   title: string
   description: string
   delay: number
@@ -163,7 +203,7 @@ function FeatureCard({ icon, title, description, delay }: FeatureCardProps) {
       transition={{ duration: 0.5, delay }}
       whileHover={{ scale: 1.02, y: -5 }}
     >
-      <div className="text-3xl mb-3">{icon}</div>
+      <div className="text-emerald-400 mb-3">{icon}</div>
       <h4 className="text-lg font-semibold text-slate-100 mb-2">{title}</h4>
       <p className="text-sm text-slate-400 leading-relaxed">{description}</p>
     </motion.div>
@@ -187,24 +227,24 @@ export default function TimeTravelSection() {
 
   const features = [
     {
-      icon: '🕐',
+      icon: FeatureIcons.clock,
       title: 'Any Point in Time',
       description: 'Jump to market close, pre-announcement, post-earnings, or any custom timestamp. Your risk, your timeline.',
     },
     {
-      icon: '📸',
+      icon: FeatureIcons.snapshot,
       title: 'Position Snapshots',
       description: 'See exactly what you held at any moment. No more "I think we had exposure" - now you know.',
     },
     {
-      icon: '📊',
+      icon: FeatureIcons.greeks,
       title: 'Historical Greeks',
       description: 'Delta, Gamma, Vega, Theta - all recalculated for any point in history. Hindsight is finally 20/20.',
     },
     {
-      icon: '🔍',
+      icon: FeatureIcons.audit,
       title: 'Audit Trail',
-      description: 'Regulators asking questions? Travel back and show them exactly what your book looked like. With receipts.',
+      description: 'Regulators asking questions? Travel back and show them exactly what your book looked like.',
     },
   ]
 
@@ -227,18 +267,6 @@ export default function TimeTravelSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          {/* Badge */}
-          <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/30
-                       rounded-full text-emerald-400 text-sm font-medium mb-6"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={isInView ? { scale: 1, opacity: 1 } : {}}
-            transition={{ delay: 0.2, type: 'spring' }}
-          >
-            <span>⚡</span>
-            <span>New Feature</span>
-          </motion.div>
-
           <motion.h2
             className="text-4xl md:text-5xl font-bold text-slate-100 mb-4"
             initial={{ opacity: 0, y: 20 }}
@@ -270,16 +298,12 @@ export default function TimeTravelSection() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <motion.blockquote
-              className="relative"
+            <motion.div
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ delay: 0.6 }}
             >
-              {/* Quote marks */}
-              <span className="absolute -top-8 -left-4 text-7xl text-emerald-500/20 font-serif">&ldquo;</span>
-
-              <p className="text-2xl md:text-3xl font-medium text-slate-200 leading-relaxed mb-6 relative z-10">
+              <p className="text-2xl md:text-3xl font-medium text-slate-200 leading-relaxed mb-6">
                 You&apos;re now officially the{' '}
                 <motion.span
                   className="text-emerald-400 font-bold"
@@ -303,8 +327,7 @@ export default function TimeTravelSection() {
               </p>
 
               <p className="text-lg text-slate-400 leading-relaxed">
-                And instead of accidentally making your mom fall in love with you,
-                you can finally answer the question that&apos;s been haunting you:{' '}
+                Now can finally answer the question that&apos;s been haunting you:{' '}
                 <motion.span
                   className="text-emerald-400 font-semibold italic"
                   initial={{ opacity: 0 }}
@@ -314,9 +337,7 @@ export default function TimeTravelSection() {
                   &ldquo;Did my PM have $50M of Tesla exposure last Friday before Elon tweeted again?&rdquo;
                 </motion.span>
               </p>
-
-              <span className="absolute -bottom-4 right-0 text-7xl text-emerald-500/20 font-serif">&rdquo;</span>
-            </motion.blockquote>
+            </motion.div>
 
             {/* CTA Button */}
             <motion.div
@@ -371,18 +392,6 @@ export default function TimeTravelSection() {
               delay={0.9 + index * 0.1}
             />
           ))}
-        </motion.div>
-
-        {/* Bottom Tagline */}
-        <motion.div
-          className="text-center mt-16"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 1.4 }}
-        >
-          <p className="text-slate-500 text-sm">
-            Great Scott! Your risk reports will never be the same.
-          </p>
         </motion.div>
       </div>
     </section>
