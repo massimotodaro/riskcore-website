@@ -5,5 +5,6 @@
       <stop offset="100%" stop-color="#22c55e"/>
     </linearGradient>
   </defs>
-  <text x="16" y="27" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="34" fill="url(#greenGradient)">R</text>
+  <rect width="32" height="32" fill="#040819"/>
+  <text x="16" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="24" fill="url(#greenGradient)">R</text>
 </svg>
