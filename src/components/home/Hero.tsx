@@ -59,7 +59,7 @@ function TrustBadges() {
 
   return (
     <motion.div
-      className="flex flex-wrap justify-center gap-4 mt-12"
+      className="flex flex-wrap justify-center gap-3 sm:gap-4 mt-8 sm:mt-12"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 1.2 }}
@@ -67,7 +67,7 @@ function TrustBadges() {
       {badges.map((badge, i) => (
         <motion.div
           key={badge.label}
-          className="flex items-center gap-2 px-4 py-2 bg-slate-800/50 border border-white/10 rounded-lg text-sm text-slate-400"
+          className="flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-slate-800/50 border border-white/10 rounded-lg text-xs sm:text-sm text-slate-400"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 1.3 + i * 0.1 }}
@@ -94,7 +94,7 @@ function StatsRow() {
 
   return (
     <motion.div
-      className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-10"
+      className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto mt-8 sm:mt-10"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.8 }}
@@ -107,7 +107,7 @@ function StatsRow() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9 + i * 0.1 }}
         >
-          <div className="text-3xl md:text-4xl font-bold text-slate-100 font-mono">
+          <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-100 font-mono">
             <AnimatedCounter
               value={stat.value}
               prefix={stat.prefix}
@@ -115,7 +115,7 @@ function StatsRow() {
               duration={2}
             />
           </div>
-          <div className="text-sm text-slate-500 mt-1">{stat.label}</div>
+          <div className="text-xs sm:text-sm text-slate-500 mt-1">{stat.label}</div>
         </motion.div>
       ))}
     </motion.div>
@@ -163,7 +163,7 @@ function CTAButtons() {
 export default function Hero() {
   return (
     <section
-      className="relative min-h-screen overflow-hidden"
+      className="relative min-h-[85vh] lg:min-h-screen overflow-hidden"
       style={{ background: 'linear-gradient(to bottom, #0a0f1a, #151E31, #10182B)' }}
     >
       {/* Background Grid */}
@@ -183,7 +183,7 @@ export default function Hero() {
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[120px]" />
 
       {/* Content */}
-      <div className="relative max-w-7xl mx-auto px-6 pt-32 pb-16">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24 lg:pt-32 pb-12 sm:pb-16">
         {/* Main Headline */}
         <motion.div
           className="text-center"
@@ -205,7 +205,7 @@ export default function Hero() {
           </motion.h1>
 
           <motion.p
-            className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto mt-6"
+            className="text-base sm:text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto mt-4 sm:mt-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
@@ -217,7 +217,7 @@ export default function Hero() {
           <CTAButtons />
         </motion.div>
 
-        {/* AnimatedRiskboard */}
+        {/* AnimatedRiskboard - Desktop: full view */}
         <motion.div
           className="mt-12 hidden lg:block"
           initial={{ opacity: 0, y: 40 }}
@@ -225,6 +225,22 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.5 }}
         >
           <AnimatedRiskboard />
+        </motion.div>
+
+        {/* AnimatedRiskboard - Mobile: cropped top-left quarter */}
+        <motion.div
+          className="mt-8 lg:hidden relative overflow-hidden rounded-xl border border-white/10"
+          style={{ height: '280px' }}
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+        >
+          <div className="absolute top-0 left-0 origin-top-left scale-[0.55] sm:scale-[0.65]">
+            <AnimatedRiskboard />
+          </div>
+          {/* Fade overlay on right and bottom edges */}
+          <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-transparent via-transparent to-[#151E31]" />
+          <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-transparent to-[#151E31]" />
         </motion.div>
 
         {/* Stats */}
