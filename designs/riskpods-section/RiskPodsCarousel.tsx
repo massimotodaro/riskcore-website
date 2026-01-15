@@ -1,3 +1,5 @@
+'use client'
+
 /**
  * RiskPodsCarousel.tsx
  *
