@@ -190,7 +190,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="relative pl-5 pt-[25vh]"
+            className="relative pr-[20%] pt-[20vh] flex justify-end"
           >
             <div className="transform scale-125 origin-top-left">
               <AnimatedRiskboard />
