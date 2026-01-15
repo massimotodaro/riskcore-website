@@ -1,7 +1,6 @@
 import {
   Hero,
   TimeTravelSection,
-  TrustBadges,
   Features,
   DashboardPreview,
   CTASection,
@@ -13,7 +12,6 @@ export default function Home() {
       <Hero />
       <TimeTravelSection />
       <DashboardPreview />
-      <TrustBadges />
       <Features />
       <CTASection />
     </>
