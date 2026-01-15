@@ -2,7 +2,8 @@
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { AnimatedRiskboard } from '../hero'
+// Note: When using this hero, import AnimatedRiskboard from '@/components/hero'
+// import { AnimatedRiskboard } from '@/components/hero'
 
 export default function Hero() {
   const [email, setEmail] = useState('')
@@ -185,7 +186,8 @@ export default function Hero() {
           className="flex-1 hidden lg:flex flex-col"
         >
           <div className="transform scale-125 origin-top-left">
-            <AnimatedRiskboard />
+            {/* <AnimatedRiskboard /> */}
+            <div className="text-text-muted">AnimatedRiskboard placeholder</div>
           </div>
         </motion.div>
       </div>
