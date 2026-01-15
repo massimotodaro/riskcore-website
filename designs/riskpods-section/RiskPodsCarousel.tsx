@@ -46,7 +46,6 @@ interface RiskCardData {
   grossExposure: string
   netExposure: string
   description: string
-  keyInsight: string
 }
 
 interface BookOption {
@@ -613,8 +612,7 @@ const riskCardsData: RiskCardData[] = [
     cvar95: '$3.4M',
     grossExposure: '$320M',
     netExposure: '$42.5M',
-    description: 'Aggregate equity exposure across all portfolios, broken down by region. Delta measures directional market exposure, while Beta shows sensitivity to benchmark moves.',
-    keyInsight: 'Instantly see if your PMs are all long tech, or if you have hidden regional concentration that diversification reports miss.',
+    description: 'Aggregate equity exposure across all portfolios, broken down by region. Delta measures directional market exposure, while Beta shows sensitivity to benchmark moves. The CORR. column shows how each regional bucket correlates to your chosen Risk Benchmark (default: S&P 500), helping you understand which exposures move together during market stress. The 0HEDGE column calculates the exact notional required to neutralize each position\'s delta — updated in real-time so you always know the cost of going flat.',
   },
   {
     title: 'RATES',
@@ -640,8 +638,7 @@ const riskCardsData: RiskCardData[] = [
     cvar95: '$2.9M',
     grossExposure: '$180M',
     netExposure: '$120M',
-    description: 'Interest rate sensitivity across all fixed income positions. DV01 shows P&L impact per basis point move. Tenor breakdown reveals curve positioning.',
-    keyInsight: 'Know exactly how much you make or lose when the Fed moves — and where on the curve that exposure sits.',
+    description: 'Interest rate sensitivity across all fixed income positions. DV01 shows your P&L impact per basis point move, while the tenor breakdown reveals your curve positioning from 2Y to 30Y. The CORR. column measures how each tenor bucket correlates to your Risk Benchmark (default: 10Y Treasury), so you can see which parts of the curve drive your overall rates risk. The 0HEDGE column shows the exact DV01 offset needed to flatten each tenor — whether through futures, swaps, or Treasury hedges.',
   },
   {
     title: 'CREDIT',
@@ -668,8 +665,7 @@ const riskCardsData: RiskCardData[] = [
     cvar95: '$1.4M',
     grossExposure: '$95M',
     netExposure: '$72M',
-    description: 'Credit spread sensitivity by rating bucket. CS01 measures P&L per basis point spread widening. PD and LGD show default probability and loss severity.',
-    keyInsight: 'Spot hidden concentration in BBB names that become fallen angels during credit stress.',
+    description: 'Credit spread sensitivity aggregated by rating bucket from AAA to Distressed. CS01 measures your P&L per basis point of spread widening, while PD (Probability of Default) and LGD (Loss Given Default) give you a forward-looking view of credit risk. The CORR. column shows how each rating bucket correlates to your Risk Benchmark (default: CDX IG Index), revealing which credit exposures cluster together in risk-off events. The 0HEDGE column calculates the CDS notional or index hedge required to neutralize spread risk in each bucket.',
   },
   {
     title: 'FX',
@@ -696,8 +692,7 @@ const riskCardsData: RiskCardData[] = [
     cvar95: '$850K',
     grossExposure: '$65M',
     netExposure: '$18.2M',
-    description: 'Currency exposure across all positions including embedded FX in international equities and bonds. Vega captures FX option exposure.',
-    keyInsight: 'See your true currency exposure — not just FX trades, but the hidden FX in your international positions.',
+    description: 'Currency exposure across all positions — not just explicit FX trades, but the embedded FX risk in your international equities, bonds, and derivatives. Vega captures your FX option exposure, while Basis shows the cross-currency funding spread. The CORR. column measures how each currency pair correlates to your Risk Benchmark (default: DXY Dollar Index), helping you understand if you\'re implicitly long or short the dollar across your book. The 0HEDGE column shows the forward or spot FX trade needed to neutralize each currency exposure.',
   },
   {
     title: 'COMMODITIES',
@@ -724,8 +719,7 @@ const riskCardsData: RiskCardData[] = [
     cvar95: '$1.9M',
     grossExposure: '$45M',
     netExposure: '$28.5M',
-    description: 'Commodity exposure including futures, ETFs, and commodity-linked equities. Roll yield shows the cost/benefit of maintaining futures positions.',
-    keyInsight: 'Track your inflation hedge exposure and understand the carry cost of your commodity positions.',
+    description: 'Commodity exposure aggregated across futures, ETFs, commodity-linked equities, and structured products. Price Sensitivity shows your P&L per 1% move in spot prices, while Basis tracks the futures-spot spread and Roll shows your carry cost from contango or backwardation. The CORR. column measures how each commodity correlates to your Risk Benchmark (default: Bloomberg Commodity Index), revealing your true inflation beta. The 0HEDGE column calculates the futures position needed to neutralize each commodity exposure — essential for managing roll costs.',
   },
   {
     title: 'OTHER',
@@ -750,8 +744,7 @@ const riskCardsData: RiskCardData[] = [
     cvar95: '$450K',
     grossExposure: '$12M',
     netExposure: '$5.8M',
-    description: 'Everything else: volatility products, structured notes, and positions that don\'t fit neatly into other categories. Decomposed for risk attribution.',
-    keyInsight: 'No more "Other" black holes. Complex products are broken down so you understand what\'s actually in them.',
+    description: 'Everything that doesn\'t fit neatly elsewhere: volatility products, variance swaps, structured notes, and exotic derivatives. Each position is decomposed into its underlying risk factors so you understand what\'s actually inside. The CORR. column shows how each sub-category correlates to your Risk Benchmark (default: VIX for volatility products), surfacing hidden tail risk that traditional reports miss. The 0HEDGE column provides the delta-equivalent hedge where possible — note that some illiquid or bespoke structures show N/A when no liquid hedge exists.',
   },
 ]
 
@@ -902,25 +895,6 @@ export default function RiskPodsCarousel() {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
               >
-                {/* Aggregation Highlight */}
-                <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-4 mb-6">
-                  <div className="flex items-center gap-2 mb-2">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5 text-emerald-400">
-                      <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16" />
-                      <path d="M3 21h18" />
-                      <path d="M9 7h6" />
-                      <path d="M9 11h6" />
-                    </svg>
-                    <span className="text-sm font-semibold text-emerald-400">Aggregated from {selectedBook.name}</span>
-                  </div>
-                  <p className="text-sm text-slate-400">
-                    {selectedBook.type === 'aggregated'
-                      ? `This view combines risk from multiple books. Switch between individual PMs or see the firm-wide picture — the choice is yours.`
-                      : `Viewing a single book. Aggregate with other books or switch to firm-wide view using the selector above.`
-                    }
-                  </p>
-                </div>
-
                 {/* Title */}
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-4 h-4 rounded-full" style={{ backgroundColor: activeCard.color }} />
@@ -928,16 +902,10 @@ export default function RiskPodsCarousel() {
                 </div>
 
                 {/* Description */}
-                <p className="text-lg text-slate-400 leading-relaxed mb-6">{activeCard.description}</p>
-
-                {/* Key Insight */}
-                <div className="bg-slate-800/50 border-l-4 rounded-r-lg p-4" style={{ borderColor: activeCard.color }}>
-                  <div className="text-xs text-slate-500 uppercase tracking-wide mb-1">Key Insight</div>
-                  <p className="text-slate-200">{activeCard.keyInsight}</p>
-                </div>
+                <p className="text-base text-slate-400 leading-relaxed mb-8">{activeCard.description}</p>
 
                 {/* Quick Stats */}
-                <div className="grid grid-cols-3 gap-4 mt-8">
+                <div className="grid grid-cols-3 gap-4">
                   <div className="text-center">
                     <div className="text-2xl font-bold font-mono text-slate-100">{activeCard.positions}</div>
                     <div className="text-xs text-slate-500">Positions</div>
@@ -964,11 +932,11 @@ export default function RiskPodsCarousel() {
           transition={{ delay: 1.0 }}
         >
           <motion.button
-            className="px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-bold text-lg rounded-xl transition-colors"
+            className="px-8 py-3 bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-semibold text-sm rounded-lg transition-colors"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            See Your Aggregated RiskPods
+            Book a Demo
           </motion.button>
           <p className="text-slate-500 text-sm mt-4">
             Single book or firm-wide. Current state or historical. Your risk, your way.
