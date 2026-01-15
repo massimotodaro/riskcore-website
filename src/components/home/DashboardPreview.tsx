@@ -1,15 +1,15 @@
 'use client'
 
 /**
- * DashboardPreview.tsx (RiskPodsCarousel variant)
+ * DashboardPreview.tsx (RiskPodsFullSpectrum variant)
  *
- * Tab-based navigation with one featured RiskPod at a time.
- * Detailed explanation panel that changes with selection.
- * Interactive and engaging for exploring each asset class.
+ * All 6 RiskPods displayed in an impressive grid.
+ * Maximum visual impact, brief copy.
+ * Emphasizes completeness: every asset class, one view.
  */
 
 import { useEffect, useState, useRef } from 'react'
-import { motion, AnimatePresence, useInView } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 
 // ==============================================
 // TYPES
@@ -35,42 +35,46 @@ interface RiskCardData {
   cvar95: string
   grossExposure: string
   netExposure: string
-  description: string
-  keyInsight: string
 }
 
 // ==============================================
-// RISK CARD COMPONENT (Exact match to Riskboard)
+// COMPACT RISK CARD (Optimized for grid)
 // ==============================================
 
-function RiskCard({ data }: { data: RiskCardData }) {
+function CompactRiskCard({ data, delay }: { data: RiskCardData; delay: number }) {
   const [barWidth, setBarWidth] = useState(0)
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, amount: 0.2 })
 
   useEffect(() => {
-    setBarWidth(0)
-    const timer = setTimeout(() => setBarWidth(65), 300)
-    return () => clearTimeout(timer)
-  }, [data.title])
+    if (isInView) {
+      const timer = setTimeout(() => setBarWidth(65), delay * 1000 + 300)
+      return () => clearTimeout(timer)
+    }
+  }, [delay, isInView])
 
   return (
     <motion.div
-      className="bg-slate-800/50 border border-white/10 rounded-lg overflow-hidden flex flex-col w-full max-w-md"
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.3 }}
-      whileHover={{ borderColor: `${data.color}40` }}
+      ref={ref}
+      className="bg-slate-800/50 border border-white/10 rounded-lg overflow-hidden flex flex-col h-full"
+      initial={{ opacity: 0, y: 30, scale: 0.95 }}
+      animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{ delay, duration: 0.5 }}
+      whileHover={{
+        borderColor: `${data.color}50`,
+        y: -5,
+        transition: { duration: 0.2 }
+      }}
     >
       {/* Card Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-white/5">
-        <span className="text-base font-bold" style={{ color: data.color }}>{data.title}</span>
+      <div className="flex items-center justify-between px-3 py-2 border-b border-white/5">
+        <span className="text-sm font-bold" style={{ color: data.color }}>{data.title}</span>
         <div className="flex items-center gap-2">
-          <span className={`text-xs font-medium ${data.isUp ? 'text-emerald-400' : 'text-rose-400'}`}>
+          <span className={`text-[10px] font-medium ${data.isUp ? 'text-emerald-400' : 'text-rose-400'}`}>
             {data.isUp ? '▲' : '▼'} {data.change}
           </span>
-          <span className="text-slate-600 text-xs">::</span>
           <motion.button
-            className="px-3 py-1 text-xs font-medium border border-white/20 rounded text-slate-300 hover:bg-white/10"
+            className="px-2 py-0.5 text-[10px] font-medium border border-white/20 rounded text-slate-300 hover:bg-white/10"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -80,51 +84,49 @@ function RiskCard({ data }: { data: RiskCardData }) {
       </div>
 
       {/* Primary Metric */}
-      <div className="px-4 py-3">
-        <div className="text-xs text-slate-500 uppercase tracking-wide">{data.primaryLabel}</div>
+      <div className="px-3 py-2">
+        <div className="text-[10px] text-slate-500 uppercase tracking-wide">{data.primaryLabel}</div>
         <motion.div
-          className="text-3xl font-bold font-mono text-slate-100"
+          className="text-2xl font-bold font-mono text-slate-100"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ delay: delay + 0.2 }}
         >
           {data.primaryValue}
         </motion.div>
-        {/* Progress Bar */}
-        <div className="h-1.5 bg-slate-700/50 rounded-full mt-2 overflow-hidden">
+        <div className="h-1 bg-slate-700/50 rounded-full mt-1.5 overflow-hidden">
           <motion.div
             className="h-full rounded-full"
             style={{ background: `linear-gradient(90deg, ${data.color}, ${data.color}88)` }}
             initial={{ width: 0 }}
-            animate={{ width: `${barWidth}%` }}
-            transition={{ delay: 0.3, duration: 0.8, ease: 'easeOut' }}
+            animate={isInView ? { width: `${barWidth}%` } : {}}
+            transition={{ delay: delay + 0.4, duration: 0.8, ease: 'easeOut' }}
           />
         </div>
       </div>
 
-      {/* Secondary Metrics Row */}
-      <div className="grid grid-cols-3 gap-2 px-4 pb-3">
+      {/* Secondary Metrics */}
+      <div className="grid grid-cols-3 gap-1 px-3 pb-2">
         {data.secondaryMetrics.map((metric, i) => (
           <motion.div
             key={metric.label}
-            className="bg-slate-900/50 rounded px-3 py-2 text-center"
+            className="bg-slate-900/50 rounded px-2 py-1.5 text-center"
             initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3 + i * 0.1 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ delay: delay + 0.3 + i * 0.05 }}
           >
-            <div className="text-[9px] text-slate-500 uppercase">{metric.label}</div>
-            <div className="text-sm font-mono font-semibold text-slate-200">{metric.value}</div>
+            <div className="text-[8px] text-slate-500 uppercase">{metric.label}</div>
+            <div className="text-[11px] font-mono font-semibold text-slate-200">{metric.value}</div>
           </motion.div>
         ))}
       </div>
 
       {/* Data Table */}
-      <div className="px-4 flex-1">
-        {/* Table Header */}
+      <div className="px-3 flex-1 min-h-0">
         <div
-          className="grid gap-1 px-2 py-1.5 text-[9px] font-semibold uppercase tracking-wide rounded-t"
+          className="grid gap-0.5 px-1.5 py-1 text-[8px] font-semibold uppercase tracking-wide rounded-t"
           style={{
-            gridTemplateColumns: `60px repeat(${data.tableHeaders.length - 1}, 1fr)`,
+            gridTemplateColumns: `50px repeat(${data.tableHeaders.length - 1}, 1fr)`,
             backgroundColor: `${data.color}15`,
             color: data.color
           }}
@@ -133,16 +135,15 @@ function RiskCard({ data }: { data: RiskCardData }) {
             <span key={i} className={i > 0 ? 'text-center' : ''}>{header}</span>
           ))}
         </div>
-        {/* Table Rows */}
         <div className="bg-slate-900/30 rounded-b">
           {data.tableRows.map((row, rowIndex) => (
             <motion.div
               key={row.label}
-              className="grid gap-1 px-2 py-1 text-[10px] border-b border-white/5 last:border-0 hover:bg-white/5"
-              style={{ gridTemplateColumns: `60px repeat(${data.tableHeaders.length - 1}, 1fr)` }}
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4 + rowIndex * 0.05 }}
+              className="grid gap-0.5 px-1.5 py-0.5 text-[9px] border-b border-white/5 last:border-0 hover:bg-white/5"
+              style={{ gridTemplateColumns: `50px repeat(${data.tableHeaders.length - 1}, 1fr)` }}
+              initial={{ opacity: 0, x: -5 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ delay: delay + 0.5 + rowIndex * 0.03 }}
             >
               <span className="font-medium" style={{ color: data.color }}>{row.label}</span>
               {row.values.map((val, i) => (
@@ -154,56 +155,31 @@ function RiskCard({ data }: { data: RiskCardData }) {
       </div>
 
       {/* Bottom Stats */}
-      <div className="grid grid-cols-3 gap-2 px-4 py-3 mt-auto">
-        <motion.div
-          className="text-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-        >
-          <div className="text-[9px] text-slate-500 uppercase">Positions</div>
-          <div className="text-xs font-mono text-slate-200">{data.positions}</div>
-        </motion.div>
-        <motion.div
-          className="text-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.7 }}
-        >
-          <div className="text-[9px] text-slate-500 uppercase">VaR (95%)</div>
-          <div className="text-xs font-mono text-rose-400">{data.var95}</div>
-        </motion.div>
-        <motion.div
-          className="text-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-        >
-          <div className="text-[9px] text-slate-500 uppercase">CVaR (95%)</div>
-          <div className="text-xs font-mono text-rose-400">{data.cvar95}</div>
-        </motion.div>
+      <div className="grid grid-cols-3 gap-1 px-3 py-2 mt-auto">
+        <div className="text-center">
+          <div className="text-[8px] text-slate-500 uppercase">Positions</div>
+          <div className="text-[10px] font-mono text-slate-200">{data.positions}</div>
+        </div>
+        <div className="text-center">
+          <div className="text-[8px] text-slate-500 uppercase">VaR (95%)</div>
+          <div className="text-[10px] font-mono text-rose-400">{data.var95}</div>
+        </div>
+        <div className="text-center">
+          <div className="text-[8px] text-slate-500 uppercase">CVaR (95%)</div>
+          <div className="text-[10px] font-mono text-rose-400">{data.cvar95}</div>
+        </div>
       </div>
 
       {/* Footer */}
-      <div className="grid grid-cols-2 gap-2 px-4 pb-3">
-        <motion.div
-          className="bg-slate-900/40 rounded px-3 py-2 text-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.9 }}
-        >
-          <div className="text-[9px] text-slate-500 uppercase">Gross Exposure</div>
-          <div className="text-sm font-mono font-semibold text-slate-200">{data.grossExposure}</div>
-        </motion.div>
-        <motion.div
-          className="bg-slate-900/40 rounded px-3 py-2 text-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-        >
-          <div className="text-[9px] text-slate-500 uppercase">Net Exposure</div>
-          <div className="text-sm font-mono font-semibold text-slate-200">{data.netExposure}</div>
-        </motion.div>
+      <div className="grid grid-cols-2 gap-1 px-3 pb-2">
+        <div className="bg-slate-900/40 rounded px-2 py-1.5 text-center">
+          <div className="text-[8px] text-slate-500 uppercase">Gross</div>
+          <div className="text-[11px] font-mono font-semibold text-slate-200">{data.grossExposure}</div>
+        </div>
+        <div className="bg-slate-900/40 rounded px-2 py-1.5 text-center">
+          <div className="text-[8px] text-slate-500 uppercase">Net</div>
+          <div className="text-[11px] font-mono font-semibold text-slate-200">{data.netExposure}</div>
+        </div>
       </div>
     </motion.div>
   )
@@ -239,8 +215,6 @@ const riskCardsData: RiskCardData[] = [
     cvar95: '$3.4M',
     grossExposure: '$320M',
     netExposure: '$42.5M',
-    description: 'Aggregate equity exposure across all portfolios, broken down by region. Delta measures directional market exposure, while Beta shows sensitivity to benchmark moves.',
-    keyInsight: 'Instantly see if your PMs are all long tech, or if you have hidden regional concentration that diversification reports miss.',
   },
   {
     title: 'RATES',
@@ -266,8 +240,6 @@ const riskCardsData: RiskCardData[] = [
     cvar95: '$2.9M',
     grossExposure: '$180M',
     netExposure: '$120M',
-    description: 'Interest rate sensitivity across all fixed income positions. DV01 shows P&L impact per basis point move. Tenor breakdown reveals curve positioning.',
-    keyInsight: 'Know exactly how much you make or lose when the Fed moves — and where on the curve that exposure sits.',
   },
   {
     title: 'CREDIT',
@@ -294,8 +266,6 @@ const riskCardsData: RiskCardData[] = [
     cvar95: '$1.4M',
     grossExposure: '$95M',
     netExposure: '$72M',
-    description: 'Credit spread sensitivity by rating bucket. CS01 measures P&L per basis point spread widening. PD and LGD show default probability and loss severity.',
-    keyInsight: 'Spot hidden concentration in BBB names that become fallen angels during credit stress.',
   },
   {
     title: 'FX',
@@ -322,8 +292,6 @@ const riskCardsData: RiskCardData[] = [
     cvar95: '$850K',
     grossExposure: '$65M',
     netExposure: '$18.2M',
-    description: 'Currency exposure across all positions including embedded FX in international equities and bonds. Vega captures FX option exposure.',
-    keyInsight: 'See your true currency exposure — not just FX trades, but the hidden FX in your international positions.',
   },
   {
     title: 'COMMODITIES',
@@ -350,8 +318,6 @@ const riskCardsData: RiskCardData[] = [
     cvar95: '$1.9M',
     grossExposure: '$45M',
     netExposure: '$28.5M',
-    description: 'Commodity exposure including futures, ETFs, and commodity-linked equities. Roll yield shows the cost/benefit of maintaining futures positions.',
-    keyInsight: 'Track your inflation hedge exposure and understand the carry cost of your commodity positions.',
   },
   {
     title: 'OTHER',
@@ -376,21 +342,58 @@ const riskCardsData: RiskCardData[] = [
     cvar95: '$450K',
     grossExposure: '$12M',
     netExposure: '$5.8M',
-    description: 'Everything else: volatility products, structured notes, and positions that don\'t fit neatly into other categories. Decomposed for risk attribution.',
-    keyInsight: 'No more "Other" black holes. Complex products are broken down so you understand what\'s actually in them.',
   },
 ]
+
+// ==============================================
+// SUMMARY STATS
+// ==============================================
+
+function SummaryStats() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, amount: 0.5 })
+
+  const stats = [
+    { label: 'Total Positions', value: '722', color: '#22c55e' },
+    { label: 'Firm Gross', value: '$717M', color: '#3b82f6' },
+    { label: 'Firm Net', value: '$321M', color: '#22c55e' },
+    { label: 'Firm VaR', value: '$8.8M', color: '#ef4444' },
+  ]
+
+  return (
+    <motion.div
+      ref={ref}
+      className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-16"
+      initial={{ opacity: 0, y: 20 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5 }}
+    >
+      {stats.map((stat, i) => (
+        <motion.div
+          key={stat.label}
+          className="bg-slate-800/30 border border-white/10 rounded-xl p-4 text-center"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ delay: 0.1 + i * 0.1 }}
+          whileHover={{ borderColor: `${stat.color}50` }}
+        >
+          <div className="text-2xl md:text-3xl font-bold font-mono" style={{ color: stat.color }}>
+            {stat.value}
+          </div>
+          <div className="text-xs text-slate-500 mt-1">{stat.label}</div>
+        </motion.div>
+      ))}
+    </motion.div>
+  )
+}
 
 // ==============================================
 // MAIN COMPONENT
 // ==============================================
 
 export default function DashboardPreview() {
-  const [activeIndex, setActiveIndex] = useState(0)
   const sectionRef = useRef(null)
-  const isInView = useInView(sectionRef, { once: true, amount: 0.1 })
-
-  const activeCard = riskCardsData[activeIndex]
+  const isInView = useInView(sectionRef, { once: true, amount: 0.05 })
 
   return (
     <section
@@ -398,14 +401,12 @@ export default function DashboardPreview() {
       className="relative py-24 px-4 sm:px-6 overflow-hidden"
       style={{ background: 'linear-gradient(to bottom, #151E31, #10182B)' }}
     >
-      {/* Background Glow */}
-      <motion.div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[150px]"
-        animate={{ backgroundColor: `${activeCard.color}10` }}
-        transition={{ duration: 0.5 }}
-      />
+      {/* Background Effects */}
+      <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[120px]" />
+      <div className="absolute top-1/2 right-1/4 w-[400px] h-[400px] bg-emerald-500/5 rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 left-1/2 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-[120px]" />
 
-      <div className="relative max-w-6xl mx-auto">
+      <div className="relative max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div
           className="text-center mb-12"
@@ -413,130 +414,89 @@ export default function DashboardPreview() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <motion.h2
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-100 mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+          <motion.div
+            className="inline-flex items-center gap-2 px-4 py-2 bg-slate-800/50 border border-white/10 rounded-full text-slate-400 text-sm font-medium mb-6"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.2 }}
           >
-            Six RiskPods.{' '}
+            <span className="flex gap-1">
+              <span className="w-2 h-2 rounded-full bg-blue-500" />
+              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+              <span className="w-2 h-2 rounded-full bg-purple-500" />
+              <span className="w-2 h-2 rounded-full bg-cyan-500" />
+              <span className="w-2 h-2 rounded-full bg-yellow-500" />
+              <span className="w-2 h-2 rounded-full bg-slate-400" />
+            </span>
+            <span>6 RiskPods</span>
+          </motion.div>
+
+          <motion.h2
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-100 mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.3 }}
+          >
+            Every Asset Class.{' '}
+            <br className="hidden md:block" />
             <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">
-              Complete Coverage.
+              One Unified View.
             </span>
           </motion.h2>
 
           <motion.p
-            className="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto"
+            className="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.3 }}
+            transition={{ delay: 0.4 }}
           >
-            Click any asset class to explore the metrics that matter most.
+            Equity, Rates, Credit, FX, Commodities, and everything else —
+            all showing the metrics that matter for that asset class.
           </motion.p>
         </motion.div>
 
-        {/* Tab Navigation */}
-        <motion.div
-          className="flex flex-wrap justify-center gap-2 mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.4 }}
-        >
+        {/* Summary Stats */}
+        <SummaryStats />
+
+        {/* RiskPods Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {riskCardsData.map((card, index) => (
-            <motion.button
+            <CompactRiskCard
               key={card.title}
-              onClick={() => setActiveIndex(index)}
-              className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg font-semibold text-xs sm:text-sm transition-all ${
-                activeIndex === index
-                  ? 'text-slate-900 shadow-lg'
-                  : 'bg-slate-800/50 text-slate-400 hover:text-slate-200 border border-white/10'
-              }`}
-              style={activeIndex === index ? { backgroundColor: card.color } : {}}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {card.title}
-            </motion.button>
+              data={card}
+              delay={0.5 + index * 0.1}
+            />
           ))}
-        </motion.div>
-
-        {/* Main Content */}
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-          {/* Card Display */}
-          <motion.div
-            className="flex justify-center"
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.5 }}
-          >
-            <AnimatePresence mode="wait">
-              <RiskCard key={activeCard.title} data={activeCard} />
-            </AnimatePresence>
-          </motion.div>
-
-          {/* Description Panel */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.6 }}
-          >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeCard.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-              >
-                {/* Title */}
-                <div className="flex items-center gap-3 mb-6">
-                  <div
-                    className="w-4 h-4 rounded-full"
-                    style={{ backgroundColor: activeCard.color }}
-                  />
-                  <h3 className="text-xl sm:text-2xl font-bold text-slate-100">
-                    {activeCard.title} RiskPod
-                  </h3>
-                </div>
-
-                {/* Description */}
-                <p className="text-base sm:text-lg text-slate-400 leading-relaxed mb-6">
-                  {activeCard.description}
-                </p>
-
-                {/* Key Insight */}
-                <div className="bg-slate-800/50 border-l-4 rounded-r-lg p-4" style={{ borderColor: activeCard.color }}>
-                  <div className="text-xs text-slate-500 uppercase tracking-wide mb-1">Key Insight</div>
-                  <p className="text-slate-200 text-sm sm:text-base">{activeCard.keyInsight}</p>
-                </div>
-
-                {/* Quick Stats */}
-                <div className="grid grid-cols-3 gap-4 mt-8">
-                  <div className="text-center">
-                    <div className="text-xl sm:text-2xl font-bold font-mono text-slate-100">{activeCard.positions}</div>
-                    <div className="text-xs text-slate-500">Positions</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-xl sm:text-2xl font-bold font-mono text-rose-400">{activeCard.var95}</div>
-                    <div className="text-xs text-slate-500">VaR (95%)</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-xl sm:text-2xl font-bold font-mono text-slate-100">{activeCard.grossExposure}</div>
-                    <div className="text-xs text-slate-500">Gross</div>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </motion.div>
         </div>
 
-        {/* Bottom CTA */}
+        {/* Bottom Section */}
         <motion.div
           className="text-center mt-16"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.8 }}
+          transition={{ delay: 1.2 }}
         >
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8">
+            {[
+              'Regional Breakdown',
+              'Tenor Analysis',
+              'Credit Quality',
+              'Currency Exposure',
+              'VaR & CVaR',
+              'Hedge Recommendations',
+            ].map((feature, i) => (
+              <motion.span
+                key={feature}
+                className="px-3 py-1.5 bg-slate-800/50 border border-white/10 rounded-full text-xs sm:text-sm text-slate-400"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ delay: 1.3 + i * 0.05 }}
+              >
+                {feature}
+              </motion.span>
+            ))}
+          </div>
+
           <motion.a
             href="#early-access"
             className="inline-block px-4 py-2 bg-brand-blue text-white font-semibold text-sm rounded-[3px] transition-all duration-200 hover:bg-brand-blue/90 shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40"
@@ -545,6 +505,10 @@ export default function DashboardPreview() {
           >
             Book a Demo
           </motion.a>
+
+          <p className="text-slate-500 text-sm mt-4">
+            All data updates in real-time. Drill down to any position with one click.
+          </p>
         </motion.div>
       </div>
     </section>
