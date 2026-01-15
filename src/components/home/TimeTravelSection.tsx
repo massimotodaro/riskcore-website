@@ -33,7 +33,7 @@ function AnimatedDashboard() {
     >
       {/* Glow effect */}
       <motion.div
-        className="absolute inset-0 bg-emerald-500/20 rounded-2xl blur-2xl"
+        className="absolute inset-0 bg-brand-green/20 rounded-2xl blur-2xl"
         animate={{
           scale: [1, 1.2, 1],
           opacity: [0.3, 0.5, 0.3]
@@ -43,17 +43,17 @@ function AnimatedDashboard() {
 
       {/* Dashboard frame */}
       <motion.div
-        className="relative bg-slate-900/90 border border-emerald-500/30 rounded-2xl p-4 h-full
-                   shadow-[0_0_30px_rgba(16,185,129,0.2)]"
-        whileHover={{ borderColor: 'rgba(16,185,129,0.6)' }}
+        className="relative bg-bg-secondary/90 border border-brand-green/30 rounded-2xl p-4 h-full
+                   shadow-[0_0_30px_rgba(34,197,94,0.2)]"
+        whileHover={{ borderColor: 'rgba(34,197,94,0.6)' }}
       >
         {/* Time display - like the DeLorean's destination time */}
         <div className="text-center mb-3">
-          <div className="text-[10px] text-emerald-400/60 uppercase tracking-widest mb-1">
+          <div className="text-[10px] text-brand-green/60 uppercase tracking-widest mb-1">
             Destination Time
           </div>
           <motion.div
-            className="font-mono text-2xl font-bold text-emerald-400"
+            className="font-mono text-2xl font-bold text-brand-green"
             animate={{ opacity: [1, 0.7, 1] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           >
@@ -63,30 +63,30 @@ function AnimatedDashboard() {
 
         {/* Animated time selector mockup */}
         <motion.div
-          className="flex items-center justify-center gap-2 bg-slate-800/80 rounded-lg px-3 py-2 border border-white/10"
-          animate={{ boxShadow: ['0 0 0px #10b981', '0 0 15px #10b981', '0 0 0px #10b981'] }}
+          className="flex items-center justify-center gap-2 bg-bg-tertiary/80 rounded-lg px-3 py-2 border border-white/10 dark:border-white/10"
+          animate={{ boxShadow: ['0 0 0px #22c55e', '0 0 15px #22c55e', '0 0 0px #22c55e'] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
           <motion.span
-            className="w-2 h-2 rounded-full bg-emerald-400"
+            className="w-2 h-2 rounded-full bg-brand-green"
             animate={{ scale: [1, 1.3, 1] }}
             transition={{ duration: 1, repeat: Infinity }}
           />
-          <span className="text-sm text-slate-300">Last Friday Close</span>
-          <span className="text-slate-500 text-xs">▼</span>
+          <span className="text-sm text-text-muted">Last Friday Close</span>
+          <span className="text-text-dim text-xs">▼</span>
         </motion.div>
 
         {/* Calculate button */}
         <motion.button
-          className="w-full mt-3 py-2 bg-emerald-500/20 border border-emerald-500/40 rounded-lg
-                     text-emerald-400 text-sm font-semibold"
-          whileHover={{ backgroundColor: 'rgba(16,185,129,0.3)', scale: 1.02 }}
+          className="w-full mt-3 py-2 bg-brand-green/20 border border-brand-green/40 rounded-lg
+                     text-brand-green text-sm font-semibold"
+          whileHover={{ backgroundColor: 'rgba(34,197,94,0.3)', scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           animate={{
             boxShadow: [
-              '0 0 0px rgba(16,185,129,0)',
-              '0 0 20px rgba(16,185,129,0.4)',
-              '0 0 0px rgba(16,185,129,0)'
+              '0 0 0px rgba(34,197,94,0)',
+              '0 0 20px rgba(34,197,94,0.4)',
+              '0 0 0px rgba(34,197,94,0)'
             ]
           }}
           transition={{ duration: 2, repeat: Infinity, delay: 1 }}
@@ -115,7 +115,7 @@ function SpeedLines() {
       {[...Array(12)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute h-[1px] bg-gradient-to-r from-transparent via-emerald-400/40 to-transparent"
+          className="absolute h-[1px] bg-gradient-to-r from-transparent via-brand-green/40 to-transparent"
           style={{
             top: `${10 + i * 8}%`,
             left: '-100%',
@@ -196,16 +196,16 @@ function FeatureCard({ icon, title, description, delay }: FeatureCardProps) {
   return (
     <motion.div
       ref={ref}
-      className="bg-slate-800/50 backdrop-blur-sm border border-white/10 rounded-xl p-5
-                 hover:border-emerald-500/30 transition-colors"
+      className="bg-bg-tertiary/50 backdrop-blur-sm border border-white/10 dark:border-white/10 rounded-xl p-5
+                 hover:border-brand-green/30 transition-colors"
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay }}
       whileHover={{ scale: 1.02, y: -5 }}
     >
-      <div className="text-emerald-400 mb-3">{icon}</div>
-      <h4 className="text-lg font-semibold text-slate-100 mb-2">{title}</h4>
-      <p className="text-sm text-slate-400 leading-relaxed">{description}</p>
+      <div className="text-brand-green mb-3">{icon}</div>
+      <h4 className="text-lg font-semibold text-text-primary mb-2">{title}</h4>
+      <p className="text-sm text-text-muted leading-relaxed">{description}</p>
     </motion.div>
   )
 }
@@ -251,13 +251,13 @@ export default function TimeTravelSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 px-6 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"
+      className="relative py-24 px-6 overflow-hidden bg-bg-primary"
     >
       {/* Background effects */}
       <SpeedLines />
 
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-[120px]" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-[120px]" />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-green/5 rounded-full blur-[120px]" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-blue/5 rounded-full blur-[120px]" />
 
       <div className="relative max-w-6xl mx-auto">
         {/* Section Header */}
@@ -268,19 +268,19 @@ export default function TimeTravelSection() {
           transition={{ duration: 0.6 }}
         >
           <motion.h2
-            className="text-4xl md:text-5xl font-bold text-slate-100 mb-4"
+            className="text-4xl md:text-5xl font-bold text-text-primary mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.3 }}
           >
             Time Travel for{' '}
-            <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-brand-green to-brand-cyan bg-clip-text text-transparent">
               Risk Managers
             </span>
           </motion.h2>
 
           <motion.p
-            className="text-xl text-slate-400 max-w-2xl mx-auto"
+            className="text-xl text-text-muted max-w-2xl mx-auto"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.4 }}
@@ -303,15 +303,15 @@ export default function TimeTravelSection() {
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ delay: 0.6 }}
             >
-              <p className="text-2xl md:text-3xl font-medium text-slate-200 leading-relaxed mb-6">
+              <p className="text-2xl md:text-3xl font-medium text-text-primary leading-relaxed mb-6">
                 You&apos;re now officially the{' '}
                 <motion.span
-                  className="text-emerald-400 font-bold"
+                  className="text-brand-green font-bold"
                   animate={{
                     textShadow: [
-                      '0 0 0px #10b981',
-                      '0 0 20px #10b981',
-                      '0 0 0px #10b981'
+                      '0 0 0px #22c55e',
+                      '0 0 20px #22c55e',
+                      '0 0 0px #22c55e'
                     ]
                   }}
                   transition={{ duration: 2, repeat: Infinity }}
@@ -321,15 +321,15 @@ export default function TimeTravelSection() {
                 {' '}of Risk Management.
               </p>
 
-              <p className="text-lg text-slate-400 leading-relaxed mb-6">
+              <p className="text-lg text-text-muted leading-relaxed mb-6">
                 Instead of a DeLorean doing 88 mph, you&apos;ve got a dropdown doing{' '}
-                <span className="text-slate-200 font-mono">T-minus whatever-you-want</span>.
+                <span className="text-text-primary font-mono">T-minus whatever-you-want</span>.
               </p>
 
-              <p className="text-lg text-slate-400 leading-relaxed">
+              <p className="text-lg text-text-muted leading-relaxed">
                 Now you can finally answer the question that&apos;s been haunting you:{' '}
                 <motion.span
-                  className="text-emerald-400 font-semibold italic"
+                  className="text-brand-green font-semibold italic"
                   initial={{ opacity: 0 }}
                   animate={isInView ? { opacity: 1 } : {}}
                   transition={{ delay: 1.2 }}
@@ -347,8 +347,8 @@ export default function TimeTravelSection() {
               transition={{ delay: 1 }}
             >
               <motion.button
-                className="group flex items-center gap-3 px-6 py-3 bg-emerald-500 hover:bg-emerald-400
-                           rounded-xl text-slate-900 font-semibold text-lg transition-colors"
+                className="group flex items-center gap-3 px-6 py-3 bg-brand-green hover:bg-brand-green/90
+                           rounded-xl text-white font-semibold text-lg transition-colors shadow-lg shadow-brand-green/25"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -361,7 +361,7 @@ export default function TimeTravelSection() {
                   →
                 </motion.span>
               </motion.button>
-              <p className="text-sm text-slate-500 mt-3">
+              <p className="text-sm text-text-dim mt-3">
                 Flux capacitor not included. Calculate button works just as well.
               </p>
             </motion.div>
