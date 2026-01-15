@@ -92,7 +92,7 @@ export default function Hero() {
       {/* Main Container - 30% margins left and right */}
       <div className="relative z-10 w-full mx-[5%] lg:mx-[15%] pt-[20vh] flex flex-col lg:flex-row gap-8">
         {/* First Container - Text Content */}
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col pt-[8vh]">
           {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -112,7 +112,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg md:text-xl text-text-muted max-w-xl mb-8"
+            className="text-lg md:text-xl text-text-muted mb-8"
           >
             Keep your trading systems. Keep your PMs&apos; workflows. RISKCORE sits on top
             and gives you the <span className="text-text-primary font-medium">firm-wide view you&apos;ve never had</span>.
