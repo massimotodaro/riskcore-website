@@ -4,14 +4,20 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { ChevronRight, Github, Play } from 'lucide-react'
 
+// Import all dashboard variations - swap the import to try different versions
+// import { AnimatedDashboardV1 as AnimatedDashboard } from '../hero'
+// import { AnimatedDashboardV2 as AnimatedDashboard } from '../hero'
+import { AnimatedDashboardV3 as AnimatedDashboard } from '../hero'
+// import { AnimatedDashboardV4 as AnimatedDashboard } from '../hero'
+
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20 pb-10">
       {/* Background Effects */}
       <div className="absolute inset-0">
         {/* Grid pattern */}
         <div
-          className="absolute inset-0 opacity-20"
+          className="absolute inset-0 opacity-20 dark:opacity-20"
           style={{
             backgroundImage: `radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.3) 1px, transparent 0)`,
             backgroundSize: '40px 40px',
@@ -100,7 +106,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
         >
           <Link
             href="#early-access"
@@ -113,7 +119,7 @@ export default function Hero() {
             href="https://github.com/massimotodaro/riskcore"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent border border-white/20 text-text-primary font-semibold rounded-lg transition-all duration-200 hover:border-white/40 hover:bg-white/5 text-lg"
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent border border-white/20 dark:border-white/20 text-text-primary font-semibold rounded-lg transition-all duration-200 hover:border-white/40 hover:bg-white/5 text-lg"
           >
             <Github className="w-5 h-5" />
             Star on GitHub
@@ -125,7 +131,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="flex items-center justify-center gap-3 text-text-muted"
+          className="flex items-center justify-center gap-3 text-text-muted mb-16"
         >
           <button className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 transition-all">
             <Play className="w-5 h-5 text-text-primary ml-0.5" />
@@ -134,11 +140,21 @@ export default function Hero() {
         </motion.div>
       </div>
 
+      {/* Animated Dashboard */}
+      <motion.div
+        initial={{ opacity: 0, y: 60 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+      >
+        <AnimatedDashboard />
+      </motion.div>
+
       {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
+        transition={{ delay: 2 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
         <motion.div
