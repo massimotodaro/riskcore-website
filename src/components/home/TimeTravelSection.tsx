@@ -251,7 +251,7 @@ export default function TimeTravelSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 px-6 overflow-hidden bg-bg-primary"
+      className="relative py-24 px-6 overflow-hidden bg-[linear-gradient(to_bottom,#f8fafc,#f1f5f9)] dark:bg-bg-primary"
     >
       {/* Background effects */}
       <SpeedLines />
