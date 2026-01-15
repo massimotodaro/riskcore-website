@@ -107,7 +107,7 @@ export default function Header() {
               href="#early-access"
               className="btn-primary text-sm"
             >
-              Get Early Access
+              Book a Demo
               <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
@@ -183,7 +183,7 @@ export default function Header() {
               className="btn-primary w-full justify-center text-base"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Get Early Access
+              Book a Demo
               <ChevronRight className="w-4 h-4" />
             </Link>
           </div>

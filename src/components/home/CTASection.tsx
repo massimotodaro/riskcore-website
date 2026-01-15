@@ -126,7 +126,7 @@ export default function CTASection() {
                     </svg>
                   ) : (
                     <>
-                      Get Access
+                      Book a Demo
                       <ChevronRight className="w-5 h-5" />
                     </>
                   )}

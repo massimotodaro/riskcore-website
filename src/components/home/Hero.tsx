@@ -123,26 +123,25 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="max-w-md"
           >
             {status === 'success' ? (
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="flex items-center gap-2 py-4 px-6 bg-brand-green/10 border border-brand-green/20 rounded-xl"
+                className="flex items-center gap-2 py-4 px-6 bg-brand-green/10 border border-brand-green/20 rounded-[3px]"
               >
                 <span className="w-2 h-2 rounded-full bg-brand-green" />
                 <span className="text-brand-green font-medium">{message}</span>
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
-                <div className="flex-[2] relative">
+                <div className="flex-1 relative">
                   <input
                     type="email"
                     placeholder="Work email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-5 py-3 bg-white/5 border border-white/10 rounded-xl text-text-primary placeholder:text-text-dim focus:outline-none focus:border-brand-blue/50 focus:ring-2 focus:ring-brand-blue/20 transition-all text-base"
+                    className="w-full px-5 py-3 bg-white/5 border border-white/10 rounded-[3px] text-text-primary placeholder:text-text-dim focus:outline-none focus:border-brand-blue/50 focus:ring-2 focus:ring-brand-blue/20 transition-all text-base"
                     required
                     disabled={status === 'loading'}
                   />
@@ -150,7 +149,7 @@ export default function Hero() {
                 <button
                   type="submit"
                   disabled={status === 'loading'}
-                  className="group inline-flex items-center justify-center gap-2 px-6 py-3 bg-brand-blue text-white font-semibold rounded-xl transition-all duration-200 hover:bg-brand-blue/90 shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40 text-base disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+                  className="group inline-flex items-center justify-center gap-2 px-6 py-3 bg-brand-blue text-white font-semibold rounded-[3px] transition-all duration-200 hover:bg-brand-blue/90 shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40 text-base disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
                 >
                   {status === 'loading' ? (
                     <>
@@ -158,11 +157,11 @@ export default function Hero() {
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                       </svg>
-                      <span>Joining...</span>
+                      <span>Booking...</span>
                     </>
                   ) : (
                     <>
-                      Subscribe
+                      Book a Demo
                       <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                     </>
                   )}
