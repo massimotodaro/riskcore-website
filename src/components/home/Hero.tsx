@@ -158,10 +158,7 @@ export default function Hero() {
                       <span>Booking...</span>
                     </>
                   ) : (
-                    <>
-                      Book a Demo
-                      <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                    </>
+                    'Book a Demo'
                   )}
                 </button>
               </form>
