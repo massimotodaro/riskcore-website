@@ -16,17 +16,271 @@
  *   npm install framer-motion
  */
 
-import { useRef, useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { motion, useInView, useAnimation } from 'framer-motion'
 
 // ==============================================
-// ANIMATED DELOREAN / DASHBOARD ICON
+// HELPER FUNCTIONS
+// ==============================================
+
+const MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+const FULL_MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+function formatDateDisplay(date: Date): string {
+  const month = MONTHS[date.getMonth()]
+  const day = date.getDate().toString().padStart(2, '0')
+  const year = date.getFullYear()
+  const hours = date.getHours().toString().padStart(2, '0')
+  const minutes = date.getMinutes().toString().padStart(2, '0')
+  return `${month} ${day} ${year} ${hours}:${minutes}`
+}
+
+function getDaysInMonth(year: number, month: number): number {
+  return new Date(year, month + 1, 0).getDate()
+}
+
+function getFirstDayOfMonth(year: number, month: number): number {
+  return new Date(year, month, 1).getDay()
+}
+
+// ==============================================
+// CALENDAR PICKER COMPONENT
+// ==============================================
+
+interface CalendarPickerProps {
+  selectedDate: Date
+  onDateSelect: (date: Date) => void
+  onClose: () => void
+}
+
+function CalendarPicker({ selectedDate, onDateSelect, onClose }: CalendarPickerProps) {
+  const [viewDate, setViewDate] = useState(new Date(selectedDate))
+  const [selectedHour, setSelectedHour] = useState(selectedDate.getHours())
+  const [selectedMinute, setSelectedMinute] = useState(selectedDate.getMinutes())
+
+  const year = viewDate.getFullYear()
+  const month = viewDate.getMonth()
+  const daysInMonth = getDaysInMonth(year, month)
+  const firstDay = getFirstDayOfMonth(year, month)
+
+  const prevMonth = () => {
+    setViewDate(new Date(year, month - 1, 1))
+  }
+
+  const nextMonth = () => {
+    setViewDate(new Date(year, month + 1, 1))
+  }
+
+  const handleDayClick = (day: number) => {
+    const newDate = new Date(year, month, day, selectedHour, selectedMinute)
+    onDateSelect(newDate)
+  }
+
+  const handleTimeChange = (hours: number, minutes: number) => {
+    setSelectedHour(hours)
+    setSelectedMinute(minutes)
+    const newDate = new Date(
+      selectedDate.getFullYear(),
+      selectedDate.getMonth(),
+      selectedDate.getDate(),
+      hours,
+      minutes
+    )
+    onDateSelect(newDate)
+  }
+
+  // Generate calendar days
+  const days: (number | null)[] = []
+  for (let i = 0; i < firstDay; i++) {
+    days.push(null)
+  }
+  for (let i = 1; i <= daysInMonth; i++) {
+    days.push(i)
+  }
+
+  const isToday = (day: number) => {
+    const today = new Date()
+    return day === today.getDate() && month === today.getMonth() && year === today.getFullYear()
+  }
+
+  const isSelected = (day: number) => {
+    return day === selectedDate.getDate() && month === selectedDate.getMonth() && year === selectedDate.getFullYear()
+  }
+
+  return (
+    <motion.div
+      className="absolute top-full left-0 right-0 mt-2 bg-slate-900 border border-emerald-500/30 rounded-xl p-3 shadow-2xl z-50"
+      initial={{ opacity: 0, y: -10, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: -10, scale: 0.95 }}
+      transition={{ duration: 0.2 }}
+    >
+      {/* Month Navigation */}
+      <div className="flex items-center justify-between mb-3">
+        <button
+          onClick={prevMonth}
+          className="p-1 hover:bg-slate-800 rounded text-slate-400 hover:text-emerald-400 transition-colors"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <span className="text-sm font-semibold text-slate-200">
+          {FULL_MONTHS[month]} {year}
+        </span>
+        <button
+          onClick={nextMonth}
+          className="p-1 hover:bg-slate-800 rounded text-slate-400 hover:text-emerald-400 transition-colors"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Day Headers */}
+      <div className="grid grid-cols-7 gap-1 mb-1">
+        {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => (
+          <div key={i} className="text-[10px] text-slate-500 text-center font-medium py-1">
+            {day}
+          </div>
+        ))}
+      </div>
+
+      {/* Calendar Grid */}
+      <div className="grid grid-cols-7 gap-1 mb-3">
+        {days.map((day, i) => (
+          <button
+            key={i}
+            disabled={day === null}
+            onClick={() => day && handleDayClick(day)}
+            className={`
+              text-[11px] py-1.5 rounded transition-all
+              ${day === null ? 'invisible' : 'hover:bg-emerald-500/20'}
+              ${day && isToday(day) ? 'ring-1 ring-emerald-500/50' : ''}
+              ${day && isSelected(day)
+                ? 'bg-emerald-500 text-slate-900 font-bold'
+                : 'text-slate-300'
+              }
+            `}
+          >
+            {day}
+          </button>
+        ))}
+      </div>
+
+      {/* Time Selector */}
+      <div className="border-t border-white/10 pt-3">
+        <div className="flex items-center justify-center gap-2">
+          <span className="text-[10px] text-slate-500 uppercase">Time:</span>
+          <select
+            value={selectedHour}
+            onChange={(e) => handleTimeChange(parseInt(e.target.value), selectedMinute)}
+            className="bg-slate-800 border border-white/10 rounded px-2 py-1 text-xs text-slate-200 focus:border-emerald-500/50 focus:outline-none"
+          >
+            {Array.from({ length: 24 }, (_, i) => (
+              <option key={i} value={i}>{i.toString().padStart(2, '0')}</option>
+            ))}
+          </select>
+          <span className="text-slate-400">:</span>
+          <select
+            value={selectedMinute}
+            onChange={(e) => handleTimeChange(selectedHour, parseInt(e.target.value))}
+            className="bg-slate-800 border border-white/10 rounded px-2 py-1 text-xs text-slate-200 focus:border-emerald-500/50 focus:outline-none"
+          >
+            {Array.from({ length: 60 }, (_, i) => (
+              <option key={i} value={i}>{i.toString().padStart(2, '0')}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      {/* Quick Presets */}
+      <div className="border-t border-white/10 pt-3 mt-3">
+        <div className="grid grid-cols-2 gap-2">
+          {[
+            { label: 'Now', getValue: () => new Date() },
+            { label: 'Yesterday Close', getValue: () => {
+              const d = new Date()
+              d.setDate(d.getDate() - 1)
+              d.setHours(16, 0, 0, 0)
+              return d
+            }},
+            { label: 'Last Friday', getValue: () => {
+              const d = new Date()
+              const day = d.getDay()
+              const diff = day === 0 ? 2 : day === 6 ? 1 : day + 2
+              d.setDate(d.getDate() - diff)
+              d.setHours(16, 0, 0, 0)
+              return d
+            }},
+            { label: 'Month Start', getValue: () => {
+              const d = new Date()
+              d.setDate(1)
+              d.setHours(9, 30, 0, 0)
+              return d
+            }},
+          ].map((preset) => (
+            <button
+              key={preset.label}
+              onClick={() => {
+                const newDate = preset.getValue()
+                setViewDate(newDate)
+                setSelectedHour(newDate.getHours())
+                setSelectedMinute(newDate.getMinutes())
+                onDateSelect(newDate)
+              }}
+              className="text-[10px] py-1.5 px-2 bg-slate-800/80 hover:bg-emerald-500/20 border border-white/10
+                         hover:border-emerald-500/30 rounded text-slate-300 hover:text-emerald-400 transition-all"
+            >
+              {preset.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Close hint */}
+      <div className="text-center mt-3">
+        <button
+          onClick={onClose}
+          className="text-[10px] text-slate-500 hover:text-emerald-400 transition-colors"
+        >
+          Click outside to close
+        </button>
+      </div>
+    </motion.div>
+  )
+}
+
+// ==============================================
+// ANIMATED TIME TRAVEL DASHBOARD
 // ==============================================
 
 function AnimatedDashboard() {
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date())
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  // Initialize with current date on mount
+  useEffect(() => {
+    setSelectedDate(new Date())
+  }, [])
+
+  // Close calendar when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setIsCalendarOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
   return (
     <motion.div
-      className="relative w-64 h-40"
+      ref={containerRef}
+      className="relative w-72"
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8, delay: 0.3 }}
@@ -43,44 +297,64 @@ function AnimatedDashboard() {
 
       {/* Dashboard frame */}
       <motion.div
-        className="relative bg-slate-900/90 border border-emerald-500/30 rounded-2xl p-4 h-full
+        className="relative bg-slate-900/90 border border-emerald-500/30 rounded-2xl p-4
                    shadow-[0_0_30px_rgba(16,185,129,0.2)]"
         whileHover={{ borderColor: 'rgba(16,185,129,0.6)' }}
       >
-        {/* Time display - like the DeLorean's destination time */}
+        {/* Date/Time Display */}
         <div className="text-center mb-3">
-          <div className="text-[10px] text-emerald-400/60 uppercase tracking-widest mb-1">
-            Destination Time
-          </div>
           <motion.div
             className="font-mono text-2xl font-bold text-emerald-400"
             animate={{ opacity: [1, 0.7, 1] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           >
-            JAN 10 2026 14:32
+            {formatDateDisplay(selectedDate)}
           </motion.div>
         </div>
 
-        {/* Animated time selector mockup */}
-        <motion.div
-          className="flex items-center justify-center gap-2 bg-slate-800/80 rounded-lg px-3 py-2 border border-white/10"
-          animate={{ boxShadow: ['0 0 0px #10b981', '0 0 15px #10b981', '0 0 0px #10b981'] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <motion.span
-            className="w-2 h-2 rounded-full bg-emerald-400"
-            animate={{ scale: [1, 1.3, 1] }}
-            transition={{ duration: 1, repeat: Infinity }}
-          />
-          <span className="text-sm text-slate-300">Last Friday Close</span>
-          <span className="text-slate-500 text-xs">▼</span>
-        </motion.div>
+        {/* Interactive Time Selector */}
+        <div className="relative">
+          <motion.button
+            onClick={() => setIsCalendarOpen(!isCalendarOpen)}
+            className="w-full flex items-center justify-center gap-2 bg-slate-800/80 rounded-lg px-3 py-2 border border-white/10
+                       hover:border-emerald-500/30 transition-colors cursor-pointer"
+            animate={!isCalendarOpen ? {
+              boxShadow: ['0 0 0px #10b981', '0 0 15px #10b981', '0 0 0px #10b981']
+            } : {}}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <motion.span
+              className="w-2 h-2 rounded-full bg-emerald-400"
+              animate={{ scale: [1, 1.3, 1] }}
+              transition={{ duration: 1, repeat: Infinity }}
+            />
+            <span className="text-sm text-slate-300">
+              {isCalendarOpen ? 'Select Date & Time' : 'Change Date & Time'}
+            </span>
+            <motion.span
+              className="text-slate-500 text-xs"
+              animate={{ rotate: isCalendarOpen ? 180 : 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              ▼
+            </motion.span>
+          </motion.button>
+
+          {/* Calendar Dropdown */}
+          {isCalendarOpen && (
+            <CalendarPicker
+              selectedDate={selectedDate}
+              onDateSelect={(date) => setSelectedDate(date)}
+              onClose={() => setIsCalendarOpen(false)}
+            />
+          )}
+        </div>
 
         {/* Calculate button */}
         <motion.button
           className="w-full mt-3 py-2 bg-emerald-500/20 border border-emerald-500/40 rounded-lg
-                     text-emerald-400 text-sm font-semibold"
-          whileHover={{ backgroundColor: 'rgba(16,185,129,0.3)', scale: 1.02 }}
+                     text-emerald-400 text-sm font-semibold hover:bg-emerald-500/30 transition-colors"
+          whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           animate={{
             boxShadow: [
@@ -251,7 +525,8 @@ export default function TimeTravelSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 px-6 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"
+      className="relative py-24 px-6 overflow-hidden"
+      style={{ background: 'linear-gradient(to bottom, #151E31, #10182B)' }}
     >
       {/* Background effects */}
       <SpeedLines />
