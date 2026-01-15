@@ -930,14 +930,8 @@ export default function DashboardPreview() {
                 {/* Description */}
                 <p className="text-lg text-slate-400 leading-relaxed mb-6">{activeCard.description}</p>
 
-                {/* Key Insight */}
-                <div className="bg-slate-800/50 border-l-4 rounded-r-lg p-4" style={{ borderColor: activeCard.color }}>
-                  <div className="text-xs text-slate-500 uppercase tracking-wide mb-1">Key Insight</div>
-                  <p className="text-slate-200">{activeCard.keyInsight}</p>
-                </div>
-
                 {/* Quick Stats */}
-                <div className="grid grid-cols-3 gap-4 mt-8">
+                <div className="grid grid-cols-3 gap-4">
                   <div className="text-center">
                     <div className="text-2xl font-bold font-mono text-slate-100">{activeCard.positions}</div>
                     <div className="text-xs text-slate-500">Positions</div>
