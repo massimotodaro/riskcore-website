@@ -12,8 +12,8 @@ export default function Home() {
     <>
       <Hero />
       <TimeTravelSection />
-      <TrustBadges />
       <DashboardPreview />
+      <TrustBadges />
       <Features />
       <CTASection />
     </>
