@@ -392,6 +392,7 @@ interface MiniRiskCardProps {
   isUp: boolean
   metrics: { label: string; value: string }[]
   rows: DataRow[]
+  riskParam: string
   barPercentage: number
   delay: number
 }
@@ -404,6 +405,7 @@ function MiniRiskCard({
   isUp,
   metrics,
   rows,
+  riskParam,
   barPercentage,
   delay
 }: MiniRiskCardProps) {
@@ -416,29 +418,29 @@ function MiniRiskCard({
 
   return (
     <motion.div
-      className="bg-slate-800/60 backdrop-blur-sm border border-white/10 rounded-xl p-4 min-w-[240px] flex-shrink-0 flex flex-col"
-      initial={{ opacity: 0, y: 30, scale: 0.9 }}
+      className="bg-slate-800/60 backdrop-blur-sm border border-white/10 rounded-lg p-2 flex flex-col h-full"
+      initial={{ opacity: 0, y: 20, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ delay, duration: 0.5, type: 'spring' }}
+      transition={{ delay, duration: 0.4, type: 'spring' }}
       whileHover={{
         scale: 1.02,
-        boxShadow: `0 0 30px ${color}20`,
+        boxShadow: `0 0 20px ${color}20`,
         borderColor: `${color}40`
       }}
     >
       {/* Header */}
-      <div className="flex items-center justify-between mb-3">
-        <span className="font-bold tracking-wide" style={{ color }}>{title}</span>
-        <span className={`text-xs font-medium ${isUp ? 'text-emerald-400' : 'text-rose-400'}`}>
+      <div className="flex items-center justify-between mb-1">
+        <span className="text-xs font-bold tracking-wide" style={{ color }}>{title}</span>
+        <span className={`text-[9px] font-medium ${isUp ? 'text-emerald-400' : 'text-rose-400'}`}>
           {isUp ? '▲' : '▼'} {change}
         </span>
       </div>
 
       {/* Primary Metric */}
-      <div className="mb-3">
-        <div className="text-xs text-slate-500 mb-1">Net Exposure</div>
+      <div className="mb-1">
+        <div className="text-[9px] text-slate-500">Net Exposure</div>
         <motion.div
-          className="text-2xl font-bold font-mono text-slate-100"
+          className="text-base font-bold font-mono text-slate-100"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: delay + 0.3 }}
@@ -447,7 +449,7 @@ function MiniRiskCard({
         </motion.div>
 
         {/* Animated Bar */}
-        <div className="h-1 bg-slate-700 rounded-full mt-2 overflow-hidden">
+        <div className="h-0.5 bg-slate-700 rounded-full mt-0.5 overflow-hidden">
           <motion.div
             className="h-full rounded-full"
             style={{
@@ -462,25 +464,25 @@ function MiniRiskCard({
       </div>
 
       {/* Data Rows Table */}
-      <div className="flex-1 mb-3">
+      <div className="flex-1 min-h-0">
         <div
-          className="grid grid-cols-3 gap-1 px-2 py-1 text-[9px] font-semibold uppercase tracking-wider rounded-t"
+          className="grid grid-cols-3 gap-0.5 px-1 py-0.5 text-[7px] font-semibold uppercase tracking-wider rounded-t"
           style={{ backgroundColor: `${color}15`, color: color }}
         >
           <span></span>
           <span className="text-center">%</span>
-          <span className="text-center">Delta</span>
+          <span className="text-center">{riskParam}</span>
         </div>
-        <div className="bg-slate-900/40 rounded-b divide-y divide-white/5">
-          {rows.map((row, i) => (
+        <div className="bg-slate-900/40 rounded-b">
+          {rows.slice(0, 3).map((row, i) => (
             <motion.div
               key={row.label}
-              className="grid grid-cols-3 gap-1 px-2 py-1.5 text-[10px] hover:bg-white/5 transition-colors"
+              className="grid grid-cols-3 gap-0.5 px-1 py-px text-[8px] hover:bg-white/5 transition-colors border-b border-white/5 last:border-0"
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: delay + 0.6 + i * 0.08 }}
+              transition={{ delay: delay + 0.6 + i * 0.06 }}
             >
-              <span className="text-slate-400 font-medium">{row.label}</span>
+              <span className="text-slate-400 font-medium truncate">{row.label}</span>
               <span className="text-center font-mono text-slate-300">{row.pct}</span>
               <span className="text-center font-mono text-slate-300">{row.value}</span>
             </motion.div>
@@ -488,8 +490,8 @@ function MiniRiskCard({
         </div>
       </div>
 
-      {/* Mini Metrics */}
-      <div className="grid grid-cols-3 gap-2 pt-2 border-t border-white/5">
+      {/* Mini Metrics - Fixed at bottom */}
+      <div className="grid grid-cols-3 gap-0.5 pt-1 mt-1 border-t border-white/5">
         {metrics.map((metric, i) => (
           <motion.div
             key={metric.label}
@@ -498,8 +500,8 @@ function MiniRiskCard({
             animate={{ opacity: 1 }}
             transition={{ delay: delay + 0.4 + i * 0.1 }}
           >
-            <div className="text-[10px] text-slate-500 uppercase">{metric.label}</div>
-            <div className="text-xs font-mono text-slate-300">{metric.value}</div>
+            <div className="text-[7px] text-slate-500 uppercase leading-tight">{metric.label}</div>
+            <div className="text-[9px] font-mono text-slate-300 leading-tight">{metric.value}</div>
           </motion.div>
         ))}
       </div>
@@ -519,6 +521,7 @@ export default function AnimatedRiskboard() {
       netNumber: 42.5,
       change: '+1.2%',
       isUp: true,
+      riskParam: 'Delta',
       metrics: [
         { label: 'Beta', value: '1.15' },
         { label: 'Vega', value: '$280K' },
@@ -539,6 +542,7 @@ export default function AnimatedRiskboard() {
       netNumber: 120,
       change: '-0.8%',
       isUp: false,
+      riskParam: 'DV01',
       metrics: [
         { label: 'DV01', value: '$85K' },
         { label: 'Duration', value: '4.2Y' },
@@ -558,6 +562,7 @@ export default function AnimatedRiskboard() {
       netNumber: 72,
       change: '-1.2%',
       isUp: false,
+      riskParam: 'CS01',
       metrics: [
         { label: 'CS01', value: '$42K' },
         { label: 'Cr.Dur', value: '3.8Y' },
@@ -578,6 +583,7 @@ export default function AnimatedRiskboard() {
       netNumber: 18.2,
       change: '+0.4%',
       isUp: true,
+      riskParam: 'Delta',
       metrics: [
         { label: 'Delta', value: '$18.2M' },
         { label: 'Vega', value: '$320K' },
@@ -598,6 +604,7 @@ export default function AnimatedRiskboard() {
       netNumber: 28.5,
       change: '+1.5%',
       isUp: true,
+      riskParam: 'Exp',
       metrics: [
         { label: 'P.Sens', value: '$285K' },
         { label: 'Basis', value: '$45K' },
@@ -618,6 +625,7 @@ export default function AnimatedRiskboard() {
       netNumber: 8.2,
       change: '-0.2%',
       isUp: false,
+      riskParam: 'Value',
       metrics: [
         { label: 'VaR', value: '$340K' },
         { label: 'CVaR', value: '$520K' },
@@ -646,7 +654,7 @@ export default function AnimatedRiskboard() {
         <div className="absolute bottom-1/4 right-1/4 w-[250px] h-[250px] bg-purple-500/10 rounded-full blur-[80px]" />
       </motion.div>
 
-      {/* Main Container with 3D Perspective */}
+      {/* Main Container with 3D Perspective - 3:2 Aspect Ratio */}
       <motion.div
         className="rounded-2xl overflow-hidden border border-white/10 bg-slate-900/80 backdrop-blur-xl shadow-2xl"
         initial={{ opacity: 0, rotateX: 10, rotateY: -5, scale: 0.9 }}
@@ -654,7 +662,8 @@ export default function AnimatedRiskboard() {
         transition={{ duration: 0.8, ease: 'easeOut' }}
         style={{
           transformStyle: 'preserve-3d',
-          perspective: '1000px'
+          perspective: '1000px',
+          aspectRatio: '3 / 2',
         }}
         whileHover={{
           rotateX: 2,
@@ -662,7 +671,7 @@ export default function AnimatedRiskboard() {
           transition: { duration: 0.3 }
         }}
       >
-        <div className="flex h-[500px]">
+        <div className="flex h-full">
           {/* Sidebar */}
           <AnimatedSidebar />
 
@@ -677,39 +686,19 @@ export default function AnimatedRiskboard() {
             {/* Summary Strip */}
             <SummaryStrip />
 
-            {/* Risk Cards Row */}
+            {/* Risk Cards Grid - 2 rows of 3 */}
             <motion.div
-              className="flex-1 p-4 overflow-x-auto riskboard-scrollbar"
+              className="flex-1 p-4 overflow-hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1 }}
-              style={{
-                scrollbarWidth: 'thin',
-                scrollbarColor: '#334155 #0f172a',
-              }}
             >
-              <style>{`
-                .riskboard-scrollbar::-webkit-scrollbar {
-                  height: 6px;
-                }
-                .riskboard-scrollbar::-webkit-scrollbar-track {
-                  background: #0f172a;
-                  border-radius: 3px;
-                }
-                .riskboard-scrollbar::-webkit-scrollbar-thumb {
-                  background: linear-gradient(90deg, #334155, #475569);
-                  border-radius: 3px;
-                }
-                .riskboard-scrollbar::-webkit-scrollbar-thumb:hover {
-                  background: linear-gradient(90deg, #475569, #64748b);
-                }
-              `}</style>
-              <div className="flex gap-4 h-full">
+              <div className="grid grid-cols-3 grid-rows-2 gap-3 h-full">
                 {riskCards.map((card, index) => (
                   <MiniRiskCard
                     key={card.title}
                     {...card}
-                    delay={2.8 + index * 0.15}
+                    delay={2.8 + index * 0.12}
                   />
                 ))}
               </div>
