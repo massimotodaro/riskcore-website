@@ -107,62 +107,81 @@ const pipelineStages: PipelineStage[] = [
 ]
 
 // ==============================================
-// CONNECTING ARROW COMPONENT
+// CURVED ARROWS OVERLAY COMPONENT
 // ==============================================
 
-interface ConnectingArrowProps {
-  fromColor: string
-  toColor: string
-  index: number
+interface CurvedArrowsProps {
   isInView: boolean
 }
 
-function ConnectingArrow({ fromColor, toColor, index, isInView }: ConnectingArrowProps) {
+function CurvedArrows({ isInView }: CurvedArrowsProps) {
+  const arrows = [
+    { from: '#3b82f6', to: '#22c55e' },  // Ingest -> Normalize
+    { from: '#22c55e', to: '#a855f7' },  // Normalize -> Aggregate
+    { from: '#a855f7', to: '#06b6d4' },  // Aggregate -> Analyze
+    { from: '#06b6d4', to: '#eab308' },  // Analyze -> Act
+  ]
+
   return (
-    <div className="hidden lg:flex absolute top-6 -right-3 w-6 h-8 items-center justify-center z-10">
+    <div className="hidden lg:block absolute top-0 left-0 right-0 h-12 z-20 pointer-events-none">
       <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
+        className="w-full h-full"
+        viewBox="0 0 1000 48"
+        preserveAspectRatio="none"
         fill="none"
-        className="overflow-visible"
       >
         <defs>
-          <linearGradient id={`arrow-gradient-${index}`} x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor={fromColor} />
-            <stop offset="100%" stopColor={toColor} />
-          </linearGradient>
+          {arrows.map((arrow, i) => (
+            <linearGradient key={i} id={`curve-gradient-${i}`} x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor={arrow.from} />
+              <stop offset="100%" stopColor={arrow.to} />
+            </linearGradient>
+          ))}
         </defs>
-        {/* Arrow line */}
-        <motion.path
-          d="M0 12 L16 12"
-          stroke={`url(#arrow-gradient-${index})`}
-          strokeWidth="2"
-          strokeLinecap="round"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={isInView ? { pathLength: 1, opacity: 1 } : {}}
-          transition={{
-            duration: 0.5,
-            delay: 0.5 + index * 0.15,
-            ease: "easeOut"
-          }}
-        />
-        {/* Arrow head */}
-        <motion.path
-          d="M14 8 L20 12 L14 16"
-          stroke={toColor}
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-          initial={{ opacity: 0, x: -5 }}
-          animate={isInView ? { opacity: 1, x: 0 } : {}}
-          transition={{
-            duration: 0.3,
-            delay: 0.8 + index * 0.15,
-            ease: "easeOut"
-          }}
-        />
+
+        {arrows.map((arrow, i) => {
+          // Calculate positions: each card takes 20% width, arrows go from badge to badge
+          const startX = 100 + i * 200 + 16  // Start after badge center
+          const endX = 100 + (i + 1) * 200 - 16  // End before next badge center
+          const midX = (startX + endX) / 2
+          const curveHeight = -20  // Negative for upward curve (convex)
+
+          return (
+            <g key={i}>
+              {/* Curved line */}
+              <motion.path
+                d={`M ${startX} 40 Q ${midX} ${40 + curveHeight} ${endX} 40`}
+                stroke={`url(#curve-gradient-${i})`}
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                fill="none"
+                initial={{ pathLength: 0, opacity: 0 }}
+                animate={isInView ? { pathLength: 1, opacity: 1 } : {}}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.6 + i * 0.2,
+                  ease: "easeOut"
+                }}
+              />
+              {/* Arrow head */}
+              <motion.path
+                d={`M ${endX - 8} ${36} L ${endX + 2} ${40} L ${endX - 8} ${44}`}
+                stroke={arrow.to}
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                fill="none"
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : {}}
+                transition={{
+                  duration: 0.3,
+                  delay: 1.0 + i * 0.2,
+                  ease: "easeOut"
+                }}
+              />
+            </g>
+          )
+        })}
       </svg>
     </div>
   )
@@ -175,11 +194,9 @@ function ConnectingArrow({ fromColor, toColor, index, isInView }: ConnectingArro
 interface StageCardProps {
   stage: PipelineStage
   index: number
-  nextStageColor?: string
-  isInView: boolean
 }
 
-function StageCard({ stage, index, nextStageColor, isInView }: StageCardProps) {
+function StageCard({ stage, index }: StageCardProps) {
   return (
     <motion.div
       className="relative"
@@ -188,23 +205,13 @@ function StageCard({ stage, index, nextStageColor, isInView }: StageCardProps) {
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
     >
-      {/* Connecting Arrow */}
-      {nextStageColor && (
-        <ConnectingArrow
-          fromColor={stage.color}
-          toColor={nextStageColor}
-          index={index}
-          isInView={isInView}
-        />
-      )}
-
       <motion.div
-        className="relative w-full text-left p-4 sm:p-6 rounded-2xl border transition-all bg-slate-900/50 border-white/5 hover:border-white/10 h-full"
+        className="relative w-full text-left p-4 sm:p-6 pt-8 sm:pt-10 rounded-2xl border transition-all bg-slate-900/50 border-white/5 hover:border-white/10 h-full"
         whileHover={{ y: -5 }}
       >
-        {/* Stage Number */}
+        {/* Stage Number - positioned higher for arrow space */}
         <div
-          className="absolute -top-3 -left-2 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold"
+          className="absolute -top-4 left-4 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold z-10"
           style={{ backgroundColor: stage.color, color: '#0f172a' }}
         >
           {stage.number}
@@ -280,17 +287,21 @@ export default function Features() {
           </motion.p>
         </motion.div>
 
-        {/* Pipeline Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
-          {pipelineStages.map((stage, index) => (
-            <StageCard
-              key={stage.id}
-              stage={stage}
-              index={index}
-              nextStageColor={index < pipelineStages.length - 1 ? pipelineStages[index + 1].color : undefined}
-              isInView={isInView}
-            />
-          ))}
+        {/* Pipeline Grid with Arrows */}
+        <div className="relative lg:pt-8">
+          {/* Curved Arrows Overlay - desktop only */}
+          <CurvedArrows isInView={isInView} />
+
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 lg:mt-4">
+            {pipelineStages.map((stage, index) => (
+              <StageCard
+                key={stage.id}
+                stage={stage}
+                index={index}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Bottom Message */}
