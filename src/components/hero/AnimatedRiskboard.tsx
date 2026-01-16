@@ -779,7 +779,7 @@ export default function AnimatedRiskboard() {
         <div className="absolute bottom-1/4 right-1/4 w-[250px] h-[250px] bg-purple-500/10 rounded-full blur-[80px]" />
       </motion.div>
 
-      {/* Main Container - 3:2 Aspect Ratio */}
+      {/* Main Container - 16:9 Aspect Ratio (shorter to show partial cards) */}
       <motion.div
         className="rounded-2xl overflow-hidden border border-white/10 bg-slate-900/80 backdrop-blur-xl shadow-2xl"
         initial={{ opacity: 0, rotateX: 10, rotateY: -5, scale: 0.9 }}
@@ -788,7 +788,7 @@ export default function AnimatedRiskboard() {
         style={{
           transformStyle: 'preserve-3d',
           perspective: '1000px',
-          aspectRatio: '3 / 2',
+          aspectRatio: '16 / 9',
         }}
         whileHover={{ rotateX: 1, rotateY: 1, transition: { duration: 0.3 } }}
       >

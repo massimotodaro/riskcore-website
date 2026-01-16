@@ -52,7 +52,7 @@ export default function CTASection() {
       className="relative py-16 md:py-20 px-4 sm:px-6 overflow-hidden"
       style={{ background: 'linear-gradient(to bottom, #151E31, #0a0f1a)' }}
     >
-      <div className="relative max-w-2xl mx-auto">
+      <div className="relative max-w-4xl mx-auto">
         {/* Header */}
         <motion.div
           className="text-center mb-8 md:mb-10"
@@ -60,7 +60,7 @@ export default function CTASection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-text-primary mb-4">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-text-primary mb-4 whitespace-nowrap text-center">
             Ready to See Risk and Correlation <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">Across All Books?</span>
           </h2>
 
