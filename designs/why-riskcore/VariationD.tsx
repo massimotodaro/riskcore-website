@@ -170,12 +170,12 @@ function ProblemSection() {
           ))}
         </motion.div>
 
-        {/* Sound Familiar Section - Matching design exactly */}
+        {/* Sound Familiar Section - Pushed down with 10% margin */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ delay: 0.6, duration: 0.5 }}
-          className="mt-24 max-w-4xl mx-auto"
+          className="mt-[10%] max-w-4xl mx-auto"
         >
           {/* Sound Familiar - Bold, white, centered */}
           <h3 className="text-center text-white text-2xl md:text-3xl uppercase tracking-wider mb-10 font-bold">
@@ -183,7 +183,7 @@ function ProblemSection() {
           </h3>
 
           {/* System boxes - Colored borders */}
-          <div className="flex flex-wrap justify-center items-center gap-4 mb-12">
+          <div className="flex flex-wrap justify-center items-center gap-4 mb-16">
             {[
               { name: 'Bloomberg', color: '#397EEE' },
               { name: 'Axioma', color: '#22C55E' },
@@ -201,8 +201,8 @@ function ProblemSection() {
             ))}
           </div>
 
-          {/* Animated Arrow - bouncing like landing page */}
-          <div className="flex justify-center py-8">
+          {/* Animated Arrow - bouncing with equal spacing */}
+          <div className="flex justify-center py-12">
             <motion.div
               animate={{ y: [0, 12, 0] }}
               transition={{
@@ -241,7 +241,7 @@ function ProblemSection() {
           </div>
 
           {/* Risk Report box - Wide, red outline only, horizontal layout */}
-          <div className="flex justify-center">
+          <div className="flex justify-center pt-4">
             <div
               className="flex items-center justify-center gap-6 px-12 py-5 rounded-full w-full max-w-xl"
               style={{
