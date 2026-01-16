@@ -107,15 +107,79 @@ const pipelineStages: PipelineStage[] = [
 ]
 
 // ==============================================
+// CONNECTING ARROW COMPONENT
+// ==============================================
+
+interface ConnectingArrowProps {
+  fromColor: string
+  toColor: string
+  index: number
+  isInView: boolean
+}
+
+function ConnectingArrow({ fromColor, toColor, index, isInView }: ConnectingArrowProps) {
+  return (
+    <div className="hidden lg:flex absolute top-6 -right-3 w-6 h-8 items-center justify-center z-10">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        className="overflow-visible"
+      >
+        <defs>
+          <linearGradient id={`arrow-gradient-${index}`} x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor={fromColor} />
+            <stop offset="100%" stopColor={toColor} />
+          </linearGradient>
+        </defs>
+        {/* Arrow line */}
+        <motion.path
+          d="M0 12 L16 12"
+          stroke={`url(#arrow-gradient-${index})`}
+          strokeWidth="2"
+          strokeLinecap="round"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={isInView ? { pathLength: 1, opacity: 1 } : {}}
+          transition={{
+            duration: 0.5,
+            delay: 0.5 + index * 0.15,
+            ease: "easeOut"
+          }}
+        />
+        {/* Arrow head */}
+        <motion.path
+          d="M14 8 L20 12 L14 16"
+          stroke={toColor}
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+          initial={{ opacity: 0, x: -5 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{
+            duration: 0.3,
+            delay: 0.8 + index * 0.15,
+            ease: "easeOut"
+          }}
+        />
+      </svg>
+    </div>
+  )
+}
+
+// ==============================================
 // PIPELINE STAGE COMPONENT
 // ==============================================
 
 interface StageCardProps {
   stage: PipelineStage
   index: number
+  nextStageColor?: string
+  isInView: boolean
 }
 
-function StageCard({ stage, index }: StageCardProps) {
+function StageCard({ stage, index, nextStageColor, isInView }: StageCardProps) {
   return (
     <motion.div
       className="relative"
@@ -124,6 +188,16 @@ function StageCard({ stage, index }: StageCardProps) {
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
     >
+      {/* Connecting Arrow */}
+      {nextStageColor && (
+        <ConnectingArrow
+          fromColor={stage.color}
+          toColor={nextStageColor}
+          index={index}
+          isInView={isInView}
+        />
+      )}
+
       <motion.div
         className="relative w-full text-left p-4 sm:p-6 rounded-2xl border transition-all bg-slate-900/50 border-white/5 hover:border-white/10 h-full"
         whileHover={{ y: -5 }}
@@ -203,7 +277,6 @@ export default function Features() {
             transition={{ delay: 0.4 }}
           >
             Five stages transform scattered position data into actionable risk intelligence.
-            Tap any stage to learn more.
           </motion.p>
         </motion.div>
 
@@ -214,6 +287,8 @@ export default function Features() {
               key={stage.id}
               stage={stage}
               index={index}
+              nextStageColor={index < pipelineStages.length - 1 ? pipelineStages[index + 1].color : undefined}
+              isInView={isInView}
             />
           ))}
         </div>
