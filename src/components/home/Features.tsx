@@ -201,6 +201,8 @@ function CurvedArrows({ isInView }: CurvedArrowsProps) {
           // Determine visibility based on phase
           const isDrawing = phase === 'sequence' && activeArrow === i
           const isDisappearing = phase === 'sequence' && activeArrow === i + 1
+          const isLastArrowDisappearing = phase === 'sequence' && i === arrows.length - 1 && activeArrow === arrows.length
+          const isAllGone = phase === 'allGone'
           const isAllVisible = phase === 'allVisible'
           const shouldShow = isDrawing || isAllVisible
 
@@ -215,14 +217,14 @@ function CurvedArrows({ isInView }: CurvedArrowsProps) {
                 fill="none"
                 initial={{ pathLength: 0, pathOffset: 0, opacity: 0 }}
                 animate={{
-                  pathLength: shouldShow ? 1 : (isDisappearing ? 1 : 0),
-                  pathOffset: isDisappearing ? 1 : 0,
-                  opacity: shouldShow ? 1 : (isDisappearing ? 1 : 0)
+                  pathLength: shouldShow ? 1 : ((isDisappearing || isLastArrowDisappearing) ? 1 : 0),
+                  pathOffset: (isDisappearing || isLastArrowDisappearing || isAllGone) ? 1 : 0,
+                  opacity: isAllGone ? 0 : (shouldShow ? 1 : ((isDisappearing || isLastArrowDisappearing) ? 1 : 0))
                 }}
                 transition={{
                   pathLength: { duration: isAllVisible ? 0.8 : 1.2, ease: "easeInOut" },
-                  pathOffset: { duration: isDisappearing ? 0.8 : 0, ease: "easeInOut" },
-                  opacity: { duration: isDisappearing ? 0.8 : (isAllVisible ? 1.0 : 0.3), ease: "easeInOut" }
+                  pathOffset: { duration: (isDisappearing || isLastArrowDisappearing) ? 0.8 : 0, ease: "easeInOut" },
+                  opacity: { duration: isAllGone ? 0 : ((isDisappearing || isLastArrowDisappearing) ? 0.8 : (isAllVisible ? 1.0 : 0.3)), ease: "easeInOut" }
                 }}
               />
               {/* Arrow head - made wider to match stroke */}
@@ -235,7 +237,7 @@ function CurvedArrows({ isInView }: CurvedArrowsProps) {
                 fill="none"
                 initial={{ opacity: 0 }}
                 animate={{
-                  opacity: isDisappearing ? 0 : (shouldShow ? 1 : 0)
+                  opacity: (isDisappearing || isLastArrowDisappearing || isAllGone) ? 0 : (shouldShow ? 1 : 0)
                 }}
                 transition={{
                   duration: isAllVisible ? 1.0 : 0.4,
