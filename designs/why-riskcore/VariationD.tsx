@@ -176,6 +176,26 @@ function ProblemSection() {
 }
 
 // ==============================================
+// TRY SECTION
+// ==============================================
+
+function TrySection() {
+  return (
+    <section
+      className="relative flex items-center justify-center"
+      style={{
+        height: '30vh',
+        background: 'linear-gradient(to bottom, #151E31, #0f172a)'
+      }}
+    >
+      <span className="text-white text-4xl md:text-5xl font-bold">
+        TRY
+      </span>
+    </section>
+  )
+}
+
+// ==============================================
 // SECTION 2: PAIN POINTS WITH IMPACT NUMBERS (from Variation A)
 // ==============================================
 
@@ -695,6 +715,7 @@ export default function WhyRiskcoreVariationD() {
   return (
     <div className="pt-20">
       <ProblemSection />
+      <TrySection />
       <ImpactSection />
       <DifferenceSection />
       <FeatureDeepDive />
