@@ -10,7 +10,7 @@
  * Emphasizes the end-to-end story rather than a feature list.
  */
 
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 // ==============================================
@@ -23,7 +23,6 @@ interface PipelineStage {
   title: string
   subtitle: string
   description: string
-  details: string[]
   icon: React.ReactNode
   color: string
 }
@@ -38,13 +37,7 @@ const pipelineStages: PipelineStage[] = [
     number: '01',
     title: 'Ingest',
     subtitle: 'Any Source, Any Format',
-    description: 'Connect Bloomberg, Enfusion, Eze, Excel, FIX — whatever your PMs use. No workflow changes required.',
-    details: [
-      'CSV, Excel, JSON, FIX protocol',
-      'REST API for real-time feeds',
-      'Scheduled batch imports',
-      'Auto-detection of file formats',
-    ],
+    description: 'Keep your Bloomberg, Enfusion, Eze, Excel, FIX — whatever you are using. No workflow changes required.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-8 h-8">
         <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1" />
@@ -59,12 +52,6 @@ const pipelineStages: PipelineStage[] = [
     title: 'Normalize',
     subtitle: 'One Language for Risk',
     description: 'Map every position to our unified schema. CUSIP, ISIN, SEDOL, ticker — all resolved to a single identity.',
-    details: [
-      'OpenFIGI security resolution',
-      'Instrument type classification',
-      'Currency standardization',
-      'Structured note decomposition',
-    ],
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-8 h-8">
         <path d="M4 6h16M4 12h16M4 18h16" />
@@ -81,12 +68,6 @@ const pipelineStages: PipelineStage[] = [
     title: 'Aggregate',
     subtitle: 'Cross-PM Intelligence',
     description: 'Net positions across books. Detect overlaps. See your true firm-wide exposure for the first time.',
-    details: [
-      'Cross-PM position netting',
-      'Overlap & concentration detection',
-      'Hierarchy: Firm → Fund → PM → Book',
-      'Real-time recalculation',
-    ],
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-8 h-8">
         <path d="M12 2L2 7l10 5 10-5-10-5z" />
@@ -102,12 +83,6 @@ const pipelineStages: PipelineStage[] = [
     title: 'Analyze',
     subtitle: 'Risk That Makes Sense',
     description: 'VaR, Greeks, duration, correlation — calculated consistently across every asset class and every PM.',
-    details: [
-      'VaR & CVaR (95%, 99%)',
-      'Full Greeks: Delta, Gamma, Vega, Theta',
-      'Duration, Convexity, CS01, DV01',
-      'Correlation to custom benchmarks',
-    ],
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-8 h-8">
         <path d="M3 3v18h18" />
@@ -121,13 +96,7 @@ const pipelineStages: PipelineStage[] = [
     number: '05',
     title: 'Act',
     subtitle: 'Decisions, Not Data',
-    description: 'Ask questions in plain English. Get 0Hedge calculations. Export regulatory reports with one click.',
-    details: [
-      'Natural language queries (AI)',
-      '0Hedge: exact hedge amounts',
-      'Form PF, 13F, custom reports',
-      'Alerts & limit monitoring',
-    ],
+    description: 'Ask questions in plain English. Get 0Hedge calculations. Export reports with one click.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-8 h-8">
         <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
@@ -144,11 +113,9 @@ const pipelineStages: PipelineStage[] = [
 interface StageCardProps {
   stage: PipelineStage
   index: number
-  isActive: boolean
-  onClick: () => void
 }
 
-function StageCard({ stage, index, isActive, onClick }: StageCardProps) {
+function StageCard({ stage, index }: StageCardProps) {
   return (
     <motion.div
       className="relative"
@@ -157,20 +124,9 @@ function StageCard({ stage, index, isActive, onClick }: StageCardProps) {
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
     >
-      {/* Connector Line */}
-      {index < pipelineStages.length - 1 && (
-        <div className="hidden lg:block absolute top-12 left-full w-full h-0.5 bg-gradient-to-r from-white/20 to-transparent z-0" />
-      )}
-
-      <motion.button
-        onClick={onClick}
-        className={`relative w-full text-left p-4 sm:p-6 rounded-2xl border transition-all ${
-          isActive
-            ? 'bg-slate-800/80 border-white/20'
-            : 'bg-slate-900/50 border-white/5 hover:border-white/10'
-        }`}
+      <motion.div
+        className="relative w-full text-left p-4 sm:p-6 rounded-2xl border transition-all bg-slate-900/50 border-white/5 hover:border-white/10 h-full"
         whileHover={{ y: -5 }}
-        whileTap={{ scale: 0.98 }}
       >
         {/* Stage Number */}
         <div
@@ -191,43 +147,7 @@ function StageCard({ stage, index, isActive, onClick }: StageCardProps) {
 
         {/* Description */}
         <p className="text-sm text-slate-400 leading-relaxed">{stage.description}</p>
-
-        {/* Expanded Details */}
-        <motion.div
-          initial={false}
-          animate={{ height: isActive ? 'auto' : 0, opacity: isActive ? 1 : 0 }}
-          transition={{ duration: 0.3 }}
-          className="overflow-hidden"
-        >
-          <ul className="mt-4 pt-4 border-t border-white/10 space-y-2">
-            {stage.details.map((detail, i) => (
-              <motion.li
-                key={i}
-                className="flex items-center gap-2 text-sm text-slate-300"
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : -10 }}
-                transition={{ delay: i * 0.05 }}
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4" style={{ color: stage.color }}>
-                  <path d="M5 12l5 5L20 7" />
-                </svg>
-                {detail}
-              </motion.li>
-            ))}
-          </ul>
-        </motion.div>
-
-        {/* Expand Indicator */}
-        <motion.div
-          className="absolute bottom-4 right-4"
-          animate={{ rotate: isActive ? 180 : 0 }}
-          transition={{ duration: 0.2 }}
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5 text-slate-500">
-            <path d="M6 9l6 6 6-6" />
-          </svg>
-        </motion.div>
-      </motion.button>
+      </motion.div>
     </motion.div>
   )
 }
@@ -237,7 +157,6 @@ function StageCard({ stage, index, isActive, onClick }: StageCardProps) {
 // ==============================================
 
 export default function Features() {
-  const [activeStage, setActiveStage] = useState<string | null>('aggregate')
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 })
 
@@ -247,8 +166,6 @@ export default function Features() {
       className="relative py-16 md:py-24 px-4 sm:px-6 overflow-hidden"
       style={{ background: 'linear-gradient(to bottom, #10182B, #151E31)' }}
     >
-      {/* Background Elements */}
-      <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent" />
 
       <div className="relative max-w-7xl mx-auto">
         {/* Section Header */}
@@ -297,8 +214,6 @@ export default function Features() {
               key={stage.id}
               stage={stage}
               index={index}
-              isActive={activeStage === stage.id}
-              onClick={() => setActiveStage(activeStage === stage.id ? null : stage.id)}
             />
           ))}
         </div>
