@@ -10,7 +10,7 @@
  * Emphasizes the end-to-end story rather than a feature list.
  */
 
-import { useRef } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 // ==============================================
@@ -115,12 +115,55 @@ interface CurvedArrowsProps {
 }
 
 function CurvedArrows({ isInView }: CurvedArrowsProps) {
+  const [phase, setPhase] = useState<'idle' | 'sequence' | 'allGone' | 'allVisible'>('idle')
+  const [activeArrow, setActiveArrow] = useState(-1)
+
   const arrows = [
     { from: '#3b82f6', to: '#22c55e' },  // Ingest -> Normalize
     { from: '#22c55e', to: '#a855f7' },  // Normalize -> Aggregate
     { from: '#a855f7', to: '#06b6d4' },  // Aggregate -> Analyze
     { from: '#06b6d4', to: '#eab308' },  // Analyze -> Act
   ]
+
+  useEffect(() => {
+    if (!isInView) return
+
+    // Start sequence after initial delay
+    const startDelay = setTimeout(() => {
+      setPhase('sequence')
+      setActiveArrow(0)
+    }, 800)
+
+    return () => clearTimeout(startDelay)
+  }, [isInView])
+
+  useEffect(() => {
+    if (phase !== 'sequence') return
+
+    if (activeArrow < arrows.length) {
+      // Move to next arrow after current one completes
+      const timer = setTimeout(() => {
+        setActiveArrow(activeArrow + 1)
+      }, 1500) // Time for each arrow to draw
+      return () => clearTimeout(timer)
+    } else {
+      // All arrows done, wait then hide all
+      const hideTimer = setTimeout(() => {
+        setPhase('allGone')
+      }, 1500)
+      return () => clearTimeout(hideTimer)
+    }
+  }, [phase, activeArrow, arrows.length])
+
+  useEffect(() => {
+    if (phase !== 'allGone') return
+
+    // After 1 second, show all arrows together
+    const showAllTimer = setTimeout(() => {
+      setPhase('allVisible')
+    }, 1000)
+    return () => clearTimeout(showAllTimer)
+  }, [phase])
 
   return (
     <div className="hidden lg:block absolute top-0 left-0 right-0 h-16 z-20 pointer-events-none">
@@ -140,44 +183,56 @@ function CurvedArrows({ isInView }: CurvedArrowsProps) {
         </defs>
 
         {arrows.map((arrow, i) => {
-          // Each card is 20% width = 200 units. Badge is at left-4 (roughly 20 units from card start)
-          // Card starts at: i * 200
-          // Badge center at: i * 200 + 20
-          const startX = i * 200 + 40  // Just after current badge
-          const endX = (i + 1) * 200 + 6  // Just before next badge
+          // Badge is w-8 (32px) at left-4 (16px from card edge)
+          // Each card is 200 units wide
+          // Badge spans: card_start + 16 to card_start + 48
+          // Top-right of badge: i * 200 + 48
+          // Top-left of next badge: (i+1) * 200 + 16
+          const startX = i * 200 + 52  // Top-right of current badge
+          const endX = (i + 1) * 200 + 12  // Top-left of next badge
           const midX = (startX + endX) / 2
-          const curveHeight = -24  // Upward curve (convex)
+          const curveHeight = -18  // Shorter upward curve
+
+          // Determine visibility based on phase
+          const isDrawing = phase === 'sequence' && activeArrow === i
+          const isDisappearing = phase === 'sequence' && activeArrow === i + 1
+          const isAllVisible = phase === 'allVisible'
+          const shouldShow = isDrawing || isAllVisible
 
           return (
             <g key={i}>
               {/* Curved line */}
               <motion.path
-                d={`M ${startX} 56 Q ${midX} ${56 + curveHeight} ${endX} 56`}
+                d={`M ${startX} 54 Q ${midX} ${54 + curveHeight} ${endX} 54`}
                 stroke={`url(#curve-gradient-${i})`}
-                strokeWidth="3"
+                strokeWidth="4"
                 strokeLinecap="round"
                 fill="none"
                 initial={{ pathLength: 0, opacity: 0 }}
-                animate={isInView ? { pathLength: 1, opacity: 1 } : {}}
+                animate={{
+                  pathLength: shouldShow ? 1 : 0,
+                  opacity: isDisappearing ? 0 : (shouldShow ? 1 : 0)
+                }}
                 transition={{
-                  duration: 1.0,
-                  delay: 0.8 + i * 0.3,
-                  ease: "easeInOut"
+                  pathLength: { duration: isAllVisible ? 0.8 : 1.2, ease: "easeInOut" },
+                  opacity: { duration: isDisappearing ? 0.8 : (isAllVisible ? 1.0 : 0.3), ease: "easeInOut" }
                 }}
               />
               {/* Arrow head */}
               <motion.path
-                d={`M ${endX - 10} ${50} L ${endX + 2} ${56} L ${endX - 10} ${62}`}
+                d={`M ${endX - 8} ${48} L ${endX + 3} ${54} L ${endX - 8} ${60}`}
                 stroke={arrow.to}
-                strokeWidth="3"
+                strokeWidth="4"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 fill="none"
                 initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : {}}
+                animate={{
+                  opacity: isDisappearing ? 0 : (shouldShow ? 1 : 0)
+                }}
                 transition={{
-                  duration: 0.4,
-                  delay: 1.6 + i * 0.3,
+                  duration: isAllVisible ? 1.0 : 0.4,
+                  delay: isDrawing ? 0.9 : 0,
                   ease: "easeOut"
                 }}
               />
