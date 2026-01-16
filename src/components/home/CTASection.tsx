@@ -1,21 +1,14 @@
 'use client'
 
 /**
- * CTASection.tsx (EarlyAccessCleanB variant)
+ * CTASection.tsx (EarlyAccessCleanC variant)
  *
- * Two-column layout: value props on left, form on right.
- * Professional, no pressure. For technical decision makers.
+ * Minimal, centered design. Two options: Book Demo or View GitHub.
+ * For technical audiences who might want to explore on their own.
  */
 
 import { useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-
-const valueProps = [
-  'See positions aggregated across all PMs',
-  'Time travel to any historical point',
-  'Calculate hedge amounts automatically',
-  'Your data stays on your infrastructure',
-]
 
 export default function CTASection() {
   const [email, setEmail] = useState('')
@@ -40,7 +33,7 @@ export default function CTASection() {
 
       if (res.ok) {
         setStatus('success')
-        setMessage("We'll be in touch shortly.")
+        setMessage("We'll be in touch within 24 hours.")
         setEmail('')
       } else {
         setStatus('error')
@@ -59,119 +52,118 @@ export default function CTASection() {
       className="relative py-16 md:py-20 px-4 sm:px-6 overflow-hidden"
       style={{ background: 'linear-gradient(to bottom, #151E31, #0a0f1a)' }}
     >
-      <div className="relative max-w-4xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-          {/* Left: Value Props */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.5 }}
-          >
-            <h2 className="text-2xl sm:text-3xl font-bold text-text-primary mb-4">
-              See It{' '}
-              <span className="bg-gradient-to-r from-brand-blue to-brand-cyan bg-clip-text text-transparent">
-                In Action
-              </span>
-            </h2>
+      <div className="relative max-w-xl mx-auto text-center">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+        >
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-text-primary mb-3">
+            Start With{' '}
+            <span className="bg-gradient-to-r from-brand-blue to-brand-cyan bg-clip-text text-transparent">
+              RISKCORE
+            </span>
+          </h2>
 
-            <p className="text-text-muted mb-6 text-sm md:text-base">
-              30-minute demo with your data schema. No slides, just the product.
-            </p>
+          <p className="text-base md:text-lg text-text-muted mb-6 md:mb-8">
+            Book a demo or deploy it yourself. Your choice.
+          </p>
+        </motion.div>
 
-            <ul className="space-y-3">
-              {valueProps.map((prop, i) => (
-                <motion.li
-                  key={prop}
-                  className="flex items-center gap-3 text-text-muted text-sm md:text-base"
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: 0.2 + i * 0.1 }}
-                >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5 text-brand-blue flex-shrink-0">
-                    <path d="M5 12l5 5L20 7" />
-                  </svg>
-                  {prop}
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Right: Form */}
-          <motion.div
-            className="bg-bg-secondary/30 border border-white/10 rounded-2xl p-5 md:p-6"
-            initial={{ opacity: 0, x: 20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.3 }}
-          >
-            <h3 className="text-lg md:text-xl font-semibold text-text-primary mb-4">Book a Demo</h3>
-
-            {status === 'success' ? (
-              <div className="text-center py-6">
-                <div className="w-10 h-10 rounded-full bg-brand-green/20 flex items-center justify-center mx-auto mb-2">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6 text-brand-green">
-                    <path d="M5 12l5 5L20 7" />
-                  </svg>
-                </div>
-                <p className="text-text-primary font-medium">{message}</p>
+        {/* Form */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.2 }}
+          className="mb-4"
+        >
+          {status === 'success' ? (
+            <motion.div
+              className="py-4"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+            >
+              <div className="w-12 h-12 rounded-full bg-brand-green/20 flex items-center justify-center mx-auto mb-3">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6 text-brand-green">
+                  <path d="M5 12l5 5L20 7" />
+                </svg>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Honeypot field */}
+              <p className="text-lg font-medium text-brand-green">{message}</p>
+            </motion.div>
+          ) : (
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+              {/* Honeypot field */}
+              <input
+                type="text"
+                name="website"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+                className="absolute -left-[9999px] opacity-0 pointer-events-none"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+              />
+              <div className="flex-1 relative">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-dim">
+                  <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
                 <input
-                  type="text"
-                  name="website"
-                  value={website}
-                  onChange={(e) => setWebsite(e.target.value)}
-                  className="absolute -left-[9999px] opacity-0 pointer-events-none"
-                  tabIndex={-1}
-                  autoComplete="off"
-                  aria-hidden="true"
-                />
-                <div className="relative">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-dim">
-                    <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Work email"
-                    className="w-full pl-12 pr-4 py-3 md:py-3.5 bg-bg-primary/80 border border-white/10 rounded-[3px] text-text-primary placeholder-text-dim focus:border-brand-blue/50 focus:outline-none focus:ring-2 focus:ring-brand-blue/20 transition-all text-sm"
-                    required
-                    disabled={status === 'loading'}
-                  />
-                </div>
-                <button
-                  type="submit"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your work email"
+                  className="w-full pl-12 pr-4 py-3 md:py-3.5 bg-bg-secondary/80 border border-white/10 rounded-[3px] text-text-primary placeholder-text-dim focus:border-brand-blue/50 focus:outline-none focus:ring-2 focus:ring-brand-blue/20 transition-all text-sm"
+                  required
                   disabled={status === 'loading'}
-                  className="w-full py-3 md:py-3.5 bg-brand-blue text-white font-semibold text-sm rounded-[3px] transition-all duration-200 hover:bg-brand-blue/90 shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {status === 'loading' ? (
-                    <svg className="animate-spin w-5 h-5 mx-auto" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                    </svg>
-                  ) : (
-                    'Schedule Demo'
-                  )}
-                </button>
-                <p className="text-text-dim text-xs text-center">
-                  No spam. We&apos;ll follow up within 24 hours.
-                </p>
-              </form>
-            )}
-            {status === 'error' && (
-              <p className="text-center text-red-400 text-sm mt-3">{message}</p>
-            )}
-          </motion.div>
-        </div>
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={status === 'loading'}
+                className="px-6 py-3 md:py-3.5 bg-brand-blue text-white font-semibold text-sm rounded-[3px] transition-all duration-200 hover:bg-brand-blue/90 shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+              >
+                {status === 'loading' ? (
+                  <svg className="animate-spin w-5 h-5 mx-auto" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                  </svg>
+                ) : (
+                  'Book a Demo'
+                )}
+              </button>
+            </form>
+          )}
+          {status === 'error' && (
+            <p className="text-center text-red-400 text-sm mt-3">{message}</p>
+          )}
+        </motion.div>
+
+        {/* GitHub Link */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.3 }}
+        >
+          <a
+            href="https://github.com/massimotodaro/riskcore"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-text-muted hover:text-text-primary text-sm transition-colors"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+            Or explore the code on GitHub
+          </a>
+        </motion.div>
 
         {/* Testimonial */}
         <motion.div
-          className="mt-10 md:mt-12 p-4 md:p-5 bg-bg-secondary/30 border border-white/5 rounded-xl max-w-2xl mx-auto"
+          className="mt-10 md:mt-12 p-4 md:p-5 bg-bg-secondary/30 border border-white/5 rounded-xl text-left"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 0.4 }}
         >
           <div className="flex items-start gap-4">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-blue to-brand-cyan flex items-center justify-center text-white font-bold flex-shrink-0">
