@@ -189,12 +189,12 @@ function TrySection() {
       }}
     >
       <div
-        className="px-8 py-4 rounded-full border-2 border-red-500"
+        className="px-12 py-5 rounded-full border-2 border-white"
         style={{ backgroundColor: 'rgba(30, 41, 59, 0.8)' }}
       >
-        <span className="text-white font-medium">
-          Risk Report <span className="text-slate-400">|</span> <span className="text-red-400">3hrs late - Inaccurate</span>
-        </span>
+        <h2 className="text-red-500 font-semibold text-2xl md:text-3xl">
+          Risk Report <span className="text-slate-400">|</span> <span className="text-white">3hrs late - Inaccurate</span>
+        </h2>
       </div>
     </section>
   )
