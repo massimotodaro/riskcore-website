@@ -300,7 +300,7 @@ export default function Features() {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.8 }}
         >
-          <p className="text-slate-500 text-sm">
+          <p className="text-slate-400 text-base md:text-lg">
             Every stage runs automatically. Your PMs keep using their systems — RISKCORE does the rest.
           </p>
         </motion.div>
