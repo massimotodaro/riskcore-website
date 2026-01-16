@@ -123,10 +123,10 @@ function CurvedArrows({ isInView }: CurvedArrowsProps) {
   ]
 
   return (
-    <div className="hidden lg:block absolute top-0 left-0 right-0 h-12 z-20 pointer-events-none">
+    <div className="hidden lg:block absolute top-0 left-0 right-0 h-16 z-20 pointer-events-none">
       <svg
         className="w-full h-full"
-        viewBox="0 0 1000 48"
+        viewBox="0 0 1000 64"
         preserveAspectRatio="none"
         fill="none"
       >
@@ -140,42 +140,44 @@ function CurvedArrows({ isInView }: CurvedArrowsProps) {
         </defs>
 
         {arrows.map((arrow, i) => {
-          // Calculate positions: each card takes 20% width, arrows go from badge to badge
-          const startX = 100 + i * 200 + 16  // Start after badge center
-          const endX = 100 + (i + 1) * 200 - 16  // End before next badge center
+          // Each card is 20% width = 200 units. Badge is at left-4 (roughly 20 units from card start)
+          // Card starts at: i * 200
+          // Badge center at: i * 200 + 20
+          const startX = i * 200 + 40  // Just after current badge
+          const endX = (i + 1) * 200 + 6  // Just before next badge
           const midX = (startX + endX) / 2
-          const curveHeight = -20  // Negative for upward curve (convex)
+          const curveHeight = -24  // Upward curve (convex)
 
           return (
             <g key={i}>
               {/* Curved line */}
               <motion.path
-                d={`M ${startX} 40 Q ${midX} ${40 + curveHeight} ${endX} 40`}
+                d={`M ${startX} 56 Q ${midX} ${56 + curveHeight} ${endX} 56`}
                 stroke={`url(#curve-gradient-${i})`}
-                strokeWidth="2.5"
+                strokeWidth="3"
                 strokeLinecap="round"
                 fill="none"
                 initial={{ pathLength: 0, opacity: 0 }}
                 animate={isInView ? { pathLength: 1, opacity: 1 } : {}}
                 transition={{
-                  duration: 0.6,
-                  delay: 0.6 + i * 0.2,
-                  ease: "easeOut"
+                  duration: 1.0,
+                  delay: 0.8 + i * 0.3,
+                  ease: "easeInOut"
                 }}
               />
               {/* Arrow head */}
               <motion.path
-                d={`M ${endX - 8} ${36} L ${endX + 2} ${40} L ${endX - 8} ${44}`}
+                d={`M ${endX - 10} ${50} L ${endX + 2} ${56} L ${endX - 10} ${62}`}
                 stroke={arrow.to}
-                strokeWidth="2.5"
+                strokeWidth="3"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 fill="none"
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : {}}
                 transition={{
-                  duration: 0.3,
-                  delay: 1.0 + i * 0.2,
+                  duration: 0.4,
+                  delay: 1.6 + i * 0.3,
                   ease: "easeOut"
                 }}
               />
