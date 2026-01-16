@@ -164,7 +164,7 @@ function StageCard({ stage, index, isActive, onClick }: StageCardProps) {
 
       <motion.button
         onClick={onClick}
-        className={`relative w-full text-left p-6 rounded-2xl border transition-all ${
+        className={`relative w-full text-left p-4 sm:p-6 rounded-2xl border transition-all ${
           isActive
             ? 'bg-slate-800/80 border-white/20'
             : 'bg-slate-900/50 border-white/5 hover:border-white/10'
@@ -244,7 +244,7 @@ export default function Features() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 px-6 overflow-hidden"
+      className="relative py-16 md:py-24 px-4 sm:px-6 overflow-hidden"
       style={{ background: 'linear-gradient(to bottom, #10182B, #151E31)' }}
     >
       {/* Background Elements */}
@@ -253,7 +253,7 @@ export default function Features() {
       <div className="relative max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -268,7 +268,7 @@ export default function Features() {
           </motion.div>
 
           <motion.h2
-            className="text-4xl md:text-5xl font-bold text-slate-100 mb-4"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-100 mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.3 }}
@@ -280,18 +280,18 @@ export default function Features() {
           </motion.h2>
 
           <motion.p
-            className="text-xl text-slate-400 max-w-3xl mx-auto"
+            className="text-base sm:text-lg md:text-xl text-slate-400 max-w-3xl mx-auto"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.4 }}
           >
             Five stages transform scattered position data into actionable risk intelligence.
-            Click any stage to learn more.
+            Tap any stage to learn more.
           </motion.p>
         </motion.div>
 
         {/* Pipeline Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
           {pipelineStages.map((stage, index) => (
             <StageCard
               key={stage.id}
@@ -305,7 +305,7 @@ export default function Features() {
 
         {/* Bottom Message */}
         <motion.div
-          className="text-center mt-16"
+          className="text-center mt-10 md:mt-16"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.8 }}
