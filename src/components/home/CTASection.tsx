@@ -61,10 +61,7 @@ export default function CTASection() {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-text-primary mb-4">
-            Ready to See Risk and Correlation{' '}
-            <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">
-              Across All Books?
-            </span>
+            Ready to See Risk and Correlation <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">Across All Books?</span>
           </h2>
 
           <p className="text-base md:text-lg text-text-muted">
