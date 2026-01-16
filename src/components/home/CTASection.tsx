@@ -1,10 +1,10 @@
 'use client'
 
 /**
- * CTASection.tsx (EarlyAccessCleanC variant)
+ * CTASection.tsx (EarlyAccessCleanA variant)
  *
- * Minimal, centered design. Two options: Book Demo or View GitHub.
- * For technical audiences who might want to explore on their own.
+ * Simple, professional CTA. No FOMO, no pressure tactics.
+ * Straightforward value proposition for engineers and risk managers.
  */
 
 import { useState, useRef } from 'react'
@@ -52,22 +52,23 @@ export default function CTASection() {
       className="relative py-16 md:py-20 px-4 sm:px-6 overflow-hidden"
       style={{ background: 'linear-gradient(to bottom, #151E31, #0a0f1a)' }}
     >
-      <div className="relative max-w-xl mx-auto text-center">
+      <div className="relative max-w-2xl mx-auto">
         {/* Header */}
         <motion.div
+          className="text-center mb-8 md:mb-10"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-text-primary mb-3">
-            Start With{' '}
-            <span className="bg-gradient-to-r from-brand-blue to-brand-cyan bg-clip-text text-transparent">
-              RISKCORE
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-text-primary mb-4">
+            Ready to See Your{' '}
+            <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">
+              Firm-Wide Risk?
             </span>
           </h2>
 
-          <p className="text-base md:text-lg text-text-muted mb-6 md:mb-8">
-            Book a demo or deploy it yourself. Your choice.
+          <p className="text-base md:text-lg text-text-muted">
+            Book a 30-minute demo. We&apos;ll show you RISKCORE with your data schema.
           </p>
         </motion.div>
 
@@ -76,11 +77,10 @@ export default function CTASection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.2 }}
-          className="mb-4"
         >
           {status === 'success' ? (
             <motion.div
-              className="py-4"
+              className="text-center py-4"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
             >
@@ -92,7 +92,7 @@ export default function CTASection() {
               <p className="text-lg font-medium text-brand-green">{message}</p>
             </motion.div>
           ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
               {/* Honeypot field */}
               <input
                 type="text"
@@ -137,45 +137,32 @@ export default function CTASection() {
           {status === 'error' && (
             <p className="text-center text-red-400 text-sm mt-3">{message}</p>
           )}
-        </motion.div>
 
-        {/* GitHub Link */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.3 }}
-        >
-          <a
-            href="https://github.com/massimotodaro/riskcore"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-text-muted hover:text-text-primary text-sm transition-colors"
-          >
-            <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-            </svg>
-            Or explore the code on GitHub
-          </a>
+          <p className="text-center text-text-dim text-xs md:text-sm mt-4">
+            We respect your inbox. No spam, just updates on your demo.
+          </p>
         </motion.div>
 
         {/* Testimonial */}
         <motion.div
-          className="mt-10 md:mt-12 p-4 md:p-5 bg-bg-secondary/30 border border-white/5 rounded-xl text-left"
+          className="mt-10 md:mt-12 p-5 md:p-6 bg-bg-secondary/40 border border-white/10 rounded-xl"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.4 }}
         >
           <div className="flex items-start gap-4">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-blue to-brand-cyan flex items-center justify-center text-white font-bold flex-shrink-0">
+            <div className="w-11 h-11 rounded-full bg-gradient-to-br from-emerald-400 to-green-500 flex items-center justify-center text-slate-900 font-bold text-lg flex-shrink-0">
               M
             </div>
             <div>
-              <p className="text-text-muted italic text-sm leading-relaxed">
+              <p className="text-text-primary text-base leading-relaxed mb-3">
                 &quot;We&apos;ve been trying to build this internally for years. The fact that someone finally
                 understands the multi-PM aggregation problem and is solving it properly — we had to get involved.&quot;
               </p>
-              <p className="text-xs text-text-dim mt-2">
-                <span className="text-text-muted font-medium">CRO</span> • $2.4B Multi-Manager Fund
+              <p className="text-sm text-text-muted">
+                <span className="font-semibold">CRO</span>
+                <span className="mx-2 text-text-dim">•</span>
+                <span>$2.4B Multi-Manager Fund</span>
               </p>
             </div>
           </div>
