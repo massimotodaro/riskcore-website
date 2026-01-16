@@ -170,20 +170,20 @@ function ProblemSection() {
           ))}
         </motion.div>
 
-        {/* Sound Familiar Section - Pushed down with 10% margin */}
+        {/* Sound Familiar Section */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ delay: 0.6, duration: 0.5 }}
-          className="mt-[10%] max-w-4xl mx-auto"
+          className="mt-20 max-w-4xl mx-auto"
         >
           {/* Sound Familiar - Bold, white, centered */}
-          <h3 className="text-center text-white text-2xl md:text-3xl uppercase tracking-wider mb-10 font-bold">
+          <h3 className="text-center text-white text-2xl md:text-3xl uppercase tracking-wider mb-8 font-bold">
             Sound Familiar?
           </h3>
 
-          {/* System boxes - Colored borders */}
-          <div className="flex flex-wrap justify-center items-center gap-4 mb-16">
+          {/* System boxes - Colored borders, tight row */}
+          <div className="flex flex-wrap justify-center items-center gap-3 mb-8">
             {[
               { name: 'Bloomberg', color: '#397EEE' },
               { name: 'Axioma', color: '#22C55E' },
@@ -193,18 +193,21 @@ function ProblemSection() {
             ].map((system) => (
               <div
                 key={system.name}
-                className="px-6 py-3 bg-slate-800/80 rounded-lg text-white text-base font-medium"
-                style={{ border: `1.5px solid ${system.color}` }}
+                className="px-5 py-2.5 rounded-lg text-white text-sm font-medium"
+                style={{
+                  border: `1.5px solid ${system.color}`,
+                  backgroundColor: 'rgba(30, 41, 59, 0.8)',
+                }}
               >
                 {system.name}
               </div>
             ))}
           </div>
 
-          {/* Animated Arrow - bouncing with equal spacing */}
-          <div className="flex justify-center py-12">
+          {/* Animated Arrow - small, bouncing */}
+          <div className="flex justify-center py-6">
             <motion.div
-              animate={{ y: [0, 12, 0] }}
+              animate={{ y: [0, 8, 0] }}
               transition={{
                 repeat: Infinity,
                 duration: 1.5,
@@ -212,58 +215,52 @@ function ProblemSection() {
               }}
             >
               <svg
-                width="40"
-                height="50"
-                viewBox="0 0 40 50"
+                width="24"
+                height="32"
+                viewBox="0 0 24 32"
                 fill="none"
               >
-                {/* Arrow shaft */}
-                <motion.line
-                  x1="20"
-                  y1="0"
-                  x2="20"
-                  y2="38"
+                <path
+                  d="M12 2 L12 24 M6 18 L12 26 L18 18"
                   stroke="#ef4444"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                />
-                {/* Arrow head */}
-                <motion.path
-                  d="M8 30 L20 45 L32 30"
-                  stroke="#ef4444"
-                  strokeWidth="3"
+                  strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  fill="none"
                 />
               </svg>
             </motion.div>
           </div>
 
-          {/* Risk Report box - Wide, red outline only, horizontal layout */}
-          <div className="flex justify-center pt-4">
+          {/* Risk Report box - Red outline pill, matching design width */}
+          <div className="flex justify-center">
             <div
-              className="flex items-center justify-center gap-6 px-12 py-5 rounded-full w-full max-w-xl"
+              className="inline-flex items-center justify-center gap-5 px-10 py-4 rounded-full"
               style={{
                 border: '2px solid #ef4444',
                 backgroundColor: 'transparent',
               }}
             >
-              {/* Warning Icon - filled red */}
-              <svg className="w-8 h-8 flex-shrink-0" viewBox="0 0 24 24" fill="#ef4444">
-                <path d="M12 2L1 21h22L12 2zm0 3.5L19.5 19h-15L12 5.5zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/>
+              {/* Warning Triangle Icon */}
+              <svg className="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"
+                  stroke="#ef4444"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
 
               {/* Risk Report text */}
-              <span className="text-red-500 font-bold text-lg uppercase tracking-wide flex-shrink-0">
+              <span className="text-red-500 font-semibold text-base uppercase tracking-wide">
                 Risk Report
               </span>
 
               {/* Divider */}
-              <span className="text-slate-500 text-xl">|</span>
+              <span className="text-slate-500">|</span>
 
               {/* Status text */}
-              <span className="text-slate-200 text-base flex-shrink-0">
+              <span className="text-slate-300 text-sm">
                 3 hours late, 47 errors
               </span>
             </div>
