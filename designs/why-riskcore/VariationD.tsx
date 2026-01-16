@@ -190,11 +190,11 @@ function TrySection() {
         }}
       >
         <div
-          className="px-12 py-5 rounded-full border-2 border-white"
+          className="px-16 py-5 rounded-full border-2 border-red-500 w-[60%] flex items-center justify-center"
           style={{ backgroundColor: 'rgba(30, 41, 59, 0.8)' }}
         >
           <h2 className="text-red-500 font-semibold text-2xl md:text-3xl">
-            Risk Report <span className="text-slate-400">|</span> <span className="text-white">3hrs late - Inaccurate</span>
+            Risk Report <span className="text-slate-400 mx-3">|</span> <span className="text-white text-lg md:text-xl font-normal">3hrs late - Inaccurate</span>
           </h2>
         </div>
       </section>
