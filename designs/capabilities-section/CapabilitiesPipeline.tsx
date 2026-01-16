@@ -1,13 +1,19 @@
 'use client'
 
 /**
- * Features.tsx (CapabilitiesPipeline variant)
+ * CapabilitiesPipeline.tsx
  *
  * Capabilities Section Variant 1: "The Data Journey"
  *
  * Shows the transformation from fragmented data to actionable risk insights
  * as a visual pipeline. Each stage expands to show details.
  * Emphasizes the end-to-end story rather than a feature list.
+ *
+ * Usage:
+ *   <CapabilitiesPipeline />
+ *
+ * Dependencies:
+ *   npm install framer-motion
  */
 
 import { useState, useRef } from 'react'
@@ -236,7 +242,7 @@ function StageCard({ stage, index, isActive, onClick }: StageCardProps) {
 // MAIN COMPONENT
 // ==============================================
 
-export default function Features() {
+export default function CapabilitiesPipeline() {
   const [activeStage, setActiveStage] = useState<string | null>('aggregate')
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 })
