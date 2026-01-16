@@ -87,8 +87,8 @@ export default function TermsContent() {
                 <h2 className="text-2xl font-bold text-text-primary mb-4">1. Acceptance of Terms</h2>
                 <p className="text-text-secondary leading-relaxed mb-4">
                   Welcome to RISKCORE. These Terms of Service (&quot;Terms&quot;) govern your access to and use of the RISKCORE
-                  website, platform, and services (collectively, the &quot;Service&quot;) operated by RISKCORE Ltd. (&quot;RISKCORE&quot;,
-                  &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;), a company registered in England and Wales.
+                  website, platform, and services (collectively, the &quot;Service&quot;). RISKCORE is a trading name of Shopkoin Ltd
+                  (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;), a company registered in England and Wales (Company Registration Number: 11440278).
                 </p>
                 <p className="text-text-secondary leading-relaxed mb-4">
                   By accessing or using our Service, you agree to be bound by these Terms. If you disagree with any
@@ -175,11 +175,11 @@ export default function TermsContent() {
                 <h2 className="text-2xl font-bold text-text-primary mb-4">5. Intellectual Property</h2>
                 <p className="text-text-secondary leading-relaxed mb-4">
                   The Service and its original content (excluding open-source components and user-provided content),
-                  features, and functionality are and will remain the exclusive property of RISKCORE Ltd. and its licensors.
+                  features, and functionality are and will remain the exclusive property of Shopkoin Ltd (trading as RISKCORE) and its licensors.
                 </p>
                 <p className="text-text-secondary leading-relaxed mb-4">
                   The RISKCORE name, logo, and all related names, logos, product and service names, designs, and slogans
-                  are trademarks of RISKCORE Ltd. You may not use such marks without our prior written permission.
+                  are trademarks of Shopkoin Ltd. You may not use such marks without our prior written permission.
                 </p>
                 <p className="text-text-secondary leading-relaxed">
                   You retain all rights to your data and content that you upload to the Service. By uploading content,
@@ -402,10 +402,13 @@ export default function TermsContent() {
                 </p>
                 <div className="bg-bg-secondary/50 rounded-lg p-6 border border-white/10">
                   <p className="text-text-secondary mb-2">
-                    <strong className="text-text-primary">RISKCORE Ltd.</strong>
+                    <strong className="text-text-primary">RISKCORE</strong>
                   </p>
                   <p className="text-text-secondary mb-2">
-                    Registered in England and Wales
+                    A trading name of Shopkoin Ltd
+                  </p>
+                  <p className="text-text-secondary mb-2">
+                    Registered in England and Wales (Company No. 11440278)
                   </p>
                   <p className="text-text-secondary">
                     Email:{' '}

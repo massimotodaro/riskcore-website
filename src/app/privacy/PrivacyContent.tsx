@@ -81,8 +81,8 @@ export default function PrivacyContent() {
               <section id="introduction" className="scroll-mt-24 mb-12">
                 <h2 className="text-2xl font-bold text-text-primary mb-4">1. Introduction</h2>
                 <p className="text-text-secondary leading-relaxed mb-4">
-                  RISKCORE Ltd. (&quot;RISKCORE&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;), a company registered in England and Wales,
-                  is committed to protecting your privacy and ensuring the security of your personal data.
+                  RISKCORE is a trading name of Shopkoin Ltd (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;), a company registered in England and Wales
+                  (Company Registration Number: 11440278). We are committed to protecting your privacy and ensuring the security of your personal data.
                 </p>
                 <p className="text-text-secondary leading-relaxed mb-4">
                   This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our
@@ -327,10 +327,13 @@ export default function PrivacyContent() {
                 </p>
                 <div className="bg-bg-secondary/50 rounded-lg p-6 border border-white/10">
                   <p className="text-text-secondary mb-2">
-                    <strong className="text-text-primary">RISKCORE Ltd.</strong>
+                    <strong className="text-text-primary">RISKCORE</strong>
                   </p>
                   <p className="text-text-secondary mb-2">
-                    Registered in England and Wales
+                    A trading name of Shopkoin Ltd
+                  </p>
+                  <p className="text-text-secondary mb-2">
+                    Registered in England and Wales (Company No. 11440278)
                   </p>
                   <p className="text-text-secondary">
                     Email:{' '}
