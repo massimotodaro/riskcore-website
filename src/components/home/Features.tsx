@@ -242,7 +242,7 @@ function CurvedArrows({ isInView }: CurvedArrowsProps) {
                 }}
                 transition={{
                   duration: isAllVisible ? 1.0 : 0.4,
-                  delay: isAllVisible ? 1.5 : (isDrawing ? 0.9 : 0),
+                  delay: isAllVisible ? 0.9 : (isDrawing ? 0.9 : 0),
                   ease: "easeOut"
                 }}
               />
