@@ -182,7 +182,7 @@ function ProblemSection() {
 function TrySection() {
   return (
     <section
-      className="relative flex items-center justify-center"
+      className="relative flex items-center justify-center border border-white/20"
       style={{
         height: '30vh',
         background: 'linear-gradient(to bottom, #151E31, #0f172a)'
