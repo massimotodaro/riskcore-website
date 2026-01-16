@@ -182,15 +182,20 @@ function ProblemSection() {
 function TrySection() {
   return (
     <section
-      className="relative flex items-center justify-center border border-white/20"
+      className="relative flex items-center justify-center"
       style={{
-        height: '30vh',
+        height: '10vh',
         background: 'linear-gradient(to bottom, #151E31, #0f172a)'
       }}
     >
-      <span className="text-white text-4xl md:text-5xl font-bold">
-        TRY
-      </span>
+      <div
+        className="px-8 py-4 rounded-full border-2 border-red-500"
+        style={{ backgroundColor: 'rgba(30, 41, 59, 0.8)' }}
+      >
+        <span className="text-white font-medium">
+          Risk Report <span className="text-slate-400">|</span> <span className="text-red-400">3hrs late - Inaccurate</span>
+        </span>
+      </div>
     </section>
   )
 }
