@@ -116,13 +116,13 @@ function ProblemSection() {
             <span className="text-lg font-bold uppercase tracking-wider" style={{ color: '#3b82f6' }}>The Problem</span>
           </motion.div>
 
-          {/* Title - One line, "Challenge" in blue */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-100 mb-6 whitespace-nowrap">
-            The Multi-Manager Risk <span style={{ color: '#3b82f6' }}>Challenge</span>
+          {/* Title - One line, "Challenge" in green */}
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-100 mb-6">
+            The Multi-Manager Risk <span style={{ color: '#22C55E' }}>Challenge</span>
           </h1>
 
-          {/* Subtitle - Bigger and white */}
-          <p className="text-xl md:text-2xl text-white max-w-4xl mx-auto">
+          {/* Subtitle - Gray/muted like design */}
+          <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto">
             Managing firm-wide risk across multiple PMs shouldn't require a PhD in spreadsheet gymnastics.
           </p>
         </motion.div>
@@ -170,68 +170,102 @@ function ProblemSection() {
           ))}
         </motion.div>
 
-        {/* Visual: System boxes - No border, pushed down */}
+        {/* Sound Familiar Section - Matching design exactly */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ delay: 0.6, duration: 0.5 }}
-          className="mt-[10%] max-w-4xl mx-auto"
+          className="mt-24 max-w-4xl mx-auto"
         >
-          <div className="p-12">
-            {/* Sound Familiar - Bigger */}
-            <p className="text-center text-white text-2xl md:text-3xl uppercase tracking-widest mb-12 font-bold">
-              Sound Familiar?
-            </p>
+          {/* Sound Familiar - Bold, white, centered */}
+          <h3 className="text-center text-white text-2xl md:text-3xl uppercase tracking-wider mb-10 font-bold">
+            Sound Familiar?
+          </h3>
 
-            {/* System boxes - Colored borders matching cards above */}
-            <div className="flex flex-wrap justify-center items-center gap-5 mb-16">
-              {[
-                { name: 'Bloomberg', color: '#397EEE' },
-                { name: 'Axioma', color: '#22C55E' },
-                { name: 'Excel', color: '#A855F7' },
-                { name: 'Python', color: '#06B6D4' },
-                { name: 'Proprietary', color: '#EAB308' },
-              ].map((system) => (
-                <div
-                  key={system.name}
-                  className="px-8 py-4 bg-slate-800/60 rounded-xl text-white text-lg font-semibold hover:bg-slate-700/80 transition-all duration-200"
-                  style={{ border: `2px solid ${system.color}` }}
-                >
-                  {system.name}
-                </div>
-              ))}
-            </div>
-
-            {/* Arrow - Same spacing above and below */}
-            <div className="flex justify-center py-16">
-              <motion.svg
-                className="w-12 h-20 text-red-500"
-                fill="none"
-                viewBox="0 0 24 40"
-                stroke="currentColor"
-                animate={{ y: [0, 8, 0] }}
-                transition={{ repeat: Infinity, duration: 1.5 }}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 2v32m0 0l-8-8m8 8l8-8" />
-              </motion.svg>
-            </div>
-
-            {/* Risk Report box - Compact, balanced design */}
-            <div className="flex justify-center">
+          {/* System boxes - Colored borders */}
+          <div className="flex flex-wrap justify-center items-center gap-4 mb-12">
+            {[
+              { name: 'Bloomberg', color: '#397EEE' },
+              { name: 'Axioma', color: '#22C55E' },
+              { name: 'Excel', color: '#A855F7' },
+              { name: 'Python', color: '#06B6D4' },
+              { name: 'Proprietary', color: '#EAB308' },
+            ].map((system) => (
               <div
-                className="inline-flex items-center gap-4 px-8 py-4 rounded-2xl"
-                style={{
-                  backgroundColor: 'rgba(239, 68, 68, 0.12)',
-                  border: '2px solid #ef4444',
-                }}
+                key={system.name}
+                className="px-6 py-3 bg-slate-800/80 rounded-lg text-white text-base font-medium"
+                style={{ border: `1.5px solid ${system.color}` }}
               >
-                <svg className="w-7 h-7 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                </svg>
-                <span className="text-red-500 font-bold text-xl">Risk Report</span>
-                <span className="text-slate-400 mx-2">|</span>
-                <span className="text-slate-300 text-lg">2 days late, 47 errors</span>
+                {system.name}
               </div>
+            ))}
+          </div>
+
+          {/* Animated Arrow - bouncing like landing page */}
+          <div className="flex justify-center py-8">
+            <motion.div
+              animate={{ y: [0, 12, 0] }}
+              transition={{
+                repeat: Infinity,
+                duration: 1.5,
+                ease: "easeInOut"
+              }}
+            >
+              <svg
+                width="40"
+                height="50"
+                viewBox="0 0 40 50"
+                fill="none"
+              >
+                {/* Arrow shaft */}
+                <motion.line
+                  x1="20"
+                  y1="0"
+                  x2="20"
+                  y2="38"
+                  stroke="#ef4444"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                />
+                {/* Arrow head */}
+                <motion.path
+                  d="M8 30 L20 45 L32 30"
+                  stroke="#ef4444"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                />
+              </svg>
+            </motion.div>
+          </div>
+
+          {/* Risk Report box - Wide, red outline only, horizontal layout */}
+          <div className="flex justify-center">
+            <div
+              className="flex items-center justify-center gap-6 px-12 py-5 rounded-full w-full max-w-xl"
+              style={{
+                border: '2px solid #ef4444',
+                backgroundColor: 'transparent',
+              }}
+            >
+              {/* Warning Icon - filled red */}
+              <svg className="w-8 h-8 flex-shrink-0" viewBox="0 0 24 24" fill="#ef4444">
+                <path d="M12 2L1 21h22L12 2zm0 3.5L19.5 19h-15L12 5.5zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/>
+              </svg>
+
+              {/* Risk Report text */}
+              <span className="text-red-500 font-bold text-lg uppercase tracking-wide flex-shrink-0">
+                Risk Report
+              </span>
+
+              {/* Divider */}
+              <span className="text-slate-500 text-xl">|</span>
+
+              {/* Status text */}
+              <span className="text-slate-200 text-base flex-shrink-0">
+                3 hours late, 47 errors
+              </span>
             </div>
           </div>
         </motion.div>
