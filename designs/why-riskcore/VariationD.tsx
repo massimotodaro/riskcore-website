@@ -183,14 +183,14 @@ function TrySection() {
   return (
     <>
       <section
-        className="relative flex items-center justify-center"
+        className="relative flex items-center justify-center px-0"
         style={{
           height: '10vh',
           background: 'linear-gradient(to bottom, #151E31, #0f172a)'
         }}
       >
         <div
-          className="px-16 py-5 rounded-full border-2 border-red-500 w-[60%] flex items-center justify-center"
+          className="py-5 border-y-2 border-red-500 w-full flex items-center justify-center"
           style={{ backgroundColor: 'rgba(30, 41, 59, 0.8)' }}
         >
           <h2 className="text-red-500 font-semibold text-2xl md:text-3xl">
