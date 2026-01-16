@@ -181,22 +181,31 @@ function ProblemSection() {
 
 function TrySection() {
   return (
-    <section
-      className="relative flex items-center justify-center"
-      style={{
-        height: '10vh',
-        background: 'linear-gradient(to bottom, #151E31, #0f172a)'
-      }}
-    >
-      <div
-        className="px-12 py-5 rounded-full border-2 border-white"
-        style={{ backgroundColor: 'rgba(30, 41, 59, 0.8)' }}
+    <>
+      <section
+        className="relative flex items-center justify-center"
+        style={{
+          height: '10vh',
+          background: 'linear-gradient(to bottom, #151E31, #0f172a)'
+        }}
       >
-        <h2 className="text-red-500 font-semibold text-2xl md:text-3xl">
-          Risk Report <span className="text-slate-400">|</span> <span className="text-white">3hrs late - Inaccurate</span>
-        </h2>
-      </div>
-    </section>
+        <div
+          className="px-12 py-5 rounded-full border-2 border-white"
+          style={{ backgroundColor: 'rgba(30, 41, 59, 0.8)' }}
+        >
+          <h2 className="text-red-500 font-semibold text-2xl md:text-3xl">
+            Risk Report <span className="text-slate-400">|</span> <span className="text-white">3hrs late - Inaccurate</span>
+          </h2>
+        </div>
+      </section>
+      <section
+        className="relative flex items-center justify-center"
+        style={{
+          height: '10vh',
+          background: 'linear-gradient(to bottom, #0f172a, #151E31)'
+        }}
+      />
+    </>
   )
 }
 
