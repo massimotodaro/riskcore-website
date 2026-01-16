@@ -185,13 +185,18 @@ function CurvedArrows({ isInView }: CurvedArrowsProps) {
         {arrows.map((arrow, i) => {
           // Badge is w-8 (32px) at left-4 (16px from card edge)
           // Each card is 200 units wide
-          // Badge spans: card_start + 16 to card_start + 48
-          // Top-right of badge: i * 200 + 48
-          // Top-left of next badge: (i+1) * 200 + 16
-          const startX = i * 200 + 52  // Top-right of current badge
-          const endX = (i + 1) * 200 + 12  // Top-left of next badge
+          // Make arrows 25% shorter by adjusting start/end points inward
+          const originalStartX = i * 200 + 52
+          const originalEndX = (i + 1) * 200 + 12
+          const span = originalEndX - originalStartX
+          const shortenAmount = span * 0.125  // 12.5% from each side = 25% total shorter
+          const startX = originalStartX + shortenAmount
+          const endX = originalEndX - shortenAmount
           const midX = (startX + endX) / 2
-          const curveHeight = -18  // Shorter upward curve
+          const curveHeight = -18  // Upward curve
+
+          // Push arrows up by 10% (viewBox height is 64, so 6.4 units up)
+          const baseY = 48  // Was 54, now 48 (moved up ~10%)
 
           // Determine visibility based on phase
           const isDrawing = phase === 'sequence' && activeArrow === i
@@ -203,26 +208,28 @@ function CurvedArrows({ isInView }: CurvedArrowsProps) {
             <g key={i}>
               {/* Curved line */}
               <motion.path
-                d={`M ${startX} 54 Q ${midX} ${54 + curveHeight} ${endX} 54`}
+                d={`M ${startX} ${baseY} Q ${midX} ${baseY + curveHeight} ${endX} ${baseY}`}
                 stroke={`url(#curve-gradient-${i})`}
-                strokeWidth="4"
+                strokeWidth="12"
                 strokeLinecap="round"
                 fill="none"
-                initial={{ pathLength: 0, opacity: 0 }}
+                initial={{ pathLength: 0, pathOffset: 0, opacity: 0 }}
                 animate={{
-                  pathLength: shouldShow ? 1 : 0,
-                  opacity: isDisappearing ? 0 : (shouldShow ? 1 : 0)
+                  pathLength: shouldShow ? 1 : (isDisappearing ? 1 : 0),
+                  pathOffset: isDisappearing ? 1 : 0,
+                  opacity: shouldShow ? 1 : (isDisappearing ? 1 : 0)
                 }}
                 transition={{
                   pathLength: { duration: isAllVisible ? 0.8 : 1.2, ease: "easeInOut" },
+                  pathOffset: { duration: isDisappearing ? 0.8 : 0, ease: "easeInOut" },
                   opacity: { duration: isDisappearing ? 0.8 : (isAllVisible ? 1.0 : 0.3), ease: "easeInOut" }
                 }}
               />
-              {/* Arrow head */}
+              {/* Arrow head - made wider to match stroke */}
               <motion.path
-                d={`M ${endX - 8} ${48} L ${endX + 3} ${54} L ${endX - 8} ${60}`}
+                d={`M ${endX - 12} ${baseY - 10} L ${endX + 5} ${baseY} L ${endX - 12} ${baseY + 10}`}
                 stroke={arrow.to}
-                strokeWidth="4"
+                strokeWidth="12"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 fill="none"
