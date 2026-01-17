@@ -4,6 +4,7 @@ import {
   SlowAnswersProblem,
   RegulatoryBlindSpotsProblem,
   UnknownCorrelationProblem,
+  TimeWastedProblem,
 } from '@/components/problems'
 
 export const metadata: Metadata = {
@@ -22,6 +23,7 @@ export default function ProblemPreview() {
           <a href="#slow-answers" className="block text-sm text-slate-400 hover:text-white transition-colors">2. Slow Answers</a>
           <a href="#regulatory" className="block text-sm text-slate-400 hover:text-white transition-colors">3. Regulatory</a>
           <a href="#unknown-correlation" className="block text-sm text-slate-400 hover:text-white transition-colors">4. Unknown Correlation</a>
+          <a href="#time-wasted" className="block text-sm text-slate-400 hover:text-white transition-colors">5. Time Wasted</a>
         </nav>
       </div>
 
@@ -40,6 +42,10 @@ export default function ProblemPreview() {
 
       <div id="unknown-correlation">
         <UnknownCorrelationProblem />
+      </div>
+
+      <div id="time-wasted">
+        <TimeWastedProblem />
       </div>
     </div>
   )
