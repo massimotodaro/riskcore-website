@@ -1,5 +1,6 @@
 import {
   Hero,
+  WhyRiskcoreHero,
   TimeTravelSection,
   Features,
   DashboardPreview,
@@ -10,6 +11,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <WhyRiskcoreHero />
       <TimeTravelSection />
       <DashboardPreview />
       <Features />

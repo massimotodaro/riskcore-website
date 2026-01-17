@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { Problem, Solution, HowItWorks } from '@/components'
+import WhyRiskcoreVariationD from '../../../designs/why-riskcore/VariationD'
 
 export const metadata: Metadata = {
   title: 'Why RISKCORE | The Multi-Manager Risk Solution',
@@ -12,11 +12,5 @@ export const metadata: Metadata = {
 }
 
 export default function WhyRiskcore() {
-  return (
-    <div className="pt-20">
-      <Problem />
-      <Solution />
-      <HowItWorks />
-    </div>
-  )
+  return <WhyRiskcoreVariationD />
 }
