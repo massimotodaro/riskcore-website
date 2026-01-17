@@ -187,7 +187,7 @@ export default function SlowAnswersProblem() {
                     >
                       <span className="text-xs font-bold" style={{ color: taskColors[index] }}>{index + 1}</span>
                     </span>
-                    <p className="text-slate-300 text-sm">{item.task}</p>
+                    <p className="text-slate-100 font-normal text-sm leading-snug">{item.task}</p>
                   </div>
                   <div
                     className="px-2 py-0.5 rounded-full ml-4"
