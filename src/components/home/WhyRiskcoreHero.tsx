@@ -224,16 +224,16 @@ export default function WhyRiskcoreHero() {
             className="mx-auto flex items-center justify-center rounded-full"
             style={{
               width: '800px',
-              height: '100px',
+              height: '80px',
               marginTop: '20px',
               backgroundColor: 'rgba(30, 41, 59, 0.8)',
               border: '2px solid #ef4444',
             }}
           >
             <div className="flex items-center gap-4">
-              <h2 className="font-bold text-4xl md:text-5xl" style={{ color: '#ef4444' }}>Risk Report</h2>
-              <span className="text-white text-3xl">|</span>
-              <span className="text-white text-xl md:text-2xl">3hrs late - Inaccurate</span>
+              <h3 className="font-bold text-2xl md:text-3xl" style={{ color: '#ef4444' }}>Risk Report</h3>
+              <span className="text-white text-2xl">|</span>
+              <span className="text-white text-lg md:text-xl">3hrs late - Inaccurate</span>
             </div>
           </motion.div>
         </motion.div>
