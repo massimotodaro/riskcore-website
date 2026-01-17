@@ -84,7 +84,7 @@ function ProblemSection() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section className="relative py-24 overflow-hidden" style={{ background: 'linear-gradient(to bottom, #0a0f1a, #151E31)' }}>
+    <section className="relative py-24" style={{ background: 'linear-gradient(to bottom, #0a0f1a, #151E31)' }}>
       {/* Background Grid */}
       <div
         className="absolute inset-0 opacity-[0.03]"
@@ -102,18 +102,18 @@ function ProblemSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          {/* "The Problem" Badge - Blue border, rounded-full (pill shape) */}
+          {/* "The Problem" Badge - Green border, rounded-full (pill shape) */}
           <motion.div
             className="inline-block px-6 py-3 rounded-full mb-8"
             style={{
-              backgroundColor: 'rgba(59, 130, 246, 0.1)',
-              border: '2px solid #3b82f6',
+              backgroundColor: 'rgba(34, 197, 94, 0.1)',
+              border: '2px solid #22C55E',
             }}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
           >
-            <span className="text-lg font-bold uppercase tracking-wider" style={{ color: '#3b82f6' }}>The Problem</span>
+            <span className="text-lg font-bold uppercase tracking-wider" style={{ color: '#22C55E' }}>The Problem</span>
           </motion.div>
 
           {/* Title - One line, "Challenge" in green */}
@@ -133,7 +133,7 @@ function ProblemSection() {
           variants={staggerContainer}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto"
+          className="grid md:grid-cols-2 gap-6 max-w-[1600px] mx-auto"
         >
           {painPoints.map((point, index) => (
             <motion.div
@@ -170,42 +170,82 @@ function ProblemSection() {
           ))}
         </motion.div>
 
+        {/* Animated Hand-drawn Arrow */}
+        <div className="flex flex-col items-center mt-12 mb-4">
+          <motion.div
+            animate={{
+              opacity: [0.5, 1, 0.5],
+            }}
+            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+          >
+            <svg
+              width="60"
+              height="150"
+              viewBox="0 0 60 150"
+              fill="none"
+            >
+              <defs>
+                <linearGradient id="arrow-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#64748b" />
+                  <stop offset="100%" stopColor="#ef4444" />
+                </linearGradient>
+              </defs>
+              {/* Hand-drawn curved shaft */}
+              <motion.path
+                d="M 30 5 Q 35 40 28 75 Q 22 110 30 130"
+                stroke="url(#arrow-gradient)"
+                strokeWidth="8"
+                strokeLinecap="round"
+                fill="none"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 1, ease: "easeOut" }}
+              />
+              {/* Hand-drawn arrow head */}
+              <motion.path
+                d="M 15 115 Q 25 135 30 145 Q 35 135 45 115"
+                stroke="#ef4444"
+                strokeWidth="8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                fill="none"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8, duration: 0.3 }}
+              />
+            </svg>
+          </motion.div>
+        </div>
+
+        {/* Single Column Grid */}
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          className="grid grid-cols-1 gap-6 max-w-[1600px] mx-auto"
+        >
+          {/* Risk Report Card */}
+          <motion.div
+            variants={fadeInUp}
+            className="mx-auto flex items-center justify-center rounded-full"
+            style={{
+              width: '800px',
+              height: '100px',
+              marginTop: '20px',
+              backgroundColor: 'rgba(30, 41, 59, 0.8)',
+              border: '2px solid #ef4444',
+            }}
+          >
+            <div className="flex items-center gap-4">
+              <h2 className="font-bold text-4xl md:text-5xl" style={{ color: '#ef4444' }}>Risk Report</h2>
+              <span className="text-white text-3xl">|</span>
+              <span className="text-white text-xl md:text-2xl">3hrs late - Inaccurate</span>
+            </div>
+          </motion.div>
+        </motion.div>
+
       </div>
     </section>
-  )
-}
-
-// ==============================================
-// TRY SECTION
-// ==============================================
-
-function TrySection() {
-  return (
-    <>
-      <section
-        className="relative flex items-center justify-center px-0"
-        style={{
-          height: '10vh',
-          background: 'linear-gradient(to bottom, #151E31, #0f172a)'
-        }}
-      >
-        <div
-          className="py-5 border-y-2 border-red-500 w-full flex items-center justify-center"
-          style={{ backgroundColor: 'rgba(30, 41, 59, 0.8)' }}
-        >
-          <h2 className="text-red-500 font-semibold text-2xl md:text-3xl">
-            Risk Report <span className="text-slate-400 mx-3">|</span> <span className="text-white text-lg md:text-xl font-normal">3hrs late - Inaccurate</span>
-          </h2>
-        </div>
-      </section>
-      <section
-        className="relative flex items-center justify-center"
-        style={{
-          height: '10vh',
-          background: 'linear-gradient(to bottom, #0f172a, #151E31)'
-        }}
-      />
-    </>
   )
 }
 
@@ -729,7 +769,6 @@ export default function WhyRiskcoreVariationD() {
   return (
     <div className="pt-20">
       <ProblemSection />
-      <TrySection />
       <ImpactSection />
       <DifferenceSection />
       <FeatureDeepDive />
