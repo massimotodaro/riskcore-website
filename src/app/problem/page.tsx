@@ -1,10 +1,9 @@
 import { Metadata } from 'next'
 import {
-  DataSilosProblem,
+  DataSilosCombinedProblem,
   SlowAnswersProblem,
-  CompetitorsProblem,
   RegulatoryBlindSpotsProblem,
-  CorrelationProblem,
+  UnknownCorrelationProblem,
 } from '@/components/problems'
 
 export const metadata: Metadata = {
@@ -20,20 +19,15 @@ export default function ProblemPreview() {
         <p className="text-xs text-slate-500 mb-2 uppercase tracking-wider">Jump to:</p>
         <nav className="space-y-1">
           <a href="#data-silos" className="block text-sm text-slate-400 hover:text-white transition-colors">1. Data Silos</a>
-          <a href="#system-fragmentation" className="block text-sm text-slate-400 hover:text-white transition-colors">2. System Fragmentation</a>
-          <a href="#slow-answers" className="block text-sm text-slate-400 hover:text-white transition-colors">3. Slow Answers</a>
-          <a href="#regulatory" className="block text-sm text-slate-400 hover:text-white transition-colors">4. Regulatory</a>
-          <a href="#correlation" className="block text-sm text-slate-400 hover:text-white transition-colors">5. Correlation</a>
+          <a href="#slow-answers" className="block text-sm text-slate-400 hover:text-white transition-colors">2. Slow Answers</a>
+          <a href="#regulatory" className="block text-sm text-slate-400 hover:text-white transition-colors">3. Regulatory</a>
+          <a href="#unknown-correlation" className="block text-sm text-slate-400 hover:text-white transition-colors">4. Unknown Correlation</a>
         </nav>
       </div>
 
       {/* Components */}
       <div id="data-silos">
-        <DataSilosProblem />
-      </div>
-
-      <div id="system-fragmentation">
-        <CompetitorsProblem />
+        <DataSilosCombinedProblem />
       </div>
 
       <div id="slow-answers">
@@ -44,8 +38,8 @@ export default function ProblemPreview() {
         <RegulatoryBlindSpotsProblem />
       </div>
 
-      <div id="correlation">
-        <CorrelationProblem />
+      <div id="unknown-correlation">
+        <UnknownCorrelationProblem />
       </div>
     </div>
   )

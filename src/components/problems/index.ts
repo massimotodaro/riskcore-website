@@ -1,6 +1,8 @@
 export { default as DataSilosProblem } from './DataSilosProblem'
+export { default as DataSilosCombinedProblem } from './DataSilosCombinedProblem'
 export { default as SlowAnswersProblem } from './SlowAnswersProblem'
 export { default as CompetitorsProblem } from './CompetitorsProblem'
 export { default as SpreadsheetTaxProblem } from './SpreadsheetTaxProblem'
 export { default as RegulatoryBlindSpotsProblem } from './RegulatoryBlindSpotsProblem'
 export { default as CorrelationProblem } from './CorrelationProblem'
+export { default as UnknownCorrelationProblem } from './UnknownCorrelationProblem'
