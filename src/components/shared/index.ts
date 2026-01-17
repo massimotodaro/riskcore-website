@@ -8,3 +8,5 @@ export {
   CardFooter,
 } from './Card'
 export { Section, SectionHeader } from './Section'
+export { AnimatedArrow } from './AnimatedArrow'
+export type { AnimatedArrowProps, ArrowVariant } from './AnimatedArrow'
