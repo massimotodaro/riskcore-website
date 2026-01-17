@@ -112,12 +112,12 @@ export default function WhyRiskcoreHero() {
 
           {/* Title - One line, "Challenge" in green */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-100 mb-6">
-            The Multi-Manager Risk <span style={{ color: '#22C55E' }}>Challenge</span>
+            The Multi-Book Risk <span style={{ color: '#22C55E' }}>Challenge</span>
           </h1>
 
           {/* Subtitle - Gray/muted like design */}
-          <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto">
-            Managing firm-wide risk across multiple PMs shouldn't require a PhD in spreadsheet gymnastics.
+          <p className="text-lg md:text-xl text-slate-400 max-w-4xl mx-auto whitespace-nowrap">
+            Understanding the firm-wide risk across multiple books shouldn't require a PhD in spreadsheet gymnastics.
           </p>
         </motion.div>
 
