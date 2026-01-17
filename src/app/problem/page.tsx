@@ -5,7 +5,6 @@ import {
   CompetitorsProblem,
   RegulatoryBlindSpotsProblem,
   CorrelationProblem,
-  SpreadsheetTaxProblem,
 } from '@/components/problems'
 
 export const metadata: Metadata = {
@@ -25,7 +24,6 @@ export default function ProblemPreview() {
           <a href="#slow-answers" className="block text-sm text-slate-400 hover:text-white transition-colors">3. Slow Answers</a>
           <a href="#regulatory" className="block text-sm text-slate-400 hover:text-white transition-colors">4. Regulatory</a>
           <a href="#correlation" className="block text-sm text-slate-400 hover:text-white transition-colors">5. Correlation</a>
-          <a href="#spreadsheet-tax" className="block text-sm text-slate-400 hover:text-white transition-colors">6. Spreadsheet Tax</a>
         </nav>
       </div>
 
@@ -48,10 +46,6 @@ export default function ProblemPreview() {
 
       <div id="correlation">
         <CorrelationProblem />
-      </div>
-
-      <div id="spreadsheet-tax">
-        <SpreadsheetTaxProblem />
       </div>
     </div>
   )

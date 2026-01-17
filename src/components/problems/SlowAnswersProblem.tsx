@@ -170,7 +170,7 @@ export default function SlowAnswersProblem() {
             </div>
 
             {/* Simple Table List - Single Column */}
-            <div className="space-y-3">
+            <div className="space-y-0">
               {dailyTasks.map((item, index) => (
                 <motion.div
                   key={index}
@@ -178,15 +178,25 @@ export default function SlowAnswersProblem() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.1 + index * 0.05, duration: 0.3 }}
-                  className="flex items-center justify-between py-2 border-b border-white/5 last:border-0"
+                  className="flex items-center justify-between py-3"
                 >
-                  <div className="flex items-center gap-3">
-                    <span
-                      className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: `${taskColors[index]}20`, border: `1px solid ${taskColors[index]}40` }}
-                    >
-                      <span className="text-xs font-bold" style={{ color: taskColors[index] }}>{index + 1}</span>
-                    </span>
+                  <div className="flex items-center gap-4">
+                    {/* Circle with gradient connecting line */}
+                    <div className="relative">
+                      <div
+                        className="relative z-10 w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
+                        style={{ backgroundColor: `${taskColors[index]}20`, border: `1px solid ${taskColors[index]}40` }}
+                      >
+                        <span className="font-bold" style={{ color: taskColors[index] }}>{index + 1}</span>
+                      </div>
+                      {/* Vertical line connector */}
+                      {index < dailyTasks.length - 1 && (
+                        <div
+                          className="absolute left-5 top-12 w-0.5 h-1/2"
+                          style={{ background: `linear-gradient(to bottom, ${taskColors[index]}66, transparent)` }}
+                        />
+                      )}
+                    </div>
                     <p className="text-slate-100 font-normal text-sm leading-snug">{item.task}</p>
                   </div>
                   <div
@@ -213,7 +223,7 @@ export default function SlowAnswersProblem() {
           </motion.div>
 
           {/* Right Column: Question Cards Stacked */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 justify-center">
             {questions.map((q, index) => (
               <QuestionCard key={index} {...q} index={index} />
             ))}
@@ -253,21 +263,21 @@ export default function SlowAnswersProblem() {
 
               {/* Bullet points - Right side */}
               <div className="space-y-1.5 flex-1">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-4">
                   <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#eab308' }} />
-                  <p className="text-slate-100 text-sm font-semibold">Risk concentrations go undetected for days</p>
+                  <p className="text-slate-100 text-sm font-semibold">Senior analysts doing data entry instead of analysis</p>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-4">
                   <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#f97316' }} />
-                  <p className="text-slate-100 text-sm font-semibold">PM offsets hidden (long $50M / short $45M = Net $5M)</p>
+                  <p className="text-slate-100 text-sm font-semibold">Errors compound (wrong CUSIP = wrong exposure)</p>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-4">
                   <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#ef4444' }} />
-                  <p className="text-slate-100 text-sm font-semibold">Regulatory reporting requires manual data gathering</p>
+                  <p className="text-slate-100 text-sm font-semibold">By the time reports are done, positions have changed</p>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-4">
                   <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#dc2626' }} />
-                  <p className="text-slate-100 text-sm font-semibold">Crisis response is reactive, not proactive</p>
+                  <p className="text-slate-100 text-sm font-semibold">No ability to ask ad-hoc questions in real-time</p>
                 </div>
               </div>
             </div>

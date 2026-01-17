@@ -23,7 +23,7 @@ const currentProcess = [
   { step: 2, task: 'Normalize formats manually', time: '1-2 days', icon: '🔄' },
   { step: 3, task: 'Aggregate in Excel', time: '1 day', icon: '📊' },
   { step: 4, task: 'Validate (find errors, request corrections)', time: '2-3 days', icon: '🔍' },
-  { step: 5, task: 'Submit (pray nothing was missed)', time: '1 day', icon: '🤞' },
+  { step: 5, task: 'Submit (hope nothing was missed)', time: '1 day', icon: '🤞' },
 ]
 
 function RegulationBadge({ name, authority, requirement, color, index }: {
@@ -39,18 +39,18 @@ function RegulationBadge({ name, authority, requirement, color, index }: {
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.4 }}
-      className="bg-[#1e293b]/90 backdrop-blur-sm border border-white/10 rounded-2xl p-5 hover:border-yellow-500/30 transition-all duration-300"
+      className="bg-[#1e293b]/90 backdrop-blur-sm border border-white/10 rounded-2xl p-5 hover:border-cyan-500/30 transition-all duration-300"
     >
       <div className="flex items-start justify-between mb-3">
         <div
-          className="px-3 py-1 rounded-lg text-sm font-bold"
+          className="px-4 py-1.5 rounded-lg text-base font-bold"
           style={{ backgroundColor: `${color}20`, color, border: `1px solid ${color}40` }}
         >
           {name}
         </div>
-        <span className="text-xs text-slate-500 bg-slate-800/50 px-2 py-1 rounded">{authority}</span>
+        <span className="text-sm text-slate-300 bg-slate-800/50 px-2.5 py-1 rounded font-medium">{authority}</span>
       </div>
-      <p className="text-sm text-slate-400">{requirement}</p>
+      <p className="text-sm text-slate-100">{requirement}</p>
     </motion.div>
   )
 }
@@ -75,20 +75,17 @@ function ProcessStep({ step, task, time, icon, index, total }: {
     >
       {/* Vertical line connector */}
       {!isLast && (
-        <div className="absolute left-5 top-12 w-0.5 h-full bg-gradient-to-b from-yellow-500/40 to-transparent" />
+        <div className="absolute left-5 top-12 w-0.5 h-1/2 bg-gradient-to-b from-cyan-500/40 to-transparent" />
       )}
 
       {/* Step circle */}
-      <div className="relative z-10 w-10 h-10 rounded-full bg-yellow-500/20 border border-yellow-500/40 flex items-center justify-center flex-shrink-0">
-        <span className="text-yellow-400 font-bold">{step}</span>
+      <div className="relative z-10 w-10 h-10 rounded-full bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center flex-shrink-0">
+        <span className="text-cyan-400 font-bold">{step}</span>
       </div>
 
       {/* Content */}
       <div className="flex-1 pb-8">
-        <div className="flex items-center gap-2 mb-1">
-          <span className="text-xl">{icon}</span>
-          <p className="text-slate-200 font-medium">{task}</p>
-        </div>
+        <p className="text-slate-200 font-medium mb-1">{task}</p>
         <div className="inline-block px-2 py-0.5 bg-orange-500/10 border border-orange-500/30 rounded text-xs text-orange-400 font-mono">
           {time}
         </div>
@@ -115,13 +112,13 @@ export default function RegulatoryBlindSpotsProblem() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="inline-block px-4 py-2 bg-yellow-500/10 border border-yellow-500/30 rounded-full text-yellow-400 text-sm font-medium mb-6"
+            className="inline-block px-4 py-2 bg-cyan-500/10 border border-cyan-500/30 rounded-full text-cyan-400 text-sm font-medium mb-6"
           >
-            Compliance Risk
+            The Compliance Risk Problem
           </motion.span>
 
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-100 font-['Space_Grotesk'] mb-4">
-            Regulatory & Compliance <span className="text-yellow-400">Blind Spots</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-100 font-['Space_Grotesk'] mb-4">
+            Regulatory <span className="text-cyan-400">Blind Spots</span>
           </h2>
 
           <p className="text-lg text-slate-400 max-w-2xl mx-auto">
@@ -146,9 +143,12 @@ export default function RegulatoryBlindSpotsProblem() {
             transition={{ duration: 0.5 }}
             className="bg-[#1e293b]/90 backdrop-blur-sm border border-white/10 rounded-2xl p-6"
           >
-            <h3 className="text-xl font-semibold text-slate-100 font-['Space_Grotesk'] mb-6">
-              Current Quarterly Filing Process
-            </h3>
+            <div className="mb-6">
+              <p className="text-slate-400 text-sm uppercase tracking-wider mb-1">Filing Process</p>
+              <h3 className="text-2xl md:text-3xl font-bold text-slate-100 font-['Space_Grotesk']">
+                Every. Single. Quarter.
+              </h3>
+            </div>
 
             <div className="space-y-0">
               {currentProcess.map((p, index) => (
@@ -158,28 +158,28 @@ export default function RegulatoryBlindSpotsProblem() {
           </motion.div>
 
           {/* Time & Risk Callouts */}
-          <div className="space-y-6">
+          <div className="flex flex-col justify-center space-y-6">
             {/* Time Callout */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 border border-yellow-500/30 rounded-2xl p-6"
+              className="bg-gradient-to-br from-cyan-500/10 to-teal-500/10 border border-cyan-500/30 rounded-2xl p-6"
             >
               <div className="flex items-center gap-4">
                 <motion.div
                   animate={{ rotate: [0, 15, -15, 0] }}
                   transition={{ repeat: Infinity, duration: 2, repeatDelay: 3 }}
-                  className="w-16 h-16 bg-yellow-500/20 rounded-2xl flex items-center justify-center"
+                  className="w-16 h-16 bg-cyan-500/20 rounded-2xl flex items-center justify-center"
                 >
-                  <svg className="w-8 h-8 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-8 h-8 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                 </motion.div>
                 <div>
                   <p className="text-sm text-slate-400">Time spent per quarterly filing</p>
-                  <p className="text-4xl font-bold text-yellow-400">2-3 Weeks</p>
+                  <p className="text-4xl font-bold text-cyan-400">2-3 Weeks</p>
                 </div>
               </div>
             </motion.div>
@@ -255,16 +255,16 @@ export default function RegulatoryBlindSpotsProblem() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5, duration: 0.5 }}
-          className="text-center bg-yellow-500/5 border border-yellow-500/20 rounded-2xl p-8"
+          className="text-center bg-cyan-500/5 border border-cyan-500/20 rounded-2xl p-8"
         >
           <div className="flex items-center justify-center gap-3 mb-4">
-            <svg className="w-6 h-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-6 h-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <span className="text-yellow-400 font-semibold">The Core Problem</span>
+            <span className="text-cyan-400 font-semibold">The Core Problem</span>
           </div>
           <p className="text-lg text-slate-300 max-w-3xl mx-auto">
-            Regulators require <span className="text-yellow-400 font-semibold">firm-wide aggregated data</span>, but your data lives in <span className="text-red-400 font-semibold">5+ disconnected systems</span>. The gap between requirement and reality is filled with manual labor and risk.
+            Regulators require <span className="text-cyan-400 font-semibold">firm-wide aggregated data</span>, but your data lives in <span className="text-red-400 font-semibold">5+ disconnected systems</span>. The gap between requirement and reality is filled with manual labor and risk.
           </p>
         </motion.div>
 
