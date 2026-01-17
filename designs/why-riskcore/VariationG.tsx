@@ -13,6 +13,7 @@
 
 import { motion, useInView } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
+import CorrelationBlindSpot from './CorrelationBlindSpot'
 
 // ==============================================
 // CUSTOM SVG ICONS
@@ -629,6 +630,7 @@ export default function WhyRiskcoreVariationG() {
     <div className="pt-20">
       <ProblemSection />
       <CostSection />
+      <CorrelationBlindSpot />
       <SolutionSection />
       <CapabilitiesSection />
     </div>
