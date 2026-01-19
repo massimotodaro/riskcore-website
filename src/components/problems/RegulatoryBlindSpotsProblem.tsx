@@ -122,7 +122,7 @@ export default function RegulatoryBlindSpotsProblem() {
           </h2>
 
           <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            Regulatory reporting requires firm-wide data that doesn't exist in any single system.
+            Regulatory reporting requires firm-wide data that doesn&apos;t exist in any single system.
           </p>
         </motion.div>
 

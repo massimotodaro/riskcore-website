@@ -66,7 +66,7 @@ export default function CorrelationProblem() {
           </h2>
 
           <p className="text-lg text-slate-400">
-            When books sit in different systems with different metrics, correlation becomes invisible—until it's too late.
+            When books sit in different systems with different metrics, correlation becomes invisible—until it&apos;s too late.
           </p>
         </motion.div>
 
@@ -95,7 +95,7 @@ export default function CorrelationProblem() {
                   ))}
                 </div>
                 <div className="mt-4 px-3 py-2 bg-green-500/10 border border-green-500/30 rounded-lg">
-                  <p className="text-green-400 text-sm font-medium text-center">Correlation: ~0.2 — "Diversified"</p>
+                  <p className="text-green-400 text-sm font-medium text-center">Correlation: ~0.2 — &ldquo;Diversified&rdquo;</p>
                 </div>
               </div>
 
@@ -182,7 +182,7 @@ export default function CorrelationProblem() {
                 </motion.div>
                 <div>
                   <p className="font-bold text-slate-100 text-xl">The Blind Spot</p>
-                  <p className="text-sm text-rose-400">Why you can't see it</p>
+                  <p className="text-sm text-rose-400">Why you can&apos;t see it</p>
                 </div>
               </div>
 
@@ -252,7 +252,7 @@ export default function CorrelationProblem() {
           className="relative bg-[#1e293b]/90 backdrop-blur-sm border border-rose-500/30 rounded-2xl p-8"
         >
           {/* Quote marks */}
-          <div className="absolute top-4 left-6 text-6xl text-rose-500/20 font-serif leading-none">"</div>
+          <div className="absolute top-4 left-6 text-6xl text-rose-500/20 font-serif leading-none">&ldquo;</div>
 
           <blockquote className="relative z-10 pl-8">
             <p className="text-lg md:text-xl text-slate-200 italic leading-relaxed">

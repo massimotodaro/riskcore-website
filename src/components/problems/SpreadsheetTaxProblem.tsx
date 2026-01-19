@@ -223,7 +223,7 @@ export default function SpreadsheetTaxProblem() {
               transition={{ delay: 0.4, duration: 0.5 }}
               className="bg-[#1e293b]/90 backdrop-blur-sm border border-orange-500/30 rounded-2xl p-6 text-center"
             >
-              <p className="text-sm text-slate-400 mb-2">Annual "Spreadsheet Tax"</p>
+              <p className="text-sm text-slate-400 mb-2">Annual &ldquo;Spreadsheet Tax&rdquo;</p>
               <p className="text-4xl md:text-5xl font-bold text-orange-400 font-mono">
                 ${(monthlyCost * 12).toLocaleString()}
               </p>

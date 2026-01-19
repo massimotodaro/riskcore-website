@@ -158,7 +158,7 @@ export default function DataSilosCombinedProblem() {
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#a855f7' }} />
-                      <p className="text-slate-100 text-xs font-semibold">Each system defines "exposure" differently</p>
+                      <p className="text-slate-100 text-xs font-semibold">Each system defines &ldquo;exposure&rdquo; differently</p>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#f97316' }} />

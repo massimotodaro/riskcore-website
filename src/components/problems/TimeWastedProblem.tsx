@@ -61,7 +61,7 @@ export default function TimeWastedProblem() {
           </h2>
 
           <p className="text-lg text-slate-400 max-w-3xl mx-auto">
-            Fragmented data turns simple tasks into time-consuming ordeals - whether it's answering a risk question or filing a regulatory report.
+            Fragmented data turns simple tasks into time-consuming ordeals - whether it&apos;s answering a risk question or filing a regulatory report.
           </p>
         </motion.div>
 

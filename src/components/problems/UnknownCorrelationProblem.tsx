@@ -47,7 +47,7 @@ export default function UnknownCorrelationProblem() {
             Hidden Correlations <span style={{ color: '#22C55E' }}>Kill Funds</span>
           </h2>
 
-          <p className="text-lg text-slate-400 max-w-4xl mx-auto">When books sit in different systems with different metrics, correlation becomes invisible - until it's too late.</p>
+          <p className="text-lg text-slate-400 max-w-4xl mx-auto">When books sit in different systems with different metrics, correlation becomes invisible - until it&apos;s too late.</p>
         </motion.div>
 
         {/* Two Column Layout: Questions Left, Correlation Matrix Right */}

@@ -103,7 +103,7 @@ export default function WhyRiskcoreHero() {
 
           {/* Subtitle - Gray/muted like design */}
           <p className="text-lg md:text-xl text-slate-400 max-w-4xl mx-auto whitespace-nowrap">
-            Understanding the firm-wide risk across multiple books shouldn't require a PhD in spreadsheet gymnastics.
+            Understanding the firm-wide risk across multiple books shouldn&apos;t require a PhD in spreadsheet gymnastics.
           </p>
         </motion.div>
 

@@ -172,11 +172,11 @@ export default function DataSilosProblem() {
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#a855f7' }} />
-                  <p className="text-slate-100 text-sm font-semibold">Each system defines "exposure" differently</p>
+                  <p className="text-slate-100 text-sm font-semibold">Each system defines &ldquo;exposure&rdquo; differently</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#f97316' }} />
-                  <p className="text-slate-100 text-sm font-semibold">Identifiers don't match (CUSIP / ISIN / SEDOL)</p>
+                  <p className="text-slate-100 text-sm font-semibold">Identifiers don&apos;t match (CUSIP / ISIN / SEDOL)</p>
                 </div>
               </div>
             </div>
@@ -192,7 +192,7 @@ export default function DataSilosProblem() {
           className="relative bg-[#1e293b]/90 backdrop-blur-sm border border-red-500/30 rounded-2xl p-8"
         >
           {/* Quote marks */}
-          <div className="absolute top-4 left-6 text-6xl text-red-500/20 font-serif leading-none">"</div>
+          <div className="absolute top-4 left-6 text-6xl text-red-500/20 font-serif leading-none">&ldquo;</div>
 
           <blockquote className="relative z-10 pl-8">
             <p className="text-lg md:text-xl text-slate-200 italic leading-relaxed">

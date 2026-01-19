@@ -336,9 +336,9 @@ export default function NativeAISection() {
         >
           <div className="bg-[#1e293b]/90 backdrop-blur-sm border border-white/10 rounded-2xl p-10">
             <p className="text-xl text-slate-300 italic leading-relaxed mb-4">
-              "As hedge fund CIO, I will never allow our{' '}
+              &ldquo;As hedge fund CIO, I will never allow our{' '}
               <span className="text-emerald-400 font-semibold not-italic">positions and exposures</span>{' '}
-              to flow through third-party cloud servers."
+              to flow through third-party cloud servers.&rdquo;
             </p>
             <p className="text-base text-slate-500">
               Mikael T. — CIO multi-strategy hedge fund

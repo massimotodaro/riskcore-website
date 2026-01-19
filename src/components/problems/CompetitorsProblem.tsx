@@ -133,7 +133,7 @@ export default function CompetitorsProblem() {
           className="relative bg-[#1e293b]/90 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-8"
         >
           {/* Quote marks */}
-          <div className="absolute top-4 left-6 text-6xl text-purple-500/20 font-serif leading-none">"</div>
+          <div className="absolute top-4 left-6 text-6xl text-purple-500/20 font-serif leading-none">&ldquo;</div>
 
           <blockquote className="relative z-10 pl-8">
             <p className="text-lg md:text-xl text-slate-200 italic leading-relaxed">
