@@ -95,7 +95,7 @@ function StatsRow() {
 export default function HeroInline() {
   return (
     <section
-      className="relative min-h-screen overflow-hidden"
+      className="relative h-[80vh] overflow-hidden"
       style={{ background: 'linear-gradient(to bottom, #0a0f1a, #151E31, #10182B)' }}
     >
       {/* Background Grid */}
