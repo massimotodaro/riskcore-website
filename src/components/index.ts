@@ -17,6 +17,7 @@ export {
 // Home page components
 export {
   Hero,
+  HeroInline,
   WhyRiskcoreHero,
   TimeTravelSection,
   TrustBadges,

@@ -1,4 +1,5 @@
 export { default as Hero } from './Hero'
+export { default as HeroInline } from './HeroInline'
 export { default as WhyRiskcoreHero } from './WhyRiskcoreHero'
 export { default as TimeTravelSection } from './TimeTravelSection'
 export { default as TrustBadges } from './TrustBadges'
