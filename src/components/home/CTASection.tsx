@@ -49,8 +49,7 @@ export default function CTASection() {
     <section
       id="early-access"
       ref={sectionRef}
-      className="relative py-16 md:py-20 px-4 sm:px-6 overflow-hidden"
-      style={{ background: 'linear-gradient(to bottom, #151E31, #0a0f1a)' }}
+      className="relative py-16 md:py-20 px-4 sm:px-6 overflow-hidden bg-transparent"
     >
       <div className="relative max-w-4xl mx-auto">
         {/* Header */}

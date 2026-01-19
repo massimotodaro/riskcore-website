@@ -24,6 +24,8 @@ export {
   Features,
   DashboardPreview,
   CTASection,
+  FixedSolutionArrow,
+  FixedChallengesArrow,
 } from './home'
 
 // Why RISKCORE page components

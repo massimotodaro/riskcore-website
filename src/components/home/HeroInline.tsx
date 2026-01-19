@@ -95,8 +95,7 @@ function StatsRow() {
 export default function HeroInline() {
   return (
     <section
-      className="relative h-[80vh] overflow-hidden"
-      style={{ background: 'linear-gradient(to bottom, #0a0f1a, #151E31, #10182B)' }}
+      className="relative h-[80vh] overflow-hidden bg-transparent"
     >
       {/* Background Grid */}
       <div
@@ -203,8 +202,8 @@ export default function HeroInline() {
         </div>
       </div>
 
-      {/* Bottom Fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#10182B] to-transparent" />
+      {/* Bottom Line */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
     </section>
   )
 }

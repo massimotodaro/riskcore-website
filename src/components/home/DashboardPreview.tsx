@@ -764,8 +764,7 @@ export default function DashboardPreview() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 px-6 overflow-hidden"
-      style={{ background: 'linear-gradient(to bottom, #151E31, #10182B)' }}
+      className="relative py-24 px-6 overflow-hidden bg-transparent"
     >
       {/* Background Glow */}
       <motion.div
@@ -789,7 +788,7 @@ export default function DashboardPreview() {
             transition={{ delay: 0.3 }}
           >
             One Dashboard.{' '}
-            <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">
+            <span className="text-blue-400">
               Any Combination of Books.
             </span>
           </motion.h2>

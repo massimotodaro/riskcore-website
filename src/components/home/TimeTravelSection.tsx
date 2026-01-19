@@ -525,8 +525,7 @@ export default function TimeTravelSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 px-6 overflow-hidden"
-      style={{ background: 'linear-gradient(to bottom, #151E31, #10182B)' }}
+      className="relative py-24 px-6 overflow-hidden bg-transparent"
     >
       {/* Background effects */}
       <SpeedLines />
@@ -657,6 +656,8 @@ export default function TimeTravelSection() {
           ))}
         </motion.div>
       </div>
+      {/* Bottom Line */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
     </section>
   )
 }

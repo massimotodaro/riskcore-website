@@ -191,8 +191,7 @@ export default function NativeAISection() {
   return (
     <section
       ref={ref}
-      className="relative py-24 overflow-hidden"
-      style={{ background: 'linear-gradient(to bottom, #0f172a, #0d1424, #0f172a)' }}
+      className="relative py-24 overflow-hidden bg-transparent"
     >
       {/* Background gradient orbs */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-emerald-500/5 rounded-full blur-[150px]" />
@@ -347,6 +346,8 @@ export default function NativeAISection() {
           </div>
         </motion.div>
       </div>
+      {/* Bottom Line */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
     </section>
   )
 }

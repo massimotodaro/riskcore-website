@@ -310,9 +310,9 @@ export default function Features() {
 
   return (
     <section
+      id="features-section"
       ref={sectionRef}
-      className="relative py-16 md:py-24 px-4 sm:px-6 overflow-hidden"
-      style={{ background: 'linear-gradient(to bottom, #10182B, #151E31)' }}
+      className="relative py-16 md:py-24 px-4 sm:px-6 overflow-hidden bg-transparent"
     >
 
       <div className="relative max-w-7xl mx-auto">
@@ -330,7 +330,7 @@ export default function Features() {
             transition={{ delay: 0.3 }}
           >
             From Fragmented Data to{' '}
-            <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">
+            <span className="text-cyan-400">
               Firm-Wide Clarity
             </span>
           </motion.h2>
@@ -374,6 +374,8 @@ export default function Features() {
           </p>
         </motion.div>
       </div>
+      {/* Bottom Line */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
     </section>
   )
 }

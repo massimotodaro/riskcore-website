@@ -13,7 +13,7 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import WhyRiskcoreHero from '@/components/home/WhyRiskcoreHero'
-import { TimeTravelSection, DashboardPreview, Features } from '@/components'
+import { TimeTravelSection, DashboardPreview, Features, FixedChallengesArrow } from '@/components'
 import CorrelationFramework from '@/components/problems/CorrelationFramework'
 import NativeAISection from '@/components/problems/NativeAISection'
 
@@ -136,7 +136,7 @@ const sourceSystems = [
 
 function DifferenceSection() {
   return (
-    <section className="relative py-24 overflow-hidden" style={{ background: 'linear-gradient(to bottom, #0f172a, #151E31)' }}>
+    <section className="relative py-24 overflow-hidden bg-transparent">
       {/* Gradient orbs */}
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-emerald-500/8 rounded-full blur-[150px]" />
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-blue-500/8 rounded-full blur-[120px]" />
@@ -175,20 +175,11 @@ function DifferenceSection() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="relative"
         >
-          {/* 4 Column Layout */}
-          <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-4">
+          {/* 3 Column Layout - Centered and Bigger */}
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-6 max-w-5xl mx-auto">
 
-            {/* Column 1: Tagline */}
-            <div className="lg:w-[24%] text-center lg:text-left lg:-ml-4">
-              <p className="text-2xl md:text-3xl font-medium text-slate-100 leading-tight">
-                "Don't replace PM systems.
-                <br />
-                <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">Aggregate them.</span>"
-              </p>
-            </div>
-
-            {/* Column 2: Source Systems */}
-            <div className="lg:w-[28%] space-y-2">
+            {/* Column 1: Source Systems */}
+            <div className="lg:w-[35%] space-y-3">
               {sourceSystems.map((system, index) => (
                 <motion.div
                   key={system.name}
@@ -223,8 +214,8 @@ function DifferenceSection() {
               ))}
             </div>
 
-            {/* Column 3: Animated Flow Lines */}
-            <div className="lg:w-[12%] flex items-center justify-center py-8 lg:py-0">
+            {/* Column 2: Animated Flow Lines */}
+            <div className="lg:w-[15%] flex items-center justify-center py-8 lg:py-0">
               <svg className="w-full h-32 lg:h-64" viewBox="0 0 100 200" preserveAspectRatio="xMidYMid meet">
                 {/* Animated flowing lines */}
                 {[0, 1, 2, 3, 4].map((i) => (
@@ -243,8 +234,8 @@ function DifferenceSection() {
               </svg>
             </div>
 
-            {/* Column 4: RISKCORE */}
-            <div className="lg:w-[38%]">
+            {/* Column 3: RISKCORE */}
+            <div className="lg:w-[50%]">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -252,7 +243,7 @@ function DifferenceSection() {
                 className="relative"
               >
                 {/* Glowing border effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-green-500/20 rounded-2xl blur-xl" />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-green-500/20 rounded-2xl blur-xl" />
 
                 <div className="relative bg-gradient-to-br from-emerald-500/10 to-green-500/10 border border-emerald-500/40 rounded-2xl p-8">
                   {/* RISKCORE Logo/Title */}
@@ -298,8 +289,20 @@ function DifferenceSection() {
               </motion.div>
             </div>
           </div>
+
+          {/* Tagline underneath */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 0.5 }}
+            className="text-2xl md:text-3xl font-medium text-slate-100 text-center mt-12"
+          >
+            "Don't replace PM systems. <span className="text-orange-400">Aggregate them.</span>"
+          </motion.p>
         </motion.div>
       </div>
+      {/* Bottom Line */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
     </section>
   )
 }
@@ -313,7 +316,7 @@ function CTASection() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section className="relative py-24 overflow-hidden" style={{ background: 'linear-gradient(to bottom, #0f172a, #0a0f1a)' }}>
+    <section className="relative py-24 overflow-hidden bg-transparent">
       <div ref={ref} className="relative max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -350,7 +353,13 @@ function CTASection() {
 
 export default function WhyRiskcoreVariationD() {
   return (
-    <div className="pt-20">
+    <div
+      className="pt-20"
+      style={{
+        background: 'linear-gradient(180deg, #0a0f1a 0%, #0f172a 10%, #151E31 25%, #1a2744 45%, #151E31 65%, #0f172a 80%, #0d1424 90%, #0a0f1a 100%)'
+      }}
+    >
+      <FixedChallengesArrow />
       <DifferenceSection />
       <Features />
       <DashboardPreview />

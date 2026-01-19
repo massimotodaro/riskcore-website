@@ -1,6 +1,7 @@
 import {
-  Hero,
+  HeroInline,
   CTASection,
+  FixedSolutionArrow,
 } from '@/components'
 import {
   TheProblemSection,
@@ -10,9 +11,15 @@ import {
 
 export default function Home() {
   return (
-    <>
+    <div
+      className="min-h-screen"
+      style={{
+        background: 'linear-gradient(180deg, #0a0f1a 0%, #0f172a 15%, #151E31 35%, #1a2744 55%, #151E31 75%, #0f172a 90%, #0a0f1a 100%)'
+      }}
+    >
+      <FixedSolutionArrow />
       <div id="hero">
-        <Hero />
+        <HeroInline />
       </div>
       <div id="problem">
         <TheProblemSection />
@@ -26,6 +33,6 @@ export default function Home() {
       <div id="cta">
         <CTASection />
       </div>
-    </>
+    </div>
   )
 }

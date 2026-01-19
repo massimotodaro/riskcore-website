@@ -32,7 +32,7 @@ const questions = [
 
 export default function UnknownCorrelationProblem() {
   return (
-    <section className="py-24" style={{ background: 'linear-gradient(to bottom, #1a2744, #0f172a)' }}>
+    <section className="relative py-24 bg-transparent">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Section Header */}
@@ -221,6 +221,8 @@ export default function UnknownCorrelationProblem() {
         </motion.div>
 
       </div>
+      {/* Bottom Line */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
     </section>
   )
 }

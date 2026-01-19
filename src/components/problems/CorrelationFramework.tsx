@@ -23,8 +23,7 @@ export default function CorrelationFramework() {
   return (
     <section
       ref={ref}
-      className="relative py-24 overflow-hidden"
-      style={{ background: 'linear-gradient(to bottom, #0f172a, #151E31)' }}
+      className="relative py-24 overflow-hidden bg-transparent"
     >
       {/* Background gradient orbs */}
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[150px]" />
@@ -218,6 +217,8 @@ export default function CorrelationFramework() {
           </div>
         </motion.div>
       </div>
+      {/* Bottom Line */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
     </section>
   )
 }

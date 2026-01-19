@@ -128,7 +128,7 @@ export default function TheProblemSection() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section className="relative py-24" style={{ background: 'linear-gradient(to bottom, #0a0f1a, #151E31)' }}>
+    <section className="relative py-24 bg-transparent">
       {/* Background Grid */}
       <div
         className="absolute inset-0 opacity-[0.03]"
@@ -344,6 +344,8 @@ export default function TheProblemSection() {
         </motion.div>
 
       </div>
+      {/* Bottom Line */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
     </section>
   )
 }

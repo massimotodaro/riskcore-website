@@ -45,7 +45,7 @@ const regulations = [
 
 export default function TimeWastedProblem() {
   return (
-    <section className="py-24" style={{ background: 'linear-gradient(to bottom, #0f172a, #1a2744)' }}>
+    <section className="relative py-24 bg-transparent">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Section Header */}
@@ -335,6 +335,8 @@ export default function TimeWastedProblem() {
         </motion.div>
 
       </div>
+      {/* Bottom Line */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
     </section>
   )
 }
