@@ -51,19 +51,35 @@ function getCorrelationStyle(value: number): { bg: string; text: string } {
   return { bg: '#dc2626', text: '#ffffff' }
 }
 
+// Get glow color based on value
+function getGlowColor(value: number): string {
+  if (value >= 0.7) return 'rgba(34, 197, 94, 0.6)' // green glow for high positive
+  if (value <= -0.35) return 'rgba(239, 68, 68, 0.6)' // red glow for negative
+  return 'transparent'
+}
+
+// Check if cell should glow
+function shouldGlow(value: number): boolean {
+  return Math.abs(value) >= 0.7 || value <= -0.35
+}
+
 // Correlation cell component
 function CorrelationCell({
   value,
   delay = 0,
   isDiagonal = false,
   animate = true,
+  glowDelay = 0,
 }: {
   value: number
   delay?: number
   isDiagonal?: boolean
   animate?: boolean
+  glowDelay?: number
 }) {
   const style = getCorrelationStyle(value)
+  const glowColor = getGlowColor(value)
+  const hasGlow = shouldGlow(value) && !isDiagonal
 
   const cellContent = (
     <div
@@ -90,8 +106,20 @@ function CorrelationCell({
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay, duration: 0.2, ease: 'easeOut' }}
+      animate={hasGlow ? {
+        opacity: 1,
+        scale: 1,
+        boxShadow: [
+          `0 0 0px ${glowColor}`,
+          `0 0 15px ${glowColor}`,
+          `0 0 0px ${glowColor}`,
+        ]
+      } : { opacity: 1, scale: 1 }}
+      transition={hasGlow ? {
+        opacity: { delay, duration: 0.2 },
+        scale: { delay, duration: 0.2 },
+        boxShadow: { delay: glowDelay, duration: 2, repeat: Infinity, ease: 'easeInOut' }
+      } : { delay, duration: 0.2, ease: 'easeOut' }}
       style={{
         width: '74px',
         height: '74px',
@@ -173,6 +201,7 @@ export default function CorrelationMatrix({
                     delay={animate ? 0.01 * (i * 6 + j) : 0}
                     isDiagonal={i === j}
                     animate={animate}
+                    glowDelay={(i * 6 + j) * 0.3}
                   />
                 </td>
               ))}

@@ -48,10 +48,10 @@ export default function CorrelationFramework() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="flex items-center justify-between gap-12 mb-8"
+          className="flex items-start justify-between gap-12 mb-8"
         >
           {/* Left side - Title and subtitle */}
-          <div className="flex-1">
+          <div className="flex-1 pt-[50px]">
             <motion.span
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -63,9 +63,19 @@ export default function CorrelationFramework() {
             <h2 className="text-3xl md:text-4xl font-bold text-slate-100 mb-6 font-['Space_Grotesk']">
               Cross-Portfolio Correlation Framework
             </h2>
-            <p className="text-base text-slate-300 leading-relaxed">
+            <motion.p
+              className="text-base text-slate-300 leading-relaxed"
+              animate={{
+                textShadow: [
+                  '0 0 0px rgba(148, 163, 184, 0)',
+                  '0 0 10px rgba(148, 163, 184, 0.3)',
+                  '0 0 0px rgba(148, 163, 184, 0)',
+                ]
+              }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+            >
               Traditional tools analyze each portfolio in isolation. Our proprietary correlation engine reveals hidden risk relationships between strategies that other platforms miss entirely.
-            </p>
+            </motion.p>
           </div>
 
           {/* Right side - Matrix only */}
@@ -92,6 +102,12 @@ export default function CorrelationFramework() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.5 + index * 0.1, duration: 0.4 }}
+              whileHover={{
+                scale: 1.03,
+                y: -5,
+                boxShadow: `0 10px 40px -10px ${pod.color}40`
+              }}
+              className="transition-all duration-300 rounded-xl"
             >
               <RiskPodMatrixCard
                 name={pod.name}
@@ -117,54 +133,86 @@ export default function CorrelationFramework() {
 
           <div className="grid grid-cols-4 gap-6">
             {/* Strategy Correlation */}
-            <div className="text-center">
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 mx-auto bg-purple-500/15">
+            <motion.div
+              className="text-center p-4 rounded-xl cursor-pointer"
+              whileHover={{ scale: 1.05, backgroundColor: 'rgba(168, 85, 247, 0.1)' }}
+              transition={{ duration: 0.2 }}
+            >
+              <motion.div
+                className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 mx-auto bg-purple-500/15"
+                animate={{ boxShadow: ['0 0 0px rgba(168, 85, 247, 0)', '0 0 20px rgba(168, 85, 247, 0.4)', '0 0 0px rgba(168, 85, 247, 0)'] }}
+                transition={{ duration: 2, repeat: Infinity, delay: 0 }}
+              >
                 <svg className="w-6 h-6 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                 </svg>
-              </div>
+              </motion.div>
               <h4 className="text-base font-semibold text-slate-100 mb-2">Strategy Correlation</h4>
               <p className="text-sm text-slate-400">See how PM strategies move together in real-time</p>
-            </div>
+            </motion.div>
 
             {/* Factor Decomposition */}
-            <div className="text-center">
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 mx-auto bg-blue-500/15">
+            <motion.div
+              className="text-center p-4 rounded-xl cursor-pointer"
+              whileHover={{ scale: 1.05, backgroundColor: 'rgba(59, 130, 246, 0.1)' }}
+              transition={{ duration: 0.2 }}
+            >
+              <motion.div
+                className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 mx-auto bg-blue-500/15"
+                animate={{ boxShadow: ['0 0 0px rgba(59, 130, 246, 0)', '0 0 20px rgba(59, 130, 246, 0.4)', '0 0 0px rgba(59, 130, 246, 0)'] }}
+                transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+              >
                 <svg className="w-6 h-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
-              </div>
+              </motion.div>
               <h4 className="text-base font-semibold text-slate-100 mb-2">Factor Decomposition</h4>
               <p className="text-sm text-slate-400">Break down correlations by asset class and factor</p>
-            </div>
+            </motion.div>
 
             {/* Tail Risk Detection */}
-            <div className="text-center">
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 mx-auto bg-red-500/15">
+            <motion.div
+              className="text-center p-4 rounded-xl cursor-pointer"
+              whileHover={{ scale: 1.05, backgroundColor: 'rgba(239, 68, 68, 0.1)' }}
+              transition={{ duration: 0.2 }}
+            >
+              <motion.div
+                className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 mx-auto bg-red-500/15"
+                animate={{ boxShadow: ['0 0 0px rgba(239, 68, 68, 0)', '0 0 20px rgba(239, 68, 68, 0.4)', '0 0 0px rgba(239, 68, 68, 0)'] }}
+                transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+              >
                 <svg className="w-6 h-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
-              </div>
+              </motion.div>
               <h4 className="text-base font-semibold text-slate-100 mb-2">Tail Risk Detection</h4>
               <p className="text-sm text-slate-400">Identify hidden concentration risks before they compound</p>
-            </div>
+            </motion.div>
 
             {/* Stress Testing */}
-            <div className="text-center">
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 mx-auto bg-green-500/15">
+            <motion.div
+              className="text-center p-4 rounded-xl cursor-pointer"
+              whileHover={{ scale: 1.05, backgroundColor: 'rgba(34, 197, 94, 0.1)' }}
+              transition={{ duration: 0.2 }}
+            >
+              <motion.div
+                className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 mx-auto bg-green-500/15"
+                animate={{ boxShadow: ['0 0 0px rgba(34, 197, 94, 0)', '0 0 20px rgba(34, 197, 94, 0.4)', '0 0 0px rgba(34, 197, 94, 0)'] }}
+                transition={{ duration: 2, repeat: Infinity, delay: 1.5 }}
+              >
                 <svg className="w-6 h-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                 </svg>
-              </div>
+              </motion.div>
               <h4 className="text-base font-semibold text-slate-100 mb-2">Stress Testing</h4>
               <p className="text-sm text-slate-400">Model 2008, 2020, and custom scenarios instantly</p>
-            </div>
+            </motion.div>
           </div>
 
           {/* Quote */}
           <div className="mt-8 pt-6 border-t border-white/10">
             <blockquote className="text-lg font-medium text-slate-300 italic text-center whitespace-nowrap">
-              &ldquo;We discovered that two of our PMs had 0.85 correlation without knowing it. <span className="text-purple-400 not-italic font-semibold">RISKCORE showed us the blind spot.</span>&rdquo;
+              &ldquo;We discovered that two of our PMs had 0.85 correlation without knowing it. <span className="text-blue-500 not-italic font-semibold">RISKCORE showed us the blind spot.</span>&rdquo;
             </blockquote>
             <p className="mt-3 text-slate-500 font-medium text-center">— CRO, $8B Multi-Manager Fund</p>
           </div>

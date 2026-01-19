@@ -15,6 +15,7 @@ import { useRef, useState } from 'react'
 import WhyRiskcoreHero from '@/components/home/WhyRiskcoreHero'
 import { TimeTravelSection, DashboardPreview, Features } from '@/components'
 import CorrelationFramework from '@/components/problems/CorrelationFramework'
+import NativeAISection from '@/components/problems/NativeAISection'
 
 // ==============================================
 // SECTION 2: PAIN POINTS WITH IMPACT NUMBERS (from Variation A)
@@ -304,304 +305,28 @@ function DifferenceSection() {
 }
 
 // ==============================================
-// SECTION 4: DEEP DIVE FEATURES (from Variation B)
+// SECTION 4: CTA
 // ==============================================
 
-const features = [
-  {
-    id: 'correlation',
-    badge: 'Proprietary',
-    title: 'Cross-PM Correlation Framework',
-    headline: 'Hidden risks, revealed',
-    description: 'Traditional tools analyze each PM in isolation. Our proprietary correlation engine reveals hidden risk relationships between strategies that other platforms miss entirely.',
-    benefits: [
-      'Strategy correlation analysis',
-      'Factor decomposition',
-      'Tail risk identification',
-      'Scenario stress testing',
-    ],
-    visual: 'correlation',
-    color: 'purple',
-    gradient: 'from-purple-400 to-pink-500',
-  },
-  {
-    id: 'nlp',
-    badge: 'AI-Powered',
-    title: 'Natural Language Queries',
-    headline: 'Ask questions, get answers',
-    description: 'Ask in plain English, get instant answers.',
-    benefits: [
-      'Claude AI integration',
-      'No SQL knowledge required',
-      'Instant query results',
-      'Exportable reports',
-    ],
-    visual: 'chat',
-    color: 'blue',
-    gradient: 'from-blue-400 to-cyan-500',
-  },
-  {
-    id: 'hedge',
-    badge: 'Industry First',
-    title: 'Zero-Risk Hedge Ratios',
-    headline: 'Instant hedge calculations',
-    description: 'Calculate precise hedge ratios across asset classes.',
-    benefits: [
-      'Equity hedge calculations',
-      'Rates hedge calculations',
-      'Credit hedge calculations',
-      'FX hedge calculations',
-      'Single book or multi-book aggregation',
-    ],
-    visual: 'hedge',
-    color: 'emerald',
-    gradient: 'from-emerald-400 to-green-500',
-  },
-]
-
-function OverlapVisual() {
-  return (
-    <div className="bg-slate-900/80 rounded-xl border border-white/10 p-6">
-      <div className="flex items-center justify-between mb-4">
-        <span className="text-slate-400 text-sm">Overlap Alert</span>
-        <span className="px-2 py-1 bg-red-500/20 text-red-400 text-xs rounded">LIVE</span>
-      </div>
-      <div className="space-y-3">
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.3 }}
-          className="flex items-center justify-between p-3 bg-slate-800/60 rounded-lg border border-emerald-500/20"
-        >
-          <div className="flex items-center gap-3">
-            <span className="text-2xl">AAPL</span>
-            <span className="text-slate-400">PM Alpha + PM Beta</span>
-          </div>
-          <span className="text-emerald-400 font-bold">300K shares</span>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.5 }}
-          className="flex items-center justify-between p-3 bg-slate-800/60 rounded-lg border border-yellow-500/20"
-        >
-          <div className="flex items-center gap-3">
-            <span className="text-2xl">NVDA</span>
-            <span className="text-slate-400">3 PMs overlapping</span>
-          </div>
-          <span className="text-yellow-400 font-bold">Near limit</span>
-        </motion.div>
-      </div>
-    </div>
-  )
-}
-
-function ChatVisual() {
-  const [showResponse, setShowResponse] = useState(false)
-
-  return (
-    <div className="bg-slate-900/80 rounded-xl border border-white/10 p-6">
-      <div className="space-y-4">
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          onAnimationComplete={() => setTimeout(() => setShowResponse(true), 500)}
-          className="flex justify-end"
-        >
-          <div className="bg-blue-500/20 border border-blue-500/30 rounded-2xl rounded-tr-md px-4 py-3 max-w-[80%]">
-            <p className="text-slate-200">What's our total tech exposure across all books?</p>
-          </div>
-        </motion.div>
-        {showResponse && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex justify-start"
-          >
-            <div className="bg-slate-800/60 border border-white/10 rounded-2xl rounded-tl-md px-4 py-3 max-w-[80%]">
-              <p className="text-slate-200 mb-2">Total tech sector exposure: <span className="text-emerald-400 font-bold">$847.2M</span></p>
-              <p className="text-slate-400 text-sm">Across 5 PMs, 23.4% of AUM</p>
-            </div>
-          </motion.div>
-        )}
-      </div>
-    </div>
-  )
-}
-
-function CorrelationVisual() {
-  const correlationData = [
-    { name: 'Alpha', values: ['1.0', '0.72', '0.31', '-0.15', '0.45', '-0.22'] },
-    { name: 'Beta', values: ['0.72', '1.0', '0.18', '0.65', '-0.28', '0.41'] },
-    { name: 'Gamma', values: ['0.31', '0.18', '1.0', '0.52', '-0.38', '0.15'] },
-    { name: 'Delta', values: ['-0.15', '0.65', '0.52', '1.0', '-0.12', '0.68'] },
-    { name: 'Macro', values: ['0.45', '-0.28', '-0.38', '-0.12', '1.0', '-0.55'] },
-    { name: 'Quant', values: ['-0.22', '0.41', '0.15', '0.68', '-0.55', '1.0'] },
-  ]
-  const books = ['Alpha', 'Beta', 'Gamma', 'Delta', 'Macro', 'Quant']
-
-  return (
-    <div className="bg-slate-900/80 rounded-xl border border-white/10 p-6">
-      <div className="text-center mb-4">
-        <span className="text-slate-400 text-sm">Cross-PM Correlation Matrix</span>
-      </div>
-      <div className="flex justify-center">
-        <table>
-          <thead>
-            <tr>
-              <th className="px-2 py-1 w-16"></th>
-              {books.map((book) => (
-                <th key={book} className="px-2 py-1 text-sm text-slate-300 font-semibold">{book}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {correlationData.map((row) => (
-              <tr key={row.name}>
-                <td className="px-2 py-1 text-sm text-slate-300 font-semibold">{row.name}</td>
-                {row.values.map((val, i) => (
-                  <td key={i} className="px-2 py-1 text-center">
-                    {val === '1.0' ? (
-                      <span className="text-lg text-slate-600">1.0</span>
-                    ) : val.startsWith('-') ? (
-                      <span className="text-lg text-red-400 font-semibold">{val}</span>
-                    ) : (
-                      <span className="text-lg text-green-400 font-semibold">{val}</span>
-                    )}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  )
-}
-
-function HedgeVisual() {
-  const hedgeData = [
-    { asset: 'Equity', exposure: '$42.5M', hedge: '-$41.2M', residual: '$1.3M', color: '#3b82f6' },
-    { asset: 'Rates', exposure: '$85K DV01', hedge: '-$82K DV01', residual: '$3K DV01', color: '#22c55e' },
-    { asset: 'Credit', exposure: '$42K CS01', hedge: '-$40K CS01', residual: '$2K CS01', color: '#a855f7' },
-    { asset: 'FX', exposure: '$18.2M', hedge: '-$17.8M', residual: '$0.4M', color: '#06b6d4' },
-  ]
-
-  return (
-    <div className="bg-slate-900/80 rounded-xl border border-white/10 p-6">
-      <div className="text-center mb-4">
-        <span className="text-slate-400 text-sm">Zero-Risk Hedge Calculator</span>
-      </div>
-      <div className="space-y-3">
-        {hedgeData.map((item) => (
-          <div key={item.asset} className="bg-slate-800/50 rounded-lg p-3">
-            <div className="flex items-center justify-between mb-2">
-              <span className="font-semibold text-slate-200" style={{ color: item.color }}>{item.asset}</span>
-              <span className="text-xs text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded">98% hedged</span>
-            </div>
-            <div className="grid grid-cols-3 gap-2 text-xs">
-              <div>
-                <span className="text-slate-500 block">Exposure</span>
-                <span className="text-slate-300 font-mono">{item.exposure}</span>
-              </div>
-              <div>
-                <span className="text-slate-500 block">0Hedge</span>
-                <span className="text-red-400 font-mono">{item.hedge}</span>
-              </div>
-              <div>
-                <span className="text-slate-500 block">Residual</span>
-                <span className="text-emerald-400 font-mono">{item.residual}</span>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function FeatureDeepDive() {
+function CTASection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
-  const visuals: Record<string, React.ReactNode> = {
-    overlap: <OverlapVisual />,
-    chat: <ChatVisual />,
-    correlation: <CorrelationVisual />,
-    hedge: <HedgeVisual />,
-  }
-
   return (
-    <section className="relative py-24 overflow-hidden" style={{ background: 'linear-gradient(to bottom, #151E31, #0a0f1a)' }}>
-      <div ref={ref} className="relative max-w-7xl mx-auto px-4 sm:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-20"
-        >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-100 mb-6">
-            Three Capabilities
-            <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent"> No One Else Has</span>
-          </h2>
-        </motion.div>
-
-        <div className="space-y-20">
-          {features.map((feature, index) => (
-            <div key={feature.id}>
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.2 + index * 0.2, duration: 0.6 }}
-                className={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-12 lg:gap-20`}
-              >
-                {/* Content */}
-                <div className="flex-1">
-                  <h3 className="text-3xl md:text-4xl font-bold text-slate-100 mb-6">
-                    {feature.title}
-                  </h3>
-
-                  <ul className="space-y-3">
-                    {feature.benefits.map((benefit, i) => (
-                      <li key={i} className="flex items-center gap-3">
-                        <svg className="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span className="text-slate-300">{benefit}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Visual */}
-                <div className="flex-1 w-full max-w-md lg:max-w-none">
-                  {visuals[feature.visual]}
-                </div>
-              </motion.div>
-
-              {/* Spacer between sections */}
-              {index < features.length - 1 && (
-                <div className="h-[10px]" />
-              )}
-            </div>
-          ))}
-        </div>
-
-        {/* CTA */}
+    <section className="relative py-24 overflow-hidden" style={{ background: 'linear-gradient(to bottom, #0f172a, #0a0f1a)' }}>
+      <div ref={ref} className="relative max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 1, duration: 0.5 }}
-          className="text-center mt-24"
+          transition={{ duration: 0.5 }}
+          className="text-center"
         >
           <div className="inline-block p-8 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-2xl">
             <p className="text-2xl md:text-3xl font-bold text-slate-100 mb-4">
-              "Don't replace PM systems.
-              <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent"> Aggregate them.</span>"
+              Ready to see how <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">RISKCORE</span> integrates with your trading system seamlessly?
             </p>
-            <p className="text-slate-400 mb-6">
-              Open source. Deploy in days. No vendor lock-in.
+            <p className="text-lg text-slate-400 mb-6">
+              Book a 30-minute demo. We'll show you RISKCORE with your data schema.
             </p>
             <a
               href="/#early-access"
@@ -631,7 +356,8 @@ export default function WhyRiskcoreVariationD() {
       <DashboardPreview />
       <TimeTravelSection />
       <CorrelationFramework />
-      <FeatureDeepDive />
+      <NativeAISection />
+      <CTASection />
     </div>
   )
 }

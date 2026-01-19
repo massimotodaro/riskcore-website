@@ -4,6 +4,8 @@
  * RiskPodMatrixCard.tsx - Small RiskPod Correlation Matrix Card
  */
 
+import { motion } from 'framer-motion'
+
 // Get color style based on correlation value
 function getCorrelationStyle(value: number): { bg: string; text: string } {
   if (value === 1) return { bg: '#334155', text: '#64748b' }
@@ -92,10 +94,27 @@ export default function RiskPodMatrixCard({ name, abbr, anchor, color, matrix }:
                 {rowHeaders[i]}
               </th>
               {row.map((value, j) => {
+                const isDiagonal = i === j
                 const style = getCorrelationStyle(value)
+                const hasGlow = !isDiagonal && (Math.abs(value) >= 0.7 || value <= -0.35)
+                const glowColor = value >= 0.7 ? 'rgba(34, 197, 94, 0.5)' : value <= -0.35 ? 'rgba(239, 68, 68, 0.5)' : 'transparent'
+
                 return (
                   <td key={j} style={{ padding: 0 }}>
-                    <div
+                    <motion.div
+                      animate={hasGlow ? {
+                        boxShadow: [
+                          `0 0 0px ${glowColor}`,
+                          `0 0 8px ${glowColor}`,
+                          `0 0 0px ${glowColor}`,
+                        ]
+                      } : {}}
+                      transition={hasGlow ? {
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                        delay: (i * 6 + j) * 0.2
+                      } : {}}
                       style={{
                         width: '24px',
                         height: '24px',
@@ -111,7 +130,7 @@ export default function RiskPodMatrixCard({ name, abbr, anchor, color, matrix }:
                       }}
                     >
                       {value.toFixed(2)}
-                    </div>
+                    </motion.div>
                   </td>
                 )
               })}
