@@ -15,7 +15,7 @@ const pmSystems = [
   { pm: 'PM Beta', system: 'Enfusion', format: 'REST API', color: '#22c55e' },
   { pm: 'PM Gamma', system: 'Eze Eclipse', format: 'FIX messages', color: '#a855f7' },
   { pm: 'PM Delta', system: 'Excel + Python', format: 'CSV files', color: '#f97316' },
-  { pm: 'PM Epsilon', system: 'Axioma', format: 'Proprietary format', color: '#eab308' },
+  { pm: 'PM Epsilon', system: 'Axioma', format: 'Proprietary format', color: '#22d3ee' },
 ]
 
 const consequences = [
@@ -127,7 +127,7 @@ export default function DataSilosProblem() {
             <path d="M180 0 L180 30 Q180 50 220 60 L300 70" stroke="#22c55e" strokeWidth="2" strokeDasharray="6 4" fill="none" opacity="0.4" />
             <path d="M300 0 L300 70" stroke="#a855f7" strokeWidth="2" strokeDasharray="6 4" fill="none" opacity="0.4" />
             <path d="M420 0 L420 30 Q420 50 380 60 L300 70" stroke="#f97316" strokeWidth="2" strokeDasharray="6 4" fill="none" opacity="0.4" />
-            <path d="M540 0 L540 30 Q540 50 480 60 L300 70" stroke="#eab308" strokeWidth="2" strokeDasharray="6 4" fill="none" opacity="0.4" />
+            <path d="M540 0 L540 30 Q540 50 480 60 L300 70" stroke="#22d3ee" strokeWidth="2" strokeDasharray="6 4" fill="none" opacity="0.4" />
           </svg>
         </div>
 

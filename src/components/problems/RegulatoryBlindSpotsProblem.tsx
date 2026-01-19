@@ -190,83 +190,90 @@ export default function RegulatoryBlindSpotsProblem() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="bg-gradient-to-br from-red-500/10 to-orange-500/10 border border-red-500/30 rounded-2xl p-6"
+              className="bg-[#1e293b]/90 backdrop-blur-sm border border-white/10 rounded-2xl p-6"
             >
               <div className="flex items-center gap-4 mb-4">
                 <motion.div
                   animate={{ scale: [1, 1.1, 1] }}
                   transition={{ repeat: Infinity, duration: 1.5 }}
-                  className="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center"
+                  className="w-12 h-12 bg-slate-500/20 rounded-xl flex items-center justify-center"
                 >
-                  <svg className="w-6 h-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-6 h-6 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                   </svg>
                 </motion.div>
                 <div>
                   <p className="text-sm text-slate-400">Compliance Risk</p>
-                  <p className="text-xl font-bold text-red-400">Material Misstatements</p>
+                  <p className="text-xl font-bold text-slate-100">Material Misstatements</p>
                 </div>
               </div>
               <ul className="space-y-2 ml-16">
                 <li className="text-slate-300 text-sm flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
                   Regulatory scrutiny & audits
                 </li>
                 <li className="text-slate-300 text-sm flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-teal-400" />
                   Potential fines & penalties
                 </li>
                 <li className="text-slate-300 text-sm flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
                   Reputational damage
                 </li>
               </ul>
             </motion.div>
-
-            {/* Deadline Pressure */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4, duration: 0.5 }}
-              className="bg-[#1e293b]/90 backdrop-blur-sm border border-white/10 rounded-2xl p-6"
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <motion.div
-                    animate={{ opacity: [1, 0.5, 1] }}
-                    transition={{ repeat: Infinity, duration: 1 }}
-                    className="w-3 h-3 rounded-full bg-red-500"
-                  />
-                  <span className="text-slate-300 font-medium">Deadline Pressure</span>
-                </div>
-                <div className="text-right">
-                  <p className="text-sm text-slate-500">Form PF due</p>
-                  <p className="text-lg font-bold text-slate-200">60 days after quarter-end</p>
-                </div>
-              </div>
-            </motion.div>
           </div>
         </div>
 
-        {/* Bottom Warning */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5, duration: 0.5 }}
-          className="text-center bg-cyan-500/5 border border-cyan-500/20 rounded-2xl p-8"
-        >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <svg className="w-6 h-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span className="text-cyan-400 font-semibold">The Core Problem</span>
-          </div>
-          <p className="text-lg text-slate-300 max-w-3xl mx-auto">
-            Regulators require <span className="text-cyan-400 font-semibold">firm-wide aggregated data</span>, but your data lives in <span className="text-red-400 font-semibold">5+ disconnected systems</span>. The gap between requirement and reality is filled with manual labor and risk.
-          </p>
-        </motion.div>
+        {/* The Core Problem - Unified Card */}
+        <div className="flex justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+            className="bg-gradient-to-br from-cyan-500/5 to-teal-500/5 border border-cyan-500/20 rounded-2xl px-8 py-5"
+            style={{ width: '70%', minWidth: '600px' }}
+          >
+            <div className="flex items-center gap-8">
+              {/* The Core Problem - Left side */}
+              <div className="flex items-center gap-4">
+                <motion.div
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ repeat: Infinity, duration: 2, repeatDelay: 2 }}
+                  className="w-14 h-14 bg-cyan-500/20 border-2 border-cyan-500/40 rounded-full flex items-center justify-center flex-shrink-0"
+                >
+                  <svg className="w-7 h-7 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </motion.div>
+                <div>
+                  <p className="font-bold text-slate-100 text-xl">The Core Problem</p>
+                  <p className="text-sm text-cyan-400">Compliance Gap</p>
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div className="w-px h-16 bg-white/10 flex-shrink-0" />
+
+              {/* Bullet points - Right side */}
+              <div className="space-y-1.5 flex-1">
+                <div className="flex items-center gap-4">
+                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 bg-cyan-400" />
+                  <p className="text-slate-100 text-sm font-semibold">Regulators require firm-wide aggregated data</p>
+                </div>
+                <div className="flex items-center gap-4">
+                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 bg-teal-400" />
+                  <p className="text-slate-100 text-sm font-semibold">Your data lives in 5+ disconnected systems</p>
+                </div>
+                <div className="flex items-center gap-4">
+                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 bg-red-400" />
+                  <p className="text-slate-100 text-sm font-semibold">The gap is filled with manual labor and risk</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
 
       </div>
     </section>

@@ -26,7 +26,21 @@
       "mcp__supabase__execute_sql",
       "mcp__supabase__list_tables",
       "Bash(timeout 10 npm run dev)",
-      "WebFetch(domain:www.vanta.com)"
+      "WebFetch(domain:www.vanta.com)",
+      "Bash(dir:*)",
+      "Bash(npm run dev:*)",
+      "Bash(cat:*)",
+      "Bash(ls:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "WebSearch",
+      "WebFetch(domain:www.ssctech.com)",
+      "WebFetch(domain:www.arcesium.com)",
+      "WebFetch(domain:www.waterstechnology.com)",
+      "WebFetch(domain:kx.com)",
+      "WebFetch(domain:thehedgefundjournal.com)",
+      "Bash(timeout:*)",
+      "Bash(npx kill-port:*)"
     ]
   }
 }

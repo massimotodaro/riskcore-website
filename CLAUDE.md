@@ -122,3 +122,21 @@ git push
 - `ROADMAP.md` - Project phases
 - `designs/Riskboard.html` - Visual reference
 - `context/` - Business documentation
+
+## FRONTEND CHANGES PROTOCOL
+
+Before making ANY CSS/styling changes:
+1. Read DESIGN-SYSTEM.md completely
+2. Identify the CURRENT values in the code
+3. State the EXACT changes: "Changing X from Y to Z"
+4. After changes, list all modified classes
+
+NEVER use:
+- Arbitrary values not in the design system
+- Different spacing than specified
+- Colors not in the approved palette
+
+When user reports something "looks wrong":
+- Ask which SPECIFIC property is wrong
+- Ask what the DESIRED value should be
+- Reference DESIGN-SYSTEM.md for the correct value

@@ -43,117 +43,112 @@ export default function UnknownCorrelationProblem() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <motion.span
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="inline-block px-4 py-2 bg-yellow-500/10 border border-yellow-500/30 rounded-full text-yellow-400 text-sm font-medium mb-6"
-          >
-            The Unknown Correlation Problem
-          </motion.span>
-
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-100 font-['Space_Grotesk'] mb-4">
-            Hidden Correlations <span className="text-yellow-400">Kill Funds</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-100 font-['Space_Grotesk'] mb-6">
+            Hidden Correlations <span style={{ color: '#22C55E' }}>Kill Funds</span>
           </h2>
 
           <p className="text-lg text-slate-400 max-w-4xl mx-auto">When books sit in different systems with different metrics, correlation becomes invisible - until it's too late.</p>
         </motion.div>
 
-        {/* Grid: 3 columns - Questions on top, Correlation Matrix (2 cols) + Flying Blind (1 col) below */}
-        <div className="grid md:grid-cols-3 gap-6 mb-16">
-          {/* Row 1: Three question cards */}
-          {questions.map((item, index) => (
+        {/* Two Column Layout: Questions Left, Correlation Matrix Right */}
+        <div className="flex flex-col lg:flex-row gap-8 mb-16 lg:items-stretch">
+
+          {/* LEFT: Three question cards stacked */}
+          <div className="lg:w-[35%] flex flex-col gap-4">
+            {questions.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
+                className="bg-[#1e293b]/90 backdrop-blur-sm border border-white/10 rounded-2xl p-5 flex-1 flex items-center"
+              >
+                <div className="flex items-start gap-4">
+                  {/* Number */}
+                  <motion.div
+                    animate={{ scale: [1, 1.1, 1], opacity: [0.8, 1, 0.8] }}
+                    transition={{ repeat: Infinity, duration: 2, delay: index * 0.3 }}
+                    className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{ backgroundColor: `${item.color}20`, border: `2px solid ${item.color}50` }}
+                  >
+                    <span className="text-lg font-bold" style={{ color: item.color }}>{index + 1}</span>
+                  </motion.div>
+                  <div>
+                    {/* Question */}
+                    <p className="text-slate-100 font-semibold text-base leading-snug mb-2">
+                      {item.question}
+                    </p>
+                    {/* Pain point */}
+                    <p className="text-sm text-slate-400">{item.pain}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* RIGHT: Correlation Matrix */}
+          <div className="lg:w-[65%]">
             <motion.div
-              key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
-              className="bg-[#1e293b]/90 backdrop-blur-sm border border-white/10 rounded-2xl p-6 min-h-[180px]"
+              transition={{ duration: 0.5 }}
+              className="bg-gradient-to-br from-blue-500/5 to-slate-500/5 border border-blue-500/20 rounded-2xl p-6 h-full"
             >
-              {/* Number */}
-              <motion.div
-                animate={{ scale: [1, 1.1, 1], opacity: [0.8, 1, 0.8] }}
-                transition={{ repeat: Infinity, duration: 2, delay: index * 0.3 }}
-                className="w-10 h-10 rounded-full flex items-center justify-center mb-4"
-                style={{ backgroundColor: `${item.color}20`, border: `2px solid ${item.color}50` }}
-              >
-                <span className="text-lg font-bold" style={{ color: item.color }}>{index + 1}</span>
-              </motion.div>
-              {/* Question */}
-              <p className="text-slate-100 font-semibold text-base leading-snug mb-3">
-                {item.question}
-              </p>
-              {/* Pain point */}
-              <p className="text-sm text-slate-400">{item.pain}</p>
-            </motion.div>
-          ))}
+              <div className="mb-6 text-center">
+                <p className="text-slate-400 text-sm uppercase tracking-wider mb-1">Cross-Book Correlation</p>
+                <h3 className="text-xl md:text-2xl font-bold text-blue-400 font-['Space_Grotesk']">
+                  What Do You Actually Know?
+                </h3>
+              </div>
 
-        </div>
-
-        {/* Correlation Matrix - Centered card that fits content */}
-        <div className="flex justify-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="bg-gradient-to-br from-yellow-500/5 to-slate-500/5 border border-yellow-500/20 rounded-2xl p-6"
-            style={{ width: '800px' }}
-          >
-          <div className="mb-6 text-center">
-            <p className="text-slate-400 text-sm uppercase tracking-wider mb-1">Cross-Book Correlation</p>
-            <h3 className="text-xl md:text-2xl font-bold text-yellow-400 font-['Space_Grotesk']">
-              What Do You Actually Know?
-            </h3>
-          </div>
-
-          {/* Correlation Matrix - Centered and Large */}
-          <div className="flex justify-center">
-            <table>
-              <thead>
-                <tr>
-                  <th className="px-3 py-1 w-20"></th>
-                  {['Alpha', 'Beta', 'Gamma', 'Delta', 'Macro', 'Quant'].map((book) => (
-                    <th key={book} className="px-3 py-1 text-lg text-slate-300 font-semibold">{book}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  { name: 'Alpha', values: ['1.0', '?', '0.3', '?', '?', '-0.2'] },
-                  { name: 'Beta', values: ['?', '1.0', '?', '0.6', '?', '?'] },
-                  { name: 'Gamma', values: ['0.3', '?', '1.0', '?', '-0.4', '?'] },
-                  { name: 'Delta', values: ['?', '0.6', '?', '1.0', '?', '0.7'] },
-                  { name: 'Macro', values: ['?', '?', '-0.4', '?', '1.0', '?'] },
-                  { name: 'Quant', values: ['-0.2', '?', '?', '0.7', '?', '1.0'] },
-                ].map((row) => (
-                  <tr key={row.name}>
-                    <td className="px-3 py-1 text-lg text-slate-300 font-semibold">{row.name}</td>
-                    {row.values.map((val, i) => (
-                      <td key={i} className="px-3 py-1 text-center">
-                        {val === '1.0' ? (
-                          <span className="text-xl text-slate-600">1.0</span>
-                        ) : val === '?' ? (
-                          <motion.span
-                            animate={{ opacity: [0.4, 1, 0.4] }}
-                            transition={{ repeat: Infinity, duration: 1.5, delay: Math.random() }}
-                            className="text-3xl text-yellow-400 font-bold"
-                          >?</motion.span>
-                        ) : val.startsWith('-') ? (
-                          <span className="text-xl text-red-400 font-semibold">{val}</span>
-                        ) : (
-                          <span className="text-xl text-green-400 font-semibold">{val}</span>
-                        )}
-                      </td>
+              {/* Correlation Matrix - Centered and Large */}
+              <div className="flex justify-center">
+                <table>
+                  <thead>
+                    <tr>
+                      <th className="px-3 py-1 w-20"></th>
+                      {['Alpha', 'Beta', 'Gamma', 'Delta', 'Macro', 'Quant'].map((book) => (
+                        <th key={book} className="px-3 py-1 text-lg text-slate-300 font-semibold">{book}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      { name: 'Alpha', values: ['1.0', '?', '0.3', '?', '?', '-0.2'] },
+                      { name: 'Beta', values: ['?', '1.0', '?', '0.6', '?', '?'] },
+                      { name: 'Gamma', values: ['0.3', '?', '1.0', '?', '-0.4', '?'] },
+                      { name: 'Delta', values: ['?', '0.6', '?', '1.0', '?', '0.7'] },
+                      { name: 'Macro', values: ['?', '?', '-0.4', '?', '1.0', '?'] },
+                      { name: 'Quant', values: ['-0.2', '?', '?', '0.7', '?', '1.0'] },
+                    ].map((row) => (
+                      <tr key={row.name}>
+                        <td className="px-3 py-1 text-lg text-slate-300 font-semibold">{row.name}</td>
+                        {row.values.map((val, i) => (
+                          <td key={i} className="px-3 py-1 text-center">
+                            {val === '1.0' ? (
+                              <span className="text-xl text-slate-600">1.0</span>
+                            ) : val === '?' ? (
+                              <motion.span
+                                animate={{ opacity: [0.4, 1, 0.4] }}
+                                transition={{ repeat: Infinity, duration: 1.5, delay: Math.random() }}
+                                className="text-3xl text-orange-500 font-bold"
+                              >?</motion.span>
+                            ) : val.startsWith('-') ? (
+                              <span className="text-xl text-red-400 font-semibold">{val}</span>
+                            ) : (
+                              <span className="text-xl text-green-400 font-semibold">{val}</span>
+                            )}
+                          </td>
+                        ))}
+                      </tr>
                     ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                  </tbody>
+                </table>
+              </div>
+            </motion.div>
           </div>
-          </motion.div>
         </div>
 
         {/* The Real Cost - Full width at bottom */}
@@ -162,11 +157,11 @@ export default function UnknownCorrelationProblem() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="bg-gradient-to-br from-yellow-500/5 to-orange-500/5 border border-yellow-500/20 rounded-2xl p-6 mt-8"
+          className="bg-gradient-to-br from-blue-500/5 to-cyan-500/5 border border-blue-500/20 rounded-2xl p-6 mt-8"
         >
-          <div className="mb-6">
+          <div className="mb-6 text-left">
             <p className="text-slate-400 text-sm uppercase tracking-wider mb-1">The Real Cost</p>
-            <h3 className="text-2xl md:text-3xl font-bold text-yellow-400 font-['Space_Grotesk']">
+            <h3 className="text-2xl md:text-3xl font-bold text-blue-400 font-['Space_Grotesk']">
               Flying Blind
             </h3>
           </div>

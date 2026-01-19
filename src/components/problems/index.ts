@@ -7,3 +7,4 @@ export { default as RegulatoryBlindSpotsProblem } from './RegulatoryBlindSpotsPr
 export { default as CorrelationProblem } from './CorrelationProblem'
 export { default as UnknownCorrelationProblem } from './UnknownCorrelationProblem'
 export { default as TimeWastedProblem } from './TimeWastedProblem'
+export { default as TheProblemSection } from './TheProblemSection'

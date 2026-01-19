@@ -96,20 +96,6 @@ export default function WhyRiskcoreHero() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          {/* "The Problem" Badge - Green border, rounded-full (pill shape) */}
-          <motion.div
-            className="inline-block px-6 py-3 rounded-full mb-8"
-            style={{
-              backgroundColor: 'rgba(34, 197, 94, 0.1)',
-              border: '2px solid #22C55E',
-            }}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-          >
-            <span className="text-lg font-bold uppercase tracking-wider" style={{ color: '#22C55E' }}>The Problem</span>
-          </motion.div>
-
           {/* Title - One line, "Challenge" in green */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-100 mb-6">
             The Multi-Book Risk <span style={{ color: '#22C55E' }}>Challenge</span>
@@ -162,80 +148,6 @@ export default function WhyRiskcoreHero() {
               </div>
             </motion.div>
           ))}
-        </motion.div>
-
-        {/* Animated Hand-drawn Arrow */}
-        <div className="flex flex-col items-center mt-12 mb-4">
-          <motion.div
-            animate={{
-              opacity: [0.5, 1, 0.5],
-            }}
-            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-          >
-            <svg
-              width="60"
-              height="150"
-              viewBox="0 0 60 150"
-              fill="none"
-            >
-              <defs>
-                <linearGradient id="arrow-gradient-home" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#64748b" />
-                  <stop offset="100%" stopColor="#ef4444" />
-                </linearGradient>
-              </defs>
-              {/* Hand-drawn curved shaft */}
-              <motion.path
-                d="M 30 5 Q 35 40 28 75 Q 22 110 30 130"
-                stroke="url(#arrow-gradient-home)"
-                strokeWidth="8"
-                strokeLinecap="round"
-                fill="none"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 1, ease: "easeOut" }}
-              />
-              {/* Hand-drawn arrow head */}
-              <motion.path
-                d="M 15 115 Q 25 135 30 145 Q 35 135 45 115"
-                stroke="#ef4444"
-                strokeWidth="8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                fill="none"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.8, duration: 0.3 }}
-              />
-            </svg>
-          </motion.div>
-        </div>
-
-        {/* Single Column Grid */}
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          className="grid grid-cols-1 gap-6 max-w-[1600px] mx-auto"
-        >
-          {/* Risk Report Card */}
-          <motion.div
-            variants={fadeInUp}
-            className="mx-auto flex items-center justify-center rounded-full"
-            style={{
-              width: '800px',
-              height: '80px',
-              marginTop: '20px',
-              backgroundColor: 'rgba(30, 41, 59, 0.8)',
-              border: '2px solid #ef4444',
-            }}
-          >
-            <div className="flex items-center gap-4">
-              <h3 className="font-bold text-2xl md:text-3xl" style={{ color: '#ef4444' }}>Risk Report</h3>
-              <span className="text-white text-2xl">|</span>
-              <span className="text-white text-lg md:text-xl">3hrs late - Inaccurate</span>
-            </div>
-          </motion.div>
         </motion.div>
 
       </div>

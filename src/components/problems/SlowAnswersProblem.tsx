@@ -60,7 +60,7 @@ function getSeverityColor(severity: string) {
   switch (severity) {
     case 'critical': return { bg: 'bg-red-500', border: 'border-red-500', text: 'text-red-400' }
     case 'high': return { bg: 'bg-orange-500', border: 'border-orange-500', text: 'text-orange-400' }
-    default: return { bg: 'bg-yellow-500', border: 'border-yellow-500', text: 'text-yellow-400' }
+    default: return { bg: 'bg-blue-500', border: 'border-blue-500', text: 'text-blue-400' }
   }
 }
 
@@ -138,13 +138,13 @@ export default function SlowAnswersProblem() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="inline-block px-4 py-2 bg-yellow-500/10 border border-yellow-500/30 rounded-full text-yellow-400 text-sm font-medium mb-6"
+            className="inline-block px-4 py-2 bg-blue-500/10 border border-blue-500/30 rounded-full text-blue-400 text-sm font-medium mb-6"
           >
             The Slow Answers Problem
           </motion.span>
 
           <h2 className="text-4xl md:text-5xl font-bold text-slate-100 font-['Space_Grotesk'] mb-4">
-            Questions That Take <span className="text-yellow-400">Hours</span> to Answer
+            Questions That Take <span className="text-blue-400">Hours</span> to Answer
           </h2>
 
           <p className="text-lg text-slate-400 max-w-2xl mx-auto">
@@ -213,10 +213,10 @@ export default function SlowAnswersProblem() {
             <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
               <span className="text-slate-400 font-semibold">Total Daily Time:</span>
               <div className="text-right">
-                <span className="text-2xl font-bold text-yellow-400 font-mono">
+                <span className="text-2xl font-bold text-blue-400 font-mono">
                   {dailyTasks.reduce((sum, t) => sum + t.time, 0)}
                 </span>
-                <span className="text-yellow-400 ml-1">min</span>
+                <span className="text-blue-400 ml-1">min</span>
                 <p className="text-sm text-slate-500">= {(dailyTasks.reduce((sum, t) => sum + t.time, 0) / 60).toFixed(1)}+ hours/day</p>
               </div>
             </div>
@@ -237,7 +237,7 @@ export default function SlowAnswersProblem() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.5 }}
-            className="bg-gradient-to-br from-yellow-500/5 to-orange-500/5 border border-yellow-500/20 rounded-2xl px-8 py-5 mb-16"
+            className="bg-gradient-to-br from-blue-500/5 to-cyan-500/5 border border-blue-500/20 rounded-2xl px-8 py-5 mb-16"
             style={{ width: '60%', minWidth: '500px' }}
           >
             <div className="flex items-center gap-8">
@@ -246,15 +246,15 @@ export default function SlowAnswersProblem() {
                 <motion.div
                   animate={{ scale: [1, 1.05, 1] }}
                   transition={{ repeat: Infinity, duration: 2, repeatDelay: 2 }}
-                  className="w-14 h-14 bg-yellow-500/20 border-2 border-yellow-500/40 rounded-full flex items-center justify-center flex-shrink-0"
+                  className="w-14 h-14 bg-blue-500/20 border-2 border-blue-500/40 rounded-full flex items-center justify-center flex-shrink-0"
                 >
-                  <svg className="w-7 h-7 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-7 h-7 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </motion.div>
                 <div>
                   <p className="font-bold text-slate-100 text-xl">The Real Cost</p>
-                  <p className="text-sm text-yellow-400">Time Lost Daily</p>
+                  <p className="text-sm text-blue-400">Time Lost Daily</p>
                 </div>
               </div>
 
@@ -264,7 +264,7 @@ export default function SlowAnswersProblem() {
               {/* Bullet points - Right side */}
               <div className="space-y-1.5 flex-1">
                 <div className="flex items-center gap-4">
-                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#eab308' }} />
+                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#3b82f6' }} />
                   <p className="text-slate-100 text-sm font-semibold">Senior analysts doing data entry instead of analysis</p>
                 </div>
                 <div className="flex items-center gap-4">
@@ -290,14 +290,14 @@ export default function SlowAnswersProblem() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5, duration: 0.5 }}
-          className="relative bg-[#1e293b]/90 backdrop-blur-sm border border-yellow-500/30 rounded-2xl p-8"
+          className="relative bg-[#1e293b]/90 backdrop-blur-sm border border-blue-500/30 rounded-2xl p-8"
         >
           {/* Quote marks */}
-          <div className="absolute top-4 left-6 text-6xl text-yellow-500/20 font-serif leading-none">&ldquo;</div>
+          <div className="absolute top-4 left-6 text-6xl text-blue-500/20 font-serif leading-none">&ldquo;</div>
 
           <blockquote className="relative z-10 pl-8">
             <p className="text-lg md:text-xl text-slate-200 italic leading-relaxed">
-              During the SVB collapse, it took us <span className="text-yellow-400 font-bold">6 hours</span> to figure out our total financial sector exposure. By then, the market had already moved.
+              During the SVB collapse, it took us <span className="text-blue-400 font-bold">6 hours</span> to figure out our total financial sector exposure. By then, the market had already moved.
             </p>
             <footer className="mt-4 text-sm text-slate-400">
               — CRO at Multi-Manager Hedge Fund

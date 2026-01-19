@@ -578,21 +578,9 @@ export default function TimeTravelSection() {
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ delay: 0.6 }}
             >
-              <p className="text-2xl md:text-3xl font-medium text-slate-200 leading-relaxed mb-6">
+              <p className="text-xl md:text-2xl font-medium text-slate-200 leading-relaxed mb-6">
                 You&apos;re now officially the{' '}
-                <motion.span
-                  className="text-emerald-400 font-bold"
-                  animate={{
-                    textShadow: [
-                      '0 0 0px #10b981',
-                      '0 0 20px #10b981',
-                      '0 0 0px #10b981'
-                    ]
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  Marty McFly
-                </motion.span>
+                <span className="text-emerald-400 font-bold">Marty McFly</span>
                 {' '}of Risk Management.
               </p>
 

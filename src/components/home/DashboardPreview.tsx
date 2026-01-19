@@ -696,7 +696,7 @@ const riskCardsData: RiskCardData[] = [
   },
   {
     title: 'COMMODITIES',
-    color: '#eab308',
+    color: '#f97316',
     primaryLabel: 'NET EXPOSURE',
     primaryValue: '$28.5M',
     change: '+1.5%',
@@ -774,26 +774,16 @@ export default function DashboardPreview() {
         transition={{ duration: 0.5 }}
       />
 
-      <div className="relative max-w-6xl mx-auto">
-        {/* Section Header */}
+      <div className="relative max-w-7xl mx-auto">
+        {/* Header: Title and Subtitle centered at top */}
         <motion.div
-          className="text-center mb-8"
-          initial={{ opacity: 0, y: 30 }}
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: -20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-emerald-400 text-sm font-medium mb-6"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ delay: 0.2 }}
-          >
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            Single Book to Firm-Wide Aggregation
-          </motion.div>
-
           <motion.h2
-            className="text-4xl md:text-5xl font-bold text-slate-100 mb-4"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-100 mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.3 }}
@@ -805,143 +795,117 @@ export default function DashboardPreview() {
           </motion.h2>
 
           <motion.p
-            className="text-xl text-slate-400 max-w-3xl mx-auto"
+            className="text-base text-slate-400"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.4 }}
           >
-            For the first time, get aggregate risk figures for a single book, a group of PMs,
-            or your entire firm — all in one unified view. And travel back to any point in time
-            to see exactly what your risk looked like.
+            For the first time, get aggregate risk figures for a single book, a group of PMs, or your entire firm.
           </motion.p>
         </motion.div>
 
-        {/* Book + Time Selectors */}
-        <motion.div
-          className="flex flex-wrap justify-center gap-4 mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.5 }}
-        >
-          <BookSelector selectedBook={selectedBook} onBookSelect={setSelectedBook} />
-          <TimeSelector selectedDate={selectedDate} onDateSelect={setSelectedDate} />
-        </motion.div>
-
-        {/* Current Selection Indicator */}
-        <motion.div
-          className="text-center mb-8"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.6 }}
-        >
-          <span className="text-sm text-slate-500">
-            Viewing:{' '}
-            <span className="text-emerald-400 font-semibold">{selectedBook.name}</span>
-            {' '}as of{' '}
-            <span className="text-emerald-400 font-mono">{formatDateDisplay(selectedDate)}</span>
-          </span>
-        </motion.div>
-
-        {/* Tab Navigation */}
-        <motion.div
-          className="flex flex-wrap justify-center gap-2 mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.7 }}
-        >
-          {riskCardsData.map((card, index) => (
-            <motion.button
-              key={card.title}
-              onClick={() => setActiveIndex(index)}
-              className={`px-5 py-2.5 rounded-lg font-semibold text-sm transition-all ${
-                activeIndex === index
-                  ? 'text-slate-900 shadow-lg'
-                  : 'bg-slate-800/50 text-slate-400 hover:text-slate-200 border border-white/10'
-              }`}
-              style={activeIndex === index ? { backgroundColor: card.color } : {}}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+        {/* All Graphics */}
+        <div>
+            {/* Book + Time Selectors + Current Selection */}
+            <motion.div
+              className="flex flex-wrap justify-center items-center gap-4 mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.5 }}
             >
-              {card.title}
-            </motion.button>
-          ))}
-        </motion.div>
+              <BookSelector selectedBook={selectedBook} onBookSelect={setSelectedBook} />
+              <TimeSelector selectedDate={selectedDate} onDateSelect={setSelectedDate} />
+              <span className="text-sm text-slate-500">
+                Viewing:{' '}
+                <span className="text-emerald-400 font-semibold">{selectedBook.name}</span>
+                {' '}as of{' '}
+                <span className="text-emerald-400 font-mono">{formatDateDisplay(selectedDate)}</span>
+              </span>
+            </motion.div>
 
-        {/* Main Content */}
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Card Display */}
-          <motion.div
-            className="flex justify-center"
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.8 }}
-          >
-            <AnimatePresence mode="wait">
-              <RiskCard key={activeCard.title} data={activeCard} />
-            </AnimatePresence>
-          </motion.div>
+            {/* Tab Navigation */}
+            <motion.div
+              className="flex flex-wrap justify-center gap-2 mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.7 }}
+            >
+              {riskCardsData.map((card, index) => (
+                <motion.button
+                  key={card.title}
+                  onClick={() => setActiveIndex(index)}
+                  className={`px-5 py-2.5 rounded-lg font-semibold text-sm transition-all ${
+                    activeIndex === index
+                      ? 'text-slate-900 shadow-lg'
+                      : 'bg-slate-800/50 text-slate-400 hover:text-slate-200 border border-white/10'
+                  }`}
+                  style={activeIndex === index ? { backgroundColor: card.color } : {}}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {card.title}
+                </motion.button>
+              ))}
+            </motion.div>
 
-          {/* Description Panel */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.9 }}
-          >
-            <AnimatePresence mode="wait">
+            {/* Main Content */}
+            <div className="grid md:grid-cols-2 gap-12 items-start">
+              {/* Card Display */}
               <motion.div
-                key={activeCard.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
+                className="flex justify-center"
+                initial={{ opacity: 0, x: -50 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ delay: 0.8 }}
               >
-                {/* Title */}
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-4 h-4 rounded-full" style={{ backgroundColor: activeCard.color }} />
-                  <h3 className="text-2xl font-bold text-slate-100">{activeCard.title} RiskPod</h3>
-                </div>
-
-                {/* Description */}
-                <p className="text-base text-slate-400 leading-relaxed mb-8">{activeCard.description}</p>
-
-                {/* Quick Stats */}
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold font-mono text-slate-100">{activeCard.positions}</div>
-                    <div className="text-xs text-slate-500">Positions</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold font-mono text-rose-400">{activeCard.var95}</div>
-                    <div className="text-xs text-slate-500">VaR (95%)</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold font-mono text-slate-100">{activeCard.grossExposure}</div>
-                    <div className="text-xs text-slate-500">Gross</div>
-                  </div>
-                </div>
+                <AnimatePresence mode="wait">
+                  <RiskCard key={activeCard.title} data={activeCard} />
+                </AnimatePresence>
               </motion.div>
-            </AnimatePresence>
-          </motion.div>
-        </div>
 
-        {/* Bottom CTA */}
-        <motion.div
-          className="text-center mt-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 1.0 }}
-        >
-          <motion.button
-            className="px-4 py-2 bg-brand-blue text-white font-semibold text-sm rounded-[3px] transition-all duration-200 hover:bg-brand-blue/90 shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Book a Demo
-          </motion.button>
-          <p className="text-slate-500 text-sm mt-4">
-            Single book or firm-wide. Current state or historical. Your risk, your way.
-          </p>
-        </motion.div>
+              {/* Description Panel */}
+              <motion.div
+                className="pt-12"
+                initial={{ opacity: 0, x: 50 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ delay: 0.9 }}
+              >
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeCard.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {/* Title */}
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-4 h-4 rounded-full" style={{ backgroundColor: activeCard.color }} />
+                      <h3 className="text-2xl font-bold text-slate-100">{activeCard.title} RiskPod</h3>
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-base text-slate-400 leading-relaxed mb-8">{activeCard.description}</p>
+
+                    {/* Quick Stats */}
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="text-center">
+                        <div className="text-2xl font-bold font-mono text-slate-100">{activeCard.positions}</div>
+                        <div className="text-xs text-slate-500">Positions</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold font-mono text-rose-400">{activeCard.var95}</div>
+                        <div className="text-xs text-slate-500">VaR (95%)</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold font-mono text-slate-100">{activeCard.grossExposure}</div>
+                        <div className="text-xs text-slate-500">Gross</div>
+                      </div>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </motion.div>
+            </div>
+        </div>
       </div>
     </section>
   )

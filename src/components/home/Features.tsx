@@ -102,7 +102,7 @@ const pipelineStages: PipelineStage[] = [
         <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
       </svg>
     ),
-    color: '#eab308',
+    color: '#f97316',
   },
 ]
 
@@ -122,7 +122,7 @@ function CurvedArrows({ isInView }: CurvedArrowsProps) {
     { from: '#3b82f6', to: '#22c55e' },  // Ingest -> Normalize
     { from: '#22c55e', to: '#a855f7' },  // Normalize -> Aggregate
     { from: '#a855f7', to: '#06b6d4' },  // Aggregate -> Analyze
-    { from: '#06b6d4', to: '#eab308' },  // Analyze -> Act
+    { from: '#06b6d4', to: '#f97316' },  // Analyze -> Act
   ]
 
   useEffect(() => {
@@ -323,15 +323,6 @@ export default function Features() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 bg-slate-800/50 border border-white/10 rounded-full text-slate-400 text-sm font-medium mb-6"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ delay: 0.2 }}
-          >
-            HOW IT WORKS
-          </motion.div>
-
           <motion.h2
             className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-100 mb-4"
             initial={{ opacity: 0, y: 20 }}
