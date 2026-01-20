@@ -88,7 +88,7 @@ export default function UnifiedCTA({
       ref={sectionRef}
       className="relative py-16 md:py-20 px-4 sm:px-6 overflow-hidden bg-transparent"
     >
-      <div className="relative max-w-4xl mx-auto">
+      <div className="relative w-[80%] mx-auto">
         {/* Header */}
         <motion.div
           className="text-center mb-8 md:mb-10"
@@ -236,11 +236,11 @@ export default function UnifiedCTA({
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.4 }}
           >
-            <div className="flex items-start gap-4">
+            <div className="flex items-start gap-4 justify-center">
               <div className="w-11 h-11 rounded-full bg-gradient-to-br from-emerald-400 to-green-500 flex items-center justify-center text-slate-900 font-bold text-lg flex-shrink-0">
                 M
               </div>
-              <div>
+              <div className="text-center">
                 <p className="text-text-primary text-base leading-relaxed mb-3">
                   &quot;We&apos;ve been trying to build this internally for years. The fact that someone finally
                   understands the multi-PM aggregation problem and is solving it properly — we had to get involved.&quot;
