@@ -95,7 +95,7 @@ function StatsRow() {
 export default function HeroInline() {
   return (
     <section
-      className="relative min-h-[100vh] lg:h-[80vh] overflow-hidden bg-transparent"
+      className="relative min-h-screen lg:h-[80vh] overflow-hidden bg-transparent"
     >
       {/* Background Grid */}
       <div
@@ -110,7 +110,7 @@ export default function HeroInline() {
       />
 
       {/* Content */}
-      <div className="relative w-full pt-32 lg:pt-40 pb-16">
+      <div className="relative w-full pt-24 lg:pt-40 pb-8 lg:pb-16">
         <div className="flex flex-col lg:flex-row items-center">
 
           {/* Left Side: Text Content */}
@@ -121,7 +121,7 @@ export default function HeroInline() {
             transition={{ duration: 0.6 }}
           >
             <motion.h1
-              className="text-4xl md:text-5xl font-bold text-slate-100 leading-tight"
+              className="text-2xl sm:text-3xl md:text-5xl font-bold text-slate-100 leading-tight"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -134,7 +134,7 @@ export default function HeroInline() {
             </motion.h1>
 
             <motion.p
-              className="text-lg text-slate-400 mt-6 max-w-md"
+              className="text-sm sm:text-base lg:text-lg text-slate-400 mt-4 lg:mt-6 max-w-md"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
@@ -144,7 +144,7 @@ export default function HeroInline() {
             </motion.p>
 
             <motion.div
-              className="flex gap-3 mt-8"
+              className="flex gap-3 mt-6 lg:mt-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
@@ -172,7 +172,7 @@ export default function HeroInline() {
 
           {/* Right Side: Dashboard */}
           <motion.div
-            className="w-full lg:w-[50%] mt-12 lg:mt-0 px-4 sm:px-0 flex justify-center lg:justify-start items-start relative"
+            className="w-full lg:w-[50%] mt-8 lg:mt-0 px-4 sm:px-0 flex justify-center lg:justify-start items-start relative"
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -190,14 +190,19 @@ export default function HeroInline() {
                 ease: "easeInOut"
               }}
             />
-            <div className="relative transform scale-[0.55] sm:scale-[0.7] lg:scale-100 origin-top-center lg:origin-top-left">
-              <AnimatedRiskboard />
+            {/* Dashboard with fade effect on mobile */}
+            <div className="relative">
+              <div className="transform scale-[0.28] sm:scale-[0.5] lg:scale-100 origin-top-center lg:origin-top-left">
+                <AnimatedRiskboard />
+              </div>
+              {/* Fade overlay on mobile */}
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0a0f1a] pointer-events-none lg:hidden" />
             </div>
           </motion.div>
         </div>
 
         {/* Stats Row - Below Dashboard */}
-        <div className="w-full mt-12 lg:mt-0 pt-10">
+        <div className="w-full mt-4 lg:mt-0 pt-4 lg:pt-10">
           <StatsRow />
         </div>
       </div>
