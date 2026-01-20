@@ -196,7 +196,11 @@ function AnimatedSidebar() {
 
   return (
     <motion.div
-      className="w-44 bg-slate-950/90 border-r border-white/10 flex flex-col h-full flex-shrink-0"
+      className="w-44 border-r flex flex-col h-full flex-shrink-0"
+      style={{
+        backgroundColor: 'rgba(2, 6, 23, 0.9)',
+        borderColor: 'rgba(255, 255, 255, 0.1)',
+      }}
       initial={{ x: -100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -277,7 +281,11 @@ function AnimatedHeader() {
 
   return (
     <motion.header
-      className="h-11 bg-slate-950/80 border-b border-white/10 flex items-center justify-between px-4 flex-shrink-0"
+      className="h-11 border-b flex items-center justify-between px-4 flex-shrink-0"
+      style={{
+        backgroundColor: 'rgba(2, 6, 23, 0.8)',
+        borderColor: 'rgba(255, 255, 255, 0.1)',
+      }}
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.2 }}
@@ -351,7 +359,11 @@ function MarketAnchorsStrip() {
 
   return (
     <motion.div
-      className="bg-slate-900/60 border-b border-white/5 px-4 py-1.5 flex-shrink-0"
+      className="border-b px-4 py-1.5 flex-shrink-0"
+      style={{
+        backgroundColor: 'rgba(15, 23, 42, 0.6)',
+        borderColor: 'rgba(255, 255, 255, 0.05)',
+      }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.6 }}
@@ -440,7 +452,11 @@ function RiskCard({ data, delay }: { data: RiskCardData; delay: number }) {
 
   return (
     <motion.div
-      className="bg-slate-800/50 border border-white/10 rounded-lg overflow-hidden flex flex-col"
+      className="border rounded-lg overflow-hidden flex flex-col"
+      style={{
+        backgroundColor: 'rgba(30, 41, 59, 0.5)',
+        borderColor: 'rgba(255, 255, 255, 0.1)',
+      }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay, duration: 0.5 }}
@@ -781,7 +797,7 @@ export default function AnimatedRiskboard() {
 
       {/* Main Container - 16:9 Aspect Ratio (shorter to show partial cards) */}
       <motion.div
-        className="rounded-2xl overflow-hidden border border-white/10 bg-slate-900/80 backdrop-blur-xl shadow-2xl"
+        className="rounded-2xl overflow-hidden border shadow-2xl"
         initial={{ opacity: 0, rotateX: 10, rotateY: -5, scale: 0.9 }}
         animate={{ opacity: 1, rotateX: 0, rotateY: 0, scale: 1 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
@@ -789,6 +805,9 @@ export default function AnimatedRiskboard() {
           transformStyle: 'preserve-3d',
           perspective: '1000px',
           aspectRatio: '16 / 9',
+          backgroundColor: 'rgba(15, 23, 42, 0.8)',
+          backdropFilter: 'blur(24px)',
+          borderColor: 'rgba(255, 255, 255, 0.1)',
         }}
         whileHover={{ rotateX: 1, rotateY: 1, transition: { duration: 0.3 } }}
       >
