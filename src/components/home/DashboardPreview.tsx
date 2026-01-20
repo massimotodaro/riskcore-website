@@ -125,13 +125,13 @@ function BookSelector({ selectedBook, onBookSelect }: BookSelectorProps) {
     <div ref={containerRef} className="relative">
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-3 px-4 py-3 bg-slate-800/80 rounded-xl border border-white/10
-                   hover:border-emerald-500/30 transition-colors min-w-[220px]"
+        className="flex items-center gap-3 px-4 py-3 bg-white dark:bg-slate-800/80 rounded-xl border border-black/10 dark:border-white/10
+                   hover:border-emerald-500/30 transition-colors min-w-[220px] shadow-sm"
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
       >
         <div className="flex items-center gap-2">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5 text-emerald-400">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5 text-emerald-500">
             <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16" />
             <path d="M3 21h18" />
             <path d="M9 7h6" />
@@ -139,7 +139,7 @@ function BookSelector({ selectedBook, onBookSelect }: BookSelectorProps) {
             <path d="M9 15h4" />
           </svg>
           <div className="text-left">
-            <div className="text-sm font-semibold text-slate-100">{selectedBook.name}</div>
+            <div className="text-sm font-semibold text-slate-800 dark:text-slate-100">{selectedBook.name}</div>
             <div className="text-[10px] text-slate-500">{selectedBook.subtext}</div>
           </div>
         </div>
@@ -301,18 +301,18 @@ function TimeSelector({ selectedDate, onDateSelect }: TimeSelectorProps) {
     <div ref={containerRef} className="relative">
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-3 px-4 py-3 bg-slate-800/80 rounded-xl border border-white/10
-                   hover:border-emerald-500/30 transition-colors min-w-[220px]"
+        className="flex items-center gap-3 px-4 py-3 bg-white dark:bg-slate-800/80 rounded-xl border border-black/10 dark:border-white/10
+                   hover:border-emerald-500/30 transition-colors min-w-[220px] shadow-sm"
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
       >
         <div className="flex items-center gap-2">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5 text-emerald-400">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5 text-emerald-500">
             <circle cx="12" cy="12" r="10" />
             <path d="M12 6v6l4 2" />
           </svg>
           <div className="text-left">
-            <div className="text-sm font-semibold text-slate-100 font-mono">{formatDateDisplay(selectedDate)}</div>
+            <div className="text-sm font-semibold text-slate-800 dark:text-slate-100 font-mono">{formatDateDisplay(selectedDate)}</div>
             <div className="text-[10px] text-slate-500">Time Travel</div>
           </div>
         </div>
@@ -452,7 +452,7 @@ function RiskCard({ data }: { data: RiskCardData }) {
 
   return (
     <motion.div
-      className="bg-slate-800/50 border border-white/10 rounded-lg overflow-hidden flex flex-col w-full max-w-md"
+      className="bg-white dark:bg-slate-800/50 border border-black/10 dark:border-white/10 rounded-lg overflow-hidden flex flex-col w-full max-w-md shadow-lg dark:shadow-none"
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
@@ -460,15 +460,15 @@ function RiskCard({ data }: { data: RiskCardData }) {
       whileHover={{ borderColor: `${data.color}40` }}
     >
       {/* Card Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-white/5">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-black/5 dark:border-white/5">
         <span className="text-base font-bold" style={{ color: data.color }}>{data.title}</span>
         <div className="flex items-center gap-2">
-          <span className={`text-xs font-medium ${data.isUp ? 'text-emerald-400' : 'text-rose-400'}`}>
+          <span className={`text-xs font-medium ${data.isUp ? 'text-emerald-500 dark:text-emerald-400' : 'text-rose-500 dark:text-rose-400'}`}>
             {data.isUp ? '▲' : '▼'} {data.change}
           </span>
-          <span className="text-slate-600 text-xs">::</span>
+          <span className="text-slate-400 dark:text-slate-600 text-xs">::</span>
           <motion.button
-            className="px-3 py-1 text-xs font-medium border border-white/20 rounded text-slate-300 hover:bg-white/10"
+            className="px-3 py-1 text-xs font-medium border border-black/20 dark:border-white/20 rounded text-slate-600 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/10"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -481,7 +481,7 @@ function RiskCard({ data }: { data: RiskCardData }) {
       <div className="px-4 py-3">
         <div className="text-xs text-slate-500 uppercase tracking-wide">{data.primaryLabel}</div>
         <motion.div
-          className="text-3xl font-bold font-mono text-slate-100"
+          className="text-3xl font-bold font-mono text-slate-800 dark:text-slate-100"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
@@ -489,7 +489,7 @@ function RiskCard({ data }: { data: RiskCardData }) {
           {data.primaryValue}
         </motion.div>
         {/* Progress Bar */}
-        <div className="h-1.5 bg-slate-700/50 rounded-full mt-2 overflow-hidden">
+        <div className="h-1.5 bg-slate-200 dark:bg-slate-700/50 rounded-full mt-2 overflow-hidden">
           <motion.div
             className="h-full rounded-full"
             style={{ background: `linear-gradient(90deg, ${data.color}, ${data.color}88)` }}
@@ -505,13 +505,13 @@ function RiskCard({ data }: { data: RiskCardData }) {
         {data.secondaryMetrics.map((metric, i) => (
           <motion.div
             key={metric.label}
-            className="bg-slate-900/50 rounded px-3 py-2 text-center"
+            className="bg-slate-100 dark:bg-slate-900/50 rounded px-3 py-2 text-center border border-black/5 dark:border-transparent"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3 + i * 0.1 }}
           >
             <div className="text-[9px] text-slate-500 uppercase">{metric.label}</div>
-            <div className="text-sm font-mono font-semibold text-slate-200">{metric.value}</div>
+            <div className="text-sm font-mono font-semibold text-slate-700 dark:text-slate-200">{metric.value}</div>
           </motion.div>
         ))}
       </div>
@@ -532,11 +532,11 @@ function RiskCard({ data }: { data: RiskCardData }) {
           ))}
         </div>
         {/* Table Rows */}
-        <div className="bg-slate-900/30 rounded-b">
+        <div className="bg-slate-50 dark:bg-slate-900/30 rounded-b">
           {data.tableRows.map((row, rowIndex) => (
             <motion.div
               key={row.label}
-              className="grid gap-1 px-2 py-1 text-[10px] border-b border-white/5 last:border-0 hover:bg-white/5"
+              className="grid gap-1 px-2 py-1 text-[10px] border-b border-black/5 dark:border-white/5 last:border-0 hover:bg-black/5 dark:hover:bg-white/5"
               style={{ gridTemplateColumns: `60px repeat(${data.tableHeaders.length - 1}, 1fr)` }}
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
@@ -544,7 +544,7 @@ function RiskCard({ data }: { data: RiskCardData }) {
             >
               <span className="font-medium" style={{ color: data.color }}>{row.label}</span>
               {row.values.map((val, i) => (
-                <span key={i} className="text-center font-mono text-slate-300">{val}</span>
+                <span key={i} className="text-center font-mono text-slate-600 dark:text-slate-300">{val}</span>
               ))}
             </motion.div>
           ))}
@@ -555,27 +555,27 @@ function RiskCard({ data }: { data: RiskCardData }) {
       <div className="grid grid-cols-3 gap-2 px-4 py-3 mt-auto">
         <motion.div className="text-center" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>
           <div className="text-[9px] text-slate-500 uppercase">Positions</div>
-          <div className="text-xs font-mono text-slate-200">{data.positions}</div>
+          <div className="text-xs font-mono text-slate-700 dark:text-slate-200">{data.positions}</div>
         </motion.div>
         <motion.div className="text-center" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}>
           <div className="text-[9px] text-slate-500 uppercase">VaR (95%)</div>
-          <div className="text-xs font-mono text-rose-400">{data.var95}</div>
+          <div className="text-xs font-mono text-rose-500 dark:text-rose-400">{data.var95}</div>
         </motion.div>
         <motion.div className="text-center" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
           <div className="text-[9px] text-slate-500 uppercase">CVaR (95%)</div>
-          <div className="text-xs font-mono text-rose-400">{data.cvar95}</div>
+          <div className="text-xs font-mono text-rose-500 dark:text-rose-400">{data.cvar95}</div>
         </motion.div>
       </div>
 
       {/* Footer */}
       <div className="grid grid-cols-2 gap-2 px-4 pb-3">
-        <motion.div className="bg-slate-900/40 rounded px-3 py-2 text-center" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }}>
+        <motion.div className="bg-slate-100 dark:bg-slate-900/40 rounded px-3 py-2 text-center border border-black/5 dark:border-transparent" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }}>
           <div className="text-[9px] text-slate-500 uppercase">Gross Exposure</div>
-          <div className="text-sm font-mono font-semibold text-slate-200">{data.grossExposure}</div>
+          <div className="text-sm font-mono font-semibold text-slate-700 dark:text-slate-200">{data.grossExposure}</div>
         </motion.div>
-        <motion.div className="bg-slate-900/40 rounded px-3 py-2 text-center" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
+        <motion.div className="bg-slate-100 dark:bg-slate-900/40 rounded px-3 py-2 text-center border border-black/5 dark:border-transparent" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
           <div className="text-[9px] text-slate-500 uppercase">Net Exposure</div>
-          <div className="text-sm font-mono font-semibold text-slate-200">{data.netExposure}</div>
+          <div className="text-sm font-mono font-semibold text-slate-700 dark:text-slate-200">{data.netExposure}</div>
         </motion.div>
       </div>
     </motion.div>
@@ -782,19 +782,19 @@ export default function DashboardPreview() {
           transition={{ duration: 0.6 }}
         >
           <motion.h2
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-100 mb-4"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 dark:text-slate-100 mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.3 }}
           >
             One Dashboard.{' '}
-            <span className="text-blue-400">
+            <span className="text-blue-500 dark:text-blue-400">
               Any Combination of Books.
             </span>
           </motion.h2>
 
           <motion.p
-            className="text-base text-slate-400"
+            className="text-base text-slate-600 dark:text-slate-400"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.4 }}
@@ -814,11 +814,11 @@ export default function DashboardPreview() {
             >
               <BookSelector selectedBook={selectedBook} onBookSelect={setSelectedBook} />
               <TimeSelector selectedDate={selectedDate} onDateSelect={setSelectedDate} />
-              <span className="text-sm text-slate-500">
+              <span className="text-sm text-slate-600 dark:text-slate-500">
                 Viewing:{' '}
-                <span className="text-emerald-400 font-semibold">{selectedBook.name}</span>
+                <span className="text-emerald-600 dark:text-emerald-400 font-semibold">{selectedBook.name}</span>
                 {' '}as of{' '}
-                <span className="text-emerald-400 font-mono">{formatDateDisplay(selectedDate)}</span>
+                <span className="text-emerald-600 dark:text-emerald-400 font-mono">{formatDateDisplay(selectedDate)}</span>
               </span>
             </motion.div>
 
@@ -835,8 +835,8 @@ export default function DashboardPreview() {
                   onClick={() => setActiveIndex(index)}
                   className={`px-5 py-2.5 rounded-lg font-semibold text-sm transition-all ${
                     activeIndex === index
-                      ? 'text-slate-900 shadow-lg'
-                      : 'bg-slate-800/50 text-slate-400 hover:text-slate-200 border border-white/10'
+                      ? 'text-white shadow-lg'
+                      : 'bg-white dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 border border-black/10 dark:border-white/10'
                   }`}
                   style={activeIndex === index ? { backgroundColor: card.color } : {}}
                   whileHover={{ scale: 1.05 }}
@@ -879,24 +879,24 @@ export default function DashboardPreview() {
                     {/* Title */}
                     <div className="flex items-center gap-3 mb-6">
                       <div className="w-4 h-4 rounded-full" style={{ backgroundColor: activeCard.color }} />
-                      <h3 className="text-2xl font-bold text-slate-100">{activeCard.title} RiskPod</h3>
+                      <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100">{activeCard.title} RiskPod</h3>
                     </div>
 
                     {/* Description */}
-                    <p className="text-base text-slate-400 leading-relaxed mb-8">{activeCard.description}</p>
+                    <p className="text-base text-slate-600 dark:text-slate-400 leading-relaxed mb-8">{activeCard.description}</p>
 
                     {/* Quick Stats */}
                     <div className="grid grid-cols-3 gap-4">
                       <div className="text-center">
-                        <div className="text-2xl font-bold font-mono text-slate-100">{activeCard.positions}</div>
+                        <div className="text-2xl font-bold font-mono text-slate-800 dark:text-slate-100">{activeCard.positions}</div>
                         <div className="text-xs text-slate-500">Positions</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-2xl font-bold font-mono text-rose-400">{activeCard.var95}</div>
+                        <div className="text-2xl font-bold font-mono text-rose-500 dark:text-rose-400">{activeCard.var95}</div>
                         <div className="text-xs text-slate-500">VaR (95%)</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-2xl font-bold font-mono text-slate-100">{activeCard.grossExposure}</div>
+                        <div className="text-2xl font-bold font-mono text-slate-800 dark:text-slate-100">{activeCard.grossExposure}</div>
                         <div className="text-xs text-slate-500">Gross</div>
                       </div>
                     </div>
