@@ -1,7 +1,7 @@
 import {
   HeroInline,
-  CTASection,
   FixedSolutionArrow,
+  UnifiedCTA,
 } from '@/components'
 import {
   TheProblemSection,
@@ -31,7 +31,7 @@ export default function Home() {
         <UnknownCorrelationProblem />
       </div>
       <div id="cta">
-        <CTASection />
+        <UnifiedCTA showTestimonial={true} theme="blue" />
       </div>
     </div>
   )

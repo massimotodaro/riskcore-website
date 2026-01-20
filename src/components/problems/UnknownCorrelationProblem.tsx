@@ -94,23 +94,23 @@ export default function UnknownCorrelationProblem() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="bg-gradient-to-br from-blue-500/5 to-slate-500/5 border border-blue-500/20 rounded-2xl p-6 h-full"
+              className="bg-gradient-to-br from-blue-500/5 to-slate-500/5 border border-blue-500/20 rounded-xl sm:rounded-2xl p-3 sm:p-6 h-full"
             >
-              <div className="mb-6 text-center">
-                <p className="text-slate-400 text-sm uppercase tracking-wider mb-1">Cross-Book Correlation</p>
-                <h3 className="text-xl md:text-2xl font-bold text-blue-400 font-['Space_Grotesk']">
+              <div className="mb-3 sm:mb-6 text-center">
+                <p className="text-slate-400 text-xs sm:text-sm uppercase tracking-wider mb-1">Cross-Book Correlation</p>
+                <h3 className="text-base sm:text-xl md:text-2xl font-bold text-blue-400 font-['Space_Grotesk']">
                   What Do You Actually Know?
                 </h3>
               </div>
 
               {/* Correlation Matrix - Centered and Large */}
               <div className="flex justify-center overflow-x-auto">
-                <table>
+                <table className="text-xs sm:text-base">
                   <thead>
                     <tr>
-                      <th className="px-3 py-1 w-20"></th>
+                      <th className="px-1 sm:px-3 py-1 w-12 sm:w-20"></th>
                       {['Alpha', 'Beta', 'Gamma', 'Delta', 'Macro', 'Quant'].map((book) => (
-                        <th key={book} className="px-3 py-1 text-lg text-slate-300 font-semibold">{book}</th>
+                        <th key={book} className="px-1 sm:px-3 py-1 text-xs sm:text-lg text-slate-300 font-semibold">{book}</th>
                       ))}
                     </tr>
                   </thead>
@@ -124,21 +124,21 @@ export default function UnknownCorrelationProblem() {
                       { name: 'Quant', values: ['-0.2', '?', '?', '0.7', '?', '1.0'] },
                     ].map((row) => (
                       <tr key={row.name}>
-                        <td className="px-3 py-1 text-lg text-slate-300 font-semibold">{row.name}</td>
+                        <td className="px-1 sm:px-3 py-1 text-xs sm:text-lg text-slate-300 font-semibold">{row.name}</td>
                         {row.values.map((val, i) => (
-                          <td key={i} className="px-3 py-1 text-center">
+                          <td key={i} className="px-1 sm:px-3 py-1 text-center">
                             {val === '1.0' ? (
-                              <span className="text-xl text-slate-600">1.0</span>
+                              <span className="text-sm sm:text-xl text-slate-600">1.0</span>
                             ) : val === '?' ? (
                               <motion.span
                                 animate={{ opacity: [0.4, 1, 0.4] }}
                                 transition={{ repeat: Infinity, duration: 1.5, delay: Math.random() }}
-                                className="text-3xl text-orange-500 font-bold"
+                                className="text-lg sm:text-3xl text-orange-500 font-bold"
                               >?</motion.span>
                             ) : val.startsWith('-') ? (
-                              <span className="text-xl text-red-400 font-semibold">{val}</span>
+                              <span className="text-sm sm:text-xl text-red-400 font-semibold">{val}</span>
                             ) : (
-                              <span className="text-xl text-green-400 font-semibold">{val}</span>
+                              <span className="text-sm sm:text-xl text-green-400 font-semibold">{val}</span>
                             )}
                           </td>
                         ))}

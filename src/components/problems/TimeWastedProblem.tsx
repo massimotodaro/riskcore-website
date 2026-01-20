@@ -254,81 +254,81 @@ export default function TimeWastedProblem() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4, duration: 0.5 }}
-          className="bg-gradient-to-br from-blue-500/5 to-cyan-500/5 border border-blue-500/20 rounded-2xl p-6 mt-8"
+          className="bg-gradient-to-br from-blue-500/5 to-cyan-500/5 border border-blue-500/20 rounded-xl sm:rounded-2xl p-3 sm:p-6 mt-4 sm:mt-8"
         >
-          <div className="mb-6 text-left">
-            <p className="text-slate-400 text-sm uppercase tracking-wider mb-1">The Real Cost</p>
-            <h3 className="text-2xl md:text-3xl font-bold text-blue-400 font-['Space_Grotesk']">
+          <div className="mb-3 sm:mb-6 text-left">
+            <p className="text-slate-400 text-[10px] sm:text-sm uppercase tracking-wider mb-1">The Real Cost</p>
+            <h3 className="text-lg sm:text-2xl md:text-3xl font-bold text-blue-400 font-['Space_Grotesk']">
               Fragmented Data
             </h3>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-4">
-            <div className="flex items-center gap-4 p-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
+            <div className="flex items-center gap-2 sm:gap-4 p-2 sm:p-4">
               <motion.div
                 animate={{ scale: [1, 1.1, 1], opacity: [0.8, 1, 0.8] }}
                 transition={{ repeat: Infinity, duration: 2, delay: 0 }}
-                className="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center flex-shrink-0"
+                className="w-8 h-8 sm:w-12 sm:h-12 bg-blue-500/20 rounded-full flex items-center justify-center flex-shrink-0"
                 style={{ border: '2px solid rgba(59, 130, 246, 0.5)' }}
               >
-                <svg className="w-6 h-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-4 h-4 sm:w-6 sm:h-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </motion.div>
               <div>
-                <p className="text-slate-100 font-semibold">$200K+ annual labor cost</p>
-                <p className="text-sm text-slate-400">Dedicated to data wrangling</p>
+                <p className="text-slate-100 font-semibold text-xs sm:text-base">$200K+ annual labor cost</p>
+                <p className="text-[10px] sm:text-sm text-slate-400">Dedicated to data wrangling</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-4 p-4">
+            <div className="flex items-center gap-2 sm:gap-4 p-2 sm:p-4">
               <motion.div
                 animate={{ scale: [1, 1.1, 1], opacity: [0.8, 1, 0.8] }}
                 transition={{ repeat: Infinity, duration: 2, delay: 0.3 }}
-                className="w-12 h-12 bg-cyan-500/20 rounded-full flex items-center justify-center flex-shrink-0"
+                className="w-8 h-8 sm:w-12 sm:h-12 bg-cyan-500/20 rounded-full flex items-center justify-center flex-shrink-0"
                 style={{ border: '2px solid rgba(34, 211, 238, 0.5)' }}
               >
-                <svg className="w-6 h-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-4 h-4 sm:w-6 sm:h-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </motion.div>
               <div>
-                <p className="text-slate-100 font-semibold">750+ hours wasted annually</p>
-                <p className="text-sm text-slate-400">On manual aggregation</p>
+                <p className="text-slate-100 font-semibold text-xs sm:text-base">750+ hours wasted annually</p>
+                <p className="text-[10px] sm:text-sm text-slate-400">On manual aggregation</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-4 p-4">
+            <div className="flex items-center gap-2 sm:gap-4 p-2 sm:p-4">
               <motion.div
                 animate={{ scale: [1, 1.1, 1], opacity: [0.8, 1, 0.8] }}
                 transition={{ repeat: Infinity, duration: 2, delay: 0.6 }}
-                className="w-12 h-12 bg-orange-500/20 rounded-full flex items-center justify-center flex-shrink-0"
+                className="w-8 h-8 sm:w-12 sm:h-12 bg-orange-500/20 rounded-full flex items-center justify-center flex-shrink-0"
                 style={{ border: '2px solid rgba(249, 115, 22, 0.5)' }}
               >
-                <svg className="w-6 h-6 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-4 h-4 sm:w-6 sm:h-6 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
               </motion.div>
               <div>
-                <p className="text-slate-100 font-semibold">High error risk</p>
-                <p className="text-sm text-slate-400">Manual processes fail</p>
+                <p className="text-slate-100 font-semibold text-xs sm:text-base">High error risk</p>
+                <p className="text-[10px] sm:text-sm text-slate-400">Manual processes fail</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-4 p-4">
+            <div className="flex items-center gap-2 sm:gap-4 p-2 sm:p-4">
               <motion.div
                 animate={{ scale: [1, 1.1, 1], opacity: [0.8, 1, 0.8] }}
                 transition={{ repeat: Infinity, duration: 2, delay: 0.9 }}
-                className="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0"
+                className="w-8 h-8 sm:w-12 sm:h-12 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0"
                 style={{ border: '2px solid rgba(239, 68, 68, 0.5)' }}
               >
-                <svg className="w-6 h-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-4 h-4 sm:w-6 sm:h-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
                 </svg>
               </motion.div>
               <div>
-                <p className="text-slate-100 font-semibold">Delayed decision making</p>
-                <p className="text-sm text-slate-400">Markets don&apos;t wait</p>
+                <p className="text-slate-100 font-semibold text-xs sm:text-base">Delayed decision making</p>
+                <p className="text-[10px] sm:text-sm text-slate-400">Markets don&apos;t wait</p>
               </div>
             </div>
           </div>

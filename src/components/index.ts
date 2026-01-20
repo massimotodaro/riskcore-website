@@ -12,6 +12,7 @@ export {
   CardFooter,
   Section,
   SectionHeader,
+  UnifiedCTA,
 } from './shared'
 
 // Home page components

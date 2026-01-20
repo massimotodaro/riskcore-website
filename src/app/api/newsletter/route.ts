@@ -18,7 +18,7 @@ const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null
 
 export async function POST(request: Request) {
   try {
-    const { email, website } = await request.json() // website is honeypot field
+    const { email, website, type = 'demo' } = await request.json() // website is honeypot field, type is 'demo' or 'newsletter'
     const headers = request.headers
     const ip = headers.get('x-forwarded-for') || headers.get('x-real-ip') || 'unknown'
     const userAgent = headers.get('user-agent') || 'unknown'
@@ -69,7 +69,7 @@ export async function POST(request: Request) {
         .from('leads')
         .insert({
           email,
-          source: 'website_newsletter',
+          source: type === 'demo' ? 'website_demo_request' : 'website_newsletter',
           status: 'new',
           ip_address: ip,
           user_agent: userAgent
@@ -106,13 +106,15 @@ export async function POST(request: Request) {
     // Send notification email via Resend
     if (resend) {
       try {
+        const isDemo = type === 'demo'
         await resend.emails.send({
           from: 'RISKCORE <notifications@riskcore.io>',
           to: NOTIFICATION_EMAIL,
-          subject: '🎉 New RISKCORE Signup!',
+          subject: isDemo ? '📅 New Demo Request!' : '📧 New Newsletter Signup!',
           html: `
-            <h2>New Beta Signup</h2>
+            <h2>${isDemo ? 'New Demo Request' : 'New Newsletter Signup'}</h2>
             <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Type:</strong> ${isDemo ? 'Demo Request' : 'Newsletter Subscription'}</p>
             <p><strong>Time:</strong> ${new Date().toISOString()}</p>
             <p><strong>IP:</strong> ${ip}</p>
             <p><strong>Source:</strong> Website form</p>
@@ -120,7 +122,7 @@ export async function POST(request: Request) {
             <p><a href="https://supabase.com/dashboard">View in Supabase</a></p>
           `
         })
-        console.log('Notification email sent for:', email)
+        console.log('Notification email sent for:', email, 'type:', type)
       } catch (emailError) {
         console.error('Resend error:', emailError)
       }
