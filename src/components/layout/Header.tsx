@@ -95,7 +95,6 @@ export default function Header() {
 
           {/* Desktop CTAs */}
           <div className="hidden md:flex items-center gap-4">
-            <ThemeToggle />
             <a
               href="https://github.com/massimotodaro/riskcore"
               target="_blank"
@@ -111,6 +110,7 @@ export default function Header() {
             >
               Book a Demo
             </Link>
+            <ThemeToggle />
           </div>
 
           {/* Mobile Menu Button */}
