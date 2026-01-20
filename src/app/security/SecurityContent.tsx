@@ -52,17 +52,6 @@ export default function SecurityContent() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="flex flex-wrap items-center justify-center gap-8">
             <div className="flex items-center gap-3 text-text-muted">
-              <div className="w-12 h-12 rounded-lg bg-brand-blue/10 flex items-center justify-center">
-                <svg className="w-6 h-6 text-brand-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-              <div>
-                <p className="font-semibold text-text-primary">SOC 2 Type II</p>
-                <p className="text-sm">Compliant</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 text-text-muted">
               <div className="w-12 h-12 rounded-lg bg-brand-green/10 flex items-center justify-center">
                 <svg className="w-6 h-6 text-brand-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -71,6 +60,17 @@ export default function SecurityContent() {
               <div>
                 <p className="font-semibold text-text-primary">AES-256</p>
                 <p className="text-sm">Encryption at Rest</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 text-text-muted">
+              <div className="w-12 h-12 rounded-lg bg-brand-blue/10 flex items-center justify-center">
+                <svg className="w-6 h-6 text-brand-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <div>
+                <p className="font-semibold text-text-primary">TLS 1.3</p>
+                <p className="text-sm">Encryption in Transit</p>
               </div>
             </div>
             <div className="flex items-center gap-3 text-text-muted">
@@ -158,17 +158,8 @@ export default function SecurityContent() {
                 <h2 className="text-2xl font-bold text-text-primary mb-4">2. Compliance & Certifications</h2>
 
                 <div className="bg-bg-secondary/50 rounded-lg p-6 mb-6 border border-white/10">
-                  <h3 className="text-lg font-semibold text-text-primary mb-4">Current Certifications</h3>
+                  <h3 className="text-lg font-semibold text-text-primary mb-4">Current Status</h3>
                   <ul className="space-y-4 text-text-secondary">
-                    <li className="flex items-start gap-3">
-                      <svg className="w-5 h-5 text-brand-green flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <div>
-                        <strong className="text-text-primary">SOC 2 Type II</strong>
-                        <p className="text-sm">Annual third-party audits covering security, availability, and confidentiality</p>
-                      </div>
-                    </li>
                     <li className="flex items-start gap-3">
                       <svg className="w-5 h-5 text-brand-green flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -183,15 +174,40 @@ export default function SecurityContent() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                       <div>
-                        <strong className="text-text-primary">Annual Penetration Testing</strong>
-                        <p className="text-sm">Independent security assessments by certified professionals</p>
+                        <strong className="text-text-primary">Security Controls Implemented</strong>
+                        <p className="text-sm">Bank-grade encryption, access controls, and monitoring in place</p>
                       </div>
                     </li>
                   </ul>
                 </div>
+
+                <div className="bg-brand-blue/10 border border-brand-blue/30 rounded-lg p-6 mb-6">
+                  <h3 className="text-lg font-semibold text-text-primary mb-4">In Progress</h3>
+                  <ul className="space-y-4 text-text-secondary">
+                    <li className="flex items-start gap-3">
+                      <svg className="w-5 h-5 text-brand-blue flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <div>
+                        <strong className="text-text-primary">SOC 2 Type II Certification</strong>
+                        <p className="text-sm">Currently undergoing the SOC 2 compliance process with third-party auditors</p>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <svg className="w-5 h-5 text-brand-blue flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <div>
+                        <strong className="text-text-primary">Penetration Testing</strong>
+                        <p className="text-sm">Scheduling independent security assessments by certified professionals</p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+
                 <p className="text-text-secondary leading-relaxed">
-                  Enterprise customers can request our full compliance documentation, including SOC 2 reports,
-                  penetration test summaries, and security questionnaire responses.
+                  We are committed to achieving the highest security standards. Enterprise customers can
+                  request our current security documentation and compliance roadmap.
                 </p>
               </section>
 
