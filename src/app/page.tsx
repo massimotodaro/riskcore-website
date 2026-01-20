@@ -2,6 +2,7 @@ import {
   HeroInline,
   FixedSolutionArrow,
   UnifiedCTA,
+  IntegrationLogos,
 } from '@/components'
 import {
   TheProblemSection,
@@ -16,6 +17,7 @@ export default function Home() {
       <div id="hero">
         <HeroInline />
       </div>
+      <IntegrationLogos />
       <div id="problem">
         <TheProblemSection />
       </div>

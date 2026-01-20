@@ -27,6 +27,7 @@ export {
   CTASection,
   FixedSolutionArrow,
   FixedChallengesArrow,
+  IntegrationLogos,
 } from './home'
 
 // Why RISKCORE page components

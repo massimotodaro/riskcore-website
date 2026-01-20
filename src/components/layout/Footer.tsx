@@ -16,8 +16,6 @@ const footerLinks = {
   ],
   company: [
     { name: 'About', href: '/about' },
-    { name: 'Blog', href: '#' },
-    { name: 'Careers', href: '#' },
     { name: 'Contact', href: 'mailto:hello@riskcore.io' },
   ],
   legal: [
