@@ -2,11 +2,11 @@
 
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
-import { Sun, Moon } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 export function ThemeToggle() {
   const [mounted, setMounted] = useState(false)
-  const { theme, setTheme, resolvedTheme } = useTheme()
+  const { setTheme, resolvedTheme } = useTheme()
 
   // Avoid hydration mismatch
   useEffect(() => {
@@ -16,12 +16,10 @@ export function ThemeToggle() {
   if (!mounted) {
     // Return a placeholder with the same dimensions to prevent layout shift
     return (
-      <button
-        className="p-2 rounded-lg bg-bg-secondary/50 border border-white/10 transition-all duration-300"
-        aria-label="Toggle theme"
-      >
-        <div className="w-5 h-5" />
-      </button>
+      <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-black/10 dark:border-white/10">
+        <span className="text-xs text-text-muted">Color Mode</span>
+        <div className="w-10 h-5 bg-slate-300 dark:bg-slate-700 rounded-full" />
+      </div>
     )
   }
 
@@ -30,39 +28,22 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      className={`
-        relative p-2 rounded-lg
-        bg-bg-secondary/50 hover:bg-bg-secondary
-        border border-black/10 dark:border-white/10
-        hover:border-brand-blue/50
-        transition-all duration-300 ease-in-out
-        group
-      `}
+      className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-black/10 dark:border-white/10 hover:border-black/20 dark:hover:border-white/20 transition-all duration-300"
       aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
       title={`Switch to ${isDark ? 'light' : 'dark'} mode`}
     >
-      <div className="relative w-5 h-5">
-        {/* Sun icon - shown in dark mode, hidden in light mode */}
-        <Sun
-          className={`
-            absolute inset-0 w-5 h-5 text-yellow-400
-            transition-all duration-300 ease-in-out
-            ${isDark
-              ? 'opacity-100 rotate-0 scale-100'
-              : 'opacity-0 rotate-90 scale-0'
-            }
-          `}
-        />
-        {/* Moon icon - shown in light mode, hidden in dark mode */}
-        <Moon
-          className={`
-            absolute inset-0 w-5 h-5 text-slate-700 dark:text-slate-400
-            transition-all duration-300 ease-in-out
-            ${isDark
-              ? 'opacity-0 -rotate-90 scale-0'
-              : 'opacity-100 rotate-0 scale-100'
-            }
-          `}
+      <span className="text-xs text-text-muted">Color Mode</span>
+      <div className="w-10 h-5 bg-slate-300 dark:bg-slate-700 rounded-full relative">
+        {/* Spinning colorful circle */}
+        <motion.div
+          className="absolute w-4 h-4 rounded-full top-0.5"
+          style={{
+            left: isDark ? '2px' : 'calc(100% - 18px)',
+            background: 'conic-gradient(#ef4444, #eab308, #22c55e, #06b6d4, #3b82f6, #a855f7, #ef4444)'
+          }}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+          layout
         />
       </div>
     </button>
