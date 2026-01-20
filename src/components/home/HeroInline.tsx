@@ -95,7 +95,7 @@ function StatsRow() {
 export default function HeroInline() {
   return (
     <section
-      className="relative min-h-screen lg:h-[80vh] overflow-hidden bg-transparent"
+      className="relative h-[85vh] overflow-hidden bg-transparent"
     >
       {/* Background Grid */}
       <div
@@ -171,37 +171,52 @@ export default function HeroInline() {
           </motion.div>
 
           {/* Right Side: Dashboard */}
+          {/* Desktop version */}
           <motion.div
-            className="w-full lg:w-[50%] mt-2 lg:mt-0 px-4 sm:px-0 flex justify-center lg:justify-start items-start relative h-[240px] sm:h-[280px] lg:h-auto overflow-hidden"
+            className="hidden lg:flex w-[50%] px-0 justify-start items-start relative h-auto lg:mt-12"
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            {/* Background glow animation */}
             <motion.div
               className="absolute -inset-10 bg-gradient-to-r from-emerald-500/20 via-blue-500/15 to-purple-500/20 rounded-3xl blur-3xl"
-              animate={{
-                opacity: [0.3, 0.6, 0.3],
-                scale: [1, 1.05, 1],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
+              animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.05, 1] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             />
-            {/* Dashboard with fade effect on mobile */}
             <div className="relative">
-              <div className="transform scale-[0.40] sm:scale-[0.5] lg:scale-100 origin-top-center lg:origin-top-left">
-                <AnimatedRiskboard />
+              <AnimatedRiskboard />
+            </div>
+          </motion.div>
+
+          {/* Mobile version - Top-left quarter with blur fade */}
+          <motion.div
+            className="lg:hidden w-full mt-6 px-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <div className="relative w-full h-[180px] overflow-hidden rounded-xl border border-white/10">
+              {/* Background glow */}
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-blue-500/10 to-purple-500/10" />
+
+              {/* Dashboard - positioned to show top-left quarter */}
+              <div className="absolute top-0 left-0">
+                <div className="transform scale-[0.55] origin-top-left">
+                  <AnimatedRiskboard />
+                </div>
               </div>
-              {/* Fade overlay removed to make dashboard visible on mobile */}
+
+              {/* Blur fade on right edge */}
+              <div className="absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-[#0a0f1a] via-[#0a0f1a]/80 to-transparent" />
+
+              {/* Blur fade on bottom edge */}
+              <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-[#0a0f1a] via-[#0a0f1a]/80 to-transparent" />
             </div>
           </motion.div>
         </div>
 
         {/* Stats Row - Below Dashboard */}
-        <div className="w-full mt-0 lg:mt-0 pt-2 lg:pt-10">
+        <div className="w-full mt-6 lg:mt-0 pt-4 lg:pt-16">
           <StatsRow />
         </div>
       </div>

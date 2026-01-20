@@ -130,14 +130,14 @@ export default function TimeWastedProblem() {
             </motion.div>
 
             {/* Arrow */}
-            <div className="flex justify-center mt-8">
-              <svg className="w-8 h-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="flex justify-center mt-4 sm:mt-8">
+              <svg className="w-6 h-6 sm:w-8 sm:h-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
             </div>
 
             {/* 3 Question Cards underneath */}
-            <div className="grid grid-cols-3 gap-4 mt-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 mt-2 sm:mt-8">
               {dailyQuestions.map((item, index) => (
                 <motion.div
                   key={index}
@@ -145,12 +145,12 @@ export default function TimeWastedProblem() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.3 + index * 0.1, duration: 0.4 }}
-                  className="bg-[#1e293b]/90 backdrop-blur-sm border border-white/10 rounded-2xl p-4"
+                  className="bg-[#1e293b]/90 backdrop-blur-sm border border-white/10 rounded-xl sm:rounded-2xl p-3 sm:p-4"
                 >
-                  <p className="text-slate-100 font-medium text-sm leading-snug mb-2">
+                  <p className="text-slate-100 font-medium text-xs sm:text-sm leading-snug mb-1 sm:mb-2">
                     {item.question}
                   </p>
-                  <p className="text-slate-400 text-xs">{item.time}</p>
+                  <p className="text-slate-400 text-[10px] sm:text-xs">{item.time}</p>
                 </motion.div>
               ))}
             </div>
@@ -218,14 +218,14 @@ export default function TimeWastedProblem() {
             </motion.div>
 
             {/* Arrow */}
-            <div className="flex justify-center mt-8">
-              <svg className="w-8 h-8 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="flex justify-center mt-4 sm:mt-8">
+              <svg className="w-6 h-6 sm:w-8 sm:h-8 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
             </div>
 
             {/* 4 Regulation Cards underneath */}
-            <div className="grid grid-cols-4 gap-3 mt-8">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mt-2 sm:mt-8">
               {regulations.map((reg, index) => (
                 <motion.div
                   key={index}
@@ -233,15 +233,15 @@ export default function TimeWastedProblem() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.3 + index * 0.1, duration: 0.4 }}
-                  className="bg-[#1e293b]/90 backdrop-blur-sm border border-white/10 rounded-2xl p-3"
+                  className="bg-[#1e293b]/90 backdrop-blur-sm border border-white/10 rounded-xl sm:rounded-2xl p-2 sm:p-3 flex flex-col items-center justify-center text-center"
                 >
                   <div
-                    className="px-2 py-1 rounded-lg inline-block mb-2"
+                    className="px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg inline-block mb-1 sm:mb-2"
                     style={{ backgroundColor: `${reg.color}20`, border: `1px solid ${reg.color}40` }}
                   >
-                    <span className="text-xs font-bold" style={{ color: reg.color }}>{reg.name}</span>
+                    <span className="text-[10px] sm:text-xs font-bold" style={{ color: reg.color }}>{reg.name}</span>
                   </div>
-                  <p className="text-slate-100 text-xs">{reg.authority}</p>
+                  <p className="text-slate-100 text-[10px] sm:text-xs">{reg.authority}</p>
                 </motion.div>
               ))}
             </div>
