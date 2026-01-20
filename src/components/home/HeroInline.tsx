@@ -60,7 +60,7 @@ function StatsRow() {
 
   return (
     <motion.div
-      className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 lg:gap-16 mt-8 px-6 sm:px-0"
+      className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 mt-8 px-6 sm:px-0 max-w-3xl mx-auto"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 1 }}
@@ -170,10 +170,10 @@ export default function HeroInline() {
             </motion.div>
           </motion.div>
 
-          {/* Right Side: Dashboard */}
+          {/* Right Side: Dashboard - Always dark mode */}
           {/* Desktop version */}
           <motion.div
-            className="hidden lg:flex w-[50%] px-0 justify-start items-start relative h-auto lg:mt-12"
+            className="hidden lg:flex w-[50%] px-0 justify-start items-start relative h-auto lg:mt-12 force-dark"
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -188,9 +188,9 @@ export default function HeroInline() {
             </div>
           </motion.div>
 
-          {/* Mobile version - Top-left quarter with blur fade */}
+          {/* Mobile version - Top-left quarter with blur fade - Always dark mode */}
           <motion.div
-            className="lg:hidden w-full mt-6 px-4"
+            className="lg:hidden w-full mt-6 px-4 force-dark"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}

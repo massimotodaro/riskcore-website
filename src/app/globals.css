@@ -306,3 +306,48 @@ html:not(.dark) .bg-\[\#1e293b\]\/90 {
 html:not(.dark) .bg-\[\#0f172a\] {
   background-color: #f8fafc !important;
 }
+
+/* Force dark mode on specific elements (like dashboard) */
+.force-dark {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #e2e8f0;
+  --text-muted: #94a3b8;
+  --border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Override light mode styles inside force-dark containers */
+.force-dark .text-slate-100,
+.force-dark .text-slate-50 {
+  color: #f1f5f9 !important;
+}
+
+.force-dark .text-slate-200,
+.force-dark .text-slate-300 {
+  color: #e2e8f0 !important;
+}
+
+.force-dark .text-slate-400 {
+  color: #94a3b8 !important;
+}
+
+.force-dark .text-slate-500 {
+  color: #64748b !important;
+}
+
+.force-dark .bg-\[\#1e293b\]\/90,
+.force-dark .bg-\[\#1e293b\],
+.force-dark .bg-slate-800\/60,
+.force-dark .bg-slate-800 {
+  background-color: rgba(30, 41, 59, 0.9) !important;
+}
+
+.force-dark .bg-\[\#0f172a\],
+.force-dark .bg-\[\#0a0f1a\] {
+  background-color: #0f172a !important;
+}
+
+.force-dark .border-white\/10 {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
