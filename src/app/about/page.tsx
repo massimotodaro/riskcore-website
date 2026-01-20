@@ -3,10 +3,10 @@ import { Founder, OpenSource } from '@/components'
 
 export const metadata: Metadata = {
   title: 'About | RISKCORE - Built by Risk Professionals',
-  description: 'Learn about RISKCORE and its founder Massimo Todaro. 20+ years of financial services experience, built to solve the multi-manager risk problem.',
+  description: 'Learn about RISKCORE and the team behind it. Former bankers and investment managers who built a solution to the multi-manager risk problem.',
   openGraph: {
     title: 'About | RISKCORE - Built by Risk Professionals',
-    description: 'Learn about RISKCORE and its founder. Built by someone who lived the problem.',
+    description: 'Built by a team of former bankers and investment managers who lived the problem.',
     url: 'https://riskcore.io/about',
   },
 }
