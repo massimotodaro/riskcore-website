@@ -69,12 +69,12 @@ function FeatureValue({ value }: { value: boolean | string }) {
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
       </svg>
     ) : (
-      <svg className="w-5 h-5 text-text-muted/50 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg className="w-5 h-5 text-slate-300 dark:text-slate-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
       </svg>
     )
   }
-  return <span className="text-text-secondary text-sm">{value}</span>
+  return <span className="text-slate-700 dark:text-slate-300 text-sm">{value}</span>
 }
 
 export default function ComparisonMatrix() {
@@ -82,7 +82,7 @@ export default function ComparisonMatrix() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <Section className="bg-gradient-to-b from-bg-primary to-bg-secondary/30">
+    <Section className="bg-transparent">
       <SectionHeader
         subtitle="Compare Plans"
         title="Detailed Feature Comparison"
@@ -96,58 +96,60 @@ export default function ComparisonMatrix() {
         transition={{ duration: 0.5 }}
         className="max-w-5xl mx-auto overflow-x-auto"
       >
-        <table className="w-full min-w-[640px]">
-          {/* Header */}
-          <thead>
-            <tr className="border-b border-white/10">
-              <th className="text-left py-4 px-4 font-normal text-text-muted"></th>
-              <th className="text-center py-4 px-4 w-32">
-                <span className="font-heading font-bold text-text-primary">Free</span>
-              </th>
-              <th className="text-center py-4 px-4 w-32 bg-brand-green/5 rounded-t-lg">
-                <span className="font-heading font-bold text-brand-green">Pro</span>
-              </th>
-              <th className="text-center py-4 px-4 w-32">
-                <span className="font-heading font-bold text-brand-purple">Enterprise</span>
-              </th>
-            </tr>
-          </thead>
+        <div className="bg-white dark:bg-slate-800/40 rounded-2xl border border-black/5 dark:border-white/10 shadow-lg dark:shadow-none overflow-hidden">
+          <table className="w-full min-w-[640px]">
+            {/* Header */}
+            <thead>
+              <tr className="border-b border-black/5 dark:border-white/10">
+                <th className="text-left py-4 px-4 font-normal text-slate-500"></th>
+                <th className="text-center py-4 px-4 w-32">
+                  <span className="font-heading font-bold text-slate-800 dark:text-slate-100">Free</span>
+                </th>
+                <th className="text-center py-4 px-4 w-32 bg-brand-green/10">
+                  <span className="font-heading font-bold text-brand-green">Pro</span>
+                </th>
+                <th className="text-center py-4 px-4 w-32">
+                  <span className="font-heading font-bold text-purple-600 dark:text-purple-400">Enterprise</span>
+                </th>
+              </tr>
+            </thead>
 
-          <tbody>
-            {categories.map((category, catIndex) => (
-              <>
-                {/* Category Header */}
-                <tr key={`cat-${catIndex}`} className="bg-bg-secondary/30">
-                  <td
-                    colSpan={4}
-                    className="py-3 px-4 font-heading font-semibold text-text-primary text-sm uppercase tracking-wider"
-                  >
-                    {category.name}
-                  </td>
-                </tr>
-
-                {/* Features */}
-                {category.features.map((feature, featureIndex) => (
-                  <tr
-                    key={`feature-${catIndex}-${featureIndex}`}
-                    className="border-b border-white/5 hover:bg-white/[0.02] transition-colors"
-                  >
-                    <td className="py-3 px-4 text-text-secondary text-sm">{feature.name}</td>
-                    <td className="py-3 px-4 text-center">
-                      <FeatureValue value={feature.free} />
-                    </td>
-                    <td className="py-3 px-4 text-center bg-brand-green/5">
-                      <FeatureValue value={feature.pro} />
-                    </td>
-                    <td className="py-3 px-4 text-center">
-                      <FeatureValue value={feature.enterprise} />
+            <tbody>
+              {categories.map((category, catIndex) => (
+                <>
+                  {/* Category Header */}
+                  <tr key={`cat-${catIndex}`} className="bg-slate-50 dark:bg-slate-800/60">
+                    <td
+                      colSpan={4}
+                      className="py-3 px-4 font-heading font-semibold text-slate-800 dark:text-slate-100 text-sm uppercase tracking-wider"
+                    >
+                      {category.name}
                     </td>
                   </tr>
-                ))}
-              </>
-            ))}
-          </tbody>
-        </table>
+
+                  {/* Features */}
+                  {category.features.map((feature, featureIndex) => (
+                    <tr
+                      key={`feature-${catIndex}-${featureIndex}`}
+                      className="border-b border-black/5 dark:border-white/5 hover:bg-slate-50 dark:hover:bg-white/[0.02] transition-colors"
+                    >
+                      <td className="py-3 px-4 text-slate-600 dark:text-slate-400 text-sm">{feature.name}</td>
+                      <td className="py-3 px-4 text-center">
+                        <FeatureValue value={feature.free} />
+                      </td>
+                      <td className="py-3 px-4 text-center bg-brand-green/5">
+                        <FeatureValue value={feature.pro} />
+                      </td>
+                      <td className="py-3 px-4 text-center">
+                        <FeatureValue value={feature.enterprise} />
+                      </td>
+                    </tr>
+                  ))}
+                </>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </motion.div>
 
       {/* Bottom CTA */}
@@ -157,12 +159,12 @@ export default function ComparisonMatrix() {
         transition={{ delay: 0.3, duration: 0.5 }}
         className="text-center mt-12"
       >
-        <p className="text-text-muted mb-4">
+        <p className="text-slate-600 dark:text-slate-400 mb-4">
           Not sure which plan is right for you?
         </p>
         <a
           href="/#cta"
-          className="inline-flex items-center gap-2 text-brand-blue hover:text-brand-cyan transition-colors"
+          className="inline-flex items-center gap-2 text-brand-blue hover:text-brand-cyan transition-colors font-semibold"
         >
           Talk to our team
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

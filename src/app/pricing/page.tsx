@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function Pricing() {
   return (
-    <div className="pt-20">
+    <div className="pt-20 theme-page-bg">
       <PricingFeatures />
       <PricingCards />
       <ComparisonMatrix />
