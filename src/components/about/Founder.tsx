@@ -12,7 +12,7 @@ export default function Founder() {
     <Section className="bg-gradient-to-b from-bg-primary to-bg-secondary/30">
       <SectionHeader
         subtitle="About"
-        title="Built by People Who Lived the Problem"
+        title="Built by Those Who Lived It"
         description="RISKCORE was created by risk professionals who spent years wrestling with fragmented data across multiple systems."
       />
 
