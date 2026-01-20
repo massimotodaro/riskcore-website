@@ -148,7 +148,7 @@ export default function PricingCards() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.1 + index * 0.15, duration: 0.5 }}
             className={`relative bg-white dark:bg-slate-800/60 backdrop-blur-sm border-2 ${tier.color} rounded-2xl p-8 flex flex-col shadow-lg dark:shadow-none ${
-              tier.popular ? 'md:-mt-4 md:mb-4 shadow-xl shadow-brand-green/20' : ''
+              tier.popular ? 'shadow-xl shadow-brand-green/20' : ''
             }`}
           >
             {tier.popular && (
