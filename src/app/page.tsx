@@ -31,7 +31,7 @@ export default function Home() {
         <UnknownCorrelationProblem />
       </div>
       <div id="cta">
-        <UnifiedCTA showTestimonial={true} theme="blue" />
+        <UnifiedCTA heading="Ready to see how RISKCORE integrates with your trading system?" showTestimonial={true} theme="blue" />
       </div>
     </div>
   )
