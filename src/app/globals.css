@@ -12,10 +12,10 @@
     --bg-primary: #f8fafc;
     --bg-secondary: #ffffff;
     --bg-tertiary: #f1f5f9;
-    --text-primary: #0f172a;
-    --text-secondary: #334155;
-    --text-muted: #64748b;
-    --text-dim: #94a3b8;
+    --text-primary: #172239;
+    --text-secondary: #172239;
+    --text-muted: #475569;
+    --text-dim: #64748b;
     --border-color: rgba(0, 0, 0, 0.1);
     --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     --card-shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.12);
@@ -204,23 +204,23 @@
   border-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Light mode: Override slate text colors globally */
+/* Light mode: Override slate text colors globally - use #172239 for dark text */
 html:not(.dark) .text-slate-100,
 html:not(.dark) .text-slate-50 {
-  color: #0f172a;
+  color: #172239;
 }
 
 html:not(.dark) .text-slate-200,
 html:not(.dark) .text-slate-300 {
-  color: #334155;
+  color: #172239;
 }
 
 html:not(.dark) .text-slate-400 {
-  color: #64748b;
+  color: #475569;
 }
 
 html:not(.dark) .text-slate-500 {
-  color: #94a3b8;
+  color: #64748b;
 }
 
 /* Light mode: Override common dark backgrounds */
