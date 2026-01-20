@@ -362,3 +362,17 @@ html:not(.dark) .force-dark [class*="backdrop-blur"],
 html:not(.dark) .force-dark[class*="backdrop-blur"] {
   background-color: rgba(15, 23, 42, 0.8) !important;
 }
+
+/* Ensure all force-dark backgrounds override light mode - using double class for highest specificity */
+html:not(.dark) .force-dark .bg-slate-900\/80,
+html:not(.dark) .force-dark .backdrop-blur-xl {
+  background-color: rgba(15, 23, 42, 0.8) !important;
+}
+
+html:not(.dark) .force-dark .bg-slate-800\/50 {
+  background-color: rgba(30, 41, 59, 0.5) !important;
+}
+
+html:not(.dark) .force-dark .bg-slate-950\/90 {
+  background-color: rgba(2, 6, 23, 0.9) !important;
+}
