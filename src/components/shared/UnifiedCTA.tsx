@@ -139,7 +139,7 @@ export default function UnifiedCTA({
             <div className="max-w-lg mx-auto">
               {/* Pill Toggle */}
               <div className="flex justify-center mb-4">
-                <div className="inline-flex bg-bg-secondary/60 border border-white/10 rounded-full p-1">
+                <div className="inline-flex bg-bg-secondary/60 border border-black/10 dark:border-white/10 rounded-full p-1">
                   <button
                     type="button"
                     onClick={() => setMode('demo')}
@@ -193,7 +193,7 @@ export default function UnifiedCTA({
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your work email"
-                    className={`w-full pl-12 pr-4 py-3 md:py-3.5 bg-bg-secondary/80 border border-white/10 rounded-[3px] text-text-primary placeholder-text-dim ${colors.focus} focus:outline-none focus:ring-2 transition-all text-sm`}
+                    className={`w-full pl-12 pr-4 py-3 md:py-3.5 bg-bg-secondary/80 border border-black/10 dark:border-white/10 rounded-[3px] text-text-primary placeholder-text-dim ${colors.focus} focus:outline-none focus:ring-2 transition-all text-sm`}
                     required
                     disabled={status === 'loading'}
                   />
@@ -231,7 +231,7 @@ export default function UnifiedCTA({
         {/* Testimonial */}
         {showTestimonial && (
           <motion.div
-            className="mt-10 md:mt-12 p-5 md:p-6 bg-bg-secondary/40 border border-white/10 rounded-xl"
+            className="mt-10 md:mt-12 p-5 md:p-6 bg-bg-secondary/40 border border-black/10 dark:border-white/10 rounded-xl"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.4 }}

@@ -86,15 +86,15 @@ function CapabilityCard({
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ delay, duration: 0.5 }}
-      className="bg-[#1e293b]/90 backdrop-blur-sm border border-white/10 rounded-2xl p-8 text-center hover:border-emerald-500/30 transition-all duration-300"
+      className="bg-[#1e293b]/90 backdrop-blur-sm border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-8 text-center hover:border-emerald-500/30 transition-all duration-300"
     >
-      <div className="w-16 h-16 mx-auto mb-5 bg-emerald-500/10 rounded-xl flex items-center justify-center">
-        <svg className={`w-8 h-8 ${iconColor}`} fill="currentColor" viewBox="0 0 24 24">
+      <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-3 sm:mb-5 bg-emerald-500/10 rounded-lg sm:rounded-xl flex items-center justify-center">
+        <svg className={`w-6 h-6 sm:w-8 sm:h-8 ${iconColor}`} fill="currentColor" viewBox="0 0 24 24">
           {icon}
         </svg>
       </div>
-      <h4 className="text-lg font-bold text-slate-100 mb-3">{title}</h4>
-      <p className="text-sm text-slate-400 leading-relaxed">{description}</p>
+      <h4 className="text-base sm:text-lg font-bold text-slate-100 mb-2 sm:mb-3">{title}</h4>
+      <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">{description}</p>
     </motion.div>
   )
 }
@@ -143,12 +143,12 @@ function ComparisonRow({
 
   return (
     <div className={`grid grid-cols-4 ${!isLast ? 'border-b border-slate-700/30' : ''}`}>
-      <div className="p-5 flex items-center">
-        <span className="text-base text-slate-300">{capability}</span>
+      <div className="p-3 sm:p-5 flex items-center">
+        <span className="text-sm sm:text-base text-slate-300">{capability}</span>
       </div>
-      <div className="p-5 flex items-center justify-center">{renderIcon(riskcore)}</div>
-      <div className="p-5 flex items-center justify-center">{renderIcon(bloomberg)}</div>
-      <div className="p-5 flex items-center justify-center">{renderIcon(riskval)}</div>
+      <div className="p-3 sm:p-5 flex items-center justify-center">{renderIcon(riskcore)}</div>
+      <div className="p-3 sm:p-5 flex items-center justify-center">{renderIcon(bloomberg)}</div>
+      <div className="p-3 sm:p-5 flex items-center justify-center">{renderIcon(riskval)}</div>
     </div>
   )
 }
@@ -198,34 +198,34 @@ export default function NativeAISection() {
 
       <div className="relative max-w-7xl mx-auto px-6">
         {/* ==================== SECTION 1: Hero + Timeline Side by Side ==================== */}
-        <div className="flex items-start justify-between gap-12 mb-20">
+        <div className="flex flex-col lg:flex-row items-start justify-between gap-8 lg:gap-12 mb-12 lg:mb-20">
           {/* Left: Hero Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="flex-1 max-w-xl pt-8"
+            className="flex-1 max-w-xl pt-0 lg:pt-8 text-left"
           >
-            <span className="inline-flex items-center px-4 py-2 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-emerald-400 text-sm font-semibold uppercase tracking-wider mb-6">
+            <span className="inline-flex items-center px-3 sm:px-4 py-2 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-emerald-400 text-xs sm:text-sm font-semibold uppercase tracking-wider mb-4 sm:mb-6">
               First AI-Native Risk Platform
             </span>
 
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 font-['Space_Grotesk']">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 font-['Space_Grotesk']">
               <span className="text-white">Your </span>
               <span className="text-emerald-400">Data Never Leaves</span>
             </h2>
 
-            <p className="text-xl text-slate-400 mb-6">
+            <p className="text-base sm:text-xl text-slate-400 mb-4 sm:mb-6">
               AI-Powered Risk Analysis, 100% On-Premises
             </p>
 
-            <p className="text-base text-slate-400 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
               RISKCORE runs a lightweight AI model directly on your infrastructure. Ask questions in plain English, get instant risk insights — without a single byte of position data touching the cloud.
             </p>
           </motion.div>
 
           {/* Right: Timeline */}
-          <div className="flex-1 max-w-xl">
+          <div className="flex-1 max-w-xl w-full">
             {timelineSteps.map((step, index) => (
               <TimelineItem
                 key={step.number}
@@ -294,14 +294,14 @@ export default function NativeAISection() {
             </h3>
           </div>
 
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-[#1e293b]/90 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden">
+          <div className="max-w-4xl mx-auto overflow-x-auto">
+            <div className="bg-[#1e293b]/90 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden min-w-[500px]">
               {/* Table Header */}
               <div className="grid grid-cols-4 bg-[#0f172a] border-b border-white/10">
-                <div className="p-5 text-base text-slate-400">Capability</div>
-                <div className="p-5 text-base font-semibold text-emerald-400 text-center">RISKCORE</div>
-                <div className="p-5 text-base font-semibold text-orange-400 text-center">Bloomberg</div>
-                <div className="p-5 text-base font-semibold text-slate-400 text-center">Riskval</div>
+                <div className="p-3 sm:p-5 text-sm sm:text-base text-slate-400">Capability</div>
+                <div className="p-3 sm:p-5 text-sm sm:text-base font-semibold text-emerald-400 text-center">RISKCORE</div>
+                <div className="p-3 sm:p-5 text-sm sm:text-base font-semibold text-orange-400 text-center">Bloomberg</div>
+                <div className="p-3 sm:p-5 text-sm sm:text-base font-semibold text-slate-400 text-center">Riskval</div>
               </div>
 
               <ComparisonRow

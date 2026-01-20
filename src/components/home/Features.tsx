@@ -273,12 +273,12 @@ function StageCard({ stage, index }: StageCardProps) {
       transition={{ delay: index * 0.1 }}
     >
       <motion.div
-        className="relative w-full text-left p-4 sm:p-6 pt-8 sm:pt-10 rounded-2xl border transition-all bg-slate-900/50 border-white/5 hover:border-white/10 h-full"
+        className="relative w-full text-center sm:text-left p-4 sm:p-6 pt-8 sm:pt-10 rounded-2xl border transition-all bg-slate-900/50 border-white/5 hover:border-white/10 h-full flex flex-col items-center sm:items-start"
         whileHover={{ y: -5 }}
       >
         {/* Stage Number - positioned higher for arrow space */}
         <div
-          className="absolute -top-4 left-4 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold z-10"
+          className="absolute -top-4 left-1/2 -translate-x-1/2 sm:left-4 sm:translate-x-0 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold z-10"
           style={{ backgroundColor: stage.color, color: '#0f172a' }}
         >
           {stage.number}

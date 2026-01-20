@@ -264,7 +264,7 @@ export default function TimeWastedProblem() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
-            <div className="flex items-center gap-2 sm:gap-4 p-2 sm:p-4">
+            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 p-2 sm:p-4 text-center sm:text-left">
               <motion.div
                 animate={{ scale: [1, 1.1, 1], opacity: [0.8, 1, 0.8] }}
                 transition={{ repeat: Infinity, duration: 2, delay: 0 }}
@@ -281,7 +281,7 @@ export default function TimeWastedProblem() {
               </div>
             </div>
 
-            <div className="flex items-center gap-2 sm:gap-4 p-2 sm:p-4">
+            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 p-2 sm:p-4 text-center sm:text-left">
               <motion.div
                 animate={{ scale: [1, 1.1, 1], opacity: [0.8, 1, 0.8] }}
                 transition={{ repeat: Infinity, duration: 2, delay: 0.3 }}
@@ -298,7 +298,7 @@ export default function TimeWastedProblem() {
               </div>
             </div>
 
-            <div className="flex items-center gap-2 sm:gap-4 p-2 sm:p-4">
+            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 p-2 sm:p-4 text-center sm:text-left">
               <motion.div
                 animate={{ scale: [1, 1.1, 1], opacity: [0.8, 1, 0.8] }}
                 transition={{ repeat: Infinity, duration: 2, delay: 0.6 }}
@@ -315,7 +315,7 @@ export default function TimeWastedProblem() {
               </div>
             </div>
 
-            <div className="flex items-center gap-2 sm:gap-4 p-2 sm:p-4">
+            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 p-2 sm:p-4 text-center sm:text-left">
               <motion.div
                 animate={{ scale: [1, 1.1, 1], opacity: [0.8, 1, 0.8] }}
                 transition={{ repeat: Infinity, duration: 2, delay: 0.9 }}

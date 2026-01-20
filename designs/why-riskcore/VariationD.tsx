@@ -56,7 +56,7 @@ function ImpactSection() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section className="relative py-24 overflow-hidden" style={{ background: 'linear-gradient(to bottom, #151E31, #0f172a)' }}>
+    <section className="relative py-24 overflow-hidden theme-impact-bg">
       {/* Red gradient orb for pain emphasis */}
       <div className="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-red-500/5 rounded-full blur-[150px]" />
 
@@ -175,11 +175,11 @@ function DifferenceSection() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="relative"
         >
-          {/* 3 Column Layout - Centered and Bigger */}
-          <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-6 max-w-5xl mx-auto">
+          {/* Desktop: 3 Column Layout */}
+          <div className="hidden lg:flex flex-row items-center justify-center gap-6 max-w-5xl mx-auto">
 
-            {/* Column 1: Source Systems */}
-            <div className="lg:w-[35%] space-y-3">
+            {/* Column 1: Source Systems - Desktop */}
+            <div className="w-[35%] space-y-3">
               {sourceSystems.map((system, index) => (
                 <motion.div
                   key={system.name}
@@ -214,9 +214,9 @@ function DifferenceSection() {
               ))}
             </div>
 
-            {/* Column 2: Animated Flow Lines */}
-            <div className="lg:w-[15%] flex items-center justify-center py-8 lg:py-0">
-              <svg className="w-full h-32 lg:h-64" viewBox="0 0 100 200" preserveAspectRatio="xMidYMid meet">
+            {/* Column 2: Animated Flow Lines - Desktop (horizontal) */}
+            <div className="w-[15%] flex items-center justify-center">
+              <svg className="w-full h-64" viewBox="0 0 100 200" preserveAspectRatio="xMidYMid meet">
                 {/* Animated flowing lines */}
                 {[0, 1, 2, 3, 4].map((i) => (
                   <motion.path
@@ -234,8 +234,138 @@ function DifferenceSection() {
               </svg>
             </div>
 
-            {/* Column 3: RISKCORE */}
-            <div className="lg:w-[50%]">
+            {/* Column 3: RISKCORE - Desktop */}
+            <div className="w-[50%]">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.8, duration: 0.5 }}
+                className="relative"
+              >
+                {/* Glowing border effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-green-500/20 rounded-2xl blur-xl" />
+
+                <div className="relative bg-gradient-to-br from-emerald-500/10 to-green-500/10 border border-emerald-500/40 rounded-2xl p-8">
+                  {/* RISKCORE Logo/Title */}
+                  <div className="text-center mb-6">
+                    <motion.div
+                      animate={{
+                        boxShadow: [
+                          '0 0 20px rgba(16, 185, 129, 0.2)',
+                          '0 0 40px rgba(16, 185, 129, 0.4)',
+                          '0 0 20px rgba(16, 185, 129, 0.2)'
+                        ]
+                      }}
+                      transition={{ repeat: Infinity, duration: 2 }}
+                      className="inline-block px-6 py-3 bg-emerald-500/20 border border-emerald-500/40 rounded-xl mb-4"
+                    >
+                      <span className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">
+                        RISKCORE
+                      </span>
+                    </motion.div>
+                    <p className="text-slate-400 text-sm">Unified Risk Aggregation Platform</p>
+                  </div>
+
+                  {/* Output capabilities */}
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="bg-slate-800/60 rounded-lg p-3 text-center border border-blue-500/30">
+                      <p className="text-blue-400 font-semibold text-sm">Firm-Wide View</p>
+                      <p className="text-slate-500 text-xs">All books, one dashboard</p>
+                    </div>
+                    <div className="bg-slate-800/60 rounded-lg p-3 text-center border border-orange-500/30">
+                      <p className="text-orange-400 font-semibold text-sm">Real-Time</p>
+                      <p className="text-slate-500 text-xs">Live position updates</p>
+                    </div>
+                    <div className="bg-slate-800/60 rounded-lg p-3 text-center border border-purple-500/30">
+                      <p className="text-purple-400 font-semibold text-sm">Correlation</p>
+                      <p className="text-slate-500 text-xs">Cross-PM analysis</p>
+                    </div>
+                    <div className="bg-slate-800/60 rounded-lg p-3 text-center border border-cyan-500/30">
+                      <p className="text-cyan-400 font-semibold text-sm">Time Travel</p>
+                      <p className="text-slate-500 text-xs">Historical snapshots</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Mobile: Vertical Layout with 2x2 grid + centered Axioma */}
+          <div className="flex lg:hidden flex-col items-center gap-6 max-w-md mx-auto">
+
+            {/* Source Systems - Mobile: 2x2 grid */}
+            <div className="grid grid-cols-2 gap-3 w-full">
+              {sourceSystems.slice(0, 4).map((system, index) => (
+                <motion.div
+                  key={system.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 + index * 0.1, duration: 0.4 }}
+                  className="bg-[#1e293b]/90 backdrop-blur-sm border rounded-xl p-3 flex flex-col items-center gap-2"
+                  style={{ borderColor: `${system.color}40` }}
+                >
+                  <div
+                    className="w-8 h-8 rounded-lg flex items-center justify-center"
+                    style={{ backgroundColor: `${system.color}20`, border: `1px solid ${system.color}40` }}
+                  >
+                    <svg className="w-4 h-4" style={{ color: system.color }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 7v10c0 2 1 3 3 3h10c2 0 3-1 3-3V7c0-2-1-3-3-3H7C5 4 4 5 4 7z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6M12 9v6" />
+                    </svg>
+                  </div>
+                  <div className="text-center">
+                    <p className="font-semibold text-slate-100 text-xs">{system.name}</p>
+                    <p className="text-[10px] text-slate-500">({system.format})</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Axioma - Mobile: Centered below 2x2 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 0.4 }}
+              className="bg-[#1e293b]/90 backdrop-blur-sm border rounded-xl p-3 flex flex-col items-center gap-2 w-1/2"
+              style={{ borderColor: `${sourceSystems[4].color}40` }}
+            >
+              <div
+                className="w-8 h-8 rounded-lg flex items-center justify-center"
+                style={{ backgroundColor: `${sourceSystems[4].color}20`, border: `1px solid ${sourceSystems[4].color}40` }}
+              >
+                <svg className="w-4 h-4" style={{ color: sourceSystems[4].color }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 7v10c0 2 1 3 3 3h10c2 0 3-1 3-3V7c0-2-1-3-3-3H7C5 4 4 5 4 7z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6M12 9v6" />
+                </svg>
+              </div>
+              <div className="text-center">
+                <p className="font-semibold text-slate-100 text-xs">{sourceSystems[4].name}</p>
+                <p className="text-[10px] text-slate-500">({sourceSystems[4].format})</p>
+              </div>
+            </motion.div>
+
+            {/* Animated Flow Lines - Mobile: Vertical (pointing down) */}
+            <div className="flex items-center justify-center py-4">
+              <svg className="w-48 h-24" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet">
+                {/* Animated flowing lines - rotated 90° clockwise (converging downward) */}
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <motion.path
+                    key={i}
+                    d={`M${20 + i * 40} 0 Q${20 + i * 40} 50 100 50 T100 100`}
+                    stroke={sourceSystems[i].color}
+                    strokeWidth="2"
+                    fill="none"
+                    strokeDasharray="6 4"
+                    initial={{ pathLength: 0, opacity: 0.3 }}
+                    animate={{ pathLength: 1, opacity: [0.3, 0.7, 0.3] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
+                  />
+                ))}
+              </svg>
+            </div>
+
+            {/* RISKCORE - Mobile */}
+            <div className="w-full">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -314,12 +444,7 @@ function DifferenceSection() {
 
 export default function WhyRiskcoreVariationD() {
   return (
-    <div
-      className="pt-20"
-      style={{
-        background: 'linear-gradient(180deg, #0a0f1a 0%, #0f172a 10%, #151E31 25%, #1a2744 45%, #151E31 65%, #0f172a 80%, #0d1424 90%, #0a0f1a 100%)'
-      }}
-    >
+    <div className="pt-20 theme-page-bg">
       <FixedChallengesArrow />
       <DifferenceSection />
       <Features />

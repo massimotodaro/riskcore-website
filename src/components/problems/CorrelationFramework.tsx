@@ -35,7 +35,7 @@ export default function CorrelationFramework() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-left sm:text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-100 font-['Space_Grotesk']">
             Capabilities <span className="text-blue-500">No One Else Has</span>
@@ -47,10 +47,10 @@ export default function CorrelationFramework() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="flex items-start justify-between gap-12 mb-8"
+          className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-8 lg:gap-12 mb-8"
         >
           {/* Left side - Title and subtitle */}
-          <div className="flex-1 pt-[50px]">
+          <div className="flex-1 pt-0 lg:pt-[50px] text-center lg:text-left">
             <motion.span
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -59,11 +59,11 @@ export default function CorrelationFramework() {
             >
               Proprietary Technology
             </motion.span>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-100 mb-6 font-['Space_Grotesk']">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-100 mb-6 font-['Space_Grotesk']">
               Cross-Portfolio Correlation Framework
             </h2>
             <motion.p
-              className="text-base text-slate-300 leading-relaxed"
+              className="text-sm sm:text-base text-slate-300 leading-relaxed"
               animate={{
                 textShadow: [
                   '0 0 0px rgba(148, 163, 184, 0)',
@@ -82,18 +82,20 @@ export default function CorrelationFramework() {
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="flex-shrink-0"
+            className="flex-shrink-0 w-full lg:w-auto flex justify-center lg:justify-end -mt-8 sm:-mt-4 lg:mt-0"
           >
-            <CorrelationMatrix animate={isInView} />
+            <div className="transform scale-[0.65] sm:scale-75 lg:scale-100 origin-center lg:origin-top-right">
+              <CorrelationMatrix animate={isInView} />
+            </div>
           </motion.div>
         </motion.div>
 
-        {/* 5 RiskPod cards in a row */}
+        {/* 5 RiskPod cards in a row - hidden on mobile */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.4, duration: 0.6 }}
-          className="grid grid-cols-5 gap-4 mb-8"
+          className="hidden md:grid md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8"
         >
           {riskPodData.filter(pod => pod.name !== 'Other').map((pod, index) => (
             <motion.div
@@ -130,7 +132,7 @@ export default function CorrelationFramework() {
             <h3 className="text-xl font-semibold text-slate-100">What makes our correlation framework unique</h3>
           </div>
 
-          <div className="grid grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {/* Strategy Correlation */}
             <motion.div
               className="text-center p-4 rounded-xl cursor-pointer"
@@ -210,7 +212,7 @@ export default function CorrelationFramework() {
 
           {/* Quote */}
           <div className="mt-8 pt-6 border-t border-white/10">
-            <blockquote className="text-lg font-medium text-slate-300 italic text-center whitespace-nowrap">
+            <blockquote className="text-sm sm:text-lg font-medium text-slate-300 italic text-center">
               &ldquo;We discovered that two of our PMs had 0.85 correlation without knowing it. <span className="text-blue-500 not-italic font-semibold">RISKCORE showed us the blind spot.</span>&rdquo;
             </blockquote>
             <p className="mt-3 text-slate-500 font-medium text-center">— CRO, $8B Multi-Manager Fund</p>

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Menu, X, Github } from 'lucide-react'
+import { ThemeToggle } from '@/components/providers/ThemeToggle'
 
 const navigation = [
   { name: 'Why RISKCORE', href: '/why-riskcore' },
@@ -94,6 +95,7 @@ export default function Header() {
 
           {/* Desktop CTAs */}
           <div className="hidden md:flex items-center gap-4">
+            <ThemeToggle />
             <a
               href="https://github.com/massimotodaro/riskcore"
               target="_blank"
@@ -113,6 +115,7 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-2">
+            <ThemeToggle />
             <button
               type="button"
               className="p-2 text-text-muted hover:text-text-primary transition-colors"
@@ -135,7 +138,7 @@ export default function Header() {
       <div
         id="mobile-menu"
         aria-hidden={!isMobileMenuOpen}
-        className={`md:hidden fixed inset-0 top-16 bg-bg-primary/95 backdrop-blur-xl transition-all duration-300 ${
+        className={`md:hidden fixed inset-0 top-16 bg-white dark:bg-[#0a0f1a] transition-all duration-300 ${
           isMobileMenuOpen
             ? 'opacity-100 pointer-events-auto'
             : 'opacity-0 pointer-events-none'
@@ -149,7 +152,7 @@ export default function Header() {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-text-secondary hover:text-text-primary transition-colors text-lg font-medium py-2 border-b border-white/10"
+                className="text-text-secondary hover:text-text-primary transition-colors text-lg font-medium py-2 border-b border-black/10 dark:border-white/10"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.name}
@@ -158,7 +161,7 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-text-secondary hover:text-text-primary transition-colors text-lg font-medium py-2 border-b border-white/10"
+                className="text-text-secondary hover:text-text-primary transition-colors text-lg font-medium py-2 border-b border-black/10 dark:border-white/10"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.name}
@@ -171,7 +174,7 @@ export default function Header() {
               href="https://github.com/massimotodaro/riskcore"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 px-4 py-3 border border-white/20 rounded-lg text-text-secondary hover:text-text-primary hover:border-white/40 transition-all text-base font-medium"
+              className="flex items-center justify-center gap-2 px-4 py-3 border border-black/20 dark:border-white/20 rounded-lg text-text-secondary hover:text-text-primary hover:border-black/40 dark:hover:border-white/40 transition-all text-base font-medium"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <Github className="w-5 h-5" />

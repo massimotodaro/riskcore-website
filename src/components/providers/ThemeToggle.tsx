@@ -33,7 +33,7 @@ export function ThemeToggle() {
       className={`
         relative p-2 rounded-lg
         bg-bg-secondary/50 hover:bg-bg-secondary
-        border border-white/10 dark:border-white/10
+        border border-black/10 dark:border-white/10
         hover:border-brand-blue/50
         transition-all duration-300 ease-in-out
         group

@@ -11,12 +11,7 @@ import {
 
 export default function Home() {
   return (
-    <div
-      className="min-h-screen"
-      style={{
-        background: 'linear-gradient(180deg, #0a0f1a 0%, #0f172a 15%, #151E31 35%, #1a2744 55%, #151E31 75%, #0f172a 90%, #0a0f1a 100%)'
-      }}
-    >
+    <div className="min-h-screen theme-page-bg">
       <FixedSolutionArrow />
       <div id="hero">
         <HeroInline />
