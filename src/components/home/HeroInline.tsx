@@ -60,7 +60,7 @@ function StatsRow() {
 
   return (
     <motion.div
-      className="flex justify-center gap-16 mt-8"
+      className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 lg:gap-16 mt-8 px-6 sm:px-0"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 1 }}
@@ -73,7 +73,7 @@ function StatsRow() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1 + i * 0.1 }}
         >
-          <div className="text-3xl font-bold text-slate-100 font-mono">
+          <div className="text-2xl sm:text-3xl font-bold text-slate-100 font-mono">
             <AnimatedCounter
               value={stat.value}
               prefix={stat.prefix}
@@ -81,7 +81,7 @@ function StatsRow() {
               duration={2}
             />
           </div>
-          <div className="text-sm text-slate-500 mt-1">{stat.label}</div>
+          <div className="text-xs sm:text-sm text-slate-500 mt-1">{stat.label}</div>
         </motion.div>
       ))}
     </motion.div>
@@ -95,7 +95,7 @@ function StatsRow() {
 export default function HeroInline() {
   return (
     <section
-      className="relative h-[80vh] overflow-hidden bg-transparent"
+      className="relative min-h-[100vh] lg:h-[80vh] overflow-hidden bg-transparent"
     >
       {/* Background Grid */}
       <div
@@ -115,7 +115,7 @@ export default function HeroInline() {
 
           {/* Left Side: Text Content */}
           <motion.div
-            className="w-full lg:w-[50%] pl-24 sm:pl-36 lg:pl-72 pr-8 lg:pr-12"
+            className="w-full lg:w-[50%] px-6 sm:px-12 lg:pl-72 lg:pr-12"
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
@@ -172,7 +172,7 @@ export default function HeroInline() {
 
           {/* Right Side: Dashboard */}
           <motion.div
-            className="w-full lg:w-[50%] mt-12 lg:mt-0 p-0 m-0 flex justify-start items-start relative"
+            className="w-full lg:w-[50%] mt-12 lg:mt-0 px-4 sm:px-0 flex justify-center lg:justify-start items-start relative"
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -190,7 +190,7 @@ export default function HeroInline() {
                 ease: "easeInOut"
               }}
             />
-            <div className="relative p-0 m-0 transform scale-[0.85] origin-top-left lg:scale-100 text-left">
+            <div className="relative transform scale-[0.55] sm:scale-[0.7] lg:scale-100 origin-top-center lg:origin-top-left">
               <AnimatedRiskboard />
             </div>
           </motion.div>

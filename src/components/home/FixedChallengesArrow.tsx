@@ -62,7 +62,7 @@ export default function FixedChallengesArrow() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -100 }}
           transition={{ duration: 0.4, ease: 'easeOut' }}
-          className="fixed left-6 top-1/2 -translate-y-1/2 z-50"
+          className="hidden lg:block fixed left-6 top-1/2 -translate-y-1/2 z-50"
         >
           <Link href="/#problem">
             <motion.div
