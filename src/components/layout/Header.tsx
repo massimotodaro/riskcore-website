@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Menu, X, Github } from 'lucide-react'
 import { ThemeToggle } from '@/components/providers/ThemeToggle'
 
@@ -15,6 +16,7 @@ const navigation = [
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,7 +63,7 @@ export default function Header() {
               <span className="text-white font-bold text-base">R</span>
             </div>
             <span
-              className="font-heading font-bold text-xl bg-clip-text text-transparent transition-opacity group-hover:opacity-80"
+              className={`font-heading text-xl bg-clip-text text-transparent transition-opacity group-hover:opacity-80 ${pathname === '/' ? 'font-extrabold' : 'font-bold'}`}
               style={{ backgroundImage: logoGradient }}
             >
               RISKCORE
@@ -85,7 +87,7 @@ export default function Header() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-text-muted hover:text-text-primary transition-colors text-sm font-medium"
+                  className={`hover:text-text-primary transition-colors text-sm ${pathname === item.href ? 'text-text-primary font-bold' : 'text-text-muted font-medium'}`}
                 >
                   {item.name}
                 </Link>
@@ -161,7 +163,7 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-text-secondary hover:text-text-primary transition-colors text-lg font-medium py-2 border-b border-black/10 dark:border-white/10"
+                className={`hover:text-text-primary transition-colors text-lg py-2 border-b border-black/10 dark:border-white/10 ${pathname === item.href ? 'text-text-primary font-bold' : 'text-text-secondary font-medium'}`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.name}
