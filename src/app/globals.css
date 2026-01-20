@@ -355,5 +355,10 @@ html:not(.dark) .bg-\[\#0f172a\] {
 .force-dark .border-white\/5 { border-color: rgba(255, 255, 255, 0.05) !important; }
 .force-dark .border-white\/20 { border-color: rgba(255, 255, 255, 0.2) !important; }
 
-/* Backdrop blur should stay dark */
-.force-dark [class*="backdrop-blur"] { background-color: rgba(15, 23, 42, 0.8) !important; }
+/* Backdrop blur should stay dark inside force-dark */
+.force-dark [class*="backdrop-blur"],
+.force-dark[class*="backdrop-blur"],
+html:not(.dark) .force-dark [class*="backdrop-blur"],
+html:not(.dark) .force-dark[class*="backdrop-blur"] {
+  background-color: rgba(15, 23, 42, 0.8) !important;
+}

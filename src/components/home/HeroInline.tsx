@@ -173,7 +173,7 @@ export default function HeroInline() {
           {/* Right Side: Dashboard - Always dark mode */}
           {/* Desktop version */}
           <motion.div
-            className="hidden lg:flex w-[50%] px-0 justify-start items-start relative h-auto lg:mt-12 force-dark"
+            className="hidden lg:flex w-[50%] px-0 justify-start items-start relative h-auto lg:mt-12"
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -183,19 +183,19 @@ export default function HeroInline() {
               animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.05, 1] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             />
-            <div className="relative">
+            <div className="relative force-dark">
               <AnimatedRiskboard />
             </div>
           </motion.div>
 
           {/* Mobile version - Top-left quarter with blur fade - Always dark mode */}
           <motion.div
-            className="lg:hidden w-full mt-6 px-4 force-dark"
+            className="lg:hidden w-full mt-6 px-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <div className="relative w-full h-[180px] overflow-hidden rounded-xl border border-white/10">
+            <div className="relative w-full h-[180px] overflow-hidden rounded-xl border border-white/10 force-dark">
               {/* Background glow */}
               <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-blue-500/10 to-purple-500/10" />
 
