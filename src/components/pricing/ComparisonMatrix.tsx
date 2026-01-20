@@ -65,16 +65,16 @@ const categories = [
 function FeatureValue({ value }: { value: boolean | string }) {
   if (typeof value === 'boolean') {
     return value ? (
-      <svg className="w-5 h-5 text-brand-green mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg className="w-4 h-4 sm:w-5 sm:h-5 text-brand-green mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
       </svg>
     ) : (
-      <svg className="w-5 h-5 text-slate-300 dark:text-slate-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg className="w-4 h-4 sm:w-5 sm:h-5 text-slate-300 dark:text-slate-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
       </svg>
     )
   }
-  return <span className="text-slate-700 dark:text-slate-300 text-sm">{value}</span>
+  return <span className="text-slate-700 dark:text-slate-300 text-[10px] sm:text-sm">{value}</span>
 }
 
 export default function ComparisonMatrix() {
@@ -97,19 +97,19 @@ export default function ComparisonMatrix() {
         className="max-w-3xl mx-auto overflow-x-auto"
       >
         <div className="bg-white dark:bg-slate-800/40 rounded-2xl border border-black/5 dark:border-white/10 shadow-lg dark:shadow-none overflow-hidden">
-          <table className="w-full">
+          <table className="w-full text-xs sm:text-sm">
             {/* Header */}
             <thead>
               <tr className="border-b border-black/5 dark:border-white/10">
-                <th className="text-left py-4 px-4 font-normal text-slate-500 w-[200px]"></th>
-                <th className="text-center py-4 px-4 w-[100px]">
+                <th className="text-left py-3 px-2 sm:px-4 font-normal text-slate-500 w-[100px] sm:w-[180px]"></th>
+                <th className="text-center py-3 px-1 sm:px-4 w-[60px] sm:w-[90px]">
                   <span className="font-heading font-bold text-slate-800 dark:text-slate-100">Free</span>
                 </th>
-                <th className="text-center py-4 px-4 w-[100px] bg-brand-green/10">
+                <th className="text-center py-3 px-1 sm:px-4 w-[60px] sm:w-[90px] bg-brand-green/10">
                   <span className="font-heading font-bold text-brand-green">Pro</span>
                 </th>
-                <th className="text-center py-4 px-4 w-[100px]">
-                  <span className="font-heading font-bold text-purple-600 dark:text-purple-400">Enterprise</span>
+                <th className="text-center py-3 px-1 sm:px-4 w-[60px] sm:w-[90px]">
+                  <span className="font-heading font-bold text-purple-600 dark:text-purple-400 text-[10px] sm:text-sm">Enterprise</span>
                 </th>
               </tr>
             </thead>
@@ -121,7 +121,7 @@ export default function ComparisonMatrix() {
                   <tr key={`cat-${catIndex}`} className="bg-slate-50 dark:bg-slate-800/60">
                     <td
                       colSpan={4}
-                      className="py-3 px-4 font-heading font-semibold text-slate-800 dark:text-slate-100 text-sm uppercase tracking-wider"
+                      className="py-2 sm:py-3 px-2 sm:px-4 font-heading font-semibold text-slate-800 dark:text-slate-100 text-xs sm:text-sm uppercase tracking-wider"
                     >
                       {category.name}
                     </td>
@@ -133,14 +133,14 @@ export default function ComparisonMatrix() {
                       key={`feature-${catIndex}-${featureIndex}`}
                       className="border-b border-black/5 dark:border-white/5 hover:bg-slate-50 dark:hover:bg-white/[0.02] transition-colors"
                     >
-                      <td className="py-3 px-4 text-slate-600 dark:text-slate-400 text-sm">{feature.name}</td>
-                      <td className="py-3 px-4 text-center">
+                      <td className="py-2 sm:py-3 px-2 sm:px-4 text-slate-600 dark:text-slate-400">{feature.name}</td>
+                      <td className="py-2 sm:py-3 px-1 sm:px-4 text-center">
                         <FeatureValue value={feature.free} />
                       </td>
-                      <td className="py-3 px-4 text-center bg-brand-green/5">
+                      <td className="py-2 sm:py-3 px-1 sm:px-4 text-center bg-brand-green/5">
                         <FeatureValue value={feature.pro} />
                       </td>
-                      <td className="py-3 px-4 text-center">
+                      <td className="py-2 sm:py-3 px-1 sm:px-4 text-center">
                         <FeatureValue value={feature.enterprise} />
                       </td>
                     </tr>
