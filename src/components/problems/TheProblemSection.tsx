@@ -268,9 +268,46 @@ export default function TheProblemSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4, duration: 0.5 }}
-                className="bg-gradient-to-br from-blue-500/5 to-cyan-500/5 border border-blue-500/20 rounded-2xl px-6 py-4 w-full"
+                className="bg-gradient-to-br from-blue-500/5 to-cyan-500/5 border border-blue-500/20 rounded-2xl px-4 sm:px-6 py-4 w-full"
               >
-                <div className="flex items-center gap-6">
+                {/* Mobile Layout */}
+                <div className="block lg:hidden">
+                  {/* Title centered at top */}
+                  <div className="flex items-center justify-center gap-3 mb-4">
+                    <motion.div
+                      animate={{ rotate: [0, -10, 10, -10, 0] }}
+                      transition={{ repeat: Infinity, duration: 2, repeatDelay: 3 }}
+                      className="w-10 h-10 bg-blue-500/20 border-2 border-blue-500/40 rounded-full flex items-center justify-center flex-shrink-0"
+                    >
+                      <span className="text-xl">?</span>
+                    </motion.div>
+                    <div className="text-center">
+                      <p className="font-bold text-slate-100 text-base">CRO: <span className="text-blue-400">No Unified View</span></p>
+                    </div>
+                  </div>
+                  {/* 2x2 Grid of bullet points */}
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className="flex items-start gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1" style={{ backgroundColor: '#3b82f6' }} />
+                      <p className="text-slate-100 text-xs font-semibold">No single source of truth</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1" style={{ backgroundColor: '#22c55e' }} />
+                      <p className="text-slate-100 text-xs font-semibold">Risk data in 5+ systems</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1" style={{ backgroundColor: '#a855f7' }} />
+                      <p className="text-slate-100 text-xs font-semibold">&ldquo;Exposure&rdquo; defined differently</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1" style={{ backgroundColor: '#f97316' }} />
+                      <p className="text-slate-100 text-xs font-semibold">IDs don&apos;t match</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Desktop Layout */}
+                <div className="hidden lg:flex items-center gap-6">
                   {/* CRO Avatar Section */}
                   <div className="flex items-center gap-3">
                     <motion.div
