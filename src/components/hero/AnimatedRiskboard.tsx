@@ -198,7 +198,7 @@ function AnimatedSidebar() {
     <motion.div
       className="w-44 border-r flex flex-col h-full flex-shrink-0"
       style={{
-        backgroundColor: 'rgba(2, 6, 23, 0.9)',
+        backgroundColor: '#111827',
         borderColor: 'rgba(255, 255, 255, 0.1)',
       }}
       initial={{ x: -100, opacity: 0 }}
@@ -283,7 +283,7 @@ function AnimatedHeader() {
     <motion.header
       className="h-11 border-b flex items-center justify-between px-4 flex-shrink-0"
       style={{
-        backgroundColor: 'rgba(2, 6, 23, 0.8)',
+        backgroundColor: '#111827',
         borderColor: 'rgba(255, 255, 255, 0.1)',
       }}
       initial={{ y: -50, opacity: 0 }}
@@ -361,7 +361,7 @@ function MarketAnchorsStrip() {
     <motion.div
       className="border-b px-4 py-1.5 flex-shrink-0"
       style={{
-        backgroundColor: 'rgba(15, 23, 42, 0.6)',
+        backgroundColor: '#172239',
         borderColor: 'rgba(255, 255, 255, 0.05)',
       }}
       initial={{ opacity: 0 }}
@@ -454,7 +454,7 @@ function RiskCard({ data, delay }: { data: RiskCardData; delay: number }) {
     <motion.div
       className="border rounded-lg overflow-hidden flex flex-col"
       style={{
-        backgroundColor: 'rgba(30, 41, 59, 0.5)',
+        backgroundColor: '#1e293b',
         borderColor: 'rgba(255, 255, 255, 0.1)',
       }}
       initial={{ opacity: 0, y: 20 }}
@@ -805,7 +805,7 @@ export default function AnimatedRiskboard() {
           transformStyle: 'preserve-3d',
           perspective: '1000px',
           aspectRatio: '16 / 9',
-          backgroundColor: 'rgba(15, 23, 42, 0.8)',
+          backgroundColor: '#172239',
           backdropFilter: 'blur(24px)',
           borderColor: 'rgba(255, 255, 255, 0.1)',
         }}
