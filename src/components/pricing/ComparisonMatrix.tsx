@@ -94,21 +94,21 @@ export default function ComparisonMatrix() {
         initial={{ opacity: 0, y: 30 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5 }}
-        className="max-w-5xl mx-auto overflow-x-auto"
+        className="max-w-3xl mx-auto overflow-x-auto"
       >
         <div className="bg-white dark:bg-slate-800/40 rounded-2xl border border-black/5 dark:border-white/10 shadow-lg dark:shadow-none overflow-hidden">
-          <table className="w-full min-w-[640px]">
+          <table className="w-full">
             {/* Header */}
             <thead>
               <tr className="border-b border-black/5 dark:border-white/10">
-                <th className="text-left py-4 px-4 font-normal text-slate-500"></th>
-                <th className="text-center py-4 px-4 w-32">
+                <th className="text-left py-4 px-4 font-normal text-slate-500 w-[200px]"></th>
+                <th className="text-center py-4 px-4 w-[100px]">
                   <span className="font-heading font-bold text-slate-800 dark:text-slate-100">Free</span>
                 </th>
-                <th className="text-center py-4 px-4 w-32 bg-brand-green/10">
+                <th className="text-center py-4 px-4 w-[100px] bg-brand-green/10">
                   <span className="font-heading font-bold text-brand-green">Pro</span>
                 </th>
-                <th className="text-center py-4 px-4 w-32">
+                <th className="text-center py-4 px-4 w-[100px]">
                   <span className="font-heading font-bold text-purple-600 dark:text-purple-400">Enterprise</span>
                 </th>
               </tr>
