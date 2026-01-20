@@ -314,32 +314,119 @@ function DifferenceSection() {
 function CTASection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const [email, setEmail] = useState('')
+  const [website, setWebsite] = useState('') // Honeypot field
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [message, setMessage] = useState('')
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email) return
+
+    setStatus('loading')
+    try {
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, website }),
+      })
+      const data = await res.json()
+
+      if (res.ok) {
+        setStatus('success')
+        setMessage("We'll be in touch within 24 hours.")
+        setEmail('')
+      } else {
+        setStatus('error')
+        setMessage(data.error || 'Something went wrong')
+      }
+    } catch {
+      setStatus('error')
+      setMessage('Failed to connect. Please try again.')
+    }
+  }
 
   return (
     <section className="relative py-24 overflow-hidden bg-transparent">
-      <div ref={ref} className="relative max-w-7xl mx-auto px-6">
+      <div ref={ref} className="relative max-w-4xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
           className="text-center"
         >
-          <div className="inline-block p-8 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-2xl">
+          <div className="p-8 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-2xl">
             <p className="text-2xl md:text-3xl font-bold text-slate-100 mb-4">
               Ready to see how <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">RISKCORE</span> integrates with your trading system seamlessly?
             </p>
             <p className="text-lg text-slate-400 mb-6">
-              Book a 30-minute demo. We'll show you RISKCORE with your data schema.
+              Book a 30-minute demo. We&apos;ll show you RISKCORE with your data schema.
             </p>
-            <a
-              href="/#early-access"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-lg rounded-xl transition-all duration-200 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40"
-            >
-              Book a Demo
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
+
+            {/* Email Form */}
+            {status === 'success' ? (
+              <motion.div
+                className="py-4"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+              >
+                <div className="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-3">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6 text-emerald-400">
+                    <path d="M5 12l5 5L20 7" />
+                  </svg>
+                </div>
+                <p className="text-lg font-medium text-emerald-400">{message}</p>
+              </motion.div>
+            ) : (
+              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+                {/* Honeypot field */}
+                <input
+                  type="text"
+                  name="website"
+                  value={website}
+                  onChange={(e) => setWebsite(e.target.value)}
+                  className="absolute -left-[9999px] opacity-0 pointer-events-none"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                />
+                <div className="flex-1 relative">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500">
+                    <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your work email"
+                    className="w-full pl-12 pr-4 py-3.5 bg-slate-800/80 border border-white/10 rounded-lg text-slate-100 placeholder-slate-500 focus:border-emerald-500/50 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all text-sm"
+                    required
+                    disabled={status === 'loading'}
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className="px-6 py-3.5 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-sm rounded-lg transition-all duration-200 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+                >
+                  {status === 'loading' ? (
+                    <svg className="animate-spin w-5 h-5 mx-auto" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                  ) : (
+                    'Book a Demo'
+                  )}
+                </button>
+              </form>
+            )}
+            {status === 'error' && (
+              <p className="text-center text-red-400 text-sm mt-3">{message}</p>
+            )}
+
+            <p className="text-slate-500 text-xs mt-4">
+              We respect your inbox. No spam, just updates on your demo.
+            </p>
           </div>
         </motion.div>
       </div>
