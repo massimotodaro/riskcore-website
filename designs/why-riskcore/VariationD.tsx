@@ -453,7 +453,7 @@ export default function WhyRiskcoreVariationD() {
       <CorrelationFramework />
       <NativeAISection />
       <UnifiedCTA
-        heading="Ready to see how RISKCORE integrates with your trading system?"
+        heading="Ready to see RISKCORE in action?"
         showTestimonial={false}
         theme="emerald"
       />
