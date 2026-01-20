@@ -90,7 +90,7 @@ function FAQItem({ question, answer, isOpen, onClick, index }: {
           onClick={onClick}
           aria-expanded={isOpen}
           aria-controls={answerId}
-          className="w-full px-6 py-5 flex items-center justify-between text-left group"
+          className="w-full px-6 py-5 flex items-center justify-between text-left group min-h-[76px]"
         >
           <span className={`font-heading font-semibold transition-colors pr-4 ${
             isOpen ? 'text-brand-blue' : 'text-slate-800 dark:text-slate-100 group-hover:text-brand-blue'

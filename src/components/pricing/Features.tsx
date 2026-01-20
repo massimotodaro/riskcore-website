@@ -83,10 +83,10 @@ export default function Features() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <Section className="bg-gradient-to-b from-bg-primary to-bg-secondary/30">
+    <Section className="bg-transparent">
       <SectionHeader
         subtitle="Features"
-        title="Everything You Need for Firm-Wide Risk"
+        title="Everything for Firm-Wide Risk"
         description="RISKCORE combines powerful aggregation with intuitive AI queries—all without disrupting your existing workflows."
       />
 
@@ -101,15 +101,15 @@ export default function Features() {
           <motion.div
             key={index}
             variants={fadeInUp}
-            className="bg-bg-secondary/50 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:border-brand-blue/30 hover:bg-bg-secondary/70 transition-all duration-300 group"
+            className="bg-white dark:bg-slate-800/50 backdrop-blur-sm border border-black/5 dark:border-white/10 rounded-xl p-6 hover:border-brand-blue/30 hover:shadow-lg dark:hover:bg-slate-800/70 transition-all duration-300 group shadow-sm dark:shadow-none"
           >
             <div className="w-12 h-12 bg-brand-blue/10 text-brand-blue rounded-lg flex items-center justify-center mb-4 group-hover:bg-brand-blue/20 group-hover:scale-110 transition-all duration-300">
               {feature.icon}
             </div>
-            <h3 className="font-heading font-bold text-text-primary text-lg mb-2">
+            <h3 className="font-heading font-bold text-slate-800 dark:text-slate-100 text-lg mb-2">
               {feature.title}
             </h3>
-            <p className="text-text-muted text-sm leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
               {feature.description}
             </p>
           </motion.div>
