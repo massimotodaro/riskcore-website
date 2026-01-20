@@ -104,7 +104,7 @@ export default function UnknownCorrelationProblem() {
               </div>
 
               {/* Correlation Matrix - Centered and Large */}
-              <div className="flex justify-center">
+              <div className="flex justify-center overflow-x-auto">
                 <table>
                   <thead>
                     <tr>

@@ -232,10 +232,44 @@ export default function RegulatoryBlindSpotsProblem() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.5, duration: 0.5 }}
-            className="bg-gradient-to-br from-cyan-500/5 to-teal-500/5 border border-cyan-500/20 rounded-2xl px-8 py-5"
-            style={{ width: '70%', minWidth: '600px' }}
+            className="bg-gradient-to-br from-cyan-500/5 to-teal-500/5 border border-cyan-500/20 rounded-2xl px-4 sm:px-8 py-5 w-full lg:w-[70%] lg:max-w-[600px]"
           >
-            <div className="flex items-center gap-8">
+            {/* Mobile Layout */}
+            <div className="block lg:hidden">
+              {/* Title centered at top */}
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <motion.div
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ repeat: Infinity, duration: 2, repeatDelay: 2 }}
+                  className="w-10 h-10 bg-cyan-500/20 border-2 border-cyan-500/40 rounded-full flex items-center justify-center flex-shrink-0"
+                >
+                  <svg className="w-5 h-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </motion.div>
+                <div className="text-center">
+                  <p className="font-bold text-slate-100 text-base">The Core Problem: <span className="text-cyan-400">Compliance Gap</span></p>
+                </div>
+              </div>
+              {/* Bullet points in vertical list */}
+              <div className="space-y-2">
+                <div className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5 bg-cyan-400" />
+                  <p className="text-slate-100 text-xs font-semibold">Regulators require firm-wide aggregated data</p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5 bg-teal-400" />
+                  <p className="text-slate-100 text-xs font-semibold">Your data lives in 5+ disconnected systems</p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5 bg-red-400" />
+                  <p className="text-slate-100 text-xs font-semibold">The gap is filled with manual labor and risk</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Desktop Layout */}
+            <div className="hidden lg:flex items-center gap-8">
               {/* The Core Problem - Left side */}
               <div className="flex items-center gap-4">
                 <motion.div

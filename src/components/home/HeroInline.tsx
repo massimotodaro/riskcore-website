@@ -172,7 +172,7 @@ export default function HeroInline() {
 
           {/* Right Side: Dashboard */}
           <motion.div
-            className="w-full lg:w-[50%] mt-2 lg:mt-0 px-4 sm:px-0 flex justify-center lg:justify-start items-start relative h-[180px] sm:h-[280px] lg:h-auto overflow-hidden"
+            className="w-full lg:w-[50%] mt-2 lg:mt-0 px-4 sm:px-0 flex justify-center lg:justify-start items-start relative h-[240px] sm:h-[280px] lg:h-auto overflow-hidden"
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -192,11 +192,10 @@ export default function HeroInline() {
             />
             {/* Dashboard with fade effect on mobile */}
             <div className="relative">
-              <div className="transform scale-[0.28] sm:scale-[0.5] lg:scale-100 origin-top-center lg:origin-top-left">
+              <div className="transform scale-[0.40] sm:scale-[0.5] lg:scale-100 origin-top-center lg:origin-top-left">
                 <AnimatedRiskboard />
               </div>
-              {/* Fade overlay on mobile */}
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0a0f1a] pointer-events-none lg:hidden" />
+              {/* Fade overlay removed to make dashboard visible on mobile */}
             </div>
           </motion.div>
         </div>

@@ -296,7 +296,7 @@ export default function TheProblemSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4, duration: 0.5 }}
-                className="bg-gradient-to-br from-blue-500/5 to-cyan-500/5 border border-blue-500/20 rounded-2xl px-4 sm:px-6 py-5 sm:py-4 w-full"
+                className="bg-gradient-to-br from-blue-500/5 to-cyan-500/5 border border-blue-500/20 rounded-2xl px-4 sm:px-6 py-6 sm:py-4 w-full"
               >
                 {/* Mobile Layout */}
                 <div className="block lg:hidden">
@@ -314,7 +314,7 @@ export default function TheProblemSection() {
                     </div>
                   </div>
                   {/* 2x2 Grid of bullet points */}
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-2 gap-3">
                     <div className="flex items-start gap-2">
                       <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1" style={{ backgroundColor: '#3b82f6' }} />
                       <p className="text-slate-100 text-xs font-semibold">No single source of truth</p>

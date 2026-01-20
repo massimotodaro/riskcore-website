@@ -59,7 +59,7 @@ export default function CTASection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-text-primary mb-4 whitespace-nowrap text-center">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-text-primary mb-4 text-center">
             Ready to See Risk and Correlation <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">Across All Books?</span>
           </h2>
 
