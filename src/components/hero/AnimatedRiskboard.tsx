@@ -492,7 +492,7 @@ function RiskCard({ data, delay }: { data: RiskCardData; delay: number }) {
           {data.primaryValue}
         </motion.div>
         {/* Progress Bar */}
-        <div className="h-1 bg-slate-700/50 rounded-full mt-1.5 overflow-hidden">
+        <div className="h-1 rounded-full mt-1.5 overflow-hidden" style={{ backgroundColor: 'rgba(51, 65, 85, 0.5)' }}>
           <motion.div
             className="h-full rounded-full"
             style={{ background: `linear-gradient(90deg, ${data.color}, ${data.color}88)` }}
@@ -508,13 +508,14 @@ function RiskCard({ data, delay }: { data: RiskCardData; delay: number }) {
         {data.secondaryMetrics.map((metric, i) => (
           <motion.div
             key={metric.label}
-            className="bg-slate-900/50 rounded px-2 py-1.5 text-center"
+            className="rounded px-2 py-1.5 text-center"
+            style={{ backgroundColor: 'rgba(15, 23, 42, 0.5)' }}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: delay + 0.4 + i * 0.1 }}
           >
-            <div className="text-[8px] text-slate-500 uppercase">{metric.label}</div>
-            <div className="text-[11px] font-mono font-semibold text-slate-200">{metric.value}</div>
+            <div className="text-[8px] uppercase" style={{ color: '#64748b' }}>{metric.label}</div>
+            <div className="text-[11px] font-mono font-semibold" style={{ color: '#e2e8f0' }}>{metric.value}</div>
           </motion.div>
         ))}
       </div>
@@ -535,7 +536,7 @@ function RiskCard({ data, delay }: { data: RiskCardData; delay: number }) {
           ))}
         </div>
         {/* Table Rows */}
-        <div className="bg-slate-900/30 rounded-b">
+        <div className="rounded-b" style={{ backgroundColor: 'rgba(15, 23, 42, 0.3)' }}>
           {data.tableRows.map((row, rowIndex) => (
             <motion.div
               key={row.label}
@@ -588,22 +589,24 @@ function RiskCard({ data, delay }: { data: RiskCardData; delay: number }) {
       {/* Footer */}
       <div className="grid grid-cols-2 gap-1 px-3 pb-2">
         <motion.div
-          className="bg-slate-900/40 rounded px-2 py-1.5 text-center"
+          className="rounded px-2 py-1.5 text-center"
+          style={{ backgroundColor: 'rgba(15, 23, 42, 0.4)' }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: delay + 1.2 }}
         >
-          <div className="text-[8px] text-slate-500 uppercase">Gross Exposure</div>
-          <div className="text-[11px] font-mono font-semibold text-slate-200">{data.grossExposure}</div>
+          <div className="text-[8px] uppercase" style={{ color: '#64748b' }}>Gross Exposure</div>
+          <div className="text-[11px] font-mono font-semibold" style={{ color: '#e2e8f0' }}>{data.grossExposure}</div>
         </motion.div>
         <motion.div
-          className="bg-slate-900/40 rounded px-2 py-1.5 text-center"
+          className="rounded px-2 py-1.5 text-center"
+          style={{ backgroundColor: 'rgba(15, 23, 42, 0.4)' }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: delay + 1.3 }}
         >
-          <div className="text-[8px] text-slate-500 uppercase">Net Exposure</div>
-          <div className="text-[11px] font-mono font-semibold text-slate-200">{data.netExposure}</div>
+          <div className="text-[8px] uppercase" style={{ color: '#64748b' }}>Net Exposure</div>
+          <div className="text-[11px] font-mono font-semibold" style={{ color: '#e2e8f0' }}>{data.netExposure}</div>
         </motion.div>
       </div>
     </motion.div>
