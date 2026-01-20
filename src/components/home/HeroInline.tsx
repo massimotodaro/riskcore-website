@@ -172,7 +172,7 @@ export default function HeroInline() {
 
           {/* Right Side: Dashboard */}
           <motion.div
-            className="w-full lg:w-[50%] mt-8 lg:mt-0 px-4 sm:px-0 flex justify-center lg:justify-start items-start relative"
+            className="w-full lg:w-[50%] mt-2 lg:mt-0 px-4 sm:px-0 flex justify-center lg:justify-start items-start relative h-[180px] sm:h-[280px] lg:h-auto overflow-hidden"
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -202,7 +202,7 @@ export default function HeroInline() {
         </div>
 
         {/* Stats Row - Below Dashboard */}
-        <div className="w-full mt-4 lg:mt-0 pt-4 lg:pt-10">
+        <div className="w-full mt-0 lg:mt-0 pt-2 lg:pt-10">
           <StatsRow />
         </div>
       </div>

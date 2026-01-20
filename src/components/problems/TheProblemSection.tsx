@@ -166,35 +166,35 @@ export default function TheProblemSection() {
           variants={staggerContainer}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          className="grid md:grid-cols-2 gap-6 mb-20"
+          className="grid grid-cols-2 md:grid-cols-2 gap-3 sm:gap-6 mb-12 sm:mb-20"
         >
           {painPoints.map((point, index) => (
             <motion.div
               key={index}
               variants={fadeInUp}
-              className="backdrop-blur-sm rounded-2xl p-8 hover:border-white/30 transition-all duration-300"
+              className="backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-8 hover:border-white/30 transition-all duration-300"
               style={{
                 backgroundColor: `${point.hexColor}10`,
                 border: `1px solid ${point.hexColor}40`,
               }}
             >
-              <div className="flex items-start gap-5">
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-2 sm:gap-5">
                 {/* Modern SVG Icon */}
                 <div
-                  className="p-4 rounded-xl"
+                  className="p-2 sm:p-4 rounded-lg sm:rounded-xl flex-shrink-0"
                   style={{
                     backgroundColor: `${point.hexColor}15`,
                     border: `1px solid ${point.hexColor}40`,
                     color: point.hexColor,
                   }}
                 >
-                  {point.icon}
+                  <div className="w-5 h-5 sm:w-6 sm:h-6">{point.icon}</div>
                 </div>
-                <div className="flex-1">
-                  <h3 className="font-bold text-slate-100 text-xl mb-3">
+                <div className="flex-1 text-center sm:text-left">
+                  <h3 className="font-bold text-slate-100 text-xs sm:text-xl mb-1 sm:mb-3">
                     {point.title}
                   </h3>
-                  <p className="text-slate-400 text-base leading-relaxed">
+                  <p className="text-slate-400 text-[10px] sm:text-base leading-relaxed hidden sm:block">
                     {point.description}
                   </p>
                 </div>
@@ -235,7 +235,8 @@ export default function TheProblemSection() {
               className="relative"
             >
               {/* Silos Grid - 5 cards */}
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-3 mb-6">
+              {/* Desktop: 5 columns, Mobile: 2 columns with 5th centered */}
+              <div className="hidden md:grid md:grid-cols-5 gap-3 mb-6">
                 {pmSystems.map((pm, index) => (
                   <SiloBox
                     key={pm.pm}
@@ -246,6 +247,33 @@ export default function TheProblemSection() {
                     delay={index * 0.1}
                   />
                 ))}
+              </div>
+              {/* Mobile: 2x2 grid + centered 5th card */}
+              <div className="md:hidden mb-6">
+                <div className="grid grid-cols-2 gap-3 mb-3">
+                  {pmSystems.slice(0, 4).map((pm, index) => (
+                    <SiloBox
+                      key={pm.pm}
+                      pm={pm.pm}
+                      system={pm.system}
+                      format={pm.format}
+                      color={pm.color}
+                      delay={index * 0.1}
+                    />
+                  ))}
+                </div>
+                {/* 5th card centered */}
+                <div className="flex justify-center">
+                  <div className="w-1/2">
+                    <SiloBox
+                      pm={pmSystems[4].pm}
+                      system={pmSystems[4].system}
+                      format={pmSystems[4].format}
+                      color={pmSystems[4].color}
+                      delay={0.4}
+                    />
+                  </div>
+                </div>
               </div>
             </motion.div>
 
@@ -268,7 +296,7 @@ export default function TheProblemSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4, duration: 0.5 }}
-                className="bg-gradient-to-br from-blue-500/5 to-cyan-500/5 border border-blue-500/20 rounded-2xl px-4 sm:px-6 py-4 w-full"
+                className="bg-gradient-to-br from-blue-500/5 to-cyan-500/5 border border-blue-500/20 rounded-2xl px-4 sm:px-6 py-5 sm:py-4 w-full"
               >
                 {/* Mobile Layout */}
                 <div className="block lg:hidden">
