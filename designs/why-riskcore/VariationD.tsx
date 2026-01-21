@@ -11,7 +11,7 @@
  */
 
 import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import WhyRiskcoreHero from '@/components/home/WhyRiskcoreHero'
 import { TimeTravelSection, DashboardPreview, Features, FixedChallengesArrow, UnifiedCTA } from '@/components'
 import CorrelationFramework from '@/components/problems/CorrelationFramework'
@@ -136,7 +136,7 @@ const sourceSystems = [
 
 function DifferenceSection() {
   return (
-    <section className="relative py-24 overflow-hidden bg-transparent">
+    <section className="relative pt-8 pb-24 overflow-hidden bg-transparent">
       {/* Gradient orbs */}
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-emerald-500/8 rounded-full blur-[150px]" />
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-blue-500/8 rounded-full blur-[120px]" />
@@ -149,15 +149,6 @@ function DifferenceSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <motion.span
-            className="inline-block px-4 py-2 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-emerald-400 text-sm font-medium mb-6"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-          >
-            What Makes Us Different
-          </motion.span>
-
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-100 mb-6">
             Built for Multi-Manager
             <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent"> From Day One</span>
@@ -439,6 +430,97 @@ function DifferenceSection() {
 
 
 // ==============================================
+// ANIMATED RISKCORE HERO SECTION
+// ==============================================
+
+// Brand colors (excluding green which is the default)
+const rotationColors = [
+  '#3b82f6', // blue
+  '#f97316', // orange
+  '#a855f7', // purple
+  '#22d3ee', // cyan
+]
+const greenColor = '#34d399' // emerald-400 to match the gradient start
+
+function AnimatedRiskcoreHero() {
+  const [rotation, setRotation] = useState(0)
+  const [currentColor, setCurrentColor] = useState(greenColor)
+  const rotationCount = useRef(0)
+  const intervalRef = useRef<NodeJS.Timeout | null>(null)
+
+  useEffect(() => {
+    // Initial rotation after page load
+    const initialTimeout = setTimeout(() => {
+      triggerRotation()
+    }, 500)
+
+    // Repeat every 5 seconds (will stop after 4 rotations)
+    intervalRef.current = setInterval(() => {
+      if (rotationCount.current < 3) {
+        triggerRotation()
+      } else if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+      }
+    }, 5000)
+
+    return () => {
+      clearTimeout(initialTimeout)
+      if (intervalRef.current) clearInterval(intervalRef.current)
+    }
+  }, [])
+
+  const triggerRotation = () => {
+    if (rotationCount.current >= 4) return
+
+    rotationCount.current += 1
+
+    // Pick a random color from the 4 non-green colors
+    const randomColor = rotationColors[Math.floor(Math.random() * rotationColors.length)]
+    setCurrentColor(randomColor)
+    setRotation(prev => prev - 360) // Negative for clockwise rotation when viewed from above
+
+    // Return to green at 180 degrees (halfway through rotation)
+    setTimeout(() => {
+      setCurrentColor(greenColor)
+    }, 600)
+  }
+
+  return (
+    <section className="relative pt-8 md:pt-32 pb-6 overflow-hidden bg-transparent">
+      <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent" />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="flex flex-col items-center justify-center">
+          <motion.h1
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight"
+            initial={{ opacity: 0, x: -100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          >
+            <motion.span
+              className="inline-block"
+              animate={{
+                rotateY: rotation,
+                color: currentColor
+              }}
+              transition={{
+                rotateY: { duration: 1.2, ease: 'easeInOut' },
+                color: { duration: 0.5 }
+              }}
+              style={{ color: currentColor }}
+            >
+              R
+            </motion.span>
+            <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">
+              ISKCORE
+            </span>
+          </motion.h1>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ==============================================
 // MAIN PAGE COMPONENT
 // ==============================================
 
@@ -446,6 +528,7 @@ export default function WhyRiskcoreVariationD() {
   return (
     <div className="pt-20 theme-page-bg">
       <FixedChallengesArrow />
+      <AnimatedRiskcoreHero />
       <DifferenceSection />
       <Features />
       <DashboardPreview />

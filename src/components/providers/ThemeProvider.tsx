@@ -8,8 +8,9 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
     <NextThemesProvider
       attribute="class"
       defaultTheme="dark"
-      enableSystem
+      enableSystem={false}
       disableTransitionOnChange={false}
+      storageKey="riskcore-theme"
       {...props}
     >
       {children}

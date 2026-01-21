@@ -50,7 +50,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+    <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `localStorage.removeItem('riskcore-theme');` }} />
+      </head>
       <body className="min-h-screen bg-bg-primary text-text-secondary antialiased flex flex-col">
         <ThemeProvider>
           <Analytics />
