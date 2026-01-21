@@ -29,11 +29,11 @@ export default function FixedChallengesArrow() {
   useEffect(() => {
     const handleScroll = () => {
       // Desktop: Show when the Features section starts
-      // Mobile: Always show (no scroll threshold needed)
+      // Mobile: Show after scrolling 200px
       const isMobile = window.innerWidth < 1024
 
       if (isMobile) {
-        setIsVisible(true)
+        setIsVisible(window.scrollY > 200)
       } else {
         const featuresSection = document.getElementById('features-section')
         if (featuresSection) {

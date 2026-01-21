@@ -29,10 +29,10 @@ export default function FixedSolutionArrow() {
   useEffect(() => {
     const handleScroll = () => {
       // Desktop: Show after scrolling past 80vh (the hero height)
-      // Mobile: Always show (no scroll threshold needed)
+      // Mobile: Show after scrolling 200px
       const isMobile = window.innerWidth < 1024
       if (isMobile) {
-        setIsVisible(true)
+        setIsVisible(window.scrollY > 200)
       } else {
         setIsVisible(window.scrollY > window.innerHeight * 0.8)
       }
