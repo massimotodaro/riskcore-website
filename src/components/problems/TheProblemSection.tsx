@@ -386,7 +386,7 @@ export default function TheProblemSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.6, duration: 0.5 }}
-          className="relative bg-[#1e293b]/90 backdrop-blur-sm border border-blue-500/30 rounded-2xl p-8 mt-10 max-w-2xl mx-auto"
+          className="relative bg-[#1e293b]/90 backdrop-blur-sm border border-blue-500/30 rounded-2xl p-8 mt-10 max-w-2xl mx-auto md:max-w-none"
         >
           {/* Header */}
           <div className="mb-6 text-center">
