@@ -31,24 +31,22 @@ export default function Home() {
       {/* Testimonial - Above CTA */}
       <section className="relative pt-0 pb-12 md:pb-16 px-6 overflow-hidden bg-transparent">
         <div className="max-w-7xl mx-auto">
-          <div className="max-w-2xl mx-auto">
-            <div className="p-5 md:p-6 bg-bg-secondary/40 rounded-xl">
-              {/* Mobile: icon on top, centered. Desktop: icon on left */}
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-4">
-                <div className="w-11 h-11 rounded-full bg-gradient-to-br from-emerald-400 to-green-500 flex items-center justify-center text-slate-900 font-bold text-lg flex-shrink-0">
-                  M
-                </div>
-                <div className="text-center md:text-left">
-                  <p className="text-text-primary text-sm md:text-lg leading-relaxed mb-3">
-                    &quot;We&apos;ve been trying to build this internally for years. The fact that someone finally
-                    understands the multi-PM aggregation problem and is solving it properly — we had to get involved.&quot;
-                  </p>
-                  <p className="text-sm md:text-base text-text-muted">
-                    <span className="font-semibold">CRO</span>
-                    <span className="mx-2 text-text-dim">•</span>
-                    <span>$2.4B Multi-Manager Fund</span>
-                  </p>
-                </div>
+          <div className="p-5 md:p-6 bg-bg-secondary/40 rounded-xl">
+            {/* Mobile: icon on top, centered. Desktop: icon on left */}
+            <div className="flex flex-col md:flex-row items-center md:items-start gap-4">
+              <div className="w-11 h-11 rounded-full bg-gradient-to-br from-emerald-400 to-green-500 flex items-center justify-center text-slate-900 font-bold text-lg flex-shrink-0">
+                M
+              </div>
+              <div className="text-center md:text-left">
+                <p className="text-text-primary text-sm md:text-lg leading-relaxed mb-3">
+                  &quot;We&apos;ve been trying to build this internally for years. The fact that someone finally
+                  understands the multi-PM aggregation problem and is solving it properly — we had to get involved.&quot;
+                </p>
+                <p className="text-sm md:text-base text-text-muted">
+                  <span className="font-semibold">CRO</span>
+                  <span className="mx-2 text-text-dim">•</span>
+                  <span>$2.4B Multi-Manager Fund</span>
+                </p>
               </div>
             </div>
           </div>
