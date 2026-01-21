@@ -13,7 +13,7 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
 import WhyRiskcoreHero from '@/components/home/WhyRiskcoreHero'
-import { TimeTravelSection, DashboardPreview, Features, FixedChallengesArrow, UnifiedCTA } from '@/components'
+import { TimeTravelSection, DashboardPreview, Features, FixedChallengesArrow, CTAForm } from '@/components'
 import CorrelationFramework from '@/components/problems/CorrelationFramework'
 import NativeAISection from '@/components/problems/NativeAISection'
 
@@ -535,11 +535,22 @@ export default function WhyRiskcoreVariationD() {
       <TimeTravelSection />
       <CorrelationFramework />
       <NativeAISection />
-      <UnifiedCTA
-        heading="Ready to see how RISKCORE integrates with your trading system?"
-        showTestimonial={false}
-        theme="emerald"
-      />
+      <section id="cta" className="relative py-16 md:py-20 px-4 sm:px-6 overflow-hidden bg-transparent">
+        <div className="relative w-[60%] mx-auto">
+          {/* Custom Title for Why RISKCORE Page */}
+          <div className="text-center mb-8 md:mb-10">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+              Ready to <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">unify your risk exposure</span> into one coherent platform without replacing anything?
+            </h2>
+            <p className="text-base md:text-lg text-text-muted">
+              Book a 30-minute demo or subscribe to stay updated.
+            </p>
+          </div>
+
+          {/* Reusable Form Component */}
+          <CTAForm theme="emerald" defaultMode="demo" />
+        </div>
+      </section>
     </div>
   )
 }

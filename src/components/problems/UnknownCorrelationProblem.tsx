@@ -221,8 +221,6 @@ export default function UnknownCorrelationProblem() {
         </motion.div>
 
       </div>
-      {/* Bottom Line */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
     </section>
   )
 }
