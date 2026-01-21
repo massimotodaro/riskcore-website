@@ -37,12 +37,17 @@ export default function FixedSolutionArrow() {
         setIsVisible(window.scrollY > window.innerHeight * 0.8)
       }
 
-      // Calculate which color to show based on scroll position
-      // Divide the page into sections for each color
+      // Calculate which color to show based on scroll position AFTER arrow appears
+      // This ensures green is the starting color when arrow first becomes visible
       const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight
-      const scrollProgress = window.scrollY / scrollableHeight
+      const appearThreshold = isMobile ? 200 : window.innerHeight * 0.8
 
-      // Map scroll progress to color index (0 to 4)
+      // Calculate progress from when arrow appears to end of page
+      const scrollAfterAppear = Math.max(0, window.scrollY - appearThreshold)
+      const remainingScrollable = scrollableHeight - appearThreshold
+      const scrollProgress = remainingScrollable > 0 ? scrollAfterAppear / remainingScrollable : 0
+
+      // Map scroll progress to color index (0 to 4) - starts at green
       const colorIndex = Math.min(
         Math.floor(scrollProgress * colors.length),
         colors.length - 1
