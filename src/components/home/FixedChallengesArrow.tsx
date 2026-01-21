@@ -28,11 +28,21 @@ export default function FixedChallengesArrow() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show arrow when the Features section ("From Fragmented Data to Firm-Wide Clarity") starts
-      const featuresSection = document.getElementById('features-section')
-      if (featuresSection) {
-        const sectionTop = featuresSection.getBoundingClientRect().top
-        setIsVisible(sectionTop <= window.innerHeight * 0.5)
+      // Desktop: Show when the Features section starts
+      // Mobile: Always show (no scroll threshold needed)
+      const isMobile = window.innerWidth < 1024
+
+      if (isMobile) {
+        setIsVisible(true)
+      } else {
+        const featuresSection = document.getElementById('features-section')
+        if (featuresSection) {
+          const sectionTop = featuresSection.getBoundingClientRect().top
+          setIsVisible(sectionTop <= window.innerHeight * 0.5)
+        } else {
+          // Fallback: show after scrolling 80vh if features section not found
+          setIsVisible(window.scrollY > window.innerHeight * 0.8)
+        }
       }
 
       // Calculate which color to show based on scroll position
@@ -57,31 +67,33 @@ export default function FixedChallengesArrow() {
   return (
     <AnimatePresence>
       {isVisible && (
-        <motion.div
-          initial={{ opacity: 0, x: -100 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -100 }}
-          transition={{ duration: 0.4, ease: 'easeOut' }}
-          className="hidden lg:block fixed left-6 top-1/2 -translate-y-1/2 z-50"
-        >
-          <Link href="/#problem">
-            <motion.div
-              className="group flex flex-col items-center cursor-pointer pl-4"
-              whileHover={{ x: 8 }}
-              transition={{ duration: 0.2 }}
-            >
-              {/* Curved Arrow SVG - Mirrored for left side */}
-              <motion.svg
-                width="80"
-                height="120"
-                viewBox="0 0 80 120"
-                fill="none"
-                className="drop-shadow-lg"
-                style={{
-                  filter: `drop-shadow(0 0 15px ${currentColor}40)`,
-                  transform: 'scaleX(-1)' // Mirror horizontally
-                }}
+        <>
+          {/* Desktop: left side, vertically centered */}
+          <motion.div
+            initial={{ opacity: 0, x: -100 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -100 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            className="hidden lg:block fixed left-6 top-1/2 -translate-y-1/2 z-50"
+          >
+            <Link href="/#problem">
+              <motion.div
+                className="group flex flex-col items-center cursor-pointer pl-4"
+                whileHover={{ x: 8 }}
+                transition={{ duration: 0.2 }}
               >
+                {/* Curved Arrow SVG - Mirrored for left side */}
+                <motion.svg
+                  width="80"
+                  height="120"
+                  viewBox="0 0 80 120"
+                  fill="none"
+                  className="drop-shadow-lg"
+                  style={{
+                    filter: `drop-shadow(0 0 15px ${currentColor}40)`,
+                    transform: 'scaleX(-1)' // Mirror horizontally
+                  }}
+                >
                 {/* Curved swooping arrow path */}
                 <defs>
                   <linearGradient id="arrowGradientLeft" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -153,6 +165,51 @@ export default function FixedChallengesArrow() {
             </motion.div>
           </Link>
         </motion.div>
+
+          {/* Mobile: bottom left */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            className="lg:hidden fixed bottom-6 left-4 z-50"
+          >
+            <Link href="/#problem">
+              <motion.div
+                className="group flex items-center gap-2 cursor-pointer px-4 py-3 rounded-full border backdrop-blur-sm"
+                style={{
+                  backgroundColor: `${currentColor}15`,
+                  borderColor: `${currentColor}40`
+                }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <motion.svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  animate={{ x: [0, -3, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  <path
+                    d="M19 12H5M12 19l-7-7 7-7"
+                    stroke={currentColor}
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </motion.svg>
+                <motion.span
+                  className="text-xs font-bold uppercase tracking-wider"
+                  animate={{ color: currentColor }}
+                  transition={{ duration: 0.5 }}
+                >
+                  Challenges
+                </motion.span>
+              </motion.div>
+            </Link>
+          </motion.div>
+        </>
       )}
     </AnimatePresence>
   )

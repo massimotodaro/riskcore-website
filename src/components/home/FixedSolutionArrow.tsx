@@ -28,9 +28,14 @@ export default function FixedSolutionArrow() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show arrow after scrolling past 80vh (the hero height)
-      const heroHeight = window.innerHeight * 0.8
-      setIsVisible(window.scrollY > heroHeight)
+      // Desktop: Show after scrolling past 80vh (the hero height)
+      // Mobile: Always show (no scroll threshold needed)
+      const isMobile = window.innerWidth < 1024
+      if (isMobile) {
+        setIsVisible(true)
+      } else {
+        setIsVisible(window.scrollY > window.innerHeight * 0.8)
+      }
 
       // Calculate which color to show based on scroll position
       // Divide the page into sections for each color
@@ -54,28 +59,30 @@ export default function FixedSolutionArrow() {
   return (
     <AnimatePresence>
       {isVisible && (
-        <motion.div
-          initial={{ opacity: 0, x: 100 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: 100 }}
-          transition={{ duration: 0.4, ease: 'easeOut' }}
-          className="hidden lg:block fixed right-6 top-1/2 -translate-y-1/2 z-50"
-        >
-          <Link href="/why-riskcore">
-            <motion.div
-              className="group flex flex-col items-center cursor-pointer pr-4"
-              whileHover={{ x: -8 }}
-              transition={{ duration: 0.2 }}
-            >
-              {/* Curved Arrow SVG */}
-              <motion.svg
-                width="80"
-                height="120"
-                viewBox="0 0 80 120"
-                fill="none"
-                className="drop-shadow-lg"
-                style={{ filter: `drop-shadow(0 0 15px ${currentColor}40)` }}
+        <>
+          {/* Desktop: right side, vertically centered */}
+          <motion.div
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 100 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            className="hidden lg:block fixed right-6 top-1/2 -translate-y-1/2 z-50"
+          >
+            <Link href="/why-riskcore">
+              <motion.div
+                className="group flex flex-col items-center cursor-pointer pr-4"
+                whileHover={{ x: -8 }}
+                transition={{ duration: 0.2 }}
               >
+                {/* Curved Arrow SVG */}
+                <motion.svg
+                  width="80"
+                  height="120"
+                  viewBox="0 0 80 120"
+                  fill="none"
+                  className="drop-shadow-lg"
+                  style={{ filter: `drop-shadow(0 0 15px ${currentColor}40)` }}
+                >
                 {/* Curved swooping arrow path */}
                 <defs>
                   <linearGradient id="arrowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -147,6 +154,51 @@ export default function FixedSolutionArrow() {
             </motion.div>
           </Link>
         </motion.div>
+
+          {/* Mobile: bottom right */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            className="lg:hidden fixed bottom-6 right-4 z-50"
+          >
+            <Link href="/why-riskcore">
+              <motion.div
+                className="group flex items-center gap-2 cursor-pointer px-4 py-3 rounded-full border backdrop-blur-sm"
+                style={{
+                  backgroundColor: `${currentColor}15`,
+                  borderColor: `${currentColor}40`
+                }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <motion.span
+                  className="text-xs font-bold uppercase tracking-wider"
+                  animate={{ color: currentColor }}
+                  transition={{ duration: 0.5 }}
+                >
+                  Solution
+                </motion.span>
+                <motion.svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  animate={{ x: [0, 3, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  <path
+                    d="M5 12h14M12 5l7 7-7 7"
+                    stroke={currentColor}
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </motion.svg>
+              </motion.div>
+            </Link>
+          </motion.div>
+        </>
       )}
     </AnimatePresence>
   )
