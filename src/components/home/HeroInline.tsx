@@ -173,7 +173,7 @@ function StatsRow() {
 export default function HeroInline() {
   return (
     <section
-      className="relative min-h-[85vh] overflow-hidden bg-transparent"
+      className="relative overflow-hidden bg-transparent pb-8"
     >
       {/* Background Grid */}
       <div
@@ -273,7 +273,12 @@ export default function HeroInline() {
                   transition={{ delay: 1.1 + i * 0.1 }}
                 >
                   <div className="text-2xl font-bold text-slate-100 font-mono">
-                    {stat.prefix}{stat.value}{stat.suffix}
+                    <AnimatedCounter
+                      value={stat.value}
+                      prefix={stat.prefix}
+                      suffix={stat.suffix}
+                      duration={2}
+                    />
                   </div>
                   <div className="text-xs text-slate-500 mt-1">{stat.label}</div>
                 </motion.div>
@@ -333,7 +338,7 @@ export default function HeroInline() {
 
         {/* Integration Logos - Inside Hero */}
         <motion.div
-          className="w-full pt-8 lg:pt-12"
+          className="w-full pt-8 lg:pt-20"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2 }}
