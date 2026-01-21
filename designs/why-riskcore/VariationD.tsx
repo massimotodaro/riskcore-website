@@ -491,7 +491,7 @@ function AnimatedRiskcoreHero() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col items-center justify-center">
           <motion.h1
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight"
+            className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight"
             initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}

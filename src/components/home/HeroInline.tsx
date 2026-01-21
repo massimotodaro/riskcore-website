@@ -7,9 +7,87 @@
  * Right side: Dashboard graphic with stats below
  */
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { AnimatedRiskboard } from '@/components/hero'
+
+// ==============================================
+// ANIMATED RISKCORE LOGO (Mobile Only)
+// ==============================================
+
+const rotationColors = [
+  '#3b82f6', // blue
+  '#f97316', // orange
+  '#a855f7', // purple
+  '#22d3ee', // cyan
+]
+const greenColor = '#34d399' // emerald-400
+
+function AnimatedRiskcore() {
+  const [rotation, setRotation] = useState(0)
+  const [currentColor, setCurrentColor] = useState(greenColor)
+  const rotationCount = useRef(0)
+  const intervalRef = useRef<NodeJS.Timeout | null>(null)
+
+  useEffect(() => {
+    const initialTimeout = setTimeout(() => {
+      triggerRotation()
+    }, 500)
+
+    intervalRef.current = setInterval(() => {
+      if (rotationCount.current < 3) {
+        triggerRotation()
+      } else if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+      }
+    }, 5000)
+
+    return () => {
+      clearTimeout(initialTimeout)
+      if (intervalRef.current) clearInterval(intervalRef.current)
+    }
+  }, [])
+
+  const triggerRotation = () => {
+    if (rotationCount.current >= 4) return
+    rotationCount.current += 1
+    const randomColor = rotationColors[Math.floor(Math.random() * rotationColors.length)]
+    setCurrentColor(randomColor)
+    setRotation(prev => prev - 360)
+    setTimeout(() => {
+      setCurrentColor(greenColor)
+    }, 600)
+  }
+
+  return (
+    <motion.div
+      className="text-center mb-4"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      <span className="text-3xl font-bold tracking-tight">
+        <motion.span
+          className="inline-block"
+          animate={{
+            rotateY: rotation,
+            color: currentColor
+          }}
+          transition={{
+            rotateY: { duration: 1.2, ease: 'easeInOut' },
+            color: { duration: 0.5 }
+          }}
+          style={{ color: currentColor }}
+        >
+          R
+        </motion.span>
+        <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">
+          ISKCORE
+        </span>
+      </span>
+    </motion.div>
+  )
+}
 
 // ==============================================
 // ANIMATED COUNTER
@@ -120,8 +198,13 @@ export default function HeroInline() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
+            {/* Mobile Only: Animated RISKCORE logo */}
+            <div className="lg:hidden">
+              <AnimatedRiskcore />
+            </div>
+
             <motion.h1
-              className="text-2xl sm:text-3xl md:text-5xl font-bold text-slate-100 leading-tight"
+              className="text-2xl sm:text-3xl md:text-5xl font-bold text-slate-100 leading-tight lg:text-left text-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -134,7 +217,7 @@ export default function HeroInline() {
             </motion.h1>
 
             <motion.p
-              className="text-sm sm:text-base lg:text-lg text-slate-400 mt-4 lg:mt-6 max-w-md"
+              className="text-sm sm:text-base lg:text-lg text-slate-400 mt-4 lg:mt-6 max-w-md text-center lg:text-left mx-auto lg:mx-0"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
@@ -144,7 +227,7 @@ export default function HeroInline() {
             </motion.p>
 
             <motion.div
-              className="flex gap-3 mt-6 lg:mt-8"
+              className="flex gap-3 mt-6 lg:mt-8 justify-center lg:justify-start"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
