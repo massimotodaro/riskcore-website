@@ -66,7 +66,7 @@ export default function FixedSolutionArrow() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 100 }}
             transition={{ duration: 0.4, ease: 'easeOut' }}
-            className="hidden lg:block fixed right-16 top-[35%] -translate-y-1/2 z-50"
+            className="hidden lg:block fixed right-16 top-1/2 -translate-y-1/2 z-50"
           >
             <Link href="/why-riskcore">
               <motion.div
