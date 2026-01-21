@@ -15,16 +15,16 @@ import Link from 'next/link'
 
 // Our 5 brand colors
 const colors = [
+  '#34d399', // green/emerald (matches RISKCORE)
   '#3b82f6', // blue
   '#a855f7', // purple
-  '#22c55e', // green
   '#f97316', // orange
   '#06b6d4', // turquoise/cyan
 ]
 
 export default function FixedSolutionArrow() {
   const [isVisible, setIsVisible] = useState(false)
-  const [currentColor, setCurrentColor] = useState(colors[0])
+  const [currentColor, setCurrentColor] = useState('#34d399') // Start with green to match RISKCORE
 
   useEffect(() => {
     const handleScroll = () => {
