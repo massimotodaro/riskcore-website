@@ -222,7 +222,7 @@ export default function HeroInline() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              Finally see your complete risk picture. Aggregate positions from every
+              See your complete risk picture. Aggregate positions from every
               PM, every system, every asset class — in one unified view.
             </motion.p>
 
