@@ -6,7 +6,7 @@ const footerLinks = {
     { name: 'Features', href: '/#features' },
     { name: 'Pricing', href: '/pricing' },
     { name: 'Why RISKCORE', href: '/why-riskcore' },
-    { name: 'Demo', href: '#early-access' },
+    { name: 'Demo', href: '#cta' },
   ],
   resources: [
     { name: 'Documentation', href: 'https://github.com/massimotodaro/riskcore#readme', external: true },

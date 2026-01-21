@@ -107,7 +107,7 @@ export default function Header() {
               <span>GitHub</span>
             </a>
             <Link
-              href="#early-access"
+              href="#cta"
               className="inline-flex items-center justify-center px-4 py-2 bg-brand-blue text-white font-semibold rounded-[3px] transition-all duration-200 hover:bg-brand-blue/90 shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40 text-sm"
             >
               Book a Demo
@@ -183,7 +183,7 @@ export default function Header() {
               <span>Star on GitHub</span>
             </a>
             <Link
-              href="#early-access"
+              href="#cta"
               className="inline-flex items-center justify-center w-full px-4 py-2 bg-brand-blue text-white font-semibold rounded-[3px] transition-all duration-200 hover:bg-brand-blue/90 shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40 text-sm"
               onClick={() => setIsMobileMenuOpen(false)}
             >

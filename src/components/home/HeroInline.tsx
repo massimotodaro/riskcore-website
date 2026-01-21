@@ -233,7 +233,7 @@ export default function HeroInline() {
               transition={{ delay: 0.6 }}
             >
               <motion.a
-                href="#early-access"
+                href="#cta"
                 className="px-5 py-2.5 bg-blue-500 hover:bg-blue-600 text-white font-medium text-sm rounded transition-all duration-200"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
