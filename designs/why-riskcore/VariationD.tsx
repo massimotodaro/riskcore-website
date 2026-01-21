@@ -488,6 +488,8 @@ function AnimatedRiskcoreHero() {
   return (
     <section className="relative pt-8 md:pt-32 pb-6 overflow-hidden bg-transparent">
       <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent" />
+      {/* Overlay to hide text on large screens */}
+      <div className="hidden lg:block absolute inset-0 bg-[#0a0f1a] z-10" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col items-center justify-center">
           <motion.h1
