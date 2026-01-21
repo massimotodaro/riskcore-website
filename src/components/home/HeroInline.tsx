@@ -95,7 +95,7 @@ function StatsRow() {
 export default function HeroInline() {
   return (
     <section
-      className="relative h-[85vh] overflow-hidden bg-transparent"
+      className="relative min-h-[85vh] overflow-hidden bg-transparent"
     >
       {/* Background Grid */}
       <div

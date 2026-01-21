@@ -157,7 +157,7 @@ export default function UnknownCorrelationProblem() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="bg-gradient-to-br from-blue-500/5 to-cyan-500/5 border border-blue-500/20 rounded-2xl p-6 mt-8"
+          className="bg-gradient-to-br from-blue-500/5 to-cyan-500/5 border border-blue-500/20 rounded-2xl p-6 mt-8 max-w-2xl mx-auto"
         >
           <div className="mb-6 text-left">
             <p className="text-slate-400 text-sm uppercase tracking-wider mb-1">The Real Cost</p>
