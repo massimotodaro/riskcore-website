@@ -102,13 +102,13 @@ export default function CookiePreferencesModal({
 
           {/* Modal */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed left-4 right-4 top-4 bottom-4 md:left-1/2 md:top-1/2 md:bottom-auto md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:max-w-2xl md:max-h-[80vh] z-50 flex flex-col"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8"
           >
-            <div className="bg-[#1e293b] border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden h-full md:h-auto md:max-h-[80vh]">
+            <div className="bg-[#1e293b] border border-white/10 rounded-2xl shadow-2xl flex flex-col w-full max-w-2xl max-h-[calc(100vh-32px)] md:max-h-[calc(100vh-64px)]">
               {/* Header */}
               <div className="p-6 border-b border-white/10 flex-shrink-0">
                 <div className="flex items-center justify-between">
@@ -142,21 +142,21 @@ export default function CookiePreferencesModal({
                 {cookieCategories.map((category) => (
                   <div
                     key={category.id}
-                    className="bg-slate-100 border border-slate-200 rounded-xl p-4"
+                    className="bg-[#0f172a] border border-white/10 rounded-xl p-4"
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1">
                         <div className="flex items-center gap-2">
-                          <h3 className="text-base font-medium text-slate-800">
+                          <h3 className="text-base font-medium text-slate-100">
                             {category.name}
                           </h3>
                           {category.required && (
-                            <span className="px-2 py-0.5 text-xs font-medium bg-green-500/20 text-green-600 rounded-full">
+                            <span className="px-2 py-0.5 text-xs font-medium bg-green-500/20 text-green-400 rounded-full">
                               Required
                             </span>
                           )}
                         </div>
-                        <p className="mt-1 text-sm text-slate-600 leading-relaxed">
+                        <p className="mt-1 text-sm text-slate-400 leading-relaxed">
                           {category.description}
                         </p>
                       </div>
