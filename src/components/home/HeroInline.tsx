@@ -360,13 +360,14 @@ export default function HeroInline() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.3 + index * 0.1 }}
-                  className="flex items-center gap-2 px-4 py-2 bg-slate-800/40 border border-white/10 rounded-lg"
+                  className="integration-badge flex items-center gap-2 px-4 py-2 bg-transparent dark:bg-slate-800/40 border rounded-lg"
+                  style={{ borderColor: integration.color }}
                 >
                   <div
                     className="w-3 h-3 rounded-full"
                     style={{ backgroundColor: integration.color }}
                   />
-                  <span className="text-slate-100 text-sm font-medium">
+                  <span className="text-slate-700 dark:text-slate-100 text-sm font-medium">
                     {integration.name}
                   </span>
                 </motion.div>
