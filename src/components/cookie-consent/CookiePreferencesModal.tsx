@@ -106,9 +106,10 @@ export default function CookiePreferencesModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed inset-4 md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:max-w-2xl md:max-h-[85vh] z-50 flex flex-col"
+            className="fixed left-4 right-4 top-[50%] -translate-y-1/2 md:left-1/2 md:-translate-x-1/2 md:w-full md:max-w-2xl z-50"
+            style={{ maxHeight: 'calc(100vh - 40px)' }}
           >
-            <div className="bg-[#1e293b] border border-white/10 rounded-2xl shadow-2xl flex flex-col max-h-full overflow-hidden">
+            <div className="bg-[#1e293b] border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden" style={{ maxHeight: 'calc(100vh - 40px)' }}>
               {/* Header */}
               <div className="p-6 border-b border-white/10 flex-shrink-0">
                 <div className="flex items-center justify-between">
@@ -138,7 +139,7 @@ export default function CookiePreferencesModal({
               </div>
 
               {/* Cookie Categories */}
-              <div className="flex-1 overflow-y-auto p-6 space-y-4">
+              <div className="flex-1 min-h-0 overflow-y-auto p-6 space-y-4">
                 {cookieCategories.map((category) => (
                   <div
                     key={category.id}
