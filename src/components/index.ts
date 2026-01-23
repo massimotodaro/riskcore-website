@@ -59,6 +59,14 @@ export {
   Analytics,
 } from './integrations'
 
+// Cookie consent
+export {
+  CookieConsent,
+  getCookieConsent,
+  setCookieConsent,
+} from './cookie-consent'
+export type { CookiePreferences } from './cookie-consent'
+
 // Provider components
 export {
   ThemeProvider,
