@@ -52,11 +52,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: `
-          localStorage.removeItem('riskcore-theme');
-          // Temporarily clear cookie consent for testing - REMOVE THIS LINE AFTER TESTING
-          localStorage.removeItem('riskcore-cookie-consent');
-        ` }} />
+        <script dangerouslySetInnerHTML={{ __html: `localStorage.removeItem('riskcore-theme');` }} />
       </head>
       <body className="min-h-screen bg-bg-primary text-text-secondary antialiased flex flex-col">
         <ThemeProvider>
