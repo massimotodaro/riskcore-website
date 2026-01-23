@@ -106,10 +106,9 @@ export default function CookiePreferencesModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed left-4 right-4 top-[50%] -translate-y-1/2 md:left-1/2 md:-translate-x-1/2 md:w-full md:max-w-2xl z-50"
-            style={{ maxHeight: 'calc(100vh - 40px)' }}
+            className="fixed left-4 right-4 top-4 bottom-4 md:left-1/2 md:top-1/2 md:bottom-auto md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:max-w-2xl md:max-h-[80vh] z-50 flex flex-col"
           >
-            <div className="bg-[#1e293b] border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden" style={{ maxHeight: 'calc(100vh - 40px)' }}>
+            <div className="bg-[#1e293b] border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden h-full md:h-auto md:max-h-[80vh]">
               {/* Header */}
               <div className="p-6 border-b border-white/10 flex-shrink-0">
                 <div className="flex items-center justify-between">
@@ -143,36 +142,36 @@ export default function CookiePreferencesModal({
                 {cookieCategories.map((category) => (
                   <div
                     key={category.id}
-                    className="bg-[#0f172a]/50 border border-white/5 rounded-xl p-4"
+                    className="bg-slate-100 border border-slate-200 rounded-xl p-4"
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1">
                         <div className="flex items-center gap-2">
-                          <h3 className="text-base font-medium text-slate-100">
+                          <h3 className="text-base font-medium text-slate-800">
                             {category.name}
                           </h3>
                           {category.required && (
-                            <span className="px-2 py-0.5 text-xs font-medium bg-green-500/20 text-green-400 rounded-full">
+                            <span className="px-2 py-0.5 text-xs font-medium bg-green-500/20 text-green-600 rounded-full">
                               Required
                             </span>
                           )}
                         </div>
-                        <p className="mt-1 text-sm text-slate-400 leading-relaxed">
+                        <p className="mt-1 text-sm text-slate-600 leading-relaxed">
                           {category.description}
                         </p>
                       </div>
                       <button
                         onClick={() => handleToggle(category.id)}
                         disabled={category.required}
-                        className={`relative flex-shrink-0 w-12 h-7 rounded-full transition-colors duration-200 ${
+                        className={`relative flex-shrink-0 w-11 h-6 rounded-full transition-colors duration-200 ${
                           preferences[category.id]
                             ? 'bg-gradient-to-r from-green-400 to-green-500'
-                            : 'bg-slate-600'
+                            : 'bg-slate-400'
                         } ${category.required ? 'opacity-75 cursor-not-allowed' : 'cursor-pointer'}`}
                       >
                         <span
-                          className={`absolute top-1 w-5 h-5 bg-white rounded-full shadow-md transition-transform duration-200 ${
-                            preferences[category.id] ? 'translate-x-6' : 'translate-x-1'
+                          className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow-md transition-all duration-200 ${
+                            preferences[category.id] ? 'translate-x-5' : 'translate-x-0'
                           }`}
                         />
                       </button>
