@@ -1,0 +1,12 @@
+<svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Variation 5: Outlined Style with Gradient Stroke -->
+  <defs>
+    <linearGradient id="outlineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="50%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="292" height="292" rx="52" fill="#162031" stroke="url(#outlineGradient)" stroke-width="8"/>
+  <text x="150" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="206" fill="none" stroke="url(#outlineGradient)" stroke-width="6">R</text>
+</svg>

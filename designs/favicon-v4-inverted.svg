@@ -1,0 +1,11 @@
+<svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Variation 4: Inverted - Dark R on Gradient Background -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="300" rx="56" fill="url(#bgGradient)"/>
+  <text x="150" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="206" fill="#162031">R</text>
+</svg>
