@@ -14,6 +14,8 @@ export {
   SectionHeader,
   UnifiedCTA,
   CTAForm,
+  ContactModalProvider,
+  useContactModal,
 } from './shared'
 
 // Home page components

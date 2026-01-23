@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { Header, Footer } from '@/components/layout'
-import { Analytics, ThemeProvider, CookieConsent } from '@/components'
+import { Analytics, ThemeProvider, CookieConsent, ContactModalProvider } from '@/components'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://riskcore.io'),
@@ -56,13 +56,15 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-bg-primary text-text-secondary antialiased flex flex-col">
         <ThemeProvider>
-          <Analytics />
-          <Header />
-          <main className="flex-1">
-            {children}
-          </main>
-          <Footer />
-          <CookieConsent />
+          <ContactModalProvider>
+            <Analytics />
+            <Header />
+            <main className="flex-1">
+              {children}
+            </main>
+            <Footer />
+            <CookieConsent />
+          </ContactModalProvider>
         </ThemeProvider>
       </body>
     </html>

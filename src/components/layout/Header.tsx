@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X, Github } from 'lucide-react'
 import { ThemeToggle } from '@/components/providers/ThemeToggle'
+import { useContactModal } from '@/components/shared/ContactModal'
 
 const navigation = [
   { name: 'Why RISKCORE', href: '/why-riskcore' },
@@ -17,6 +18,7 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
+  const { openModal } = useContactModal()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -106,12 +108,12 @@ export default function Header() {
               <Github className="w-5 h-5" />
               <span>GitHub</span>
             </a>
-            <Link
-              href="#cta"
+            <button
+              onClick={openModal}
               className="inline-flex items-center justify-center px-4 py-2 bg-brand-blue text-white font-semibold rounded-[3px] transition-all duration-200 hover:bg-brand-blue/90 shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40 text-sm"
             >
-              Stay Updated
-            </Link>
+              Contact Us
+            </button>
             <ThemeToggle />
           </div>
 
@@ -182,13 +184,15 @@ export default function Header() {
               <Github className="w-5 h-5" />
               <span>Star on GitHub</span>
             </a>
-            <Link
-              href="#cta"
+            <button
+              onClick={() => {
+                setIsMobileMenuOpen(false)
+                openModal()
+              }}
               className="inline-flex items-center justify-center w-full px-4 py-2 bg-brand-blue text-white font-semibold rounded-[3px] transition-all duration-200 hover:bg-brand-blue/90 shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40 text-sm"
-              onClick={() => setIsMobileMenuOpen(false)}
             >
-              Stay Updated
-            </Link>
+              Contact Us
+            </button>
           </div>
         </div>
       </div>

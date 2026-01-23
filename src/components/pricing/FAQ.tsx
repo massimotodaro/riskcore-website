@@ -3,6 +3,7 @@
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { Section, SectionHeader } from '@/components/shared'
+import { useContactModal } from '@/components/shared/ContactModal'
 
 const faqs = [
   {
@@ -137,6 +138,7 @@ export default function FAQ() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
   const [openIndex, setOpenIndex] = useState<number | null>(0)
+  const { openModal } = useContactModal()
 
   return (
     <Section className="bg-transparent">
@@ -205,15 +207,15 @@ export default function FAQ() {
               Our team is here to help you get started.
             </p>
           </div>
-          <a
-            href="mailto:hello@riskcore.io"
+          <button
+            onClick={openModal}
             className="inline-flex items-center gap-2 px-6 py-3 bg-brand-blue text-white rounded-lg font-semibold hover:bg-brand-blue/90 transition-all shadow-lg shadow-brand-blue/20"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
             Contact Us
-          </a>
+          </button>
         </div>
       </motion.div>
     </Section>
