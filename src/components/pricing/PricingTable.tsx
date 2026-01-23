@@ -254,7 +254,7 @@ function ComparisonTable() {
 
       <div className="bg-bg-secondary/90 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full">
+          <table className="w-full min-w-[700px]">
             <thead>
               <tr className="bg-bg-primary/50">
                 <th className="text-left py-4 px-5 font-semibold text-text-primary font-['Space_Grotesk']">Feature</th>
