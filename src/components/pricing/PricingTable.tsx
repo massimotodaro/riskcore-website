@@ -42,14 +42,14 @@ const pricingTiers = [
     description: 'For teams needing multi-PM risk aggregation',
     price: '$500',
     period: '/month',
-    priceNote: '+ $50/user (up to 15 users)',
+    priceNote: 'Up to 10 users',
     cta: 'Start 14-Day Trial',
     ctaStyle: 'primary',
     badge: 'Most Popular',
     badgeColor: 'blue',
     featured: true,
     features: [
-      { text: 'Up to 15 users', included: true, highlight: true },
+      { text: 'Up to 10 users', included: true, highlight: true },
       { text: 'Cloud or self-hosted deployment', included: true },
       { text: 'Multi-PM aggregation', included: true, highlight: true },
       { text: 'Correlation matrix & overlap detection', included: true },
@@ -68,7 +68,7 @@ const pricingTiers = [
     cta: 'Contact Sales',
     ctaStyle: 'enterprise',
     badge: 'Air-Gapped',
-    badgeColor: 'purple',
+    badgeColor: 'green',
     enterprise: true,
     features: [
       { text: 'Unlimited users', included: true, premium: true },
@@ -79,7 +79,7 @@ const pricingTiers = [
       { text: 'SSO / SAML integration', included: true },
       { text: '24/7 dedicated support', included: true },
       { text: 'Custom integrations', included: true },
-      { text: 'SOC 2 Type II certified', included: true },
+      { text: 'Zero-trust architecture', included: true },
     ],
   },
 ]
@@ -103,7 +103,6 @@ const comparisonCategories = [
       { name: 'Controlled Bridge', subtext: 'Secure update mechanism for air-gapped networks', free: 'x', pro: 'x', enterprise: 'check' },
       { name: 'MFA (2FA)', free: 'x', pro: 'check', enterprise: 'check' },
       { name: 'SSO / SAML', free: 'x', pro: 'x', enterprise: 'check' },
-      { name: 'SOC 2 Type II', free: 'x', pro: 'Available', enterprise: 'Certified', enterprisePremium: true },
     ],
   },
   {
@@ -160,14 +159,14 @@ function PricingCard({ tier, index }: { tier: typeof pricingTiers[0]; index: num
         tier.featured
           ? 'border-blue-500/50 bg-gradient-to-b from-blue-500/10 to-bg-secondary/90'
           : tier.enterprise
-          ? 'border-purple-500/50 bg-gradient-to-b from-purple-500/10 to-bg-secondary/90'
+          ? 'border-green-500/50 bg-gradient-to-b from-green-500/10 to-bg-secondary/90'
           : 'border-white/10 hover:border-blue-500/30'
       }`}
     >
       {tier.badge && (
         <span
           className={`absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide text-white ${
-            tier.badgeColor === 'blue' ? 'bg-blue-500' : 'bg-purple-500'
+            tier.badgeColor === 'blue' ? 'bg-blue-500' : 'bg-green-500'
           }`}
         >
           {tier.badge}
@@ -189,7 +188,7 @@ function PricingCard({ tier, index }: { tier: typeof pricingTiers[0]; index: num
           tier.ctaStyle === 'primary'
             ? 'bg-blue-500 hover:bg-blue-600 text-white'
             : tier.ctaStyle === 'enterprise'
-            ? 'bg-purple-500 hover:bg-purple-600 text-white'
+            ? 'bg-green-500 hover:bg-green-600 text-white'
             : 'bg-transparent border border-white/20 hover:border-white/40 text-text-primary'
         }`}
       >
@@ -211,7 +210,7 @@ function PricingCard({ tier, index }: { tier: typeof pricingTiers[0]; index: num
                   {feature.text.split(feature.highlight)[1]}
                 </>
               ) : 'premium' in feature && feature.premium ? (
-                <span className="text-purple-400 font-medium">{feature.text}</span>
+                <span className="text-green-400 font-medium">{feature.text}</span>
               ) : 'highlight' in feature && feature.highlight === true ? (
                 <span className="text-blue-400 font-medium">{feature.text}</span>
               ) : (
@@ -234,10 +233,10 @@ function ComparisonTable() {
       return <XIcon />
     }
     if (isPremium) {
-      return <span className="text-purple-400 font-medium">{value}</span>
+      return <span className="text-green-400 font-medium">{value}</span>
     }
     if (isHighlight) {
-      return <span className="text-green-400 font-medium">{value}</span>
+      return <span className="text-blue-400 font-medium">{value}</span>
     }
     return <span className="text-text-muted">{value}</span>
   }
@@ -302,7 +301,6 @@ function SecurityCallout() {
   const securityFeatures = [
     { icon: 'shield', text: 'Zero-trust architecture' },
     { icon: 'lock', text: 'End-to-end encryption' },
-    { icon: 'clipboard', text: 'SOC 2 Type II certified' },
     { icon: 'terminal', text: 'Local LLM (no cloud AI)' },
   ]
 
@@ -311,9 +309,9 @@ function SecurityCallout() {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="mt-12 bg-gradient-to-br from-purple-500/10 to-blue-500/10 border border-purple-500/30 rounded-2xl p-8 text-center"
+      className="mt-12 bg-gradient-to-br from-green-500/10 to-blue-500/10 border border-green-500/30 rounded-2xl p-8 text-center"
     >
-      <h3 className="text-2xl font-bold text-purple-400 font-['Space_Grotesk'] mb-4">
+      <h3 className="text-2xl font-bold text-green-400 font-['Space_Grotesk'] mb-4">
         Enterprise-Grade Security for Air-Gapped Networks
       </h3>
       <p className="text-text-muted max-w-3xl mx-auto mb-6">
