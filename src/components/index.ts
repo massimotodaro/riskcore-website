@@ -44,6 +44,7 @@ export {
   PricingCards,
   ComparisonMatrix,
   FAQ,
+  PricingTable,
 } from './pricing'
 
 // About page components

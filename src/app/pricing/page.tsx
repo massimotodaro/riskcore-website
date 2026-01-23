@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { PricingFeatures, PricingCards, ComparisonMatrix, FAQ } from '@/components'
+import { PricingTable, FAQ } from '@/components'
 
 export const metadata: Metadata = {
   title: 'Pricing | RISKCORE - Simple, Transparent Pricing',
@@ -14,9 +14,7 @@ export const metadata: Metadata = {
 export default function Pricing() {
   return (
     <div className="pt-20 theme-page-bg">
-      <PricingFeatures />
-      <PricingCards />
-      <ComparisonMatrix />
+      <PricingTable />
       <FAQ />
     </div>
   )
