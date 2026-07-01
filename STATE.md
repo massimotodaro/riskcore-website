@@ -5,8 +5,8 @@
 ---
 
 ## Last Updated
-**Date**: 2026-01-15 14:00 UTC
-**Session**: 4
+**Date**: 2026-07-01 05:37 UTC
+**Session**: 5
 
 ---
 
@@ -20,6 +20,7 @@
 - [x] All Environment Variables Configured in Vercel
 - [x] Light/Dark Mode Toggle (Task 1 Complete)
 - [x] Animated Hero Dashboard (Task 2 Complete)
+- [x] Local hydration/update overlay fix on port 3002
 
 ---
 
@@ -175,6 +176,18 @@
   - Wider cards (min-w-[240px])
 
 **Notes**: New Time Travel section showcases historical risk analysis features. Dashboard enhanced with detailed data tables.
+
+### Session 5
+**Date**: 2026-07-01
+**Tasks Completed**:
+- **Local Hydration/Update Overlay Fix** ✅
+  - Confirmed `127.0.0.1:3002` was a Python static server serving `static-html/riskcore-website-html`, not the live Next app.
+  - Confirmed the running Next dev server was on `127.0.0.1:3001`.
+  - Replaced logo anchor block wrappers in `Header` and `Footer` with inline wrappers to harden hydration around the overlay-reported `<a>` path.
+  - Ran `npm run lint` and `npm run build` successfully.
+  - Stopped the stale Python static server on port `3002` and started the freshly built Next production server there.
+
+**Notes**: The "update" prompt was from Next.js, not Codex. The project is already on the latest Next 14 patch (`14.2.35`); npm latest is Next 16, but project instructions keep this site on Next 14.
 
 ### Session 2
 **Date**: 2026-01-14

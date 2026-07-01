@@ -43,9 +43,9 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-blue to-brand-cyan flex items-center justify-center">
+              <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-blue to-brand-cyan flex items-center justify-center">
                 <span className="text-white font-bold text-sm">R</span>
-              </div>
+              </span>
               <span className="font-heading font-bold text-xl text-text-primary">
                 RISKCORE
               </span>

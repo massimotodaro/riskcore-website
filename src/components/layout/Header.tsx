@@ -58,12 +58,12 @@ export default function Header() {
             href="/"
             className="flex items-center gap-2 group"
           >
-            <div
+            <span
               className="w-8 h-8 rounded-lg flex items-center justify-center"
               style={{ background: logoGradient }}
             >
               <span className="text-white font-bold text-base">R</span>
-            </div>
+            </span>
             <span
               className={`font-heading text-xl bg-clip-text text-transparent transition-opacity group-hover:opacity-80 ${pathname === '/' ? 'font-extrabold' : 'font-bold'}`}
               style={{ backgroundImage: logoGradient }}
